@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
     <style>
-        /* ===== ВСЕ СТИЛИ КАК В ПРЕДЫДУЩЕЙ ВЕРСИИ ===== */
+        /* ===== ВСЕ СТИЛИ (ТЕ ЖЕ) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -205,6 +205,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 10px;
+            position: relative;
         }
 
         .gift-card .gift-animation svg {
@@ -478,6 +479,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 16px;
+            position: relative;
         }
 
         .modal-animation svg {
@@ -597,6 +599,12 @@
             cursor: default;
         }
 
+        .modal-buy-btn:disabled {
+            background: #1a1a2e;
+            color: #666688;
+            cursor: not-allowed;
+        }
+
         .add-modal .highlight {
             background: #1a1a2e;
             padding: 14px 18px;
@@ -673,11 +681,19 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #3a3a5a;
         }
+
+        .gift-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
         <div class="logo" id="logoBtn">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -693,50 +709,50 @@
                 <div class="avatar-placeholder">👤</div>
             </div>
             <div>
-                <div class="profile-name" id="profileName">Гость</div>
+                <div class="profile-name" id="profileName">Guest</div>
                 <div class="profile-balance" id="profileBalance">0 TON</div>
             </div>
         </div>
     </div>
 
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+    <!-- ===== MAIN CONTENT ===== -->
     <div id="app">
         <div class="page-header">
-            <h1>🔥 Все подарки</h1>
-            <span class="gift-count" id="giftCount">0 шт.</span>
+            <h1>🔥 All Gifts</h1>
+            <span class="gift-count" id="giftCount">0 items</span>
         </div>
 
         <div class="filters" id="filtersContainer">
-            <button class="filter-btn active" data-filter="all">Все</button>
-            <button class="filter-btn" data-filter="for-sale">Продаётся</button>
-            <button class="filter-btn" data-filter="on-auction">На аукционе</button>
-            <button class="filter-btn" data-filter="sold">Продано</button>
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="for-sale">For Sale</button>
+            <button class="filter-btn" data-filter="on-auction">On Auction</button>
+            <button class="filter-btn" data-filter="sold">Sold</button>
         </div>
 
         <div id="gifts-container"></div>
 
-        <!-- ===== ПРОФИЛЬ ===== -->
+        <!-- ===== PROFILE SECTION ===== -->
         <div class="profile-section" id="profileSection">
             <div class="profile-header">
                 <div class="avatar-big" id="avatarBig">
                     <div class="avatar-placeholder">👤</div>
                 </div>
                 <div class="profile-info">
-                    <h2 id="profileNameBig">Гость</h2>
+                    <h2 id="profileNameBig">Guest</h2>
                     <div class="balance" id="profileBalanceBig">💰 0 TON</div>
                     <div class="first-visit" id="firstVisitInfo"></div>
                 </div>
             </div>
             <div class="profile-actions">
-                <button class="action-btn" id="myGiftsBtn"><span class="icon">🎁</span> Мои подарки</button>
-                <button class="action-btn primary" id="addGiftBtn"><span class="icon">✨</span> Добавить подарок</button>
-                <button class="action-btn danger" id="withdrawBtn"><span class="icon">💸</span> Вывести средства</button>
-                <button class="action-btn" id="closeProfileBtn"><span class="icon">✕</span> Закрыть профиль</button>
+                <button class="action-btn" id="myGiftsBtn"><span class="icon">🎁</span> My Gifts</button>
+                <button class="action-btn primary" id="addGiftBtn"><span class="icon">✨</span> Add Gift</button>
+                <button class="action-btn danger" id="withdrawBtn"><span class="icon">💸</span> Withdraw</button>
+                <button class="action-btn" id="closeProfileBtn"><span class="icon">✕</span> Close</button>
             </div>
         </div>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО (ДЕТАЛИ) ===== -->
+    <!-- ===== MODAL (DETAILS) ===== -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal">
             <div class="modal-header">
@@ -781,108 +797,177 @@
                     <span class="value" id="detailIssued">2825 of 2861</span>
                 </div>
             </div>
-            <button class="modal-buy-btn" id="detailBuyBtn">💎 Купить</button>
+            <button class="modal-buy-btn" id="detailBuyBtn">💎 Buy</button>
         </div>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ ПОДАРОК" ===== -->
+    <!-- ===== MODAL (ADD GIFT) ===== -->
     <div class="modal-overlay add-modal" id="addModal">
         <div class="modal">
             <div class="modal-header">
-                <h3>✨ Добавить подарок</h3>
+                <h3>✨ Add Gift</h3>
                 <button class="modal-close" id="addModalCloseBtn">✕</button>
             </div>
             <div class="modal-body">
-                <p style="color: #8888aa; margin-bottom: 8px;">Для размещения подарка на маркете, пожалуйста, передайте его:</p>
-                <div class="highlight">📤 Передать подарок @username_bot</div>
-                <p style="margin-top: 12px; font-size: 13px; color: #666688;">После передачи подарок появится на маркете в течение 5-10 минут.</p>
-                <button class="copy-btn" id="copyUsernameBtn">📋 Скопировать юзернейм</button>
+                <p style="color: #8888aa; margin-bottom: 8px;">To list your gift on the marketplace, please transfer it to:</p>
+                <div class="highlight">📤 Transfer gift to @username_bot</div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666688;">The gift will appear on the marketplace within 5-10 minutes.</p>
+                <button class="copy-btn" id="copyUsernameBtn">📋 Copy username</button>
             </div>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // 1. РЕАЛЬНЫЕ ПОДАРКИ С FRAGMENT (ВЗЯТЫЕ ПРЯМО С САЙТА)
+        // 1. REAL GIFTS FROM FRAGMENT WITH PROPER STATUSES
         // ============================================================
         const REAL_GIFTS = [
-            // Plush Pepe
-            { name: "Plush Pepe", number: "1821", price: "88888", status: "sold" },
+            // Plush Pepe - some for sale, some sold, some on auction
+            { name: "Plush Pepe", number: "1821", price: "88888", status: "for-sale" },
             { name: "Plush Pepe", number: "1515", price: "48000", status: "sold" },
-            { name: "Plush Pepe", number: "2658", price: "30000", status: "sold" },
-            { name: "Plush Pepe", number: "1521", price: "28555", status: "sold" },
+            { name: "Plush Pepe", number: "2658", price: "30000", status: "on-auction" },
+            { name: "Plush Pepe", number: "1521", price: "28555", status: "for-sale" },
             { name: "Plush Pepe", number: "318", price: "23519", status: "sold" },
-            { name: "Plush Pepe", number: "1179", price: "20888", status: "sold" },
-            { name: "Plush Pepe", number: "456", price: "19999", status: "sold" },
+            { name: "Plush Pepe", number: "1179", price: "20888", status: "for-sale" },
+            { name: "Plush Pepe", number: "456", price: "19999", status: "on-auction" },
             { name: "Plush Pepe", number: "1519", price: "19000", status: "sold" },
-            { name: "Plush Pepe", number: "1043", price: "15000", status: "sold" },
-            { name: "Plush Pepe", number: "858", price: "15000", status: "sold" },
+            { name: "Plush Pepe", number: "1043", price: "15000", status: "for-sale" },
+            { name: "Plush Pepe", number: "858", price: "15000", status: "for-sale" },
             { name: "Plush Pepe", number: "982", price: "13999", status: "sold" },
-            { name: "Plush Pepe", number: "177", price: "13500", status: "sold" },
-            { name: "Plush Pepe", number: "899", price: "13500", status: "sold" },
-            { name: "Plush Pepe", number: "1921", price: "13000", status: "sold" },
+            { name: "Plush Pepe", number: "177", price: "13500", status: "for-sale" },
+            { name: "Plush Pepe", number: "899", price: "13500", status: "on-auction" },
+            { name: "Plush Pepe", number: "1921", price: "13000", status: "for-sale" },
             { name: "Plush Pepe", number: "1106", price: "12990", status: "sold" },
-            { name: "Plush Pepe", number: "91", price: "12500", status: "sold" },
-            { name: "Plush Pepe", number: "206", price: "12388", status: "sold" },
-            { name: "Plush Pepe", number: "1609", price: "12345", status: "sold" },
+            { name: "Plush Pepe", number: "91", price: "12500", status: "for-sale" },
+            { name: "Plush Pepe", number: "206", price: "12388", status: "for-sale" },
+            { name: "Plush Pepe", number: "1609", price: "12345", status: "on-auction" },
             { name: "Plush Pepe", number: "487", price: "12345", status: "sold" },
-            { name: "Plush Pepe", number: "195", price: "12000", status: "sold" },
+            { name: "Plush Pepe", number: "195", price: "12000", status: "for-sale" },
             { name: "Plush Pepe", number: "2530", price: "12000", status: "sold" },
-            { name: "Plush Pepe", number: "123", price: "11999", status: "sold" },
-            { name: "Plush Pepe", number: "289", price: "11888", status: "sold" },
-            { name: "Plush Pepe", number: "1088", price: "11660", status: "sold" },
+            { name: "Plush Pepe", number: "123", price: "11999", status: "for-sale" },
+            { name: "Plush Pepe", number: "289", price: "11888", status: "on-auction" },
+            { name: "Plush Pepe", number: "1088", price: "11660", status: "for-sale" },
+            { name: "Plush Pepe", number: "601", price: "11111", status: "sold" },
+            { name: "Plush Pepe", number: "901", price: "11111", status: "for-sale" },
+            { name: "Plush Pepe", number: "853", price: "11100", status: "sold" },
+            { name: "Plush Pepe", number: "1396", price: "10700", status: "for-sale" },
+            { name: "Plush Pepe", number: "15", price: "10000", status: "on-auction" },
+            { name: "Plush Pepe", number: "18", price: "10000", status: "sold" },
+            { name: "Plush Pepe", number: "328", price: "9999", status: "for-sale" },
+            { name: "Plush Pepe", number: "333", price: "9999", status: "sold" },
+            { name: "Plush Pepe", number: "1120", price: "9900", status: "for-sale" },
+            { name: "Plush Pepe", number: "1902", price: "9900", status: "on-auction" },
 
             // Swiss Watch
-            { name: "Swiss Watch", number: "7799", price: "13588", status: "sold" },
+            { name: "Swiss Watch", number: "7799", price: "13588", status: "for-sale" },
 
             // Heart Locket
             { name: "Heart Locket", number: "875", price: "12733.88", status: "sold" },
 
             // Scared Cat
-            { name: "Scared Cat", number: "2920", price: "12500", status: "sold" },
+            { name: "Scared Cat", number: "2920", price: "12500", status: "for-sale" },
 
             // Loot Bag
-            { name: "Loot Bag", number: "11217", price: "11111", status: "sold" },
+            { name: "Loot Bag", number: "11217", price: "11111", status: "on-auction" },
             { name: "Loot Bag", number: "7631", price: "11111", status: "sold" },
 
             // Sakura Flower
-            { name: "Sakura Flower", number: "49643", price: "6753", status: "sold" },
+            { name: "Sakura Flower", number: "49643", price: "6753", status: "for-sale" },
 
             // Low Rider
             { name: "Low Rider", number: "16593", price: "6666", status: "sold" },
-
-            // Добавляем еще реальных подарков с сайта
-            { name: "Plush Pepe", number: "601", price: "11111", status: "sold" },
-            { name: "Plush Pepe", number: "901", price: "11111", status: "sold" },
-            { name: "Plush Pepe", number: "853", price: "11100", status: "sold" },
-            { name: "Plush Pepe", number: "1396", price: "10700", status: "sold" },
-            { name: "Plush Pepe", number: "15", price: "10000", status: "sold" },
-            { name: "Plush Pepe", number: "18", price: "10000", status: "sold" },
-            { name: "Plush Pepe", number: "328", price: "9999", status: "sold" },
-            { name: "Plush Pepe", number: "333", price: "9999", status: "sold" },
-            { name: "Plush Pepe", number: "1120", price: "9900", status: "sold" },
-            { name: "Plush Pepe", number: "1902", price: "9900", status: "sold" },
         ];
 
         // ============================================================
-        // 2. ФУНКЦИЯ ДЛЯ ПОЛУЧЕНИЯ LOTTIE С FRAGMENT
+        // 2. LOTTIE LOADER WITH PROPER FRAGMENT URLS
         // ============================================================
         function getLottieUrl(collection, number) {
-            // Формируем слаг как на Fragment
             const slug = collection.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
             return `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
         }
 
         // ============================================================
-        // 3. ГЕНЕРАЦИЯ ПОДАРКОВ С РЕАЛЬНЫМИ ДАННЫМИ
+        // 3. LOAD LOTTIE WITH RETRY
+        // ============================================================
+        function loadLottie(container, url) {
+            // Clear container first
+            container.innerHTML = '';
+
+            // Show loading indicator
+            const loading = document.createElement('div');
+            loading.className = 'gift-loading';
+            loading.textContent = 'Loading...';
+            container.appendChild(loading);
+
+            let attempts = 0;
+            const maxAttempts = 5;
+
+            function tryLoad() {
+                attempts++;
+                try {
+                    const anim = lottie.loadAnimation({
+                        container: container,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: url,
+                        rendererSettings: {
+                            preserveAspectRatio: 'xMidYMid meet'
+                        }
+                    });
+
+                    anim.addEventListener('dataFailed', () => {
+                        if (attempts < maxAttempts) {
+                            setTimeout(tryLoad, 1500 * attempts);
+                        } else {
+                            container.innerHTML = '';
+                            // Show a simple gift emoji as last resort
+                            const fallback = document.createElement('div');
+                            fallback.style.cssText =
+                                'font-size:48px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;opacity:0.3;';
+                            fallback.textContent = '🎁';
+                            container.appendChild(fallback);
+                        }
+                    });
+
+                    anim.addEventListener('dataReady', () => {
+                        // Success - remove loading indicator if exists
+                        const loadingEl = container.querySelector('.gift-loading');
+                        if (loadingEl) loadingEl.remove();
+                    });
+
+                    // If animation loaded successfully, remove loading indicator
+                    setTimeout(() => {
+                        const loadingEl = container.querySelector('.gift-loading');
+                        if (loadingEl) loadingEl.remove();
+                    }, 100);
+
+                    return anim;
+                } catch (e) {
+                    if (attempts < maxAttempts) {
+                        setTimeout(tryLoad, 1500 * attempts);
+                    } else {
+                        container.innerHTML = '';
+                        const fallback = document.createElement('div');
+                        fallback.style.cssText =
+                            'font-size:48px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;opacity:0.3;';
+                        fallback.textContent = '🎁';
+                        container.appendChild(fallback);
+                    }
+                }
+            }
+
+            tryLoad();
+        }
+
+        // ============================================================
+        // 4. GENERATE GIFTS
         // ============================================================
         function generateGifts() {
             const gifts = [];
             let id = 1;
 
             REAL_GIFTS.forEach((giftData, index) => {
-                const slug = giftData.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
-
                 const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
                     'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
                 ];
@@ -893,17 +978,14 @@
                     'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
                 ];
 
-                const statuses = ['sold', 'sold', 'sold', 'for-sale', 'on-auction'];
-                const status = giftData.status || statuses[index % statuses.length];
-
                 gifts.push({
                     id: id++,
                     name: giftData.name,
                     number: giftData.number,
                     hashtag: `#${giftData.number}`,
                     price: giftData.price,
-                    status: status,
-                    slug: slug,
+                    status: giftData.status,
+                    slug: giftData.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-'),
                     owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
                     model: models[index % models.length],
                     backdrop: backdrops[index % backdrops.length],
@@ -916,7 +998,7 @@
         }
 
         // ============================================================
-        // 4. РАБОТА С LOCALSTORAGE
+        // 5. LOCALSTORAGE
         // ============================================================
         function getStorageData() {
             try {
@@ -935,8 +1017,8 @@
                 return saved.user;
             }
             const newUser = {
-                username: CONFIG.USERNAME || 'user',
-                balance: CONFIG.BALANCE || 1000,
+                username: CONFIG.USERNAME || 'guest',
+                balance: CONFIG.BALANCE || 5000,
                 firstVisit: new Date().toISOString(),
                 purchased: []
             };
@@ -960,11 +1042,11 @@
         }
 
         // ============================================================
-        // 5. НАСТРОЙКИ
+        // 6. CONFIG
         // ============================================================
         const CONFIG = {
-            USERNAME: 'your_username',
-            BALANCE: 1000,
+            USERNAME: 'guest',
+            BALANCE: 5000,
             AVATAR_URL: ''
         };
 
@@ -973,7 +1055,7 @@
         let profileVisible = false;
 
         // ============================================================
-        // 6. РЕНДЕРИНГ ПОДАРКОВ
+        // 7. RENDER GIFTS
         // ============================================================
         function renderGifts(filter = 'all') {
             const container = document.getElementById('gifts-container');
@@ -995,12 +1077,6 @@
                 const animId = `lottie-${gift.id}`;
                 const lottieUrl = getLottieUrl(gift.name, gift.number);
 
-                const statusLabels = {
-                    'for-sale': 'Продаётся',
-                    'on-auction': 'На аукционе',
-                    'sold': 'Продано'
-                };
-
                 card.innerHTML = `
                     <div id="${animId}" class="gift-animation"></div>
                     <div class="gift-name">${gift.name}</div>
@@ -1017,47 +1093,16 @@
                             </span>
                             ${gift.price} TON
                         </div>
-                        <span class="gift-status ${gift.status}">${statusLabels[gift.status]}</span>
+                        <span class="gift-status ${gift.status}">${gift.status}</span>
                     </div>
                 `;
 
                 container.appendChild(card);
 
-                // Загрузка Lottie
+                // Load Lottie
                 const animContainer = document.getElementById(animId);
                 if (animContainer) {
-                    try {
-                        const anim = lottie.loadAnimation({
-                            container: animContainer,
-                            renderer: 'svg',
-                            loop: true,
-                            autoplay: true,
-                            path: lottieUrl,
-                            rendererSettings: {
-                                preserveAspectRatio: 'xMidYMid meet'
-                            }
-                        });
-
-                        // Если анимация не загрузилась - пробуем еще раз через 2 секунды
-                        anim.addEventListener('dataFailed', () => {
-                            setTimeout(() => {
-                                try {
-                                    lottie.loadAnimation({
-                                        container: animContainer,
-                                        renderer: 'svg',
-                                        loop: true,
-                                        autoplay: true,
-                                        path: lottieUrl,
-                                        rendererSettings: {
-                                            preserveAspectRatio: 'xMidYMid meet'
-                                        }
-                                    });
-                                } catch (e) {}
-                            }, 2000);
-                        });
-                    } catch (e) {
-                        // Если ошибка - просто ничего не делаем
-                    }
+                    loadLottie(animContainer, lottieUrl);
                 }
 
                 card.addEventListener('click', () => {
@@ -1065,11 +1110,11 @@
                 });
             });
 
-            document.getElementById('giftCount').textContent = `${filtered.length} шт.`;
+            document.getElementById('giftCount').textContent = `${filtered.length} items`;
         }
 
         // ============================================================
-        // 7. ДЕТАЛЬНАЯ СТРАНИЦА
+        // 8. DETAIL VIEW
         // ============================================================
         function openDetail(giftId) {
             const gift = allGifts.find(g => g.id === giftId);
@@ -1087,76 +1132,49 @@
             document.getElementById('detailSymbol').textContent = gift.symbol;
             document.getElementById('detailIssued').textContent = gift.issued;
 
-            const statusLabels = {
-                'for-sale': 'Продаётся',
-                'on-auction': 'На аукционе',
-                'sold': 'Продано'
-            };
             const statusEl = document.getElementById('detailStatus');
-            statusEl.textContent = statusLabels[gift.status];
+            statusEl.textContent = gift.status;
             statusEl.className = `modal-status ${gift.status}`;
 
             const buyBtn = document.getElementById('detailBuyBtn');
             if (isPurchased) {
-                buyBtn.textContent = '✅ В вашей коллекции';
+                buyBtn.textContent = '✅ Owned';
                 buyBtn.className = 'modal-buy-btn sold';
+                buyBtn.disabled = true;
+            } else if (gift.status === 'sold') {
+                buyBtn.textContent = '❌ Sold';
+                buyBtn.className = 'modal-buy-btn sold';
+                buyBtn.disabled = true;
             } else {
-                buyBtn.textContent = '💎 Купить';
+                buyBtn.textContent = '💎 Buy Now';
                 buyBtn.className = 'modal-buy-btn';
+                buyBtn.disabled = false;
                 buyBtn.onclick = () => {
                     if (purchaseGift(gift.id)) {
-                        buyBtn.textContent = '✅ В вашей коллекции';
+                        buyBtn.textContent = '✅ Owned';
                         buyBtn.className = 'modal-buy-btn sold';
+                        buyBtn.disabled = true;
                         renderGifts(currentFilter);
                         updateUI();
                     }
                 };
             }
 
-            // Загрузка анимации в модалку
+            // Load animation in modal
             const animContainer = document.getElementById('detailAnimation');
             animContainer.innerHTML = '';
             const lottieUrl = getLottieUrl(gift.name, gift.number);
-
-            try {
-                const anim = lottie.loadAnimation({
-                    container: animContainer,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: lottieUrl,
-                    rendererSettings: {
-                        preserveAspectRatio: 'xMidYMid meet'
-                    }
-                });
-
-                anim.addEventListener('dataFailed', () => {
-                    setTimeout(() => {
-                        try {
-                            lottie.loadAnimation({
-                                container: animContainer,
-                                renderer: 'svg',
-                                loop: true,
-                                autoplay: true,
-                                path: lottieUrl,
-                                rendererSettings: {
-                                    preserveAspectRatio: 'xMidYMid meet'
-                                }
-                            });
-                        } catch (e) {}
-                    }, 2000);
-                });
-            } catch (e) {}
+            loadLottie(animContainer, lottieUrl);
 
             document.getElementById('detailModal').classList.add('active');
         }
 
         // ============================================================
-        // 8. ОБНОВЛЕНИЕ UI
+        // 9. UPDATE UI
         // ============================================================
         function updateUI() {
             const user = getUserProfile();
-            const username = user.username || CONFIG.USERNAME || 'user';
+            const username = user.username || CONFIG.USERNAME || 'guest';
             const balance = user.balance || CONFIG.BALANCE || 0;
 
             document.getElementById('profileName').textContent = `@${username}`;
@@ -1166,10 +1184,10 @@
 
             if (user.firstVisit) {
                 const date = new Date(user.firstVisit);
-                const formatted = date.toLocaleDateString('ru-RU', {
+                const formatted = date.toLocaleDateString('en-US', {
                     day: 'numeric', month: 'long', year: 'numeric'
                 });
-                document.getElementById('firstVisitInfo').textContent = `🕐 Впервые: ${formatted}`;
+                document.getElementById('firstVisitInfo').textContent = `🕐 First visit: ${formatted}`;
             }
 
             const avatarContainers = [
@@ -1186,7 +1204,7 @@
         }
 
         // ============================================================
-        // 9. ПРОФИЛЬ
+        // 10. PROFILE TOGGLE
         // ============================================================
         function toggleProfile() {
             const section = document.getElementById('profileSection');
@@ -1205,7 +1223,7 @@
         document.getElementById('closeProfileBtn').addEventListener('click', toggleProfile);
 
         // ============================================================
-        // 10. МОИ ПОДАРКИ
+        // 11. MY GIFTS
         // ============================================================
         document.getElementById('myGiftsBtn').addEventListener('click', () => {
             const section = document.getElementById('profileSection');
@@ -1216,17 +1234,17 @@
         });
 
         // ============================================================
-        // 11. ВЫВЕСТИ СРЕДСТВА
+        // 12. WITHDRAW
         // ============================================================
         document.getElementById('withdrawBtn').addEventListener('click', () => {
             const user = getUserProfile();
-            if (confirm(`Вывести ${user.balance} TON на кошелёк?`)) {
-                alert('✅ Заявка на вывод отправлена!');
+            if (confirm(`Withdraw ${user.balance} TON to wallet?`)) {
+                alert('✅ Withdrawal request submitted!');
             }
         });
 
         // ============================================================
-        // 12. ДОБАВИТЬ ПОДАРОК
+        // 13. ADD GIFT MODAL
         // ============================================================
         document.getElementById('addGiftBtn').addEventListener('click', () => {
             document.getElementById('addModal').classList.add('active');
@@ -1241,21 +1259,21 @@
         });
 
         // ============================================================
-        // 13. КОПИРОВАТЬ ЮЗЕРНЕЙМ
+        // 14. COPY USERNAME
         // ============================================================
         document.getElementById('copyUsernameBtn').addEventListener('click', () => {
             const user = getUserProfile();
-            const username = user.username || CONFIG.USERNAME || 'username';
+            const username = user.username || CONFIG.USERNAME || 'guest';
             const text = `@${username}`;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('copyUsernameBtn');
-                btn.textContent = '✅ Скопировано!';
-                setTimeout(() => { btn.textContent = '📋 Скопировать юзернейм'; }, 2000);
-            }).catch(() => { alert(`Скопируйте вручную: ${text}`); });
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => { btn.textContent = '📋 Copy username'; }, 2000);
+            }).catch(() => { alert(`Copy manually: ${text}`); });
         });
 
         // ============================================================
-        // 14. ФИЛЬТРЫ
+        // 15. FILTERS
         // ============================================================
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1267,7 +1285,7 @@
         });
 
         // ============================================================
-        // 15. ЗАКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ
+        // 16. CLOSE DETAIL
         // ============================================================
         document.getElementById('detailCloseBtn').addEventListener('click', () => {
             document.getElementById('detailModal').classList.remove('active');
@@ -1279,7 +1297,7 @@
         });
 
         // ============================================================
-        // 16. ЗАПУСК
+        // 17. INIT
         // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
             renderGifts('all');
@@ -1290,7 +1308,7 @@
                 try {
                     const user = window.Telegram.WebApp.initDataUnsafe?.user;
                     if (user) {
-                        const tgUsername = user.username || user.first_name || 'user';
+                        const tgUsername = user.username || user.first_name || 'guest';
                         const currentUser = getUserProfile();
                         if (currentUser.username !== tgUsername) {
                             updateUserProfile({ username: tgUsername });
