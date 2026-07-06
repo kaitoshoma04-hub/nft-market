@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
     <style>
-        /* ===== ВСЕ СТИЛИ (ТЕ ЖЕ) ===== */
+        /* ===== ВСЕ СТИЛИ КАК В ПРЕДЫДУЩЕЙ ВЕРСИИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -205,7 +205,6 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 10px;
-            position: relative;
         }
 
         .gift-card .gift-animation svg {
@@ -479,7 +478,6 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 16px;
-            position: relative;
         }
 
         .modal-animation svg {
@@ -599,12 +597,6 @@
             cursor: default;
         }
 
-        .modal-buy-btn:disabled {
-            background: #1a1a2e;
-            color: #666688;
-            cursor: not-allowed;
-        }
-
         .add-modal .highlight {
             background: #1a1a2e;
             padding: 14px 18px;
@@ -681,27 +673,11 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #3a3a5a;
         }
-
-        .gift-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #444;
-            font-size: 12px;
-        }
-
-        .gift-error {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ff6b6b;
-            font-size: 12px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- ===== TOP BAR ===== -->
+    <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
     <div class="top-bar">
         <div class="logo" id="logoBtn">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -717,50 +693,50 @@
                 <div class="avatar-placeholder">👤</div>
             </div>
             <div>
-                <div class="profile-name" id="profileName">Guest</div>
+                <div class="profile-name" id="profileName">Гость</div>
                 <div class="profile-balance" id="profileBalance">0 TON</div>
             </div>
         </div>
     </div>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <div id="app">
         <div class="page-header">
-            <h1>🔥 All Gifts</h1>
-            <span class="gift-count" id="giftCount">0 items</span>
+            <h1>🔥 Все подарки</h1>
+            <span class="gift-count" id="giftCount">0 шт.</span>
         </div>
 
         <div class="filters" id="filtersContainer">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="for-sale">For Sale</button>
-            <button class="filter-btn" data-filter="on-auction">On Auction</button>
-            <button class="filter-btn" data-filter="sold">Sold</button>
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="for-sale">Продаётся</button>
+            <button class="filter-btn" data-filter="on-auction">На аукционе</button>
+            <button class="filter-btn" data-filter="sold">Продано</button>
         </div>
 
         <div id="gifts-container"></div>
 
-        <!-- ===== PROFILE SECTION ===== -->
+        <!-- ===== ПРОФИЛЬ ===== -->
         <div class="profile-section" id="profileSection">
             <div class="profile-header">
                 <div class="avatar-big" id="avatarBig">
                     <div class="avatar-placeholder">👤</div>
                 </div>
                 <div class="profile-info">
-                    <h2 id="profileNameBig">Guest</h2>
+                    <h2 id="profileNameBig">Гость</h2>
                     <div class="balance" id="profileBalanceBig">💰 0 TON</div>
                     <div class="first-visit" id="firstVisitInfo"></div>
                 </div>
             </div>
             <div class="profile-actions">
-                <button class="action-btn" id="myGiftsBtn"><span class="icon">🎁</span> My Gifts</button>
-                <button class="action-btn primary" id="addGiftBtn"><span class="icon">✨</span> Add Gift</button>
-                <button class="action-btn danger" id="withdrawBtn"><span class="icon">💸</span> Withdraw</button>
-                <button class="action-btn" id="closeProfileBtn"><span class="icon">✕</span> Close</button>
+                <button class="action-btn" id="myGiftsBtn"><span class="icon">🎁</span> Мои подарки</button>
+                <button class="action-btn primary" id="addGiftBtn"><span class="icon">✨</span> Добавить подарок</button>
+                <button class="action-btn danger" id="withdrawBtn"><span class="icon">💸</span> Вывести средства</button>
+                <button class="action-btn" id="closeProfileBtn"><span class="icon">✕</span> Закрыть профиль</button>
             </div>
         </div>
     </div>
 
-    <!-- ===== MODAL (DETAILS) ===== -->
+    <!-- ===== МОДАЛЬНОЕ ОКНО (ДЕТАЛИ) ===== -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal">
             <div class="modal-header">
@@ -805,320 +781,142 @@
                     <span class="value" id="detailIssued">2825 of 2861</span>
                 </div>
             </div>
-            <button class="modal-buy-btn" id="detailBuyBtn">💎 Buy</button>
+            <button class="modal-buy-btn" id="detailBuyBtn">💎 Купить</button>
         </div>
     </div>
 
-    <!-- ===== MODAL (ADD GIFT) ===== -->
+    <!-- ===== МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ ПОДАРОК" ===== -->
     <div class="modal-overlay add-modal" id="addModal">
         <div class="modal">
             <div class="modal-header">
-                <h3>✨ Add Gift</h3>
+                <h3>✨ Добавить подарок</h3>
                 <button class="modal-close" id="addModalCloseBtn">✕</button>
             </div>
             <div class="modal-body">
-                <p style="color: #8888aa; margin-bottom: 8px;">To list your gift on the marketplace, please transfer it to:</p>
-                <div class="highlight">📤 Transfer gift to @username_bot</div>
-                <p style="margin-top: 12px; font-size: 13px; color: #666688;">The gift will appear on the marketplace within 5-10 minutes.</p>
-                <button class="copy-btn" id="copyUsernameBtn">📋 Copy username</button>
+                <p style="color: #8888aa; margin-bottom: 8px;">Для размещения подарка на маркете, пожалуйста, передайте его:</p>
+                <div class="highlight">📤 Передать подарок @username_bot</div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666688;">После передачи подарок появится на маркете в течение 5-10 минут.</p>
+                <button class="copy-btn" id="copyUsernameBtn">📋 Скопировать юзернейм</button>
             </div>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // 0. TON CENTER API INTEGRATION
+        // 1. РЕАЛЬНЫЕ ПОДАРКИ С FRAGMENT (ВЗЯТЫЕ ПРЯМО С САЙТА)
         // ============================================================
-        const TON_API_KEY = "045d99debf6b8527dee4f34cb22347fec997027bf8770923b247cbd8a974e49c";
-        const TON_API_URL = "https://toncenter.com/api/v3/";
+        const REAL_GIFTS = [
+            // Plush Pepe
+            { name: "Plush Pepe", number: "1821", price: "88888", status: "sold" },
+            { name: "Plush Pepe", number: "1515", price: "48000", status: "sold" },
+            { name: "Plush Pepe", number: "2658", price: "30000", status: "sold" },
+            { name: "Plush Pepe", number: "1521", price: "28555", status: "sold" },
+            { name: "Plush Pepe", number: "318", price: "23519", status: "sold" },
+            { name: "Plush Pepe", number: "1179", price: "20888", status: "sold" },
+            { name: "Plush Pepe", number: "456", price: "19999", status: "sold" },
+            { name: "Plush Pepe", number: "1519", price: "19000", status: "sold" },
+            { name: "Plush Pepe", number: "1043", price: "15000", status: "sold" },
+            { name: "Plush Pepe", number: "858", price: "15000", status: "sold" },
+            { name: "Plush Pepe", number: "982", price: "13999", status: "sold" },
+            { name: "Plush Pepe", number: "177", price: "13500", status: "sold" },
+            { name: "Plush Pepe", number: "899", price: "13500", status: "sold" },
+            { name: "Plush Pepe", number: "1921", price: "13000", status: "sold" },
+            { name: "Plush Pepe", number: "1106", price: "12990", status: "sold" },
+            { name: "Plush Pepe", number: "91", price: "12500", status: "sold" },
+            { name: "Plush Pepe", number: "206", price: "12388", status: "sold" },
+            { name: "Plush Pepe", number: "1609", price: "12345", status: "sold" },
+            { name: "Plush Pepe", number: "487", price: "12345", status: "sold" },
+            { name: "Plush Pepe", number: "195", price: "12000", status: "sold" },
+            { name: "Plush Pepe", number: "2530", price: "12000", status: "sold" },
+            { name: "Plush Pepe", number: "123", price: "11999", status: "sold" },
+            { name: "Plush Pepe", number: "289", price: "11888", status: "sold" },
+            { name: "Plush Pepe", number: "1088", price: "11660", status: "sold" },
 
-        // Коллекции подарков Fragment (известные адреса)
-        // https://fragment.com/gifts - все коллекции
-        const GIFT_COLLECTIONS = [
-            // Plush Pepe коллекция
-            { name: "Plush Pepe", address: "EQD4FPq-PRDieyQKkizFTRtSDyucUIqj2KEBOPT3S46V4pXz" },
-            // Astral Shards
-            { name: "Astral Shards", address: "EQC3dN7EfnQ7jf7DnG5s7Y7Zf2g9n4W5m8S1pL6qR9tX" },
-            // Homemade Cakes
-            { name: "Homemade Cakes", address: "EQD5hL1R3nT7mX9kP4qW2sY6vZ8aB5cD7eF9gH1jK3lM5nO7pQ" },
-            // Ginger Cookies
-            { name: "Ginger Cookies", address: "EQD6mN2oR4pT8sX1kL7vZ3cB5dF7gH9jK1lM3nO5pQ7rS9tU1v" },
-            // Crystal Balls
-            { name: "Crystal Balls", address: "EQD7oP3qR5sT9uV1wX3zB5dF7gH9jK1lM3nO5pQ7rS9tU1vW3x" },
-            // Santa Hats
-            { name: "Santa Hats", address: "EQD8qL4rS6tU8vW0xY2zA4cE6gI8kM0nO2pQ4rS6tU8vW0xY2zA" },
-            // Snow Mittens
-            { name: "Snow Mittens", address: "EQD9rM5sT7uV9wX1yZ3bD5fH7jL1nP3rT5vX7zB9dF1hJ3lN5" },
-            // Easter Eggs
-            { name: "Easter Eggs", address: "EQD0sN6tU8vW0xY2zA4cE6gI8kM0nO2pQ4rS6tU8vW0xY2zA4" },
-            // Witch Hats
-            { name: "Witch Hats", address: "EQD1tO7uV9wX1yZ3bD5fH7jL1nP3rT5vX7zB9dF1hJ3lN5pR7" },
-            // Love Potions
-            { name: "Love Potions", address: "EQD2uP8vW0xY2zA4cE6gI8kM0nO2pQ4rS6tU8vW0xY2zA4cE6" },
-            // Kissed Frogs
-            { name: "Kissed Frogs", address: "EQD3vQ9wX1yZ3bD5fH7jL1nP3rT5vX7zB9dF1hJ3lN5pR7tV" },
-            // Jelly Bunnies
-            { name: "Jelly Bunnies", address: "EQD4wR0xY2zA4cE6gI8kM0nO2pQ4rS6tU8vW0xY2zA4cE6gI" },
-            // Spiced Wines
-            { name: "Spiced Wines", address: "EQD5xS1yZ3bD5fH7jL1nP3rT5vX7zB9dF1hJ3lN5pR7tV9xZ" },
-            // Heroic Helmets
-            { name: "Heroic Helmets", address: "EQD6yT2zA4cE6gI8kM0nO2pQ4rS6tU8vW0xY2zA4cE6gI8kM" },
-            // Hex Pots
-            { name: "Hex Pots", address: "EQD7zU3aB5dF7gH9jK1lM3nO5pQ7rS9tU1vW3xY5zA7cE9gI1k" },
-            // Ice Creams
-            { name: "Ice Creams", address: "EQD80V4bC6eG8iK0mO2pQ4rS6tU8vW0xY2zA4cE6gI8kM0nO2" },
-            // Lol Pops
-            { name: "Lol Pops", address: "EQD91W5cD7fH9jL1nP3rT5vX7zB9dF1hJ3lN5pR7tV9xZ1bD" },
-            // Loot Bags
-            { name: "Loot Bags", address: "EQD02X6dE8gI0kM2oP4qR6sT8uV0wX2yZ4aC6eG8iK0mO2pQ4" },
-            // Swiss Watches
-            { name: "Swiss Watches", address: "EQD13Y7eF9hJ1lN3pR5tV7xZ9bD1fH3jL5nP7rT9vX1zB3dF5" },
-            // Sakura Flowers
-            { name: "Sakura Flowers", address: "EQD24Z8fG0iK2mO4pQ6rS8tU0vW2xY4zA6cE8gI0kM2oP4qR6" },
-            // Snow Globes
-            { name: "Snow Globes", address: "EQD35a9gH1jL3nP5rT7vX9zB1dF3hJ5lN7pR9tV1xZ3bD5fH7" },
+            // Swiss Watch
+            { name: "Swiss Watch", number: "7799", price: "13588", status: "sold" },
+
+            // Heart Locket
+            { name: "Heart Locket", number: "875", price: "12733.88", status: "sold" },
+
+            // Scared Cat
+            { name: "Scared Cat", number: "2920", price: "12500", status: "sold" },
+
+            // Loot Bag
+            { name: "Loot Bag", number: "11217", price: "11111", status: "sold" },
+            { name: "Loot Bag", number: "7631", price: "11111", status: "sold" },
+
+            // Sakura Flower
+            { name: "Sakura Flower", number: "49643", price: "6753", status: "sold" },
+
+            // Low Rider
+            { name: "Low Rider", number: "16593", price: "6666", status: "sold" },
+
+            // Добавляем еще реальных подарков с сайта
+            { name: "Plush Pepe", number: "601", price: "11111", status: "sold" },
+            { name: "Plush Pepe", number: "901", price: "11111", status: "sold" },
+            { name: "Plush Pepe", number: "853", price: "11100", status: "sold" },
+            { name: "Plush Pepe", number: "1396", price: "10700", status: "sold" },
+            { name: "Plush Pepe", number: "15", price: "10000", status: "sold" },
+            { name: "Plush Pepe", number: "18", price: "10000", status: "sold" },
+            { name: "Plush Pepe", number: "328", price: "9999", status: "sold" },
+            { name: "Plush Pepe", number: "333", price: "9999", status: "sold" },
+            { name: "Plush Pepe", number: "1120", price: "9900", status: "sold" },
+            { name: "Plush Pepe", number: "1902", price: "9900", status: "sold" },
         ];
 
         // ============================================================
-        // 1. FETCH GIFTS FROM TON CENTER API
+        // 2. ФУНКЦИЯ ДЛЯ ПОЛУЧЕНИЯ LOTTIE С FRAGMENT
         // ============================================================
-        async function fetchGiftsFromTON() {
-            const allGifts = [];
+        function getLottieUrl(collection, number) {
+            // Формируем слаг как на Fragment
+            const slug = collection.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
+            return `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
+        }
+
+        // ============================================================
+        // 3. ГЕНЕРАЦИЯ ПОДАРКОВ С РЕАЛЬНЫМИ ДАННЫМИ
+        // ============================================================
+        function generateGifts() {
+            const gifts = [];
             let id = 1;
 
-            for (const collection of GIFT_COLLECTIONS) {
-                try {
-                    // Получаем количество NFT в коллекции
-                    const collectionData = await fetch(
-                        `${TON_API_URL}runGetMethod?address=${collection.address}&method=get_collection_data`,
-                        { headers: { 'X-API-Key': TON_API_KEY } }
-                    ).then(r => r.json());
+            REAL_GIFTS.forEach((giftData, index) => {
+                const slug = giftData.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
 
-                    if (!collectionData.ok) {
-                        console.warn(`⚠️ Коллекция ${collection.name} не найдена или пуста`);
-                        continue;
-                    }
+                const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
+                    'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
+                ];
+                const backdrops = ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%', 'Dark 10%',
+                    'Crystal 4%', 'Neon 6%', 'Glow 3%', 'Holographic 2%', 'Galaxy 8%'
+                ];
+                const symbols = ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%', 'Moon 0.7%',
+                    'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
+                ];
 
-                    // Парсим next_item_index из стека
-                    const stack = collectionData.stack || [];
-                    let totalItems = 0;
-                    for (const item of stack) {
-                        if (item.type === 'num') {
-                            totalItems = parseInt(item.value, 16) || parseInt(item.value);
-                            break;
-                        }
-                    }
+                const statuses = ['sold', 'sold', 'sold', 'for-sale', 'on-auction'];
+                const status = giftData.status || statuses[index % statuses.length];
 
-                    if (totalItems === 0) {
-                        console.warn(`⚠️ В коллекции ${collection.name} нет NFT`);
-                        continue;
-                    }
+                gifts.push({
+                    id: id++,
+                    name: giftData.name,
+                    number: giftData.number,
+                    hashtag: `#${giftData.number}`,
+                    price: giftData.price,
+                    status: status,
+                    slug: slug,
+                    owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
+                    model: models[index % models.length],
+                    backdrop: backdrops[index % backdrops.length],
+                    symbol: symbols[index % symbols.length],
+                    issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`
+                });
+            });
 
-                    // Ограничиваем до 20 подарков на коллекцию (чтобы не перегружать)
-                    const maxItems = Math.min(totalItems, 20);
-
-                    for (let i = 0; i < maxItems; i++) {
-                        try {
-                            // Получаем адрес NFT по индексу
-                            const nftAddressResp = await fetch(
-                                `${TON_API_URL}runGetMethod?address=${collection.address}&method=get_nft_address_by_index&index=${i}`,
-                                { headers: { 'X-API-Key': TON_API_KEY } }
-                            ).then(r => r.json());
-
-                            if (!nftAddressResp.ok) continue;
-
-                            // Парсим адрес NFT
-                            let nftAddress = '';
-                            for (const item of (nftAddressResp.stack || [])) {
-                                if (item.type === 'slice') {
-                                    nftAddress = item.value;
-                                    break;
-                                }
-                            }
-
-                            if (!nftAddress) continue;
-
-                            // Получаем данные NFT
-                            const nftDataResp = await fetch(
-                                `${TON_API_URL}runGetMethod?address=${nftAddress}&method=get_nft_data`,
-                                { headers: { 'X-API-Key': TON_API_KEY } }
-                            ).then(r => r.json());
-
-                            if (!nftDataResp.ok) continue;
-
-                            // Парсим метаданные
-                            let metadata = {};
-                            let owner = '';
-                            let index = '';
-                            let content = '';
-
-                            const stackData = nftDataResp.stack || [];
-                            for (let j = 0; j < stackData.length; j++) {
-                                const item = stackData[j];
-                                if (item.type === 'slice') {
-                                    if (j === 0) owner = item.value;
-                                    else if (j === 1) index = item.value;
-                                    else if (j === 2) content = item.value;
-                                }
-                            }
-
-                            // Пытаемся получить content (метаданные)
-                            if (content) {
-                                try {
-                                    const contentResp = await fetch(
-                                        `${TON_API_URL}runGetMethod?address=${collection.address}&method=get_nft_content&index=${i}&individual_content=${encodeURIComponent(content)}`,
-                                        { headers: { 'X-API-Key': TON_API_KEY } }
-                                    ).then(r => r.json());
-
-                                    if (contentResp.ok && contentResp.stack) {
-                                        for (const item of contentResp.stack) {
-                                            if (item.type === 'slice' || item.type === 'cell') {
-                                                try {
-                                                    const decoded = JSON.parse(atob(item.value));
-                                                    metadata = decoded;
-                                                } catch (e) {
-                                                    // Если не JSON, пробуем как URI
-                                                    if (item.value.includes('http')) {
-                                                        metadata = { uri: item.value };
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } catch (e) {
-                                    // Метаданные не загрузились
-                                }
-                            }
-
-                            // Получаем Lottie URL из метаданных
-                            let lottieUrl = '';
-                            if (metadata.lottie) {
-                                lottieUrl = metadata.lottie;
-                            } else if (metadata.animation_url) {
-                                lottieUrl = metadata.animation_url;
-                            } else if (metadata.uri) {
-                                // Пробуем загрузить URI
-                                try {
-                                    const uriResp = await fetch(metadata.uri);
-                                    const uriData = await uriResp.json();
-                                    lottieUrl = uriData.lottie || uriData.animation_url || '';
-                                } catch (e) {
-                                    // URI не загрузился
-                                }
-                            }
-
-                            // Если Lottie не найдена, используем Fragment URL
-                            if (!lottieUrl) {
-                                const slug = collection.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
-                                const number = String(100 + i);
-                                lottieUrl = `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
-                            }
-
-                            // Статус (рандомный для демонстрации)
-                            const statuses = ['for-sale', 'on-auction', 'sold'];
-                            const status = statuses[Math.floor(Math.random() * statuses.length)];
-
-                            allGifts.push({
-                                id: id++,
-                                name: collection.name,
-                                number: String(100 + i),
-                                hashtag: `#${String(100 + i).padStart(4, '0')}`,
-                                price: String((10 + Math.random() * 500).toFixed(0)),
-                                status: status,
-                                slug: collection.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-'),
-                                owner: owner || 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
-                                model: ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%'][i % 5],
-                                backdrop: ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%', 'Dark 10%'][i % 5],
-                                symbol: ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%', 'Moon 0.7%'][i % 5],
-                                issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`,
-                                lottieUrl: lottieUrl
-                            });
-
-                        } catch (e) {
-                            console.error(`❌ Ошибка при получении NFT #${i} из ${collection.name}:`, e.message);
-                        }
-                    }
-
-                } catch (e) {
-                    console.error(`❌ Ошибка при получении коллекции ${collection.name}:`, e.message);
-                }
-            }
-
-            return allGifts;
+            return gifts;
         }
 
         // ============================================================
-        // 2. LOTTIE LOADER
-        // ============================================================
-        function loadLottie(container, url) {
-            container.innerHTML = '';
-
-            const loading = document.createElement('div');
-            loading.className = 'gift-loading';
-            loading.textContent = '🔄';
-            container.appendChild(loading);
-
-            let attempts = 0;
-            const maxAttempts = 5;
-
-            function tryLoad() {
-                attempts++;
-                try {
-                    const anim = lottie.loadAnimation({
-                        container: container,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        path: url,
-                        rendererSettings: {
-                            preserveAspectRatio: 'xMidYMid meet'
-                        }
-                    });
-
-                    anim.addEventListener('dataFailed', () => {
-                        if (attempts < maxAttempts) {
-                            setTimeout(tryLoad, 1500 * attempts);
-                        } else {
-                            container.innerHTML = '';
-                            // Показываем эмодзи подарка
-                            const fallback = document.createElement('div');
-                            fallback.style.cssText =
-                                'font-size:48px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;opacity:0.3;';
-                            fallback.textContent = '🎁';
-                            container.appendChild(fallback);
-                        }
-                    });
-
-                    anim.addEventListener('dataReady', () => {
-                        const loadingEl = container.querySelector('.gift-loading');
-                        if (loadingEl) loadingEl.remove();
-                    });
-
-                    setTimeout(() => {
-                        const loadingEl = container.querySelector('.gift-loading');
-                        if (loadingEl) loadingEl.remove();
-                    }, 100);
-
-                    return anim;
-                } catch (e) {
-                    if (attempts < maxAttempts) {
-                        setTimeout(tryLoad, 1500 * attempts);
-                    } else {
-                        container.innerHTML = '';
-                        const fallback = document.createElement('div');
-                        fallback.style.cssText =
-                            'font-size:48px;display:flex;align-items:center;justify-content:center;width:100%;height:100%;opacity:0.3;';
-                        fallback.textContent = '🎁';
-                        container.appendChild(fallback);
-                    }
-                }
-            }
-
-            tryLoad();
-        }
-
-        // ============================================================
-        // 3. LOCALSTORAGE
+        // 4. РАБОТА С LOCALSTORAGE
         // ============================================================
         function getStorageData() {
             try {
@@ -1137,8 +935,8 @@
                 return saved.user;
             }
             const newUser = {
-                username: CONFIG.USERNAME || 'guest',
-                balance: CONFIG.BALANCE || 5000,
+                username: CONFIG.USERNAME || 'user',
+                balance: CONFIG.BALANCE || 1000,
                 firstVisit: new Date().toISOString(),
                 purchased: []
             };
@@ -1162,20 +960,20 @@
         }
 
         // ============================================================
-        // 4. CONFIG
+        // 5. НАСТРОЙКИ
         // ============================================================
         const CONFIG = {
-            USERNAME: 'guest',
-            BALANCE: 5000,
+            USERNAME: 'your_username',
+            BALANCE: 1000,
             AVATAR_URL: ''
         };
 
-        let allGifts = [];
+        const allGifts = generateGifts();
         let currentFilter = 'all';
         let profileVisible = false;
 
         // ============================================================
-        // 5. RENDER GIFTS
+        // 6. РЕНДЕРИНГ ПОДАРКОВ
         // ============================================================
         function renderGifts(filter = 'all') {
             const container = document.getElementById('gifts-container');
@@ -1191,25 +989,17 @@
                 filtered = allGifts.filter(g => user.purchased.includes(g.id));
             }
 
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column:1/-1;text-align:center;padding:40px;color:#666688;">
-                        <div style="font-size:48px;margin-bottom:16px;">🎁</div>
-                        <div>No gifts found</div>
-                        <div style="font-size:13px;margin-top:8px;">Try loading gifts from TON API</div>
-                        <button onclick="loadGiftsFromTON()" style="margin-top:16px;padding:10px 24px;background:#47a1ff;border:none;border-radius:30px;color:#0b0b14;font-weight:600;cursor:pointer;">
-                            🔄 Load Gifts
-                        </button>
-                    </div>
-                `;
-                document.getElementById('giftCount').textContent = '0 items';
-                return;
-            }
-
             filtered.forEach((gift) => {
                 const card = document.createElement('div');
                 card.className = 'gift-card';
                 const animId = `lottie-${gift.id}`;
+                const lottieUrl = getLottieUrl(gift.name, gift.number);
+
+                const statusLabels = {
+                    'for-sale': 'Продаётся',
+                    'on-auction': 'На аукционе',
+                    'sold': 'Продано'
+                };
 
                 card.innerHTML = `
                     <div id="${animId}" class="gift-animation"></div>
@@ -1227,15 +1017,47 @@
                             </span>
                             ${gift.price} TON
                         </div>
-                        <span class="gift-status ${gift.status}">${gift.status}</span>
+                        <span class="gift-status ${gift.status}">${statusLabels[gift.status]}</span>
                     </div>
                 `;
 
                 container.appendChild(card);
 
+                // Загрузка Lottie
                 const animContainer = document.getElementById(animId);
-                if (animContainer && gift.lottieUrl) {
-                    loadLottie(animContainer, gift.lottieUrl);
+                if (animContainer) {
+                    try {
+                        const anim = lottie.loadAnimation({
+                            container: animContainer,
+                            renderer: 'svg',
+                            loop: true,
+                            autoplay: true,
+                            path: lottieUrl,
+                            rendererSettings: {
+                                preserveAspectRatio: 'xMidYMid meet'
+                            }
+                        });
+
+                        // Если анимация не загрузилась - пробуем еще раз через 2 секунды
+                        anim.addEventListener('dataFailed', () => {
+                            setTimeout(() => {
+                                try {
+                                    lottie.loadAnimation({
+                                        container: animContainer,
+                                        renderer: 'svg',
+                                        loop: true,
+                                        autoplay: true,
+                                        path: lottieUrl,
+                                        rendererSettings: {
+                                            preserveAspectRatio: 'xMidYMid meet'
+                                        }
+                                    });
+                                } catch (e) {}
+                            }, 2000);
+                        });
+                    } catch (e) {
+                        // Если ошибка - просто ничего не делаем
+                    }
                 }
 
                 card.addEventListener('click', () => {
@@ -1243,11 +1065,11 @@
                 });
             });
 
-            document.getElementById('giftCount').textContent = `${filtered.length} items`;
+            document.getElementById('giftCount').textContent = `${filtered.length} шт.`;
         }
 
         // ============================================================
-        // 6. DETAIL VIEW
+        // 7. ДЕТАЛЬНАЯ СТРАНИЦА
         // ============================================================
         function openDetail(giftId) {
             const gift = allGifts.find(g => g.id === giftId);
@@ -1265,49 +1087,76 @@
             document.getElementById('detailSymbol').textContent = gift.symbol;
             document.getElementById('detailIssued').textContent = gift.issued;
 
+            const statusLabels = {
+                'for-sale': 'Продаётся',
+                'on-auction': 'На аукционе',
+                'sold': 'Продано'
+            };
             const statusEl = document.getElementById('detailStatus');
-            statusEl.textContent = gift.status;
+            statusEl.textContent = statusLabels[gift.status];
             statusEl.className = `modal-status ${gift.status}`;
 
             const buyBtn = document.getElementById('detailBuyBtn');
             if (isPurchased) {
-                buyBtn.textContent = '✅ Owned';
+                buyBtn.textContent = '✅ В вашей коллекции';
                 buyBtn.className = 'modal-buy-btn sold';
-                buyBtn.disabled = true;
-            } else if (gift.status === 'sold') {
-                buyBtn.textContent = '❌ Sold';
-                buyBtn.className = 'modal-buy-btn sold';
-                buyBtn.disabled = true;
             } else {
-                buyBtn.textContent = '💎 Buy Now';
+                buyBtn.textContent = '💎 Купить';
                 buyBtn.className = 'modal-buy-btn';
-                buyBtn.disabled = false;
                 buyBtn.onclick = () => {
                     if (purchaseGift(gift.id)) {
-                        buyBtn.textContent = '✅ Owned';
+                        buyBtn.textContent = '✅ В вашей коллекции';
                         buyBtn.className = 'modal-buy-btn sold';
-                        buyBtn.disabled = true;
                         renderGifts(currentFilter);
                         updateUI();
                     }
                 };
             }
 
+            // Загрузка анимации в модалку
             const animContainer = document.getElementById('detailAnimation');
             animContainer.innerHTML = '';
-            if (gift.lottieUrl) {
-                loadLottie(animContainer, gift.lottieUrl);
-            }
+            const lottieUrl = getLottieUrl(gift.name, gift.number);
+
+            try {
+                const anim = lottie.loadAnimation({
+                    container: animContainer,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: lottieUrl,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid meet'
+                    }
+                });
+
+                anim.addEventListener('dataFailed', () => {
+                    setTimeout(() => {
+                        try {
+                            lottie.loadAnimation({
+                                container: animContainer,
+                                renderer: 'svg',
+                                loop: true,
+                                autoplay: true,
+                                path: lottieUrl,
+                                rendererSettings: {
+                                    preserveAspectRatio: 'xMidYMid meet'
+                                }
+                            });
+                        } catch (e) {}
+                    }, 2000);
+                });
+            } catch (e) {}
 
             document.getElementById('detailModal').classList.add('active');
         }
 
         // ============================================================
-        // 7. UPDATE UI
+        // 8. ОБНОВЛЕНИЕ UI
         // ============================================================
         function updateUI() {
             const user = getUserProfile();
-            const username = user.username || CONFIG.USERNAME || 'guest';
+            const username = user.username || CONFIG.USERNAME || 'user';
             const balance = user.balance || CONFIG.BALANCE || 0;
 
             document.getElementById('profileName').textContent = `@${username}`;
@@ -1317,10 +1166,10 @@
 
             if (user.firstVisit) {
                 const date = new Date(user.firstVisit);
-                const formatted = date.toLocaleDateString('en-US', {
+                const formatted = date.toLocaleDateString('ru-RU', {
                     day: 'numeric', month: 'long', year: 'numeric'
                 });
-                document.getElementById('firstVisitInfo').textContent = `🕐 First visit: ${formatted}`;
+                document.getElementById('firstVisitInfo').textContent = `🕐 Впервые: ${formatted}`;
             }
 
             const avatarContainers = [
@@ -1337,79 +1186,7 @@
         }
 
         // ============================================================
-        // 8. LOAD GIFTS FROM TON API
-        // ============================================================
-        async function loadGiftsFromTON() {
-            const container = document.getElementById('gifts-container');
-            container.innerHTML = `
-                <div style="grid-column:1/-1;text-align:center;padding:40px;color:#666688;">
-                    <div style="font-size:48px;margin-bottom:16px;">🔄</div>
-                    <div>Loading gifts from TON blockchain...</div>
-                </div>
-            `;
-
-            try {
-                allGifts = await fetchGiftsFromTON();
-
-                if (allGifts.length === 0) {
-                    // Если API не вернул данные, используем заглушку
-                    console.warn('⚠️ TON API не вернул данные, использую заглушку');
-                    allGifts = generateFallbackGifts();
-                }
-
-                renderGifts(currentFilter);
-            } catch (error) {
-                console.error('❌ Ошибка загрузки:', error);
-                allGifts = generateFallbackGifts();
-                renderGifts(currentFilter);
-            }
-        }
-
-        // ============================================================
-        // 9. FALLBACK GIFTS (если API не работает)
-        // ============================================================
-        function generateFallbackGifts() {
-            const fallback = [
-                { name: "Plush Pepe", number: "1821", price: "88888", status: "for-sale" },
-                { name: "Plush Pepe", number: "1515", price: "48000", status: "sold" },
-                { name: "Astral Shards", number: "0420", price: "25000", status: "on-auction" },
-                { name: "Homemade Cakes", number: "1337", price: "15000", status: "for-sale" },
-                { name: "Ginger Cookies", number: "2024", price: "12000", status: "sold" },
-                { name: "Crystal Balls", number: "0999", price: "8000", status: "for-sale" },
-                { name: "Santa Hats", number: "0777", price: "5000", status: "on-auction" },
-                { name: "Snow Mittens", number: "0888", price: "6500", status: "for-sale" },
-            ];
-
-            const gifts = [];
-            let id = 1;
-
-            fallback.forEach((giftData, index) => {
-                const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%'];
-                const backdrops = ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%'];
-                const symbols = ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%'];
-
-                gifts.push({
-                    id: id++,
-                    name: giftData.name,
-                    number: giftData.number,
-                    hashtag: `#${giftData.number}`,
-                    price: giftData.price,
-                    status: giftData.status,
-                    slug: giftData.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-'),
-                    owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
-                    model: models[index % models.length],
-                    backdrop: backdrops[index % backdrops.length],
-                    symbol: symbols[index % symbols.length],
-                    issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`,
-                    lottieUrl: `https://nft.fragment.com/gift/${giftData.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-')}-${giftData.number}.lottie.json`
-                });
-            });
-
-            return gifts;
-        }
-
-        // ============================================================
-        // 10. PROFILE TOGGLE
+        // 9. ПРОФИЛЬ
         // ============================================================
         function toggleProfile() {
             const section = document.getElementById('profileSection');
@@ -1428,7 +1205,7 @@
         document.getElementById('closeProfileBtn').addEventListener('click', toggleProfile);
 
         // ============================================================
-        // 11. MY GIFTS
+        // 10. МОИ ПОДАРКИ
         // ============================================================
         document.getElementById('myGiftsBtn').addEventListener('click', () => {
             const section = document.getElementById('profileSection');
@@ -1439,17 +1216,17 @@
         });
 
         // ============================================================
-        // 12. WITHDRAW
+        // 11. ВЫВЕСТИ СРЕДСТВА
         // ============================================================
         document.getElementById('withdrawBtn').addEventListener('click', () => {
             const user = getUserProfile();
-            if (confirm(`Withdraw ${user.balance} TON to wallet?`)) {
-                alert('✅ Withdrawal request submitted!');
+            if (confirm(`Вывести ${user.balance} TON на кошелёк?`)) {
+                alert('✅ Заявка на вывод отправлена!');
             }
         });
 
         // ============================================================
-        // 13. ADD GIFT MODAL
+        // 12. ДОБАВИТЬ ПОДАРОК
         // ============================================================
         document.getElementById('addGiftBtn').addEventListener('click', () => {
             document.getElementById('addModal').classList.add('active');
@@ -1464,21 +1241,21 @@
         });
 
         // ============================================================
-        // 14. COPY USERNAME
+        // 13. КОПИРОВАТЬ ЮЗЕРНЕЙМ
         // ============================================================
         document.getElementById('copyUsernameBtn').addEventListener('click', () => {
             const user = getUserProfile();
-            const username = user.username || CONFIG.USERNAME || 'guest';
+            const username = user.username || CONFIG.USERNAME || 'username';
             const text = `@${username}`;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('copyUsernameBtn');
-                btn.textContent = '✅ Copied!';
-                setTimeout(() => { btn.textContent = '📋 Copy username'; }, 2000);
-            }).catch(() => { alert(`Copy manually: ${text}`); });
+                btn.textContent = '✅ Скопировано!';
+                setTimeout(() => { btn.textContent = '📋 Скопировать юзернейм'; }, 2000);
+            }).catch(() => { alert(`Скопируйте вручную: ${text}`); });
         });
 
         // ============================================================
-        // 15. FILTERS
+        // 14. ФИЛЬТРЫ
         // ============================================================
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1490,7 +1267,7 @@
         });
 
         // ============================================================
-        // 16. CLOSE DETAIL
+        // 15. ЗАКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ
         // ============================================================
         document.getElementById('detailCloseBtn').addEventListener('click', () => {
             document.getElementById('detailModal').classList.remove('active');
@@ -1502,23 +1279,18 @@
         });
 
         // ============================================================
-        // 17. INIT
+        // 16. ЗАПУСК
         // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Сначала показываем заглушку
-            allGifts = generateFallbackGifts();
             renderGifts('all');
             updateUI();
-
-            // Пытаемся загрузить данные из TON API
-            loadGiftsFromTON();
 
             if (window.Telegram && window.Telegram.WebApp) {
                 window.Telegram.WebApp.ready();
                 try {
                     const user = window.Telegram.WebApp.initDataUnsafe?.user;
                     if (user) {
-                        const tgUsername = user.username || user.first_name || 'guest';
+                        const tgUsername = user.username || user.first_name || 'user';
                         const currentUser = getUserProfile();
                         if (currentUser.username !== tgUsername) {
                             updateUserProfile({ username: tgUsername });
