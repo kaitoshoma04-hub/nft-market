@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NFT Подарки Fragment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f1a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 0;
+            padding-bottom: 80px;
+        }
+
+        .top-bar {
+            background: #1a1a2e;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a44;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0088cc, #47a1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #2a2a4a;
+            padding: 6px 12px 6px 6px;
+            border-radius: 30px;
+            border: 1px solid #3a3a5a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .profile-btn:active {
+            transform: scale(0.95);
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #2a2a4a;
+            border: 2px solid #47a1ff;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #8888aa;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .profile-balance {
+            font-size: 12px;
+            color: #47a1ff;
+        }
+
+        #app {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 4px;
+        }
+
+        .market-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .gift-count {
+            color: #8888aa;
+            font-size: 14px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #1a1a2e;
+            border: 1px solid #2a2a44;
+            color: #8888aa;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #2a2a4a;
+            border-color: #47a1ff;
+            color: #ffffff;
+        }
+
+        .filter-btn:active {
+            transform: scale(0.95);
+        }
+
+        #gifts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .gift-card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 12px;
+            border: 1px solid #2a2a44;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gift-card:active {
+            transform: scale(0.97);
+        }
+
+        .gift-card .gift-animation {
+            width: 100%;
+            height: 140px;
+            background: #12121f;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .gift-card .gift-animation svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .gift-card .gift-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gift-card .gift-hashtag {
+            font-size: 11px;
+            color: #47a1ff;
+            font-family: monospace;
+        }
+
+        .gift-card .gift-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .gift-card .gift-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .gift-card .ton-logo {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0088cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gift-card .ton-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gift-card .gift-status {
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .gift-status.sold {
+            background: #2a2a4a;
+            color: #8888aa;
+        }
+
+        .gift-status.for-sale {
+            background: #1a3a2a;
+            color: #47d47a;
+        }
+
+        .gift-status.on-auction {
+            background: #3a2a1a;
+            color: #f5a623;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #1a1a2e;
+            border-radius: 24px;
+            padding: 24px;
+            max-width: 480px;
+            width: 100%;
+            border: 1px solid #2a2a44;
+            animation: modalIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .modal-header .modal-title {
+            flex: 1;
+        }
+
+        .modal-header .modal-title h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .modal-header .modal-title .modal-hashtag {
+            font-size: 14px;
+            color: #47a1ff;
+            font-family: monospace;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #8888aa;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0 8px;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-animation {
+            width: 100%;
+            height: 280px;
+            background: #12121f;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-animation svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-status {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .modal-status.sold {
+            background: #2a2a4a;
+            color: #8888aa;
+        }
+
+        .modal-status.for-sale {
+            background: #1a3a2a;
+            color: #47d47a;
+        }
+
+        .modal-status.on-auction {
+            background: #3a2a1a;
+            color: #f5a623;
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #2a2a44;
+        }
+
+        .modal-details .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-details .detail-item .label {
+            font-size: 11px;
+            color: #8888aa;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-details .detail-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            word-break: break-all;
+        }
+
+        .modal-details .detail-item .value.owner {
+            font-size: 12px;
+            font-family: monospace;
+            color: #47a1ff;
+        }
+
+        .modal-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 12px 0;
+        }
+
+        .modal-price .ton-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #0088cc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .modal-price .ton-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-buy-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0088cc, #47a1ff);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .modal-buy-btn:active {
+            transform: scale(0.97);
+            opacity: 0.8;
+        }
+
+        .modal-buy-btn.sold {
+            background: #2a4a3a;
+            cursor: default;
+        }
+
+        .add-gift-section {
+            margin-top: 24px;
+            padding: 0 4px;
+        }
+
+        .add-gift-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #f5a623, #f7c948);
+            border: none;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #0f0f1a;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(245, 166, 35, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .add-gift-btn:active {
+            transform: scale(0.97);
+        }
+
+        .add-modal .highlight {
+            background: #2a2a4a;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: monospace;
+            font-size: 16px;
+            color: #47a1ff;
+            border: 1px solid #3a3a5a;
+        }
+
+        .add-modal .copy-btn {
+            background: #2a2a4a;
+            border: 1px solid #3a3a5a;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .add-modal .copy-btn:active {
+            transform: scale(0.95);
+            background: #3a3a5a;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 16px;
+            background: #1a1a2e;
+            border: 1px solid #2a2a44;
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 220px;
+            z-index: 200;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .profile-dropdown.active {
+            display: block;
+            animation: modalIn 0.2s ease;
+        }
+
+        .profile-dropdown .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #2a2a44;
+        }
+
+        .profile-dropdown .profile-info .avatar-big {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #47a1ff;
+        }
+
+        .profile-dropdown .profile-info .avatar-big img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-dropdown .profile-info .info-text {
+            flex: 1;
+        }
+
+        .profile-dropdown .profile-info .info-text .name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .profile-dropdown .profile-info .info-text .balance {
+            color: #47a1ff;
+            font-size: 14px;
+        }
+
+        .profile-dropdown .action-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .profile-dropdown .action-btn:active {
+            transform: scale(0.97);
+        }
+
+        .profile-dropdown .withdraw-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .profile-dropdown .close-profile-btn {
+            background: #2a2a4a;
+            color: #8888aa;
+            margin-top: 4px;
+        }
+
+        .first-visit-badge {
+            display: inline-block;
+            background: #2a4a3a;
+            color: #7ddfa0;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 480px) {
+            #gifts-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .gift-card .gift-animation {
+                height: 110px;
+            }
+            .modal-animation {
+                height: 200px;
+            }
+            .modal-details {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #gifts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span class="app-title">🎁 NFT Маркет</span>
+        <div class="profile-btn" id="profileBtn">
+            <div class="avatar" id="avatarContainer">
+                <div class="avatar-placeholder">👤</div>
+            </div>
+            <div>
+                <div class="profile-name" id="profileName">Гость</div>
+                <div class="profile-balance" id="profileBalance">0 TON</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <div class="profile-info">
+            <div class="avatar-big" id="avatarBig">
+                <div class="avatar-placeholder">👤</div>
+            </div>
+            <div class="info-text">
+                <div class="name" id="dropdownName">Гость</div>
+                <div class="balance" id="dropdownBalance">💰 0 TON</div>
+                <div id="firstVisitInfo" class="first-visit-badge"></div>
+            </div>
+        </div>
+        <button class="action-btn withdraw-btn" id="withdrawBtn">💸 Вывести средства</button>
+        <button class="action-btn close-profile-btn" id="closeProfileBtn">✕ Закрыть</button>
+    </div>
+
+    <div id="app">
+        <div class="market-header">
+            <h2>🔥 Все подарки</h2>
+            <span class="gift-count" id="giftCount">0 шт.</span>
+        </div>
+
+        <div class="filters" id="filtersContainer">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="for-sale">Продаётся</button>
+            <button class="filter-btn" data-filter="on-auction">На аукционе</button>
+            <button class="filter-btn" data-filter="sold">Продано</button>
+        </div>
+
+        <div id="gifts-container"></div>
+
+        <div class="add-gift-section">
+            <button class="add-gift-btn" id="addGiftBtn">
+                <span class="icon">✨</span>
+                Добавить свой подарок
+                <span class="icon">🎁</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h3 id="detailName">Plush Pepe</h3>
+                    <span class="modal-hashtag" id="detailHashtag">#1821</span>
+                </div>
+                <button class="modal-close" id="detailCloseBtn">✕</button>
+            </div>
+            <div class="modal-animation" id="detailAnimation"></div>
+            <span class="modal-status" id="detailStatus">Sold</span>
+            <div class="modal-price">
+                <span class="ton-logo">
+                    <img src="https://ton.org/download/ton_symbol.png" alt="TON" onerror="this.style.display='none'; this.parentElement.textContent='⧫';">
+                </span>
+                <span id="detailPrice">88,888 TON</span>
+            </div>
+            <div class="modal-details">
+                <div class="detail-item">
+                    <span class="label">Owner</span>
+                    <span class="value owner" id="detailOwner">UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Model</span>
+                    <span class="value" id="detailModel">Gummy Frog 3%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Backdrop</span>
+                    <span class="value" id="detailBackdrop">Platinum 2%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Symbol</span>
+                    <span class="value" id="detailSymbol">Ring 0.4%</span>
+                </div>
+                <div class="detail-item" style="grid-column: 1 / -1;">
+                    <span class="label">Issued</span>
+                    <span class="value" id="detailIssued">2825 of 2861</span>
+                </div>
+            </div>
+            <button class="modal-buy-btn" id="detailBuyBtn">Купить</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay add-modal" id="addModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>✨ Добавить подарок</h3>
+                <button class="modal-close" id="addModalCloseBtn">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>Для размещения подарка на маркете, пожалуйста, передайте его:</p>
+                <div class="highlight">
+                    📤 Передать подарок @username_bot
+                </div>
+                <p style="margin-top: 12px; font-size: 14px; color: #8888aa;">
+                    После передачи подарок появится на маркете в течение 5-10 минут.
+                </p>
+                <button class="copy-btn" id="copyUsernameBtn">📋 Скопировать юзернейм</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. ВСЕ 114 КОЛЛЕКЦИЙ С ФРАГМЕНТА (РЕАЛЬНЫЕ НАЗВАНИЯ)
+        // ============================================================
+        const COLLECTIONS = [
+            "Artisan Bricks", "Astral Shards", "B-Day Candles", "Berry Boxes",
+            "Big Years", "Bling Binkies", "Bonded Rings", "Bow Ties",
+            "Bunny Muffins", "Candy Canes", "Chill Flames", "Clover Pins",
+            "Cookie Hearts", "Crystal Balls", "Cupid Charms", "Desk Calendars",
+            "Diamond Rings", "Durov's Caps", "Easter Eggs", "Electric Skulls",
+            "Eternal Candles", "Eternal Roses", "Evil Eyes", "Faith Amulets",
+            "Flying Brooms", "Fresh Socks", "Gem Signets", "Genie Lamps",
+            "Ginger Cookies", "Hanging Stars", "Happy Brownies", "Heart Lockets",
+            "Heroic Helmets", "Hex Pots", "Holiday Drinks", "Homemade Cakes",
+            "Hypno Lollipops", "Ice Creams", "Input Keys", "Instant Ramens",
+            "Ion Gems", "Ionic Dryers", "Jacks-in-the-Box", "Jelly Bunnies",
+            "Jester Hats", "Jingle Bells", "Jolly Chimps", "Joyful Bundles",
+            "Khabib's Papakhas", "Kissed Frogs", "Light Swords", "Lol Pops",
+            "Loot Bags", "Love Candles", "Love Potions", "Low Riders",
+            "Lunar Snakes", "Lush Bouquets", "Mad Pumpkins", "Magic Potions",
+            "Mighty Arms", "Mini Oscars", "Money Pots", "Mood Packs",
+            "Moon Pendants", "Mousse Cakes", "Nail Bracelets", "Neko Helmets",
+            "Party Sparklers", "Perfume Bottles", "Pet Snakes", "Plush Pepes",
+            "Pool Floats", "Precious Peaches", "Pretty Posies", "Rare Birds",
+            "Record Players", "Restless Jars", "Sakura Flowers", "Santa Hats",
+            "Scared Cats", "Sharp Tongues", "Signet Rings", "Skull Flowers",
+            "Sky Stilettos", "Sleigh Bells", "Snake Boxes", "Snoop Cigars",
+            "Snoop Doggs", "Snow Globes", "Snow Mittens", "Spiced Wines",
+            "Spring Baskets", "Spy Agarics", "Star Notepads", "Stellar Rockets",
+            "Swag Bags", "Swiss Watches", "Tama Gadgets", "Timeless Books",
+            "Top Hats", "Toy Bears", "Trapped Hearts", "UFC Strikes",
+            "Valentine Boxes", "Vice Creams", "Victory Medals", "Vintage Cigars",
+            "Voodoo Dolls", "Westside Signs", "Whip Cupcakes", "Winter Wreaths",
+            "Witch Hats", "Xmas Stockings"
+        ];
+
+        // ============================================================
+        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ
+        // ============================================================
+        function generateGifts() {
+            const gifts = [];
+            let id = 1;
+
+            COLLECTIONS.forEach(collection => {
+                // Для каждой коллекции генерируем 5 подарков с разными номерами
+                for (let i = 1; i <= 5; i++) {
+                    const number = String(100 + Math.floor(Math.random() * 9000));
+                    const statuses = ['for-sale', 'on-auction', 'sold'];
+                    const status = statuses[Math.floor(Math.random() * statuses.length)];
+                    const price = (10 + Math.random() * 500).toFixed(0);
+
+                    // Создаем слаг для URL (как на Fragment)
+                    const slug = collection.toLowerCase()
+                        .replace(/['\s]/g, '-')
+                        .replace(/-+/g, '-')
+                        .replace(/^-|-$/g, '');
+
+                    const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
+                        'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
+                    ];
+                    const backdrops = ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%', 'Dark 10%',
+                        'Crystal 4%', 'Neon 6%', 'Glow 3%', 'Holographic 2%', 'Galaxy 8%'
+                    ];
+                    const symbols = ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%', 'Moon 0.7%',
+                        'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
+                    ];
+
+                    gifts.push({
+                        id: id++,
+                        collection: collection,
+                        name: collection,
+                        number: number,
+                        hashtag: `#${number}`,
+                        price: price,
+                        status: status,
+                        slug: slug,
+                        owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
+                        model: models[Math.floor(Math.random() * models.length)],
+                        backdrop: backdrops[Math.floor(Math.random() * backdrops.length)],
+                        symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                        issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`
+                    });
+                }
+            });
+
+            return gifts;
+        }
+
+        // ============================================================
+        // 3. ФУНКЦИЯ ДЛЯ ПОЛУЧЕНИЯ LOTTIE С FRAGMENT (ПРЯМАЯ ССЫЛКА)
+        // ============================================================
+        function getLottieUrl(slug, number) {
+            // Реальный шаблон URL с Fragment
+            return `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
+        }
+
+        // ============================================================
+        // 4. РАБОТА С LOCALSTORAGE
+        // ============================================================
+        function getStorageData() {
+            try {
+                const data = localStorage.getItem('nftMarketData');
+                return data ? JSON.parse(data) : null;
+            } catch { return null; }
+        }
+
+        function saveStorageData(data) {
+            localStorage.setItem('nftMarketData', JSON.stringify(data));
+        }
+
+        function getUserProfile() {
+            const saved = getStorageData();
+            if (saved && saved.user) {
+                return saved.user;
+            }
+            const newUser = {
+                username: CONFIG.USERNAME || 'user',
+                balance: CONFIG.BALANCE || 1000,
+                firstVisit: new Date().toISOString(),
+                purchased: []
+            };
+            saveStorageData({ user: newUser });
+            return newUser;
+        }
+
+        function updateUserProfile(updates) {
+            const saved = getStorageData() || { user: {} };
+            saved.user = { ...saved.user, ...updates };
+            saveStorageData(saved);
+            return saved.user;
+        }
+
+        function purchaseGift(giftId) {
+            const user = getUserProfile();
+            if (user.purchased.includes(giftId)) return false;
+            user.purchased.push(giftId);
+            updateUserProfile({ purchased: user.purchased });
+            return true;
+        }
+
+        // ============================================================
+        // 5. НАСТРОЙКИ
+        // ============================================================
+        const CONFIG = {
+            USERNAME: 'your_username',
+            BALANCE: 1000,
+            AVATAR_URL: ''
+        };
+
+        const TON_LOGO_URL = "https://ton.org/download/ton_symbol.png";
+        const allGifts = generateGifts();
+        let currentFilter = 'all';
+
+        // ============================================================
+        // 6. РЕНДЕРИНГ ПОДАРКОВ С LOTTIE АНИМАЦИЯМИ
+        // ============================================================
+        function renderGifts(filter = 'all') {
+            const container = document.getElementById('gifts-container');
+            container.innerHTML = '';
+            const user = getUserProfile();
+
+            let filtered = allGifts;
+            if (filter !== 'all') {
+                filtered = allGifts.filter(g => g.status === filter);
+            }
+
+            filtered.forEach((gift) => {
+                const card = document.createElement('div');
+                card.className = 'gift-card';
+                const animId = `lottie-${gift.id}`;
+                const lottieUrl = getLottieUrl(gift.slug, gift.number);
+                const isPurchased = user.purchased.includes(gift.id);
+
+                const statusLabels = {
+                    'for-sale': 'Продаётся',
+                    'on-auction': 'На аукционе',
+                    'sold': 'Продано'
+                };
+
+                card.innerHTML = `
+                    <div id="${animId}" class="gift-animation"></div>
+                    <div class="gift-name">${gift.name}</div>
+                    <div class="gift-hashtag">${gift.hashtag}</div>
+                    <div class="gift-price-row">
+                        <div class="gift-price">
+                            <span class="ton-logo">
+                                <img src="${TON_LOGO_URL}" alt="TON" onerror="this.style.display='none'; this.parentElement.textContent='⧫';">
+                            </span>
+                            ${gift.price} TON
+                        </div>
+                        <span class="gift-status ${gift.status}">${statusLabels[gift.status]}</span>
+                    </div>
+                `;
+
+                container.appendChild(card);
+
+                // ЗАГРУЗКА LOTTIE АНИМАЦИИ - ТОЛЬКО РЕАЛЬНЫЕ ФАЙЛЫ
+                const animContainer = document.getElementById(animId);
+                if (animContainer) {
+                    // Пробуем загрузить анимацию с Fragment
+                    lottie.loadAnimation({
+                        container: animContainer,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: lottieUrl,
+                        rendererSettings: {
+                            preserveAspectRatio: 'xMidYMid slice'
+                        }
+                    });
+                }
+
+                // Открытие детальной страницы
+                card.addEventListener('click', () => {
+                    openDetail(gift.id);
+                });
+            });
+
+            document.getElementById('giftCount').textContent = `${filtered.length} шт.`;
+        }
+
+        // ============================================================
+        // 7. ДЕТАЛЬНАЯ СТРАНИЦА
+        // ============================================================
+        function openDetail(giftId) {
+            const gift = allGifts.find(g => g.id === giftId);
+            if (!gift) return;
+
+            const user = getUserProfile();
+            const isPurchased = user.purchased.includes(gift.id);
+
+            document.getElementById('detailName').textContent = gift.name;
+            document.getElementById('detailHashtag').textContent = gift.hashtag;
+            document.getElementById('detailPrice').textContent = `${gift.price} TON`;
+            document.getElementById('detailOwner').textContent = gift.owner;
+            document.getElementById('detailModel').textContent = gift.model;
+            document.getElementById('detailBackdrop').textContent = gift.backdrop;
+            document.getElementById('detailSymbol').textContent = gift.symbol;
+            document.getElementById('detailIssued').textContent = gift.issued;
+
+            const statusLabels = {
+                'for-sale': 'Продаётся',
+                'on-auction': 'На аукционе',
+                'sold': 'Продано'
+            };
+            const statusEl = document.getElementById('detailStatus');
+            statusEl.textContent = statusLabels[gift.status];
+            statusEl.className = `modal-status ${gift.status}`;
+
+            const buyBtn = document.getElementById('detailBuyBtn');
+            if (isPurchased) {
+                buyBtn.textContent = '✅ В вашей коллекции';
+                buyBtn.className = 'modal-buy-btn sold';
+            } else {
+                buyBtn.textContent = '💎 Купить';
+                buyBtn.className = 'modal-buy-btn';
+                buyBtn.onclick = () => {
+                    if (purchaseGift(gift.id)) {
+                        buyBtn.textContent = '✅ В вашей коллекции';
+                        buyBtn.className = 'modal-buy-btn sold';
+                        renderGifts(currentFilter);
+                        updateUI();
+                    }
+                };
+            }
+
+            // Загрузка анимации в модалку
+            const animContainer = document.getElementById('detailAnimation');
+            animContainer.innerHTML = '';
+            const lottieUrl = getLottieUrl(gift.slug, gift.number);
+
+            lottie.loadAnimation({
+                container: animContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: lottieUrl,
+                rendererSettings: {
+                    preserveAspectRatio: 'xMidYMid slice'
+                }
+            });
+
+            document.getElementById('detailModal').classList.add('active');
+        }
+
+        // ============================================================
+        // 8. ОБНОВЛЕНИЕ UI
+        // ============================================================
+        function updateUI() {
+            const user = getUserProfile();
+            const username = user.username || CONFIG.USERNAME || 'user';
+            const balance = user.balance || CONFIG.BALANCE || 0;
+
+            document.getElementById('profileName').textContent = `@${username}`;
+            document.getElementById('profileBalance').textContent = `${balance} TON`;
+            document.getElementById('dropdownName').textContent = `@${username}`;
+            document.getElementById('dropdownBalance').textContent = `💰 ${balance} TON`;
+
+            if (user.firstVisit) {
+                const date = new Date(user.firstVisit);
+                const formatted = date.toLocaleDateString('ru-RU', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+                document.getElementById('firstVisitInfo').textContent = `🕐 Впервые: ${formatted}`;
+            }
+
+            const avatarContainers = [
+                document.getElementById('avatarContainer'),
+                document.getElementById('avatarBig')
+            ];
+            const avatarUrl = CONFIG.AVATAR_URL ||
+                `https://ui-avatars.com/api/?name=${username}&background=47a1ff&color=fff&size=128`;
+            avatarContainers.forEach(container => {
+                if (container) {
+                    container.innerHTML = `<img src="${avatarUrl}" alt="avatar" onerror="this.parentElement.innerHTML='<div class=\\'avatar-placeholder\\'>👤</div>'">`;
+                }
+            });
+        }
+
+        // ============================================================
+        // 9. ФИЛЬТРЫ
+        // ============================================================
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderGifts(currentFilter);
+            });
+        });
+
+        // ============================================================
+        // 10. ПРОФИЛЬ
+        // ============================================================
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const closeProfileBtn = document.getElementById('closeProfileBtn');
+
+        profileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('active');
+        });
+        closeProfileBtn.addEventListener('click', () => {
+            profileDropdown.classList.remove('active');
+        });
+        document.addEventListener('click', (e) => {
+            if (!profileDropdown.contains(e.target) && !profileBtn.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 11. ВЫВЕСТИ СРЕДСТВА
+        // ============================================================
+        document.getElementById('withdrawBtn').addEventListener('click', () => {
+            const user = getUserProfile();
+            if (confirm(`Вывести ${user.balance} TON на кошелёк?`)) {
+                alert('✅ Заявка на вывод отправлена!');
+                profileDropdown.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 12. ДОБАВИТЬ ПОДАРОК
+        // ============================================================
+        document.getElementById('addGiftBtn').addEventListener('click', () => {
+            document.getElementById('addModal').classList.add('active');
+        });
+        document.getElementById('addModalCloseBtn').addEventListener('click', () => {
+            document.getElementById('addModal').classList.remove('active');
+        });
+        document.getElementById('addModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('addModal').classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 13. КОПИРОВАТЬ ЮЗЕРНЕЙМ
+        // ============================================================
+        document.getElementById('copyUsernameBtn').addEventListener('click', () => {
+            const user = getUserProfile();
+            const username = user.username || CONFIG.USERNAME || 'username';
+            const text = `@${username}`;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copyUsernameBtn');
+                btn.textContent = '✅ Скопировано!';
+                setTimeout(() => { btn.textContent = '📋 Скопировать юзернейм'; }, 2000);
+            }).catch(() => { alert(`Скопируйте вручную: ${text}`); });
+        });
+
+        // ============================================================
+        // 14. ЗАКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ
+        // ============================================================
+        document.getElementById('detailCloseBtn').addEventListener('click', () => {
+            document.getElementById('detailModal').classList.remove('active');
+        });
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('detailModal').classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 15. ЗАПУСК
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGifts('all');
+            updateUI();
+
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.ready();
+                try {
+                    const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                    if (user) {
+                        const tgUsername = user.username || user.first_name || 'user';
+                        const currentUser = getUserProfile();
+                        if (currentUser.username !== tgUsername) {
+                            updateUserProfile({ username: tgUsername });
+                            updateUI();
+                        }
+                        if (user.photo_url) {
+                            CONFIG.AVATAR_URL = user.photo_url;
+                            updateUI();
+                        }
+                    }
+                } catch (e) { /* тихо */ }
+            }
+        });
+    </script>
+</body>
+</html>
