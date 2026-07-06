@@ -7,7 +7,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
     <style>
-        /* ===== ВСЕ СТИЛИ КАК В ПРЕДЫДУЩЕЙ ВЕРСИИ ===== */
+        /* ============================================================
+           ДИЗАЙН КАК У FRAGMENT (1 В 1)
+           ============================================================ */
+
+        /* ----- Базовые сбросы ----- */
         * {
             margin: 0;
             padding: 0;
@@ -22,6 +26,7 @@
             padding: 0;
         }
 
+        /* ----- Верхняя панель (как на Fragment) ----- */
         .top-bar {
             background: #13131f;
             padding: 12px 20px;
@@ -110,12 +115,14 @@
             color: #47a1ff;
         }
 
+        /* ----- Основной контент ----- */
         #app {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 16px;
         }
 
+        /* ----- Заголовок ----- */
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -139,6 +146,7 @@
             border: 1px solid #2a2a44;
         }
 
+        /* ----- Фильтры (как на Fragment) ----- */
         .filters {
             display: flex;
             gap: 8px;
@@ -170,6 +178,7 @@
             color: #0b0b14;
         }
 
+        /* ----- Сетка подарков ----- */
         #gifts-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -283,6 +292,9 @@
             color: #f5a623;
         }
 
+        /* ============================================================
+           ПРОФИЛЬ (КАК НА FRAGMENT)
+           ============================================================ */
         .profile-section {
             background: #13131f;
             border: 1px solid #1e1e30;
@@ -318,6 +330,16 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .profile-section .profile-header .avatar-big .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #8888aa;
         }
 
         .profile-section .profile-header .profile-info h2 {
@@ -391,6 +413,13 @@
             border-color: #6a2a2a;
         }
 
+        .profile-section .profile-actions .action-btn .icon {
+            font-size: 18px;
+        }
+
+        /* ============================================================
+           МОДАЛЬНОЕ ОКНО (ДЕТАЛЬНАЯ СТРАНИЦА)
+           ============================================================ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -597,6 +626,9 @@
             cursor: default;
         }
 
+        /* ============================================================
+           МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ ПОДАРОК"
+           ============================================================ */
         .add-modal .highlight {
             background: #1a1a2e;
             padding: 14px 18px;
@@ -625,24 +657,40 @@
             border-color: #3a3a5a;
         }
 
+        .add-modal .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ============================================================
+           АДАПТИВ
+           ============================================================ */
         @media (max-width: 640px) {
             #gifts-container {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 12px;
             }
+
             .profile-section .profile-actions {
                 grid-template-columns: 1fr;
             }
+
             .modal {
                 padding: 20px;
                 margin: 10px;
             }
+
             .page-header h1 {
                 font-size: 20px;
             }
+
             .top-bar {
                 padding: 10px 14px;
             }
+
+            .top-bar .logo span {
+                font-size: 16px;
+            }
+
             .profile-section .profile-header {
                 flex-direction: column;
                 text-align: center;
@@ -654,22 +702,29 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
+
             .gift-card {
                 padding: 10px;
             }
         }
 
+        /* ============================================================
+           СКРОЛЛБАР (как на Fragment)
+           ============================================================ */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #0b0b14;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #2a2a3a;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #3a3a5a;
         }
@@ -677,9 +732,12 @@
 </head>
 <body>
 
-    <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ ===== -->
+    <!-- ============================================================
+    ВЕРХНЯЯ ПАНЕЛЬ (как на Fragment)
+    ============================================================ -->
     <div class="top-bar">
         <div class="logo" id="logoBtn">
+            <!-- Логотип TON (встроенный SVG) -->
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#47a1ff"/>
                 <path d="M12 4L6 12L12 20L18 12L12 4Z" fill="#ffffff" fill-opacity="0.8"/>
@@ -688,6 +746,7 @@
             </svg>
             <span>Fragment <span class="ton-text">Gifts</span></span>
         </div>
+
         <div class="profile-btn" id="profileBtn">
             <div class="avatar" id="avatarContainer">
                 <div class="avatar-placeholder">👤</div>
@@ -699,13 +758,17 @@
         </div>
     </div>
 
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+    <!-- ============================================================
+    ОСНОВНОЙ КОНТЕНТ
+    ============================================================ -->
     <div id="app">
+        <!-- Заголовок -->
         <div class="page-header">
             <h1>🔥 Все подарки</h1>
             <span class="gift-count" id="giftCount">0 шт.</span>
         </div>
 
+        <!-- Фильтры -->
         <div class="filters" id="filtersContainer">
             <button class="filter-btn active" data-filter="all">Все</button>
             <button class="filter-btn" data-filter="for-sale">Продаётся</button>
@@ -713,9 +776,12 @@
             <button class="filter-btn" data-filter="sold">Продано</button>
         </div>
 
+        <!-- Сетка подарков -->
         <div id="gifts-container"></div>
 
-        <!-- ===== ПРОФИЛЬ ===== -->
+        <!-- ============================================================
+        ПРОФИЛЬ (как на Fragment)
+        ============================================================ -->
         <div class="profile-section" id="profileSection">
             <div class="profile-header">
                 <div class="avatar-big" id="avatarBig">
@@ -727,16 +793,27 @@
                     <div class="first-visit" id="firstVisitInfo"></div>
                 </div>
             </div>
+
             <div class="profile-actions">
-                <button class="action-btn" id="myGiftsBtn"><span class="icon">🎁</span> Мои подарки</button>
-                <button class="action-btn primary" id="addGiftBtn"><span class="icon">✨</span> Добавить подарок</button>
-                <button class="action-btn danger" id="withdrawBtn"><span class="icon">💸</span> Вывести средства</button>
-                <button class="action-btn" id="closeProfileBtn"><span class="icon">✕</span> Закрыть профиль</button>
+                <button class="action-btn" id="myGiftsBtn">
+                    <span class="icon">🎁</span> Мои подарки
+                </button>
+                <button class="action-btn primary" id="addGiftBtn">
+                    <span class="icon">✨</span> Добавить подарок
+                </button>
+                <button class="action-btn danger" id="withdrawBtn">
+                    <span class="icon">💸</span> Вывести средства
+                </button>
+                <button class="action-btn" id="closeProfileBtn">
+                    <span class="icon">✕</span> Закрыть профиль
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО (ДЕТАЛИ) ===== -->
+    <!-- ============================================================
+    МОДАЛЬНОЕ ОКНО (ДЕТАЛЬНАЯ СТРАНИЦА)
+    ============================================================ -->
     <div class="modal-overlay" id="detailModal">
         <div class="modal">
             <div class="modal-header">
@@ -746,8 +823,11 @@
                 </div>
                 <button class="modal-close" id="detailCloseBtn">✕</button>
             </div>
+
             <div class="modal-animation" id="detailAnimation"></div>
+
             <span class="modal-status" id="detailStatus">Sold</span>
+
             <div class="modal-price">
                 <span class="ton-logo">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -759,6 +839,7 @@
                 </span>
                 <span id="detailPrice">88,888 TON</span>
             </div>
+
             <div class="modal-details">
                 <div class="detail-item">
                     <span class="label">Owner</span>
@@ -781,11 +862,14 @@
                     <span class="value" id="detailIssued">2825 of 2861</span>
                 </div>
             </div>
+
             <button class="modal-buy-btn" id="detailBuyBtn">💎 Купить</button>
         </div>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ ПОДАРОК" ===== -->
+    <!-- ============================================================
+    МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ ПОДАРОК"
+    ============================================================ -->
     <div class="modal-overlay add-modal" id="addModal">
         <div class="modal">
             <div class="modal-header">
@@ -794,8 +878,12 @@
             </div>
             <div class="modal-body">
                 <p style="color: #8888aa; margin-bottom: 8px;">Для размещения подарка на маркете, пожалуйста, передайте его:</p>
-                <div class="highlight">📤 Передать подарок @username_bot</div>
-                <p style="margin-top: 12px; font-size: 13px; color: #666688;">После передачи подарок появится на маркете в течение 5-10 минут.</p>
+                <div class="highlight">
+                    📤 Передать подарок @username_bot
+                </div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666688;">
+                    После передачи подарок появится на маркете в течение 5-10 минут.
+                </p>
                 <button class="copy-btn" id="copyUsernameBtn">📋 Скопировать юзернейм</button>
             </div>
         </div>
@@ -803,116 +891,97 @@
 
     <script>
         // ============================================================
-        // 1. РЕАЛЬНЫЕ ПОДАРКИ С FRAGMENT (ВЗЯТЫЕ ПРЯМО С САЙТА)
+        // 1. ВСЕ 114 КОЛЛЕКЦИЙ С ФРАГМЕНТА (РЕАЛЬНЫЕ НАЗВАНИЯ)
         // ============================================================
-        const REAL_GIFTS = [
-            // Plush Pepe
-            { name: "Plush Pepe", number: "1821", price: "88888", status: "sold" },
-            { name: "Plush Pepe", number: "1515", price: "48000", status: "sold" },
-            { name: "Plush Pepe", number: "2658", price: "30000", status: "sold" },
-            { name: "Plush Pepe", number: "1521", price: "28555", status: "sold" },
-            { name: "Plush Pepe", number: "318", price: "23519", status: "sold" },
-            { name: "Plush Pepe", number: "1179", price: "20888", status: "sold" },
-            { name: "Plush Pepe", number: "456", price: "19999", status: "sold" },
-            { name: "Plush Pepe", number: "1519", price: "19000", status: "sold" },
-            { name: "Plush Pepe", number: "1043", price: "15000", status: "sold" },
-            { name: "Plush Pepe", number: "858", price: "15000", status: "sold" },
-            { name: "Plush Pepe", number: "982", price: "13999", status: "sold" },
-            { name: "Plush Pepe", number: "177", price: "13500", status: "sold" },
-            { name: "Plush Pepe", number: "899", price: "13500", status: "sold" },
-            { name: "Plush Pepe", number: "1921", price: "13000", status: "sold" },
-            { name: "Plush Pepe", number: "1106", price: "12990", status: "sold" },
-            { name: "Plush Pepe", number: "91", price: "12500", status: "sold" },
-            { name: "Plush Pepe", number: "206", price: "12388", status: "sold" },
-            { name: "Plush Pepe", number: "1609", price: "12345", status: "sold" },
-            { name: "Plush Pepe", number: "487", price: "12345", status: "sold" },
-            { name: "Plush Pepe", number: "195", price: "12000", status: "sold" },
-            { name: "Plush Pepe", number: "2530", price: "12000", status: "sold" },
-            { name: "Plush Pepe", number: "123", price: "11999", status: "sold" },
-            { name: "Plush Pepe", number: "289", price: "11888", status: "sold" },
-            { name: "Plush Pepe", number: "1088", price: "11660", status: "sold" },
-
-            // Swiss Watch
-            { name: "Swiss Watch", number: "7799", price: "13588", status: "sold" },
-
-            // Heart Locket
-            { name: "Heart Locket", number: "875", price: "12733.88", status: "sold" },
-
-            // Scared Cat
-            { name: "Scared Cat", number: "2920", price: "12500", status: "sold" },
-
-            // Loot Bag
-            { name: "Loot Bag", number: "11217", price: "11111", status: "sold" },
-            { name: "Loot Bag", number: "7631", price: "11111", status: "sold" },
-
-            // Sakura Flower
-            { name: "Sakura Flower", number: "49643", price: "6753", status: "sold" },
-
-            // Low Rider
-            { name: "Low Rider", number: "16593", price: "6666", status: "sold" },
-
-            // Добавляем еще реальных подарков с сайта
-            { name: "Plush Pepe", number: "601", price: "11111", status: "sold" },
-            { name: "Plush Pepe", number: "901", price: "11111", status: "sold" },
-            { name: "Plush Pepe", number: "853", price: "11100", status: "sold" },
-            { name: "Plush Pepe", number: "1396", price: "10700", status: "sold" },
-            { name: "Plush Pepe", number: "15", price: "10000", status: "sold" },
-            { name: "Plush Pepe", number: "18", price: "10000", status: "sold" },
-            { name: "Plush Pepe", number: "328", price: "9999", status: "sold" },
-            { name: "Plush Pepe", number: "333", price: "9999", status: "sold" },
-            { name: "Plush Pepe", number: "1120", price: "9900", status: "sold" },
-            { name: "Plush Pepe", number: "1902", price: "9900", status: "sold" },
+        const COLLECTIONS = [
+            "Artisan Bricks", "Astral Shards", "B-Day Candles", "Berry Boxes",
+            "Big Years", "Bling Binkies", "Bonded Rings", "Bow Ties",
+            "Bunny Muffins", "Candy Canes", "Chill Flames", "Clover Pins",
+            "Cookie Hearts", "Crystal Balls", "Cupid Charms", "Desk Calendars",
+            "Diamond Rings", "Durov's Caps", "Easter Eggs", "Electric Skulls",
+            "Eternal Candles", "Eternal Roses", "Evil Eyes", "Faith Amulets",
+            "Flying Brooms", "Fresh Socks", "Gem Signets", "Genie Lamps",
+            "Ginger Cookies", "Hanging Stars", "Happy Brownies", "Heart Lockets",
+            "Heroic Helmets", "Hex Pots", "Holiday Drinks", "Homemade Cakes",
+            "Hypno Lollipops", "Ice Creams", "Input Keys", "Instant Ramens",
+            "Ion Gems", "Ionic Dryers", "Jacks-in-the-Box", "Jelly Bunnies",
+            "Jester Hats", "Jingle Bells", "Jolly Chimps", "Joyful Bundles",
+            "Khabib's Papakhas", "Kissed Frogs", "Light Swords", "Lol Pops",
+            "Loot Bags", "Love Candles", "Love Potions", "Low Riders",
+            "Lunar Snakes", "Lush Bouquets", "Mad Pumpkins", "Magic Potions",
+            "Mighty Arms", "Mini Oscars", "Money Pots", "Mood Packs",
+            "Moon Pendants", "Mousse Cakes", "Nail Bracelets", "Neko Helmets",
+            "Party Sparklers", "Perfume Bottles", "Pet Snakes", "Plush Pepes",
+            "Pool Floats", "Precious Peaches", "Pretty Posies", "Rare Birds",
+            "Record Players", "Restless Jars", "Sakura Flowers", "Santa Hats",
+            "Scared Cats", "Sharp Tongues", "Signet Rings", "Skull Flowers",
+            "Sky Stilettos", "Sleigh Bells", "Snake Boxes", "Snoop Cigars",
+            "Snoop Doggs", "Snow Globes", "Snow Mittens", "Spiced Wines",
+            "Spring Baskets", "Spy Agarics", "Star Notepads", "Stellar Rockets",
+            "Swag Bags", "Swiss Watches", "Tama Gadgets", "Timeless Books",
+            "Top Hats", "Toy Bears", "Trapped Hearts", "UFC Strikes",
+            "Valentine Boxes", "Vice Creams", "Victory Medals", "Vintage Cigars",
+            "Voodoo Dolls", "Westside Signs", "Whip Cupcakes", "Winter Wreaths",
+            "Witch Hats", "Xmas Stockings"
         ];
 
         // ============================================================
-        // 2. ФУНКЦИЯ ДЛЯ ПОЛУЧЕНИЯ LOTTIE С FRAGMENT
-        // ============================================================
-        function getLottieUrl(collection, number) {
-            // Формируем слаг как на Fragment
-            const slug = collection.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
-            return `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
-        }
-
-        // ============================================================
-        // 3. ГЕНЕРАЦИЯ ПОДАРКОВ С РЕАЛЬНЫМИ ДАННЫМИ
+        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ
         // ============================================================
         function generateGifts() {
             const gifts = [];
             let id = 1;
 
-            REAL_GIFTS.forEach((giftData, index) => {
-                const slug = giftData.name.toLowerCase().replace(/['\s]/g, '-').replace(/-+/g, '-');
+            COLLECTIONS.forEach(collection => {
+                // Для каждой коллекции генерируем 5 подарков с разными номерами
+                for (let i = 1; i <= 5; i++) {
+                    const number = String(100 + Math.floor(Math.random() * 9000));
+                    const statuses = ['for-sale', 'on-auction', 'sold'];
+                    const status = statuses[Math.floor(Math.random() * statuses.length)];
+                    const price = (10 + Math.random() * 500).toFixed(0);
 
-                const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
-                    'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
-                ];
-                const backdrops = ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%', 'Dark 10%',
-                    'Crystal 4%', 'Neon 6%', 'Glow 3%', 'Holographic 2%', 'Galaxy 8%'
-                ];
-                const symbols = ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%', 'Moon 0.7%',
-                    'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
-                ];
+                    // Создаем слаг для URL (как на Fragment)
+                    const slug = collection.toLowerCase()
+                        .replace(/['\s]/g, '-')
+                        .replace(/-+/g, '-')
+                        .replace(/^-|-$/g, '');
 
-                const statuses = ['sold', 'sold', 'sold', 'for-sale', 'on-auction'];
-                const status = giftData.status || statuses[index % statuses.length];
+                    const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
+                        'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
+                    ];
+                    const backdrops = ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%', 'Dark 10%',
+                        'Crystal 4%', 'Neon 6%', 'Glow 3%', 'Holographic 2%', 'Galaxy 8%'
+                    ];
+                    const symbols = ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%', 'Moon 0.7%',
+                        'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
+                    ];
 
-                gifts.push({
-                    id: id++,
-                    name: giftData.name,
-                    number: giftData.number,
-                    hashtag: `#${giftData.number}`,
-                    price: giftData.price,
-                    status: status,
-                    slug: slug,
-                    owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
-                    model: models[index % models.length],
-                    backdrop: backdrops[index % backdrops.length],
-                    symbol: symbols[index % symbols.length],
-                    issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`
-                });
+                    gifts.push({
+                        id: id++,
+                        collection: collection,
+                        name: collection,
+                        number: number,
+                        hashtag: `#${number}`,
+                        price: price,
+                        status: status,
+                        slug: slug,
+                        owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
+                        model: models[Math.floor(Math.random() * models.length)],
+                        backdrop: backdrops[Math.floor(Math.random() * backdrops.length)],
+                        symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                        issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`
+                    });
+                }
             });
 
             return gifts;
+        }
+
+        // ============================================================
+        // 3. ФУНКЦИЯ ДЛЯ ПОЛУЧЕНИЯ LOTTIE С FRAGMENT
+        // ============================================================
+        function getLottieUrl(slug, number) {
+            return `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
         }
 
         // ============================================================
@@ -985,6 +1054,7 @@
                 filtered = allGifts.filter(g => g.status === filter);
             }
 
+            // Если профиль открыт, показываем только купленные подарки
             if (profileVisible && document.getElementById('profileSection').classList.contains('active')) {
                 filtered = allGifts.filter(g => user.purchased.includes(g.id));
             }
@@ -993,7 +1063,8 @@
                 const card = document.createElement('div');
                 card.className = 'gift-card';
                 const animId = `lottie-${gift.id}`;
-                const lottieUrl = getLottieUrl(gift.name, gift.number);
+                const lottieUrl = getLottieUrl(gift.slug, gift.number);
+                const isPurchased = user.purchased.includes(gift.id);
 
                 const statusLabels = {
                     'for-sale': 'Продаётся',
@@ -1027,7 +1098,7 @@
                 const animContainer = document.getElementById(animId);
                 if (animContainer) {
                     try {
-                        const anim = lottie.loadAnimation({
+                        lottie.loadAnimation({
                             container: animContainer,
                             renderer: 'svg',
                             loop: true,
@@ -1037,26 +1108,8 @@
                                 preserveAspectRatio: 'xMidYMid meet'
                             }
                         });
-
-                        // Если анимация не загрузилась - пробуем еще раз через 2 секунды
-                        anim.addEventListener('dataFailed', () => {
-                            setTimeout(() => {
-                                try {
-                                    lottie.loadAnimation({
-                                        container: animContainer,
-                                        renderer: 'svg',
-                                        loop: true,
-                                        autoplay: true,
-                                        path: lottieUrl,
-                                        rendererSettings: {
-                                            preserveAspectRatio: 'xMidYMid meet'
-                                        }
-                                    });
-                                } catch (e) {}
-                            }, 2000);
-                        });
                     } catch (e) {
-                        // Если ошибка - просто ничего не делаем
+                        // Тихая ошибка - анимация просто не загрузится
                     }
                 }
 
@@ -1116,10 +1169,10 @@
             // Загрузка анимации в модалку
             const animContainer = document.getElementById('detailAnimation');
             animContainer.innerHTML = '';
-            const lottieUrl = getLottieUrl(gift.name, gift.number);
+            const lottieUrl = getLottieUrl(gift.slug, gift.number);
 
             try {
-                const anim = lottie.loadAnimation({
+                lottie.loadAnimation({
                     container: animContainer,
                     renderer: 'svg',
                     loop: true,
@@ -1129,24 +1182,9 @@
                         preserveAspectRatio: 'xMidYMid meet'
                     }
                 });
-
-                anim.addEventListener('dataFailed', () => {
-                    setTimeout(() => {
-                        try {
-                            lottie.loadAnimation({
-                                container: animContainer,
-                                renderer: 'svg',
-                                loop: true,
-                                autoplay: true,
-                                path: lottieUrl,
-                                rendererSettings: {
-                                    preserveAspectRatio: 'xMidYMid meet'
-                                }
-                            });
-                        } catch (e) {}
-                    }, 2000);
-                });
-            } catch (e) {}
+            } catch (e) {
+                // Тихая ошибка
+            }
 
             document.getElementById('detailModal').classList.add('active');
         }
@@ -1186,7 +1224,7 @@
         }
 
         // ============================================================
-        // 9. ПРОФИЛЬ
+        // 9. ПРОФИЛЬ (открытие/закрытие)
         // ============================================================
         function toggleProfile() {
             const section = document.getElementById('profileSection');
@@ -1212,6 +1250,10 @@
             if (!section.classList.contains('active')) {
                 toggleProfile();
             }
+            const user = getUserProfile();
+            const filtered = allGifts.filter(g => user.purchased.includes(g.id));
+            document.getElementById('giftCount').textContent = `${filtered.length} шт.`;
+            // Перерисовываем только купленные
             renderGifts('all');
         });
 
@@ -1226,7 +1268,7 @@
         });
 
         // ============================================================
-        // 12. ДОБАВИТЬ ПОДАРОК
+        // 12. ДОБАВИТЬ ПОДАРОК (в модалке)
         // ============================================================
         document.getElementById('addGiftBtn').addEventListener('click', () => {
             document.getElementById('addModal').classList.add('active');
@@ -1301,7 +1343,7 @@
                             updateUI();
                         }
                     }
-                } catch (e) {}
+                } catch (e) { /* тихо */ }
             }
         });
     </script>
