@@ -1032,29 +1032,23 @@
         }
 
         // ============================================================
-        // 3. ЗАГРУЗКА LOTTIE С ФРАГМЕНТА (РАБОЧИЙ МЕТОД)
+        // 3. ЗАГРУЗКА LOTTIE С ФРАГМЕНТА (ПРЯМОЙ URL)
         // ============================================================
         function loadLottieFromFragment(container, lottieId) {
             if (!container) return;
 
-            // Показываем загрузку
             container.innerHTML = '<div class="loading-placeholder">⏳</div>';
 
-            // Прямой URL к Lottie файлу на Fragment
+            // Прямой URL к Lottie файлу на Fragment (убираем прокси, используем напрямую)
             const url = `https://nft.fragment.com/gift/${lottieId}.lottie.json`;
 
-            // Пробуем загрузить через fetch с прокси
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-
-            fetch(proxyUrl)
+            fetch(url, { mode: 'cors' })
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();
                 })
                 .then(data => {
-                    // Очищаем контейнер
                     container.innerHTML = '';
-                    // Загружаем анимацию
                     lottie.loadAnimation({
                         container: container,
                         renderer: 'svg',
@@ -1068,8 +1062,7 @@
                 })
                 .catch(error => {
                     console.warn(`Failed to load Lottie for ${lottieId}:`, error);
-                    // Показываем эмодзи вместо анимации
-                    const collection = Object.keys(GIFT_EMOJIS).find(key => 
+                    const collection = Object.keys(GIFT_EMOJIS).find(key =>
                         lottieId.startsWith(key.toLowerCase().replace(/['\s]/g, '-'))
                     );
                     const emoji = collection ? GIFT_EMOJIS[collection] : '🎁';
@@ -1222,7 +1215,6 @@
 
                 container.appendChild(card);
 
-                // Загружаем Lottie с Fragment
                 const animContainer = document.getElementById(animId);
                 if (animContainer) {
                     loadLottieFromFragment(animContainer, gift.lottieId);
@@ -1281,7 +1273,6 @@
                 };
             }
 
-            // Загрузка анимации в модалку
             const animContainer = document.getElementById('detailAnimation');
             loadLottieFromFragment(animContainer, gift.lottieId);
 
