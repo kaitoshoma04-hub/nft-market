@@ -54,6 +54,7 @@
             gap: 10px;
             cursor: pointer;
             transition: opacity 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
         .header .profile:active {
             opacity: 0.7;
@@ -79,6 +80,11 @@
             font-size: 16px;
             font-weight: 700;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
         .header .profile .username {
             font-size: 13px;
@@ -861,7 +867,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (B-Day Candle удалена, добавлена Precious Peach)
+        // 1. КОЛЛЕКЦИИ (добавлена Swiss Watch)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -877,29 +883,30 @@
             "Nail Bracelet": { icon: "📿", floorPrice: 28.5 },
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
-            "Precious Peach": { icon: "🍑", floorPrice: 29.9 }
+            "Precious Peach": { icon: "🍑", floorPrice: 29.9 },
+            "Swiss Watch": { icon: "⌚", floorPrice: 299 }
         };
 
         // ============================================================
-        // 2. ВСЕ NFT (добавлена Precious Peach 18 шт)
+        // 2. ВСЕ NFT
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
 
             const realNFTs = [
-                // ===== PLUSH PEPE (15 шт) =====
+                // ===== PLUSH PEPE (15 шт - все с реальными номерами) =====
                 { collection: "Plush Pepe", number: 2656, price: 4230 },
                 { collection: "Plush Pepe", number: 100, price: 5555 },
                 { collection: "Plush Pepe", number: 1412, price: 4870 },
                 { collection: "Plush Pepe", number: 1382, price: 5120 },
                 { collection: "Plush Pepe", number: 2658, price: 4000 },
                 { collection: "Plush Pepe", number: 1179, price: 4420 },
-                { collection: "Plush Pepe", number: 2001, price: 4999 },
-                { collection: "Plush Pepe", number: 3003, price: 5200 },
-                { collection: "Plush Pepe", number: 4004, price: 4600 },
-                { collection: "Plush Pepe", number: 5005, price: 5300 },
-                { collection: "Plush Pepe", number: 6006, price: 4800 },
-                { collection: "Plush Pepe", number: 7007, price: 5100 },
+                { collection: "Plush Pepe", number: 2055, price: 7500 },
+                { collection: "Plush Pepe", number: 987, price: 7400 },
+                { collection: "Plush Pepe", number: 1583, price: 4650 },
+                { collection: "Plush Pepe", number: 858, price: 15000 },
+                { collection: "Plush Pepe", number: 487, price: 12345 },
+                { collection: "Plush Pepe", number: 123, price: 11999 },
                 { collection: "Plush Pepe", number: 8008, price: 4450 },
                 { collection: "Plush Pepe", number: 9009, price: 5250 },
                 { collection: "Plush Pepe", number: 1010, price: 4700 },
@@ -1054,7 +1061,7 @@
                 { collection: "Vintage Cigar", number: 4013, price: 36.9 },
                 { collection: "Vintage Cigar", number: 4014, price: 43.2 },
 
-                // ===== PRECIOUS PEACH (18 шт) =====
+                // ===== PRECIOUS PEACH (10 шт) =====
                 { collection: "Precious Peach", number: 8841, price: 42.3 },
                 { collection: "Precious Peach", number: 8842, price: 38.7 },
                 { collection: "Precious Peach", number: 8843, price: 29.9 },
@@ -1065,14 +1072,16 @@
                 { collection: "Precious Peach", number: 1780, price: 399 },
                 { collection: "Precious Peach", number: 1348, price: 1.234 },
                 { collection: "Precious Peach", number: 663, price: 349 },
-                { collection: "Precious Peach", number: 5001, price: 52.7 },
-                { collection: "Precious Peach", number: 5002, price: 48.3 },
-                { collection: "Precious Peach", number: 5003, price: 67.1 },
-                { collection: "Precious Peach", number: 5004, price: 23.8 },
-                { collection: "Precious Peach", number: 5005, price: 88.4 },
-                { collection: "Precious Peach", number: 5006, price: 34.5 },
-                { collection: "Precious Peach", number: 5007, price: 55.9 },
-                { collection: "Precious Peach", number: 5008, price: 41.2 }
+
+                // ===== SWISS WATCH (8 шт) =====
+                { collection: "Swiss Watch", number: 7799, price: 13588 },
+                { collection: "Swiss Watch", number: 3964, price: 1234 },
+                { collection: "Swiss Watch", number: 15777, price: 2777 },
+                { collection: "Swiss Watch", number: 11240, price: 555 },
+                { collection: "Swiss Watch", number: 16315, price: 450 },
+                { collection: "Swiss Watch", number: 1904, price: 999 },
+                { collection: "Swiss Watch", number: 16539, price: 1555 },
+                { collection: "Swiss Watch", number: 23288, price: 299 }
             ];
 
             // Модели для каждой коллекции
@@ -1090,7 +1099,8 @@
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
-                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe", "Premium"]
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe", "Premium"],
+                "Swiss Watch": ["Classic", "Sport", "Elegant", "Luxury", "Diamond", "Platinum", "Gold", "Rose Gold"]
             };
 
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow", "Aurora",
@@ -1113,6 +1123,8 @@
                     .replace(/'/g, '')
                     .replace(/đ/g, 'durovs')
                     .replace(/-/g, '');
+
+                if (collection === "Swiss Watch") slug = "swiss-watch";
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
@@ -1268,9 +1280,9 @@
             const avatarImg = document.getElementById('avatarImg');
             const avatarPlaceholder = document.getElementById('avatarPlaceholder');
             const usernameDisplay = document.getElementById('usernameDisplay');
+            const profileBtn = document.getElementById('profileBtn');
 
-            if (window.Telegram && window.Telegram.WebApp) {
-                const user = window.Telegram.WebApp.initDataUnsafe?.user;
+            function updateProfile(user) {
                 if (user) {
                     if (user.photo_url) {
                         avatarImg.src = user.photo_url;
@@ -1282,23 +1294,43 @@
                         avatarPlaceholder.style.display = 'flex';
                         avatarImg.style.display = 'none';
                     }
-                    usernameDisplay.innerHTML = `${user.first_name || 'Пользователь'} <span>▼</span>`;
+                    const name = user.first_name || 'Пользователь';
+                    usernameDisplay.innerHTML = `${name} <span>▼</span>`;
                 } else {
                     avatarPlaceholder.textContent = '👤';
                     avatarPlaceholder.style.display = 'flex';
                     avatarImg.style.display = 'none';
                     usernameDisplay.innerHTML = `Профиль <span>▼</span>`;
                 }
-            } else {
-                avatarPlaceholder.textContent = '👤';
-                avatarPlaceholder.style.display = 'flex';
-                avatarImg.style.display = 'none';
-                usernameDisplay.innerHTML = `Профиль <span>▼</span>`;
             }
 
-            document.getElementById('profileBtn').addEventListener('click', () => {
+            if (window.Telegram && window.Telegram.WebApp) {
+                try {
+                    const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                    if (user) {
+                        updateProfile(user);
+                    } else {
+                        setTimeout(() => {
+                            const user2 = window.Telegram.WebApp.initDataUnsafe?.user;
+                            if (user2) updateProfile(user2);
+                        }, 500);
+                    }
+                } catch (e) {
+                    updateProfile(null);
+                }
+            } else {
+                updateProfile(null);
+            }
+
+            profileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 if (window.Telegram && window.Telegram.WebApp) {
-                    window.Telegram.WebApp.openLink('https://t.me/me');
+                    try {
+                        window.Telegram.WebApp.openLink('https://t.me/me');
+                    } catch (err) {
+                        window.open('https://t.me/me', '_blank');
+                    }
                 } else {
                     alert('👤 Профиль пользователя\n\nЗдесь будет ваша аватарка и имя из Telegram.\nОткройте приложение через Telegram WebApp.');
                 }
@@ -1351,13 +1383,18 @@
             if (lottieCache.has(url)) {
                 const cached = lottieCache.get(url);
                 container.innerHTML = '';
-                lottie.loadAnimation({
-                    container: container,
-                    animationData: cached,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true
-                });
+                try {
+                    lottie.loadAnimation({
+                        container: container,
+                        animationData: cached,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true
+                    });
+                } catch (e) {
+                    container.innerHTML =
+                        `<div style="color:#6e6e80;font-size:${isMini ? '14px' : '28px'};">${isMini ? '🎁' : '🎁'}</div>`;
+                }
                 if (!isMini) container.style.background = '#121216';
                 return;
             }
@@ -1370,13 +1407,19 @@
                     })
                     .then(data => {
                         lottieCache.set(url, data);
-                        lottie.loadAnimation({
-                            container: container,
-                            animationData: data,
-                            renderer: 'svg',
-                            loop: true,
-                            autoplay: true
-                        });
+                        container.innerHTML = '';
+                        try {
+                            lottie.loadAnimation({
+                                container: container,
+                                animationData: data,
+                                renderer: 'svg',
+                                loop: true,
+                                autoplay: true
+                            });
+                        } catch (e) {
+                            container.innerHTML =
+                                `<div style="color:#6e6e80;font-size:${isMini ? '14px' : '28px'};">${isMini ? '🎁' : '🎁'}</div>`;
+                        }
                         if (!isMini) container.style.background = '#121216';
                     })
                     .catch(() => {
@@ -1524,14 +1567,19 @@
 
             if (lottieCache.has(nft.lottie)) {
                 const cached = lottieCache.get(nft.lottie);
-                lottie.loadAnimation({
-                    container: detailContainer,
-                    animationData: cached,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true
-                });
-                document.getElementById('detailLottieWrapper').style.background = '#121216';
+                try {
+                    lottie.loadAnimation({
+                        container: detailContainer,
+                        animationData: cached,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true
+                    });
+                    document.getElementById('detailLottieWrapper').style.background = '#121216';
+                } catch (e) {
+                    detailContainer.innerHTML =
+                        `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>`;
+                }
             } else {
                 try {
                     fetch(nft.lottie)
@@ -1541,14 +1589,20 @@
                         })
                         .then(data => {
                             lottieCache.set(nft.lottie, data);
-                            lottie.loadAnimation({
-                                container: detailContainer,
-                                animationData: data,
-                                renderer: 'svg',
-                                loop: true,
-                                autoplay: true
-                            });
-                            document.getElementById('detailLottieWrapper').style.background = '#121216';
+                            detailContainer.innerHTML = '';
+                            try {
+                                lottie.loadAnimation({
+                                    container: detailContainer,
+                                    animationData: data,
+                                    renderer: 'svg',
+                                    loop: true,
+                                    autoplay: true
+                                });
+                                document.getElementById('detailLottieWrapper').style.background = '#121216';
+                            } catch (e) {
+                                detailContainer.innerHTML =
+                                    `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>`;
+                            }
                         })
                         .catch(() => {
                             detailContainer.innerHTML =
@@ -1614,12 +1668,17 @@
         // ============================================================
         // 8. ЗАПУСК
         // ============================================================
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             initProfile();
+            renderGrid();
+            updateCartUI();
         });
 
-        renderGrid();
-        updateCartUI();
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            initProfile();
+            renderGrid();
+            updateCartUI();
+        }
 
         document.addEventListener('click', (e) => {
             const filterSection = document.querySelector('.filter-section');
