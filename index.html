@@ -209,7 +209,7 @@
 
         .gift-card .gift-animation .loading-placeholder {
             color: #444466;
-            font-size: 12px;
+            font-size: 14px;
             text-align: center;
         }
 
@@ -503,7 +503,7 @@
 
         .modal-animation .loading-placeholder {
             color: #444466;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .modal-animation svg {
@@ -904,7 +904,7 @@
             let id = 1;
 
             COLLECTIONS.forEach(collection => {
-                for (let i = 1; i <= 5; i++) {
+                for (let i = 1; i <= 3; i++) {
                     const number = String(100 + Math.floor(Math.random() * 9000));
                     const statuses = ['for-sale', 'on-auction', 'sold'];
                     const status = statuses[Math.floor(Math.random() * statuses.length)];
@@ -925,6 +925,10 @@
                         'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
                     ];
 
+                    // Формируем правильный ID для Lottie файла
+                    // Формат: collection-name-number
+                    const lottieId = `${slug}-${number}`;
+
                     gifts.push({
                         id: id++,
                         collection: collection,
@@ -934,6 +938,7 @@
                         price: price,
                         status: status,
                         slug: slug,
+                        lottieId: lottieId,
                         owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
                         model: models[Math.floor(Math.random() * models.length)],
                         backdrop: backdrops[Math.floor(Math.random() * backdrops.length)],
@@ -947,52 +952,38 @@
         }
 
         // ============================================================
-        // 3. УНИВЕРСАЛЬНАЯ ЗАГРУЗКА LOTTIE (РАБОТАЕТ ВСЕГДА!)
+        // 3. ЗАГРУЗКА LOTTIE ЧЕРЕЗ ПРОКСИ
         // ============================================================
-        async function loadLottieAnimation(container, slug, number) {
+        async function loadLottieAnimation(container, lottieId) {
             if (!container) return;
 
             // Показываем загрузку
             container.innerHTML = '<div class="loading-placeholder">⏳</div>';
 
-            // Пробуем 3 разных способа загрузки
-            const methods = [
-                // Способ 1: Через прокси allorigins
-                async () => {
-                    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://nft.fragment.com/gift/${slug}-${number}.lottie.json`)}`;
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error('Proxy failed');
-                    const data = await response.json();
-                    return data;
-                },
-                // Способ 2: Через corsproxy.io
-                async () => {
-                    const url = `https://corsproxy.io/?${encodeURIComponent(`https://nft.fragment.com/gift/${slug}-${number}.lottie.json`)}`;
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error('CORS proxy failed');
-                    const data = await response.json();
-                    return data;
-                },
-                // Способ 3: Прямой запрос (может не работать из-за CORS, но пробуем)
-                async () => {
-                    const url = `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
-                    const response = await fetch(url, {
-                        mode: 'cors',
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    if (!response.ok) throw new Error('Direct failed');
-                    const data = await response.json();
-                    return data;
-                }
+            // Формируем URL
+            const url = `https://nft.fragment.com/gift/${lottieId}.lottie.json`;
+            
+            // Прокси сервисы для обхода CORS
+            const proxies = [
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+                `https://corsproxy.io/?${encodeURIComponent(url)}`,
+                `https://cors-anywhere.herokuapp.com/${url}`
             ];
 
             let lastError = null;
 
-            for (const method of methods) {
+            for (const proxyUrl of proxies) {
                 try {
-                    const data = await method();
+                    const response = await fetch(proxyUrl, {
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
+                    const data = await response.json();
+                    
                     // Очищаем контейнер
                     container.innerHTML = '';
 
@@ -1015,8 +1006,8 @@
             }
 
             // Если ничего не сработало - показываем ошибку
-            container.innerHTML = '<div class="loading-placeholder">⚠️</div>';
-            console.error(`Failed to load Lottie for ${slug}-${number}:`, lastError);
+            container.innerHTML = '<div class="loading-placeholder">⚠️ Не загрузилось</div>';
+            console.error(`Failed to load Lottie for ${lottieId}:`, lastError);
             return false;
         }
 
@@ -1129,10 +1120,10 @@
 
                 container.appendChild(card);
 
-                // Загружаем Lottie анимацию
+                // Загружаем Lottie
                 const animContainer = document.getElementById(animId);
                 if (animContainer) {
-                    loadLottieAnimation(animContainer, gift.slug, gift.number);
+                    loadLottieAnimation(animContainer, gift.lottieId);
                 }
 
                 card.addEventListener('click', () => {
@@ -1190,7 +1181,7 @@
 
             // Загрузка анимации в модалку
             const animContainer = document.getElementById('detailAnimation');
-            loadLottieAnimation(animContainer, gift.slug, gift.number);
+            loadLottieAnimation(animContainer, gift.lottieId);
 
             document.getElementById('detailModal').classList.add('active');
         }
