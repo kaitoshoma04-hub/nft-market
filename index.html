@@ -939,10 +939,11 @@
         }
         .withdraw-section .withdraw-row {
             display: flex;
+            flex-direction: column;
             gap: 10px;
         }
         .withdraw-section .withdraw-row .withdraw-amount {
-            flex: 1;
+            width: 100%;
             padding: 10px 14px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -960,7 +961,8 @@
             color: #6e6e80;
         }
         .withdraw-section .withdraw-row .withdraw-submit {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 10px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 10px;
@@ -970,7 +972,7 @@
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
+            margin-top: 4px;
         }
         .withdraw-section .withdraw-row .withdraw-submit:active {
             transform: scale(0.97);
@@ -1556,6 +1558,7 @@
         // ============================================================
         let currentUser = null;
         let userBalance = 0;
+        let isNewUser = true; // Флаг для нового пользователя
 
         function updateBalanceUI() {
             document.getElementById('headerBalance').textContent = userBalance.toFixed(2);
@@ -1569,7 +1572,6 @@
             const bigAvatarPlaceholder = document.getElementById('bigAvatarPlaceholder');
 
             if (user && user.photo_url) {
-                // Показываем аватарку
                 avatarImg.src = user.photo_url;
                 avatarImg.style.display = 'block';
                 avatarPlaceholder.style.display = 'none';
@@ -1578,7 +1580,6 @@
                 bigAvatarImg.style.display = 'block';
                 bigAvatarPlaceholder.style.display = 'none';
             } else {
-                // Скрываем аватарку, показываем плейсхолдер
                 avatarImg.style.display = 'none';
                 avatarPlaceholder.style.display = 'flex';
                 avatarPlaceholder.textContent = '👤';
@@ -1593,25 +1594,50 @@
             const profileName = document.getElementById('profileName');
             const profileId = document.getElementById('profileId');
 
+            // Проверяем, был ли уже пользователь
+            const savedUserId = localStorage.getItem('allow_user_id');
+            
             function updateProfileUI(user) {
                 if (user) {
                     currentUser = user;
                     
-                    // Обновляем аватарки
+                    // Проверяем, новый ли это пользователь
+                    const userId = user.id || '—';
+                    if (savedUserId && savedUserId === String(userId)) {
+                        // Пользователь уже был, баланс не меняем
+                        isNewUser = false;
+                    } else {
+                        // Новый пользователь или первый вход
+                        isNewUser = true;
+                        // Сохраняем ID пользователя
+                        if (userId !== '—') {
+                            localStorage.setItem('allow_user_id', String(userId));
+                        }
+                    }
+
                     updateAvatarUI(user);
 
-                    // Имя в модалке
                     profileName.textContent = user.first_name || 'Пользователь';
-
-                    // ID пользователя
-                    const userId = user.id || '—';
                     profileId.textContent = `ID: ${userId}`;
 
-                    // Баланс (заглушка)
-                    userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
+                    // Если новый пользователь - баланс 0, иначе генерируем случайный
+                    if (isNewUser) {
+                        userBalance = 0;
+                        isNewUser = false;
+                    } else {
+                        // Если баланс уже был сохранен в localStorage, используем его
+                        const savedBalance = localStorage.getItem('allow_user_balance');
+                        if (savedBalance !== null) {
+                            userBalance = parseFloat(savedBalance);
+                        } else {
+                            // Иначе генерируем небольшой баланс для существующих пользователей
+                            userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
+                            localStorage.setItem('allow_user_balance', String(userBalance));
+                        }
+                    }
                     updateBalanceUI();
-                    
-                    console.log('✅ Профиль загружен:', user.first_name, 'ID:', user.id);
+
+                    console.log('✅ Профиль загружен:', user.first_name, 'ID:', user.id, 'Баланс:', userBalance);
                 } else {
                     currentUser = null;
                     updateAvatarUI(null);
@@ -1623,7 +1649,6 @@
                 }
             }
 
-            // Получаем данные пользователя из Telegram WebApp
             function getTelegramUser() {
                 try {
                     if (window.Telegram && window.Telegram.WebApp) {
@@ -1640,9 +1665,7 @@
                 return false;
             }
 
-            // Пробуем получить сразу
             if (!getTelegramUser()) {
-                // Если не получилось, пробуем через интервалы
                 let attempts = 0;
                 const maxAttempts = 10;
                 const interval = setInterval(() => {
@@ -1657,12 +1680,10 @@
                 }, 300);
             }
 
-            // Клик по профилю — открываем модалку
             document.getElementById('profileBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
 
-                // Обновляем данные перед открытием
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
                         const user = window.Telegram.WebApp.initDataUnsafe?.user;
@@ -1678,7 +1699,6 @@
                 document.getElementById('withdrawSuccess').classList.remove('show');
             });
 
-            // Закрытие модалки
             document.getElementById('profileModalClose').addEventListener('click', function() {
                 document.getElementById('profileModal').classList.remove('open');
             });
@@ -1689,7 +1709,6 @@
                 }
             });
 
-            // Кнопка "Добавить подарок"
             document.getElementById('addGiftBtn').addEventListener('click', function() {
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
@@ -1706,7 +1725,6 @@
                 }
             });
 
-            // Кнопка "Вывести" - toggle
             document.getElementById('withdrawToggleBtn').addEventListener('click', function() {
                 const section = document.getElementById('withdrawSection');
                 section.classList.toggle('open');
@@ -1714,7 +1732,6 @@
                 document.getElementById('withdrawSuccess').classList.remove('show');
             });
 
-            // Кнопка "Вывести средства"
             document.getElementById('withdrawSubmitBtn').addEventListener('click', function() {
                 const wallet = document.getElementById('walletInput').value.trim();
                 const amount = parseFloat(document.getElementById('amountInput').value);
@@ -1742,6 +1759,8 @@
                 }
 
                 userBalance = parseFloat((userBalance - amount).toFixed(2));
+                // Сохраняем баланс в localStorage
+                localStorage.setItem('allow_user_balance', String(userBalance));
                 updateBalanceUI();
 
                 successEl.textContent =
