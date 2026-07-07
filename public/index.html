@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fragment Gifts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0b0b14;
+            color: #e8e8f0;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .top-bar {
+            background: #13131f;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a3a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .top-bar .logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .top-bar .logo span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .top-bar .logo span .ton-text {
+            color: #47a1ff;
+        }
+
+        .top-bar .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #1e1e30;
+            padding: 6px 14px 6px 6px;
+            border-radius: 30px;
+            border: 1px solid #2a2a3a;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .top-bar .profile-btn:hover {
+            background: #2a2a40;
+            border-color: #3a3a5a;
+        }
+
+        .top-bar .profile-btn .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #2a2a4a;
+            border: 2px solid #47a1ff;
+            overflow: hidden;
+        }
+
+        .top-bar .profile-btn .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .top-bar .profile-btn .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #8888aa;
+        }
+
+        .top-bar .profile-btn .profile-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .top-bar .profile-btn .profile-balance {
+            font-size: 11px;
+            color: #47a1ff;
+        }
+
+        #app {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 0 4px;
+        }
+
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .page-header .gift-count {
+            color: #8888aa;
+            font-size: 14px;
+            background: #1a1a2e;
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid #2a2a44;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            padding: 0 4px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #2a2a3a;
+            color: #8888aa;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #47a1ff;
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            background: #47a1ff;
+            border-color: #47a1ff;
+            color: #0b0b14;
+        }
+
+        #gifts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .gift-card {
+            background: #13131f;
+            border-radius: 16px;
+            padding: 14px;
+            border: 1px solid #1e1e30;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .gift-card:hover {
+            border-color: #47a1ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(71, 161, 255, 0.08);
+        }
+
+        .gift-card:active {
+            transform: scale(0.97);
+        }
+
+        .gift-card .gift-animation {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #0b0b14;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .gift-card .gift-animation .loading-placeholder {
+            color: #444466;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .gift-card .gift-animation svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .gift-card .gift-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gift-card .gift-hashtag {
+            font-size: 11px;
+            color: #47a1ff;
+            font-family: monospace;
+        }
+
+        .gift-card .gift-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #1a1a2e;
+        }
+
+        .gift-card .gift-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .gift-card .ton-logo {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gift-card .ton-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .gift-card .gift-status {
+            font-size: 10px;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .gift-status.sold {
+            background: #1a1a2e;
+            color: #666688;
+        }
+
+        .gift-status.for-sale {
+            background: #0a2a1a;
+            color: #47d47a;
+        }
+
+        .gift-status.on-auction {
+            background: #2a1a0a;
+            color: #f5a623;
+        }
+
+        .profile-section {
+            background: #13131f;
+            border: 1px solid #1e1e30;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .profile-section.active {
+            display: block;
+        }
+
+        .profile-section .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1a1a2e;
+        }
+
+        .profile-section .profile-header .avatar-big {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #47a1ff;
+            background: #1a1a2e;
+        }
+
+        .profile-section .profile-header .avatar-big img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-section .profile-header .avatar-big .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #8888aa;
+        }
+
+        .profile-section .profile-header .profile-info h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .profile-section .profile-header .profile-info .balance {
+            color: #47a1ff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .profile-section .profile-header .profile-info .first-visit {
+            color: #666688;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .profile-section .profile-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .profile-section .profile-actions .action-btn {
+            padding: 14px;
+            border: 1px solid #2a2a3a;
+            border-radius: 14px;
+            background: transparent;
+            color: #e8e8f0;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .profile-section .profile-actions .action-btn:hover {
+            background: #1a1a2e;
+            border-color: #3a3a5a;
+        }
+
+        .profile-section .profile-actions .action-btn:active {
+            transform: scale(0.97);
+        }
+
+        .profile-section .profile-actions .action-btn.primary {
+            background: #47a1ff;
+            border-color: #47a1ff;
+            color: #0b0b14;
+        }
+
+        .profile-section .profile-actions .action-btn.primary:hover {
+            background: #5aafff;
+            border-color: #5aafff;
+        }
+
+        .profile-section .profile-actions .action-btn.danger {
+            border-color: #4a1a1a;
+            color: #ff6b6b;
+        }
+
+        .profile-section .profile-actions .action-btn.danger:hover {
+            background: #1a0a0a;
+            border-color: #6a2a2a;
+        }
+
+        .profile-section .profile-actions .action-btn .icon {
+            font-size: 18px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(11, 11, 20, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #13131f;
+            border-radius: 24px;
+            padding: 28px;
+            max-width: 520px;
+            width: 100%;
+            border: 1px solid #1e1e30;
+            animation: modalIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .modal-header .modal-title h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .modal-header .modal-title .modal-hashtag {
+            font-size: 14px;
+            color: #47a1ff;
+            font-family: monospace;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #666688;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0 8px;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-animation {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #0b0b14;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .modal-animation .loading-placeholder {
+            color: #444466;
+            font-size: 16px;
+        }
+
+        .modal-animation svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .modal-status {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .modal-status.sold {
+            background: #1a1a2e;
+            color: #666688;
+        }
+
+        .modal-status.for-sale {
+            background: #0a2a1a;
+            color: #47d47a;
+        }
+
+        .modal-status.on-auction {
+            background: #2a1a0a;
+            color: #f5a623;
+        }
+
+        .modal-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 12px 0 16px 0;
+            color: #ffffff;
+        }
+
+        .modal-price .ton-logo {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-price .ton-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-top: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #1a1a2e;
+        }
+
+        .modal-details .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-details .detail-item .label {
+            font-size: 10px;
+            color: #666688;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .modal-details .detail-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e8e8f0;
+            word-break: break-all;
+        }
+
+        .modal-details .detail-item .value.owner {
+            font-size: 12px;
+            font-family: monospace;
+            color: #47a1ff;
+        }
+
+        .modal-buy-btn {
+            width: 100%;
+            padding: 16px;
+            background: #47a1ff;
+            border: none;
+            border-radius: 16px;
+            color: #0b0b14;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .modal-buy-btn:hover {
+            background: #5aafff;
+        }
+
+        .modal-buy-btn:active {
+            transform: scale(0.97);
+        }
+
+        .modal-buy-btn.sold {
+            background: #1a1a2e;
+            color: #666688;
+            cursor: default;
+        }
+
+        .add-modal .highlight {
+            background: #1a1a2e;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: monospace;
+            font-size: 16px;
+            color: #47a1ff;
+            border: 1px solid #2a2a3a;
+        }
+
+        .add-modal .copy-btn {
+            background: #1a1a2e;
+            border: 1px solid #2a2a3a;
+            color: #e8e8f0;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .add-modal .copy-btn:hover {
+            background: #2a2a3a;
+            border-color: #3a3a5a;
+        }
+
+        .add-modal .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 640px) {
+            #gifts-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .profile-section .profile-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .page-header h1 {
+                font-size: 20px;
+            }
+
+            .top-bar {
+                padding: 10px 14px;
+            }
+
+            .top-bar .logo span {
+                font-size: 16px;
+            }
+
+            .profile-section .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            #gifts-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .gift-card {
+                padding: 10px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0b0b14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a3a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a3a5a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="logo" id="logoBtn">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#47a1ff"/>
+                <path d="M12 4L6 12L12 20L18 12L12 4Z" fill="#ffffff" fill-opacity="0.8"/>
+                <path d="M12 4L6 12L12 20V4Z" fill="#ffffff" fill-opacity="0.4"/>
+                <path d="M12 4L18 12L12 20V4Z" fill="#ffffff" fill-opacity="0.2"/>
+            </svg>
+            <span>Fragment <span class="ton-text">Gifts</span></span>
+        </div>
+
+        <div class="profile-btn" id="profileBtn">
+            <div class="avatar" id="avatarContainer">
+                <div class="avatar-placeholder">👤</div>
+            </div>
+            <div>
+                <div class="profile-name" id="profileName">Гость</div>
+                <div class="profile-balance" id="profileBalance">0 TON</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app">
+        <div class="page-header">
+            <h1>🔥 Все подарки</h1>
+            <span class="gift-count" id="giftCount">0 шт.</span>
+        </div>
+
+        <div class="filters" id="filtersContainer">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="for-sale">Продаётся</button>
+            <button class="filter-btn" data-filter="on-auction">На аукционе</button>
+            <button class="filter-btn" data-filter="sold">Продано</button>
+        </div>
+
+        <div id="gifts-container"></div>
+
+        <div class="profile-section" id="profileSection">
+            <div class="profile-header">
+                <div class="avatar-big" id="avatarBig">
+                    <div class="avatar-placeholder">👤</div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profileNameBig">Гость</h2>
+                    <div class="balance" id="profileBalanceBig">💰 0 TON</div>
+                    <div class="first-visit" id="firstVisitInfo"></div>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="action-btn" id="myGiftsBtn">
+                    <span class="icon">🎁</span> Мои подарки
+                </button>
+                <button class="action-btn primary" id="addGiftBtn">
+                    <span class="icon">✨</span> Добавить подарок
+                </button>
+                <button class="action-btn danger" id="withdrawBtn">
+                    <span class="icon">💸</span> Вывести средства
+                </button>
+                <button class="action-btn" id="closeProfileBtn">
+                    <span class="icon">✕</span> Закрыть профиль
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h3 id="detailName">Plush Pepe</h3>
+                    <span class="modal-hashtag" id="detailHashtag">#1821</span>
+                </div>
+                <button class="modal-close" id="detailCloseBtn">✕</button>
+            </div>
+
+            <div class="modal-animation" id="detailAnimation">
+                <div class="loading-placeholder">⏳ Загрузка...</div>
+            </div>
+
+            <span class="modal-status" id="detailStatus">Sold</span>
+
+            <div class="modal-price">
+                <span class="ton-logo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#47a1ff"/>
+                        <path d="M12 4L6 12L12 20L18 12L12 4Z" fill="#ffffff" fill-opacity="0.8"/>
+                        <path d="M12 4L6 12L12 20V4Z" fill="#ffffff" fill-opacity="0.4"/>
+                        <path d="M12 4L18 12L12 20V4Z" fill="#ffffff" fill-opacity="0.2"/>
+                    </svg>
+                </span>
+                <span id="detailPrice">88,888 TON</span>
+            </div>
+
+            <div class="modal-details">
+                <div class="detail-item">
+                    <span class="label">Owner</span>
+                    <span class="value owner" id="detailOwner">UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Model</span>
+                    <span class="value" id="detailModel">Gummy Frog 3%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Backdrop</span>
+                    <span class="value" id="detailBackdrop">Platinum 2%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Symbol</span>
+                    <span class="value" id="detailSymbol">Ring 0.4%</span>
+                </div>
+                <div class="detail-item" style="grid-column: 1 / -1;">
+                    <span class="label">Issued</span>
+                    <span class="value" id="detailIssued">2825 of 2861</span>
+                </div>
+            </div>
+
+            <button class="modal-buy-btn" id="detailBuyBtn">💎 Купить</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay add-modal" id="addModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>✨ Добавить подарок</h3>
+                <button class="modal-close" id="addModalCloseBtn">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #8888aa; margin-bottom: 8px;">Для размещения подарка на маркете, пожалуйста, передайте его:</p>
+                <div class="highlight">
+                    📤 Передать подарок @username_bot
+                </div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666688;">
+                    После передачи подарок появится на маркете в течение 5-10 минут.
+                </p>
+                <button class="copy-btn" id="copyUsernameBtn">📋 Скопировать юзернейм</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. ВСЕ КОЛЛЕКЦИИ С ИХ ОФИЦИАЛЬНЫМИ SLUG НА FRAGMENT
+        // ============================================================
+        const COLLECTIONS = [
+            { name: "Artisan Bricks", slug: "artisan-bricks" },
+            { name: "Astral Shards", slug: "astral-shards" },
+            { name: "B-Day Candles", slug: "b-day-candles" },
+            { name: "Berry Boxes", slug: "berry-boxes" },
+            { name: "Big Years", slug: "big-years" },
+            { name: "Bling Binkies", slug: "bling-binkies" },
+            { name: "Bonded Rings", slug: "bonded-rings" },
+            { name: "Bow Ties", slug: "bow-ties" },
+            { name: "Bunny Muffins", slug: "bunny-muffins" },
+            { name: "Candy Canes", slug: "candy-canes" },
+            { name: "Chill Flames", slug: "chill-flames" },
+            { name: "Clover Pins", slug: "clover-pins" },
+            { name: "Cookie Hearts", slug: "cookie-hearts" },
+            { name: "Crystal Balls", slug: "crystal-balls" },
+            { name: "Cupid Charms", slug: "cupid-charms" },
+            { name: "Desk Calendars", slug: "desk-calendars" },
+            { name: "Diamond Rings", slug: "diamond-rings" },
+            { name: "Durov's Caps", slug: "durovs-caps" },
+            { name: "Easter Eggs", slug: "easter-eggs" },
+            { name: "Electric Skulls", slug: "electric-skulls" },
+            { name: "Eternal Candles", slug: "eternal-candles" },
+            { name: "Eternal Roses", slug: "eternal-roses" },
+            { name: "Evil Eyes", slug: "evil-eyes" },
+            { name: "Faith Amulets", slug: "faith-amulets" },
+            { name: "Flying Brooms", slug: "flying-brooms" },
+            { name: "Fresh Socks", slug: "fresh-socks" },
+            { name: "Gem Signets", slug: "gem-signets" },
+            { name: "Genie Lamps", slug: "genie-lamps" },
+            { name: "Ginger Cookies", slug: "ginger-cookies" },
+            { name: "Hanging Stars", slug: "hanging-stars" },
+            { name: "Happy Brownies", slug: "happy-brownies" },
+            { name: "Heart Lockets", slug: "heart-lockets" },
+            { name: "Heroic Helmets", slug: "heroic-helmets" },
+            { name: "Hex Pots", slug: "hex-pots" },
+            { name: "Holiday Drinks", slug: "holiday-drinks" },
+            { name: "Homemade Cakes", slug: "homemade-cakes" },
+            { name: "Hypno Lollipops", slug: "hypno-lollipops" },
+            { name: "Ice Creams", slug: "ice-creams" },
+            { name: "Input Keys", slug: "input-keys" },
+            { name: "Instant Ramens", slug: "instant-ramens" },
+            { name: "Ion Gems", slug: "ion-gems" },
+            { name: "Ionic Dryers", slug: "ionic-dryers" },
+            { name: "Jacks-in-the-Box", slug: "jacks-in-the-box" },
+            { name: "Jelly Bunnies", slug: "jelly-bunnies" },
+            { name: "Jester Hats", slug: "jester-hats" },
+            { name: "Jingle Bells", slug: "jingle-bells" },
+            { name: "Jolly Chimps", slug: "jolly-chimps" },
+            { name: "Joyful Bundles", slug: "joyful-bundles" },
+            { name: "Khabib's Papakhas", slug: "khabibs-papakhas" },
+            { name: "Kissed Frogs", slug: "kissed-frogs" },
+            { name: "Light Swords", slug: "light-swords" },
+            { name: "Lol Pops", slug: "lol-pops" },
+            { name: "Loot Bags", slug: "loot-bags" },
+            { name: "Love Candles", slug: "love-candles" },
+            { name: "Love Potions", slug: "love-potions" },
+            { name: "Low Riders", slug: "low-riders" },
+            { name: "Lunar Snakes", slug: "lunar-snakes" },
+            { name: "Lush Bouquets", slug: "lush-bouquets" },
+            { name: "Mad Pumpkins", slug: "mad-pumpkins" },
+            { name: "Magic Potions", slug: "magic-potions" },
+            { name: "Mighty Arms", slug: "mighty-arms" },
+            { name: "Mini Oscars", slug: "mini-oscars" },
+            { name: "Money Pots", slug: "money-pots" },
+            { name: "Mood Packs", slug: "mood-packs" },
+            { name: "Moon Pendants", slug: "moon-pendants" },
+            { name: "Mousse Cakes", slug: "mousse-cakes" },
+            { name: "Nail Bracelets", slug: "nail-bracelets" },
+            { name: "Neko Helmets", slug: "neko-helmets" },
+            { name: "Party Sparklers", slug: "party-sparklers" },
+            { name: "Perfume Bottles", slug: "perfume-bottles" },
+            { name: "Pet Snakes", slug: "pet-snakes" },
+            { name: "Plush Pepes", slug: "plush-pepes" },
+            { name: "Pool Floats", slug: "pool-floats" },
+            { name: "Precious Peaches", slug: "precious-peaches" },
+            { name: "Pretty Posies", slug: "pretty-posies" },
+            { name: "Rare Birds", slug: "rare-birds" },
+            { name: "Record Players", slug: "record-players" },
+            { name: "Restless Jars", slug: "restless-jars" },
+            { name: "Sakura Flowers", slug: "sakura-flowers" },
+            { name: "Santa Hats", slug: "santa-hats" },
+            { name: "Scared Cats", slug: "scared-cats" },
+            { name: "Sharp Tongues", slug: "sharp-tongues" },
+            { name: "Signet Rings", slug: "signet-rings" },
+            { name: "Skull Flowers", slug: "skull-flowers" },
+            { name: "Sky Stilettos", slug: "sky-stilettos" },
+            { name: "Sleigh Bells", slug: "sleigh-bells" },
+            { name: "Snake Boxes", slug: "snake-boxes" },
+            { name: "Snoop Cigars", slug: "snoop-cigars" },
+            { name: "Snoop Doggs", slug: "snoop-doggs" },
+            { name: "Snow Globes", slug: "snow-globes" },
+            { name: "Snow Mittens", slug: "snow-mittens" },
+            { name: "Spiced Wines", slug: "spiced-wines" },
+            { name: "Spring Baskets", slug: "spring-baskets" },
+            { name: "Spy Agarics", slug: "spy-agarics" },
+            { name: "Star Notepads", slug: "star-notepads" },
+            { name: "Stellar Rockets", slug: "stellar-rockets" },
+            { name: "Swag Bags", slug: "swag-bags" },
+            { name: "Swiss Watches", slug: "swiss-watches" },
+            { name: "Tama Gadgets", slug: "tama-gadgets" },
+            { name: "Timeless Books", slug: "timeless-books" },
+            { name: "Top Hats", slug: "top-hats" },
+            { name: "Toy Bears", slug: "toy-bears" },
+            { name: "Trapped Hearts", slug: "trapped-hearts" },
+            { name: "UFC Strikes", slug: "ufc-strikes" },
+            { name: "Valentine Boxes", slug: "valentine-boxes" },
+            { name: "Vice Creams", slug: "vice-creams" },
+            { name: "Victory Medals", slug: "victory-medals" },
+            { name: "Vintage Cigars", slug: "vintage-cigars" },
+            { name: "Voodoo Dolls", slug: "voodoo-dolls" },
+            { name: "Westside Signs", slug: "westside-signs" },
+            { name: "Whip Cupcakes", slug: "whip-cupcakes" },
+            { name: "Winter Wreaths", slug: "winter-wreaths" },
+            { name: "Witch Hats", slug: "witch-hats" },
+            { name: "Xmas Stockings", slug: "xmas-stockings" }
+        ];
+
+        // ============================================================
+        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ С ПРАВИЛЬНЫМИ LOTTIE ID
+        // ============================================================
+        function generateGifts() {
+            const gifts = [];
+            let id = 1;
+
+            COLLECTIONS.forEach(collection => {
+                for (let i = 0; i < 3; i++) {
+                    const number = String(1000 + Math.floor(Math.random() * 9000));
+                    const statuses = ['for-sale', 'on-auction', 'sold'];
+                    const status = statuses[Math.floor(Math.random() * statuses.length)];
+                    const price = (10 + Math.random() * 500).toFixed(0);
+
+                    const lottieId = `${collection.slug}-${number}`;
+
+                    const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
+                        'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
+                    ];
+                    const backdrops = ['Platinum 2%', 'Gold 3%', 'Silver 5%', 'Rainbow 1%', 'Dark 10%',
+                        'Crystal 4%', 'Neon 6%', 'Glow 3%', 'Holographic 2%', 'Galaxy 8%'
+                    ];
+                    const symbols = ['Ring 0.4%', 'Star 1%', 'Heart 2%', 'Crown 0.3%', 'Moon 0.7%',
+                        'Sun 0.9%', 'Cloud 1.2%', 'Lightning 0.6%', 'Snowflake 1.1%', 'Flower 0.8%'
+                    ];
+
+                    gifts.push({
+                        id: id++,
+                        collection: collection.name,
+                        name: collection.name,
+                        number: number,
+                        hashtag: `#${number}`,
+                        price: price,
+                        status: status,
+                        lottieId: lottieId,
+                        owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
+                        model: models[Math.floor(Math.random() * models.length)],
+                        backdrop: backdrops[Math.floor(Math.random() * backdrops.length)],
+                        symbol: symbols[Math.floor(Math.random() * symbols.length)],
+                        issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`
+                    });
+                }
+            });
+
+            return gifts;
+        }
+
+        // ============================================================
+        // 3. ЗАГРУЗКА LOTTIE ЧЕРЕЗ СВОЙ БЭКЕНД НА VERCEL
+        // ============================================================
+        function loadLottieFromFragment(container, lottieId) {
+            if (!container) return;
+
+            container.innerHTML = '<div class="loading-placeholder">⏳ Загрузка...</div>';
+
+            // Используем свой бэкенд на Vercel
+            // 🔥 ЗАМЕНИ НА СВОЙ URL ПОСЛЕ ДЕПЛОЯ!
+            const API_BASE_URL = 'https://nft-market-chi-three.vercel.app/'; // <- ЗАМЕНИТЬ!
+            const apiUrl = `${API_BASE_URL}/api/lottie/${lottieId}`;
+
+            fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                container.innerHTML = '';
+                const anim = lottie.loadAnimation({
+                    container: container,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    animationData: data,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid meet',
+                        clearCanvas: true,
+                        progressiveLoad: true,
+                        hideOnTransparent: true
+                    }
+                });
+                setTimeout(() => anim.resize(), 100);
+            })
+            .catch(error => {
+                console.warn(`Lottie ${lottieId} not loaded:`, error);
+                container.innerHTML = `
+                    <div style="
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #0b0b14;
+                        color: #444466;
+                        font-size: 13px;
+                        border-radius: 12px;
+                        flex-direction: column;
+                        gap: 6px;
+                    ">
+                        <span>🔄</span>
+                        <span style="font-size: 11px; opacity: 0.5;">Повторная загрузка...</span>
+                    </div>
+                `;
+                setTimeout(() => loadLottieFromFragment(container, lottieId), 2000);
+            });
+        }
+
+        // ============================================================
+        // 4. РАБОТА С LOCALSTORAGE
+        // ============================================================
+        function getStorageData() {
+            try {
+                const data = localStorage.getItem('nftMarketData');
+                return data ? JSON.parse(data) : null;
+            } catch { return null; }
+        }
+
+        function saveStorageData(data) {
+            localStorage.setItem('nftMarketData', JSON.stringify(data));
+        }
+
+        function getUserProfile() {
+            const saved = getStorageData();
+            if (saved && saved.user) {
+                return saved.user;
+            }
+            const newUser = {
+                username: CONFIG.USERNAME || 'user',
+                balance: CONFIG.BALANCE || 1000,
+                firstVisit: new Date().toISOString(),
+                purchased: []
+            };
+            saveStorageData({ user: newUser });
+            return newUser;
+        }
+
+        function updateUserProfile(updates) {
+            const saved = getStorageData() || { user: {} };
+            saved.user = { ...saved.user, ...updates };
+            saveStorageData(saved);
+            return saved.user;
+        }
+
+        function purchaseGift(giftId) {
+            const user = getUserProfile();
+            if (user.purchased.includes(giftId)) return false;
+            user.purchased.push(giftId);
+            updateUserProfile({ purchased: user.purchased });
+            return true;
+        }
+
+        // ============================================================
+        // 5. НАСТРОЙКИ
+        // ============================================================
+        const CONFIG = {
+            USERNAME: 'your_username',
+            BALANCE: 1000,
+            AVATAR_URL: ''
+        };
+
+        const allGifts = generateGifts();
+        let currentFilter = 'all';
+        let profileVisible = false;
+
+        // ============================================================
+        // 6. РЕНДЕРИНГ ПОДАРКОВ
+        // ============================================================
+        function renderGifts(filter = 'all') {
+            const container = document.getElementById('gifts-container');
+            container.innerHTML = '';
+            const user = getUserProfile();
+
+            let filtered = allGifts;
+            if (filter !== 'all') {
+                filtered = allGifts.filter(g => g.status === filter);
+            }
+
+            if (profileVisible && document.getElementById('profileSection').classList.contains('active')) {
+                filtered = allGifts.filter(g => user.purchased.includes(g.id));
+            }
+
+            const statusLabels = {
+                'for-sale': 'Продаётся',
+                'on-auction': 'На аукционе',
+                'sold': 'Продано'
+            };
+
+            filtered.forEach((gift) => {
+                const card = document.createElement('div');
+                card.className = 'gift-card';
+                const animId = `lottie-${gift.id}`;
+
+                card.innerHTML = `
+                    <div id="${animId}" class="gift-animation">
+                        <div class="loading-placeholder">⏳</div>
+                    </div>
+                    <div class="gift-name">${gift.name}</div>
+                    <div class="gift-hashtag">${gift.hashtag}</div>
+                    <div class="gift-price-row">
+                        <div class="gift-price">
+                            <span class="ton-logo">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#47a1ff"/>
+                                    <path d="M12 4L6 12L12 20L18 12L12 4Z" fill="#ffffff" fill-opacity="0.8"/>
+                                    <path d="M12 4L6 12L12 20V4Z" fill="#ffffff" fill-opacity="0.4"/>
+                                    <path d="M12 4L18 12L12 20V4Z" fill="#ffffff" fill-opacity="0.2"/>
+                                </svg>
+                            </span>
+                            ${gift.price} TON
+                        </div>
+                        <span class="gift-status ${gift.status}">${statusLabels[gift.status]}</span>
+                    </div>
+                `;
+
+                container.appendChild(card);
+
+                const animContainer = document.getElementById(animId);
+                if (animContainer) {
+                    loadLottieFromFragment(animContainer, gift.lottieId);
+                }
+
+                card.addEventListener('click', () => {
+                    openDetail(gift.id);
+                });
+            });
+
+            document.getElementById('giftCount').textContent = `${filtered.length} шт.`;
+        }
+
+        // ============================================================
+        // 7. ДЕТАЛЬНАЯ СТРАНИЦА
+        // ============================================================
+        function openDetail(giftId) {
+            const gift = allGifts.find(g => g.id === giftId);
+            if (!gift) return;
+
+            const user = getUserProfile();
+            const isPurchased = user.purchased.includes(gift.id);
+
+            document.getElementById('detailName').textContent = gift.name;
+            document.getElementById('detailHashtag').textContent = gift.hashtag;
+            document.getElementById('detailPrice').textContent = `${gift.price} TON`;
+            document.getElementById('detailOwner').textContent = gift.owner;
+            document.getElementById('detailModel').textContent = gift.model;
+            document.getElementById('detailBackdrop').textContent = gift.backdrop;
+            document.getElementById('detailSymbol').textContent = gift.symbol;
+            document.getElementById('detailIssued').textContent = gift.issued;
+
+            const statusLabels = {
+                'for-sale': 'Продаётся',
+                'on-auction': 'На аукционе',
+                'sold': 'Продано'
+            };
+            const statusEl = document.getElementById('detailStatus');
+            statusEl.textContent = statusLabels[gift.status];
+            statusEl.className = `modal-status ${gift.status}`;
+
+            const buyBtn = document.getElementById('detailBuyBtn');
+            if (isPurchased) {
+                buyBtn.textContent = '✅ В вашей коллекции';
+                buyBtn.className = 'modal-buy-btn sold';
+            } else {
+                buyBtn.textContent = '💎 Купить';
+                buyBtn.className = 'modal-buy-btn';
+                buyBtn.onclick = () => {
+                    if (purchaseGift(gift.id)) {
+                        buyBtn.textContent = '✅ В вашей коллекции';
+                        buyBtn.className = 'modal-buy-btn sold';
+                        renderGifts(currentFilter);
+                        updateUI();
+                    }
+                };
+            }
+
+            const animContainer = document.getElementById('detailAnimation');
+            loadLottieFromFragment(animContainer, gift.lottieId);
+
+            document.getElementById('detailModal').classList.add('active');
+        }
+
+        // ============================================================
+        // 8. ОБНОВЛЕНИЕ UI
+        // ============================================================
+        function updateUI() {
+            const user = getUserProfile();
+            const username = user.username || CONFIG.USERNAME || 'user';
+            const balance = user.balance || CONFIG.BALANCE || 0;
+
+            document.getElementById('profileName').textContent = `@${username}`;
+            document.getElementById('profileBalance').textContent = `${balance} TON`;
+            document.getElementById('profileNameBig').textContent = `@${username}`;
+            document.getElementById('profileBalanceBig').textContent = `💰 ${balance} TON`;
+
+            if (user.firstVisit) {
+                const date = new Date(user.firstVisit);
+                const formatted = date.toLocaleDateString('ru-RU', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+                document.getElementById('firstVisitInfo').textContent = `🕐 Впервые: ${formatted}`;
+            }
+
+            const avatarContainers = [
+                document.getElementById('avatarContainer'),
+                document.getElementById('avatarBig')
+            ];
+            const avatarUrl = CONFIG.AVATAR_URL ||
+                `https://ui-avatars.com/api/?name=${username}&background=47a1ff&color=fff&size=128`;
+            avatarContainers.forEach(container => {
+                if (container) {
+                    container.innerHTML = `<img src="${avatarUrl}" alt="avatar" onerror="this.parentElement.innerHTML='<div class=\\'avatar-placeholder\\'>👤</div>'">`;
+                }
+            });
+        }
+
+        // ============================================================
+        // 9. ПРОФИЛЬ
+        // ============================================================
+        function toggleProfile() {
+            const section = document.getElementById('profileSection');
+            profileVisible = !profileVisible;
+
+            if (profileVisible) {
+                section.classList.add('active');
+                renderGifts(currentFilter);
+            } else {
+                section.classList.remove('active');
+                renderGifts(currentFilter);
+            }
+        }
+
+        document.getElementById('profileBtn').addEventListener('click', toggleProfile);
+        document.getElementById('closeProfileBtn').addEventListener('click', toggleProfile);
+
+        // ============================================================
+        // 10. МОИ ПОДАРКИ
+        // ============================================================
+        document.getElementById('myGiftsBtn').addEventListener('click', () => {
+            const section = document.getElementById('profileSection');
+            if (!section.classList.contains('active')) {
+                toggleProfile();
+            }
+            renderGifts('all');
+        });
+
+        // ============================================================
+        // 11. ВЫВЕСТИ СРЕДСТВА
+        // ============================================================
+        document.getElementById('withdrawBtn').addEventListener('click', () => {
+            const user = getUserProfile();
+            if (confirm(`Вывести ${user.balance} TON на кошелёк?`)) {
+                alert('✅ Заявка на вывод отправлена!');
+            }
+        });
+
+        // ============================================================
+        // 12. ДОБАВИТЬ ПОДАРОК
+        // ============================================================
+        document.getElementById('addGiftBtn').addEventListener('click', () => {
+            document.getElementById('addModal').classList.add('active');
+        });
+        document.getElementById('addModalCloseBtn').addEventListener('click', () => {
+            document.getElementById('addModal').classList.remove('active');
+        });
+        document.getElementById('addModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('addModal').classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 13. КОПИРОВАТЬ ЮЗЕРНЕЙМ
+        // ============================================================
+        document.getElementById('copyUsernameBtn').addEventListener('click', () => {
+            const user = getUserProfile();
+            const username = user.username || CONFIG.USERNAME || 'username';
+            const text = `@${username}`;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copyUsernameBtn');
+                btn.textContent = '✅ Скопировано!';
+                setTimeout(() => { btn.textContent = '📋 Скопировать юзернейм'; }, 2000);
+            }).catch(() => { alert(`Скопируйте вручную: ${text}`); });
+        });
+
+        // ============================================================
+        // 14. ФИЛЬТРЫ
+        // ============================================================
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderGifts(currentFilter);
+            });
+        });
+
+        // ============================================================
+        // 15. ЗАКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ
+        // ============================================================
+        document.getElementById('detailCloseBtn').addEventListener('click', () => {
+            document.getElementById('detailModal').classList.remove('active');
+        });
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('detailModal').classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // 16. ЗАПУСК
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGifts('all');
+            updateUI();
+
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.ready();
+                try {
+                    const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                    if (user) {
+                        const tgUsername = user.username || user.first_name || 'user';
+                        const currentUser = getUserProfile();
+                        if (currentUser.username !== tgUsername) {
+                            updateUserProfile({ username: tgUsername });
+                            updateUI();
+                        }
+                        if (user.photo_url) {
+                            CONFIG.AVATAR_URL = user.photo_url;
+                            updateUI();
+                        }
+                    }
+                } catch (e) { /* тихо */ }
+            }
+        });
+    </script>
+</body>
+</html>
