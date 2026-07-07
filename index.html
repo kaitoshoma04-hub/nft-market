@@ -1442,12 +1442,29 @@
         const NFT_DATA = generateNFTs();
 
         // ============================================================
-        // 3. КОРЗИНА
+        // 3. КОРЗИНА (ПОЛНОСТЬЮ СОХРАНЯЕТСЯ)
         // ============================================================
-        let cart = JSON.parse(localStorage.getItem('nft_cart') || '[]');
+        let cart = [];
+
+        // Загружаем корзину из localStorage
+        function loadCart() {
+            const saved = localStorage.getItem('allow_cart');
+            if (saved) {
+                try {
+                    cart = JSON.parse(saved);
+                    // Проверяем, что все товары в корзине существуют
+                    cart = cart.filter(name => NFT_DATA.some(n => n.name === name));
+                } catch (e) {
+                    cart = [];
+                }
+            } else {
+                cart = [];
+            }
+            updateCartUI();
+        }
 
         function saveCart() {
-            localStorage.setItem('nft_cart', JSON.stringify(cart));
+            localStorage.setItem('allow_cart', JSON.stringify(cart));
             updateCartUI();
         }
 
@@ -1554,11 +1571,10 @@
         }
 
         // ============================================================
-        // 4. ПРОФИЛЬ (Telegram Avatar + ID)
+        // 4. ПРОФИЛЬ (Telegram Avatar + ID + БАЛАНС 0 ДЛЯ НОВЫХ)
         // ============================================================
         let currentUser = null;
         let userBalance = 0;
-        let isNewUser = true; // Флаг для нового пользователя
 
         function updateBalanceUI() {
             document.getElementById('headerBalance').textContent = userBalance.toFixed(2);
@@ -1594,49 +1610,28 @@
             const profileName = document.getElementById('profileName');
             const profileId = document.getElementById('profileId');
 
-            // Проверяем, был ли уже пользователь
-            const savedUserId = localStorage.getItem('allow_user_id');
-            
             function updateProfileUI(user) {
                 if (user) {
                     currentUser = user;
-                    
-                    // Проверяем, новый ли это пользователь
                     const userId = user.id || '—';
-                    if (savedUserId && savedUserId === String(userId)) {
-                        // Пользователь уже был, баланс не меняем
-                        isNewUser = false;
-                    } else {
-                        // Новый пользователь или первый вход
-                        isNewUser = true;
-                        // Сохраняем ID пользователя
-                        if (userId !== '—') {
-                            localStorage.setItem('allow_user_id', String(userId));
-                        }
-                    }
-
+                    
                     updateAvatarUI(user);
-
                     profileName.textContent = user.first_name || 'Пользователь';
                     profileId.textContent = `ID: ${userId}`;
 
-                    // Если новый пользователь - баланс 0, иначе генерируем случайный
-                    if (isNewUser) {
-                        userBalance = 0;
-                        isNewUser = false;
+                    // Загружаем баланс из localStorage по ID пользователя
+                    const balanceKey = `allow_balance_${userId}`;
+                    const savedBalance = localStorage.getItem(balanceKey);
+                    
+                    if (savedBalance !== null) {
+                        userBalance = parseFloat(savedBalance);
                     } else {
-                        // Если баланс уже был сохранен в localStorage, используем его
-                        const savedBalance = localStorage.getItem('allow_user_balance');
-                        if (savedBalance !== null) {
-                            userBalance = parseFloat(savedBalance);
-                        } else {
-                            // Иначе генерируем небольшой баланс для существующих пользователей
-                            userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
-                            localStorage.setItem('allow_user_balance', String(userBalance));
-                        }
+                        // Новый пользователь - баланс 0
+                        userBalance = 0;
+                        localStorage.setItem(balanceKey, '0');
                     }
+                    
                     updateBalanceUI();
-
                     console.log('✅ Профиль загружен:', user.first_name, 'ID:', user.id, 'Баланс:', userBalance);
                 } else {
                     currentUser = null;
@@ -1759,8 +1754,11 @@
                 }
 
                 userBalance = parseFloat((userBalance - amount).toFixed(2));
-                // Сохраняем баланс в localStorage
-                localStorage.setItem('allow_user_balance', String(userBalance));
+                // Сохраняем баланс в localStorage по ID пользователя
+                if (currentUser && currentUser.id) {
+                    const balanceKey = `allow_balance_${currentUser.id}`;
+                    localStorage.setItem(balanceKey, String(userBalance));
+                }
                 updateBalanceUI();
 
                 successEl.textContent =
@@ -2087,8 +2085,20 @@
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             const total = getCartTotal();
+            if (total > userBalance) {
+                alert(`Недостаточно средств! Ваш баланс: ${userBalance.toFixed(3)} GRAM, а сумма покупки: ${total.toFixed(3)} GRAM`);
+                return;
+            }
             if (confirm(`Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(3)} GRAM`)) {
-                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM`);
+                // Списываем средства
+                userBalance = parseFloat((userBalance - total).toFixed(2));
+                if (currentUser && currentUser.id) {
+                    const balanceKey = `allow_balance_${currentUser.id}`;
+                    localStorage.setItem(balanceKey, String(userBalance));
+                }
+                updateBalanceUI();
+                
+                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM\nОстаток на балансе: ${userBalance.toFixed(3)} GRAM`);
                 cart = [];
                 saveCart();
                 cartModal.classList.remove('open');
@@ -2101,12 +2111,14 @@
         // 8. ЗАПУСК
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
+            loadCart(); // Загружаем корзину
             initProfile();
             renderGrid();
             updateCartUI();
         });
 
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            loadCart();
             initProfile();
             renderGrid();
             updateCartUI();
