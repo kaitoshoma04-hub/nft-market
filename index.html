@@ -1162,7 +1162,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (Heart Locket удалена)
+        // 1. КОЛЛЕКЦИИ
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -1182,7 +1182,7 @@
         };
 
         // ============================================================
-        // 2. ВСЕ NFT (Heart Locket удалена)
+        // 2. ВСЕ NFT
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
@@ -1550,7 +1550,7 @@
         }
 
         // ============================================================
-        // 4. ПРОФИЛЬ (Telegram Avatar + ID)
+        // 4. ПРОФИЛЬ (Telegram Avatar + ID - ИСПРАВЛЕНО)
         // ============================================================
         let currentUser = null;
         let userBalance = 0;
@@ -1566,34 +1566,31 @@
             const bigAvatarImg = document.getElementById('bigAvatarImg');
             const bigAvatarPlaceholder = document.getElementById('bigAvatarPlaceholder');
 
-            // Маленькая аватарка
+            // Если есть фото — показываем его
             if (user && user.photo_url) {
                 avatarImg.src = user.photo_url;
                 avatarImg.style.display = 'block';
                 avatarPlaceholder.style.display = 'none';
-            } else {
-                avatarPlaceholder.style.display = 'flex';
-                avatarImg.style.display = 'none';
-                if (user && user.first_name) {
-                    avatarPlaceholder.textContent = user.first_name.charAt(0).toUpperCase();
-                } else {
-                    avatarPlaceholder.textContent = '👤';
-                }
-            }
 
-            // Большая аватарка
-            if (user && user.photo_url) {
                 bigAvatarImg.src = user.photo_url;
                 bigAvatarImg.style.display = 'block';
                 bigAvatarPlaceholder.style.display = 'none';
+                return;
+            }
+
+            // Если фото нет — показываем инициалы или эмодзи
+            avatarImg.style.display = 'none';
+            bigAvatarImg.style.display = 'none';
+            avatarPlaceholder.style.display = 'flex';
+            bigAvatarPlaceholder.style.display = 'flex';
+
+            if (user && user.first_name) {
+                const initial = user.first_name.charAt(0).toUpperCase();
+                avatarPlaceholder.textContent = initial;
+                bigAvatarPlaceholder.textContent = initial;
             } else {
-                bigAvatarPlaceholder.style.display = 'flex';
-                bigAvatarImg.style.display = 'none';
-                if (user && user.first_name) {
-                    bigAvatarPlaceholder.textContent = user.first_name.charAt(0).toUpperCase();
-                } else {
-                    bigAvatarPlaceholder.textContent = '👤';
-                }
+                avatarPlaceholder.textContent = '👤';
+                bigAvatarPlaceholder.textContent = '👤';
             }
         }
 
@@ -1605,18 +1602,13 @@
             function updateProfileUI(user) {
                 if (user) {
                     currentUser = user;
-
-                    // Обновляем аватарки
                     updateAvatarUI(user);
 
-                    // Имя в хедере
                     const name = user.first_name || 'Пользователь';
-                    usernameDisplay.innerHTML = `${name}`;
+                    usernameDisplay.textContent = name;
+                    profileName.textContent = name;
 
-                    // Имя в модалке
-                    profileName.textContent = user.first_name || 'Пользователь';
-
-                    // ID пользователя
+                    // Отображаем ID пользователя
                     const userId = user.id || '—';
                     profileId.textContent = `ID: ${userId}`;
 
@@ -1626,7 +1618,7 @@
                 } else {
                     currentUser = null;
                     updateAvatarUI(null);
-                    usernameDisplay.innerHTML = 'Профиль';
+                    usernameDisplay.textContent = 'Профиль';
                     profileName.textContent = 'Пользователь';
                     profileId.textContent = 'ID: —';
                     userBalance = 0;
@@ -1634,41 +1626,53 @@
                 }
             }
 
-            // Получаем данные пользователя из Telegram WebApp
-            if (window.Telegram && window.Telegram.WebApp) {
+            // Функция для получения данных из Telegram
+            function getTelegramUser() {
                 try {
-                    const user = window.Telegram.WebApp.initDataUnsafe?.user;
-                    if (user) {
-                        updateProfileUI(user);
-                    } else {
-                        // Пробуем ещё раз через 500ms
-                        setTimeout(() => {
-                            const user2 = window.Telegram.WebApp.initDataUnsafe?.user;
-                            if (user2) {
-                                updateProfileUI(user2);
-                            } else {
-                                updateProfileUI(null);
-                            }
-                        }, 500);
-                    }
-                } catch (e) {
-                    console.warn('Telegram WebApp error:', e);
-                    updateProfileUI(null);
-                }
-            } else {
-                // Если не в Telegram — пробуем получить через Telegram WebApp (если он появится позже)
-                setTimeout(() => {
                     if (window.Telegram && window.Telegram.WebApp) {
+                        const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                        if (user && user.id) {
+                            return user;
+                        }
+                    }
+                    // Пробуем через localStorage (для отладки)
+                    const savedUser = localStorage.getItem('telegram_user');
+                    if (savedUser) {
                         try {
-                            const user = window.Telegram.WebApp.initDataUnsafe?.user;
-                            if (user) {
-                                updateProfileUI(user);
-                                return;
-                            }
+                            return JSON.parse(savedUser);
                         } catch (e) {}
                     }
-                    updateProfileUI(null);
-                }, 1000);
+                    return null;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            // Получаем пользователя
+            let user = getTelegramUser();
+
+            if (user) {
+                updateProfileUI(user);
+            } else {
+                // Пробуем ещё несколько раз с задержкой
+                let attempts = 0;
+                const maxAttempts = 5;
+
+                function tryGetUser() {
+                    attempts++;
+                    const u = getTelegramUser();
+                    if (u) {
+                        updateProfileUI(u);
+                        return;
+                    }
+                    if (attempts < maxAttempts) {
+                        setTimeout(tryGetUser, 500);
+                    } else {
+                        updateProfileUI(null);
+                    }
+                }
+
+                setTimeout(tryGetUser, 300);
             }
 
             // Клик по профилю — открываем модалку
@@ -1677,13 +1681,9 @@
                 e.stopPropagation();
 
                 // Обновляем данные перед открытием
-                if (window.Telegram && window.Telegram.WebApp) {
-                    try {
-                        const user = window.Telegram.WebApp.initDataUnsafe?.user;
-                        if (user) {
-                            updateProfileUI(user);
-                        }
-                    } catch (e) {}
+                const u = getTelegramUser();
+                if (u) {
+                    updateProfileUI(u);
                 }
 
                 document.getElementById('profileModal').classList.add('open');
