@@ -170,8 +170,19 @@
             overflow: hidden;
             flex-shrink: 0;
             background: #121216;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .filter-option .mini-lottie .lottie-container {
+            width: 100%;
+            height: 100%;
+        }
+        .filter-option .mini-lottie .lottie-fallback {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
         }
@@ -227,6 +238,15 @@
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
+        }
+        .lottie-wrapper .lottie-fallback {
+            font-size: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #121216;
         }
         .status-badge {
             position: absolute;
@@ -383,6 +403,15 @@
         .detail-lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
+        }
+        .detail-lottie-wrapper .lottie-fallback {
+            font-size: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: #121216;
         }
         .detail-title {
             font-size: 17px;
@@ -832,7 +861,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ
+        // 1. КОЛЛЕКЦИИ (добавлена B-Day Candle)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -848,11 +877,11 @@
             "Nail Bracelet": { icon: "📿", floorPrice: 28.5 },
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
-            "Loot Bag": { icon: "💰", floorPrice: 179 }
+            "B-Day Candle": { icon: "🕯️", floorPrice: 6 }
         };
 
         // ============================================================
-        // 2. ВСЕ NFT
+        // 2. ВСЕ NFT (добавлена B-Day Candle)
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
@@ -1025,18 +1054,16 @@
                 { collection: "Vintage Cigar", number: 4013, price: 36.9 },
                 { collection: "Vintage Cigar", number: 4014, price: 43.2 },
 
-                // ===== LOOT BAG (исправлено) =====
-                { collection: "Loot Bag", number: 6737, price: 179 },
-                { collection: "Loot Bag", number: 6947, price: 2222 },
-                { collection: "Loot Bag", number: 7208, price: 999 },
-                { collection: "Loot Bag", number: 4252, price: 888 },
-                { collection: "Loot Bag", number: 8199, price: 700 },
-                { collection: "Loot Bag", number: 4658, price: 444 },
-                { collection: "Loot Bag", number: 13851, price: 299 },
-                { collection: "Loot Bag", number: 12282, price: 299 },
-                { collection: "Loot Bag", number: 6340, price: 300 },
-                { collection: "Loot Bag", number: 4080, price: 500 },
-                { collection: "Loot Bag", number: 11217, price: 11111 }
+                // ===== B-DAY CANDLE (9 шт) =====
+                { collection: "B-Day Candle", number: 17748, price: 40 },
+                { collection: "B-Day Candle", number: 54517, price: 39 },
+                { collection: "B-Day Candle", number: 207778, price: 50 },
+                { collection: "B-Day Candle", number: 56908, price: 12 },
+                { collection: "B-Day Candle", number: 133846, price: 15 },
+                { collection: "B-Day Candle", number: 24750, price: 12 },
+                { collection: "B-Day Candle", number: 152061, price: 8 },
+                { collection: "B-Day Candle", number: 116680, price: 6 },
+                { collection: "B-Day Candle", number: 32252, price: 6 }
             ];
 
             // Модели для каждой коллекции
@@ -1054,7 +1081,7 @@
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
-                "Loot Bag": ["Common", "Rare", "Epic", "Legendary", "Mythic", "Unique", "Divine"]
+                "B-Day Candle": ["Classic", "Golden", "Silver", "Rainbow", "Crystal", "Flame"]
             };
 
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow", "Aurora",
@@ -1075,9 +1102,11 @@
                 let slug = collection.toLowerCase()
                     .replace(/\s/g, '')
                     .replace(/'/g, '')
-                    .replace(/đ/g, 'durovs');
+                    .replace(/đ/g, 'durovs')
+                    .replace(/-/g, '');
 
-                if (collection === "Loot Bag") slug = "loot-bag";
+                // Специальные случаи для слагов
+                if (collection === "B-Day Candle") slug = "b-day-candle";
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
@@ -1234,40 +1263,33 @@
             const avatarPlaceholder = document.getElementById('avatarPlaceholder');
             const usernameDisplay = document.getElementById('usernameDisplay');
 
-            // Проверяем наличие Telegram WebApp
             if (window.Telegram && window.Telegram.WebApp) {
                 const user = window.Telegram.WebApp.initDataUnsafe?.user;
                 if (user) {
-                    // Устанавливаем аватарку
                     if (user.photo_url) {
                         avatarImg.src = user.photo_url;
                         avatarImg.style.display = 'block';
                         avatarPlaceholder.style.display = 'none';
                     } else {
-                        // Если фото нет, показываем инициалы
                         const initials = user.first_name?.charAt(0).toUpperCase() || '👤';
                         avatarPlaceholder.textContent = initials;
                         avatarPlaceholder.style.display = 'flex';
                         avatarImg.style.display = 'none';
                     }
-                    // Устанавливаем имя
                     usernameDisplay.innerHTML = `${user.first_name || 'Пользователь'} <span>▼</span>`;
                 } else {
-                    // Если пользователь не найден
                     avatarPlaceholder.textContent = '👤';
                     avatarPlaceholder.style.display = 'flex';
                     avatarImg.style.display = 'none';
                     usernameDisplay.innerHTML = `Профиль <span>▼</span>`;
                 }
             } else {
-                // Если не в Telegram WebApp — показываем заглушку
                 avatarPlaceholder.textContent = '👤';
                 avatarPlaceholder.style.display = 'flex';
                 avatarImg.style.display = 'none';
                 usernameDisplay.innerHTML = `Профиль <span>▼</span>`;
             }
 
-            // Клик по профилю — открываем профиль Telegram
             document.getElementById('profileBtn').addEventListener('click', () => {
                 if (window.Telegram && window.Telegram.WebApp) {
                     window.Telegram.WebApp.openLink('https://t.me/me');
@@ -1586,7 +1608,6 @@
         // ============================================================
         // 8. ЗАПУСК
         // ============================================================
-        // Инициализируем профиль после загрузки страницы
         document.addEventListener('DOMContentLoaded', () => {
             initProfile();
         });
