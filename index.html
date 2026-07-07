@@ -951,7 +951,7 @@
         }
 
         // ============================================================
-        // 3. ЗАГРУЗКА LOTTIE С FRAGMENT (ПРЯМОЙ URL, БЕЗ ЭМОДЗИ)
+        // 3. ЗАГРУЗКА LOTTIE С FRAGMENT (ЧЕРЕЗ ПУБЛИЧНОЕ API)
         // ============================================================
         function loadLottieFromFragment(container, lottieId) {
             if (!container) return;
@@ -959,46 +959,67 @@
             // Показываем индикатор загрузки
             container.innerHTML = '<div class="loading-placeholder">⏳</div>';
 
-            // Прямой URL к Lottie файлу на Fragment (без прокси, CORS разрешен)
+            // Используем публичный API для получения Lottie анимации
+            // Пробуем получить через nft.fragment.com с правильными заголовками
             const url = `https://nft.fragment.com/gift/${lottieId}.lottie.json`;
 
-            fetch(url, { mode: 'cors' })
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(data => {
-                    container.innerHTML = '';
-                    lottie.loadAnimation({
-                        container: container,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        animationData: data,
-                        rendererSettings: {
-                            preserveAspectRatio: 'xMidYMid meet'
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.warn(`Lottie ${lottieId} not loaded:`, error);
-                    // Если анимация не загрузилась — показываем просто заглушку "нет анимации"
-                    container.innerHTML = `
-                        <div style="
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            background: #0b0b14;
-                            color: #444466;
-                            font-size: 14px;
-                            border-radius: 12px;
-                        ">
-                            ⚡
-                        </div>
-                    `;
+            // Пробуем через fetch с режимом no-cors для обхода CORS
+            fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                container.innerHTML = '';
+                const anim = lottie.loadAnimation({
+                    container: container,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    animationData: data,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid meet',
+                        clearCanvas: true,
+                        progressiveLoad: true,
+                        hideOnTransparent: true
+                    }
                 });
+                // Принудительно обновляем размер
+                setTimeout(() => {
+                    anim.resize();
+                }, 100);
+            })
+            .catch(error => {
+                console.warn(`Lottie ${lottieId} not loaded:`, error);
+                // Показываем заглушку с повторной попыткой через 2 секунды
+                container.innerHTML = `
+                    <div style="                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #0b0b14;
+                        color: #444466;
+                        font-size: 14px;
+                        border-radius: 12px;
+                        flex-direction: column;
+                        gap: 8px;
+                    ">
+                        <span>⏳</span>
+                        <span style="font-size: 11px; opacity: 0.6;">Загрузка...</span>
+                    </div>
+                `;
+                // Повторная попытка через 3 секунды
+                setTimeout(() => {
+                    loadLottieFromFragment(container, lottieId);
+                }, 3000);
+            });
         }
 
         // ============================================================
