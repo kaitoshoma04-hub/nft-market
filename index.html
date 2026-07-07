@@ -28,10 +28,10 @@
             width: 100%;
             min-height: 100vh;
             background: #0a0a0f;
-            position: relative;
-            padding-bottom: 80px;
+            padding-bottom: 20px;
         }
 
+        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -51,52 +51,19 @@
             background: linear-gradient(135deg, #ffffff 0%, #8e8ea0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+        .header .stats {
+            font-size: 13px;
+            color: #6e6e80;
         }
 
-        .header-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: none;
-            color: #8e8ea0;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .header-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .header .stats span {
             color: #ffffff;
-        }
-
-        .header-btn .badge {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: #ff6b6b;
-            color: #ffffff;
-            font-size: 10px;
             font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
+        /* FILTERS */
         .filters {
             display: flex;
             gap: 8px;
@@ -116,7 +83,7 @@
             padding: 6px 16px;
             border-radius: 20px;
             color: #8e8ea0;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             font-family: 'Inter', sans-serif;
             white-space: nowrap;
@@ -130,69 +97,80 @@
             color: #ffffff;
         }
 
-        .filter-btn:active {
-            transform: scale(0.95);
-        }
-
+        /* NFT GRID - 2 columns */
         .nft-grid {
-            padding: 12px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            padding: 12px 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
-        .collection-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0 4px 0;
-        }
-
-        .collection-name {
-            font-size: 17px;
-            font-weight: 700;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .collection-name .icon {
-            font-size: 20px;
-        }
-
-        .collection-count {
-            font-size: 13px;
-            color: #6e6e80;
-            font-weight: 500;
-        }
-
+        /* NFT CARD */
         .nft-card {
             background: linear-gradient(145deg, #14141e 0%, #1a1a2e 100%);
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             overflow: hidden;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            position: relative;
         }
 
         .nft-card:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
+        }
+
+        /* Expanded card */
+        .nft-card.expanded {
+            grid-column: 1 / -1;
+            transform: scale(1);
+            z-index: 50;
+        }
+
+        .nft-card.expanded .nft-card-inner {
+            flex-direction: row;
+            padding: 16px;
+            gap: 16px;
+        }
+
+        .nft-card.expanded .lottie-wrapper {
+            width: 120px;
+            height: 120px;
+        }
+
+        .nft-card.expanded .nft-info-compact {
+            display: none;
+        }
+
+        .nft-card.expanded .nft-info-expanded {
+            display: block;
+        }
+
+        .nft-card:not(.expanded) .nft-info-expanded {
+            display: none;
+        }
+
+        .nft-card:not(.expanded) .nft-info-compact {
+            display: block;
         }
 
         .nft-card-inner {
             display: flex;
-            gap: 14px;
-            padding: 12px;
-            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+            gap: 8px;
         }
 
+        .nft-card.expanded .nft-card-inner {
+            flex-direction: row;
+        }
+
+        /* LOTTIE */
         .lottie-wrapper {
-            width: 80px;
-            height: 80px;
-            flex-shrink: 0;
-            border-radius: 14px;
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 12px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.02);
             display: flex;
@@ -201,21 +179,28 @@
             position: relative;
         }
 
+        .nft-card.expanded .lottie-wrapper {
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
 
+        /* Status badge */
         .status-badge {
             position: absolute;
             top: 4px;
             right: 4px;
             padding: 2px 8px;
             border-radius: 10px;
-            font-size: 8px;
+            font-size: 7px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .status-badge.sold {
@@ -225,71 +210,113 @@
         }
 
         .status-badge['for-sale'] {
-            background: rgba(75, 200, 138, 0.2);
+            background: rgba(75, 200, 138, 0.15);
             color: #4bc88a;
-            border: 1px solid rgba(75, 200, 138, 0.2);
+            border: 1px solid rgba(75, 200, 138, 0.15);
         }
 
         .status-badge['on-auction'] {
-            background: rgba(255, 200, 50, 0.2);
+            background: rgba(255, 200, 50, 0.15);
             color: #ffc832;
-            border: 1px solid rgba(255, 200, 50, 0.2);
+            border: 1px solid rgba(255, 200, 50, 0.15);
         }
 
-        .nft-info {
+        /* NFT INFO COMPACT */
+        .nft-info-compact {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .nft-name-compact {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nft-model-compact {
+            font-size: 10px;
+            color: #8e8ea0;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* NFT INFO EXPANDED */
+        .nft-info-expanded {
             flex: 1;
             min-width: 0;
         }
 
-        .nft-name {
+        .nft-name-expanded {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .nft-number-expanded {
             font-size: 14px;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1px;
-            letter-spacing: -0.2px;
-        }
-
-        .nft-model {
-            font-size: 12px;
-            color: #8e8ea0;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .nft-traits {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
+            color: #4a8af4;
             margin-bottom: 6px;
         }
 
-        .trait-tag {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 1px 8px;
-            border-radius: 10px;
-            font-size: 9px;
-            font-weight: 600;
+        .nft-description {
+            font-size: 13px;
+            color: #8e8ea0;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .nft-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            margin-bottom: 8px;
+        }
+
+        .nft-detail-item {
+            font-size: 12px;
             color: #6e6e80;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
         }
 
-        .trait-tag .trait-value {
-            color: #a0a0b0;
+        .nft-detail-item .label {
+            color: #8e8ea0;
         }
 
+        .nft-detail-item .value {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* PRICE */
         .nft-price {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: #ffffff;
+            margin-bottom: 6px;
         }
 
-        .nft-price .ton-icon {
-            font-size: 14px;
+        .nft-price .gram-icon {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 800;
+            color: #ffffff;
+            flex-shrink: 0;
         }
 
         .nft-price .usd {
@@ -298,72 +325,62 @@
             color: #6e6e80;
         }
 
-        .nft-actions {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            flex-shrink: 0;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .btn-action {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 5px 12px;
+        /* BUY BUTTON */
+        .btn-buy {
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            border: none;
+            padding: 6px 16px;
             border-radius: 12px;
             color: #ffffff;
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            width: 100%;
         }
 
-        .btn-action:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .btn-buy:active {
+            transform: scale(0.95);
         }
 
-        .btn-action:active {
-            transform: scale(0.92);
+        .btn-buy:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .btn-action.primary {
-            background: rgba(75, 200, 138, 0.15);
-            border-color: rgba(75, 200, 138, 0.2);
-            color: #4bc88a;
-        }
-
-        .btn-action.primary:hover {
-            background: rgba(75, 200, 138, 0.25);
-        }
-
-        .btn-action.danger {
-            background: rgba(255, 107, 107, 0.1);
-            border-color: rgba(255, 107, 107, 0.1);
-            color: #ff6b6b;
-        }
-
-        .btn-action .icon {
-            font-size: 12px;
-        }
-
-        .btn-number {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 5px 10px;
-            border-radius: 12px;
+        .btn-buy.sold-out {
+            background: rgba(255, 255, 255, 0.05);
             color: #6e6e80;
-            font-size: 11px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            white-space: nowrap;
         }
 
+        /* LOADING */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6e6e80;
+            font-size: 14px;
+            grid-column: 1 / -1;
+        }
+
+        .loading .spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.04);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* CART FLOATING */
         .cart-floating {
             position: fixed;
             bottom: 20px;
@@ -371,11 +388,11 @@
             transform: translateX(-50%);
             background: linear-gradient(145deg, #1a1a2e, #14141e);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 30px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
             z-index: 200;
@@ -388,20 +405,20 @@
         }
 
         .cart-floating .cart-icon {
-            font-size: 20px;
+            font-size: 18px;
             position: relative;
         }
 
         .cart-floating .cart-count {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #4bc88a;
-            color: #0a0a0f;
-            font-size: 10px;
+            top: -6px;
+            right: -6px;
+            background: #4a8af4;
+            color: #ffffff;
+            font-size: 9px;
             font-weight: 700;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -409,16 +426,17 @@
         }
 
         .cart-floating .cart-total {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #ffffff;
         }
 
         .cart-floating .cart-total .ton {
-            color: #8e8ea0;
+            color: #6e6e80;
             font-weight: 400;
         }
 
+        /* CART MODAL */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -454,7 +472,7 @@
             border-radius: 24px 24px 0 0;
             max-width: 430px;
             width: 100%;
-            max-height: 80vh;
+            max-height: 75vh;
             padding: 20px 16px 30px 16px;
             overflow-y: auto;
         }
@@ -507,9 +525,14 @@
             font-weight: 600;
         }
 
+        .cart-item .item-collection {
+            font-size: 11px;
+            color: #6e6e80;
+        }
+
         .cart-item .item-price {
             font-size: 13px;
-            color: #4bc88a;
+            color: #4a8af4;
             font-weight: 600;
         }
 
@@ -522,11 +545,6 @@
             border-radius: 50%;
             font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .cart-item .item-remove:hover {
-            background: rgba(255, 107, 107, 0.2);
         }
 
         .cart-total-section {
@@ -559,10 +577,10 @@
         .btn-checkout {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #4bc88a, #2ea86a);
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 16px;
-            color: #0a0a0f;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
@@ -591,52 +609,19 @@
             margin-bottom: 12px;
         }
 
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: #6e6e80;
-            font-size: 14px;
-        }
-
-        .loading .spinner {
-            width: 32px;
-            height: 32px;
-            border: 2px solid rgba(255, 255, 255, 0.04);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 16px auto;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @media (max-width: 420px) {
-            .nft-card-inner {
-                flex-wrap: wrap;
+        @media (max-width: 400px) {
+            .nft-grid {
+                gap: 8px;
+                padding: 8px;
             }
 
-            .lottie-wrapper {
-                width: 64px;
-                height: 64px;
+            .nft-card.expanded .lottie-wrapper {
+                width: 90px;
+                height: 90px;
             }
 
-            .nft-actions {
-                width: 100%;
-                justify-content: flex-end;
-                margin-top: 2px;
-            }
-
-            .cart-floating {
-                padding: 10px 16px;
-                bottom: 12px;
-            }
-
-            .cart-floating .cart-total {
-                font-size: 12px;
+            .nft-name-expanded {
+                font-size: 15px;
             }
         }
     </style>
@@ -646,9 +631,7 @@
     <div class="app" id="app">
         <div class="header">
             <h1>🎁 Подарки</h1>
-            <div class="header-actions">
-                <button class="header-btn" id="refreshBtn" title="Обновить">⟳</button>
-            </div>
+            <div class="stats"><span id="totalCount">0</span> NFT</div>
         </div>
 
         <div class="filters" id="filtersContainer">
@@ -668,7 +651,7 @@
                 <span class="cart-count" id="cartCount">0</span>
             </div>
             <div class="cart-total">
-                <span id="cartTotal">0.00</span> <span class="ton">TON</span>
+                <span id="cartTotal">0.00</span> <span class="ton">GRAM</span>
             </div>
         </div>
 
@@ -681,477 +664,136 @@
                 <div id="cartItems"></div>
                 <div class="cart-total-section">
                     <span class="total-label">Итого</span>
-                    <span class="total-amount"><span id="modalCartTotal">0.00</span> <span class="ton">TON</span></span>
+                    <span class="total-amount"><span id="modalCartTotal">0.00</span> <span class="ton">GRAM</span></span>
                 </div>
-                <button class="btn-checkout" id="checkoutBtn">💎 Купить все</button>
+                <button class="btn-checkout" id="checkoutBtn">Купить все</button>
             </div>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (13 штук)
+        // 1. КОЛЛЕКЦИИ (16 штук)
         // ============================================================
         const COLLECTIONS_DATA = {
-            "Hex Pot": {
-                icon: "🔮",
-                description: "Mystical hexagonal NFTs with unique powers",
-                totalSupply: 10000,
-                floorPrice: 12.5
-            },
-            "Astral Shard": {
-                icon: "💎",
-                description: "Cosmic fragments from the astral plane",
-                totalSupply: 5000,
-                floorPrice: 8.2
-            },
-            "Pixel Fox": {
-                icon: "🦊",
-                description: "Retro pixel art foxes with unique traits",
-                totalSupply: 3000,
-                floorPrice: 5.7
-            },
-            "Crystal Orb": {
-                icon: "🔮",
-                description: "Elemental orbs with mystical properties",
-                totalSupply: 2000,
-                floorPrice: 15.3
-            },
-            "Void Mask": {
-                icon: "👹",
-                description: "Ancient masks from the void dimension",
-                totalSupply: 1500,
-                floorPrice: 22.1
-            },
-            "Plush Pepe": {
-                icon: "🐸",
-                description: "Collectible plush frogs from the swamp",
-                totalSupply: 2500,
-                floorPrice: 6.8
-            },
-            "Bonded Ring": {
-                icon: "💍",
-                description: "Eternal rings bonded by ancient magic",
-                totalSupply: 1000,
-                floorPrice: 45.2
-            },
-            "Bow Tie Durov's Cap": {
-                icon: "🎩",
-                description: "Durov's legendary bow tie cap collection",
-                totalSupply: 500,
-                floorPrice: 89.7
-            },
-            "Diamond Ring": {
-                icon: "💎",
-                description: "Rare diamond rings from the deep earth",
-                totalSupply: 800,
-                floorPrice: 67.3
-            },
-            "Evil Eye": {
-                icon: "👁️",
-                description: "Protective amulets against dark forces",
-                totalSupply: 3500,
-                floorPrice: 4.5
-            },
-            "Eternal Rose": {
-                icon: "🌹",
-                description: "Immortal roses that never wither",
-                totalSupply: 1200,
-                floorPrice: 34.8
-            },
-            "Ion Gem": {
-                icon: "⚡",
-                description: "Crystalline gems charged with cosmic energy",
-                totalSupply: 750,
-                floorPrice: 56.4
-            },
-            "Kissed Frog": {
-                icon: "🐸",
-                description: "Magical frogs that transform with a kiss",
-                totalSupply: 1800,
-                floorPrice: 9.6
-            }
+            "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
+            "Astral Shard": { icon: "💎", floorPrice: 8.2 },
+            "Pixel Fox": { icon: "🦊", floorPrice: 5.7 },
+            "Crystal Orb": { icon: "🔮", floorPrice: 15.3 },
+            "Void Mask": { icon: "👹", floorPrice: 22.1 },
+            "Plush Pepe": { icon: "🐸", floorPrice: 6.8 },
+            "Bonded Ring": { icon: "💍", floorPrice: 45.2 },
+            "Bow Tie Durov's Cap": { icon: "🎩", floorPrice: 89.7 },
+            "Diamond Ring": { icon: "💎", floorPrice: 67.3 },
+            "Evil Eye": { icon: "👁️", floorPrice: 4.5 },
+            "Eternal Rose": { icon: "🌹", floorPrice: 34.8 },
+            "Ion Gem": { icon: "⚡", floorPrice: 56.4 },
+            "Kissed Frog": { icon: "🐸", floorPrice: 9.6 },
+            "Nail Bracelet": { icon: "📿", floorPrice: 28.5 },
+            "Precious Peach": { icon: "🍑", floorPrice: 42.3 },
+            "Scared Cat": { icon: "🐱", floorPrice: 18.9 }
         };
 
         // ============================================================
-        // 2. NFT ДАННЫЕ (46 штук)
+        // 2. ГЕНЕРАЦИЯ NFT ДЛЯ ВСЕХ КОЛЛЕКЦИЙ
         // ============================================================
-        const NFT_DATA = [
-            // ===== HEX POT (6) =====
-            {
-                name: "Hex Pot #10348",
-                collection: "Hex Pot",
-                lottie: "https://nft.fragment.com/gift/hexpot-10348.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Violet Veil" }, { trait_type: "Backdrop",
-                    value: "English Violet" }, { trait_type: "Symbol", value: "Baphomet" }],
-                price: 12.5,
-                status: "for-sale"
-            }, {
-                name: "Hex Pot #10349",
-                collection: "Hex Pot",
-                lottie: "https://nft.fragment.com/gift/hexpot-10349.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Blood Moon" }, { trait_type: "Backdrop",
-                    value: "Midnight" }, { trait_type: "Symbol", value: "Pentagram" }],
-                price: 18.7,
-                status: "on-auction"
-            }, {
-                name: "Hex Pot #10350",
-                collection: "Hex Pot",
-                lottie: "https://nft.fragment.com/gift/hexpot-10350.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Emerald" }, { trait_type: "Backdrop",
-                    value: "Forest" }, { trait_type: "Symbol", value: "Tree" }],
-                price: 0,
-                status: "sold"
-            }, {
-                name: "Hex Pot #10351",
-                collection: "Hex Pot",
-                lottie: "https://nft.fragment.com/gift/hexpot-10351.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Golden" }, { trait_type: "Backdrop",
-                    value: "Sunset" }, { trait_type: "Symbol", value: "Sun" }],
-                price: 22.3,
-                status: "for-sale"
-            }, {
-                name: "Hex Pot #10352",
-                collection: "Hex Pot",
-                lottie: "https://nft.fragment.com/gift/hexpot-10352.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Crystal" }, { trait_type: "Backdrop",
-                    value: "Frost" }, { trait_type: "Symbol", value: "Snowflake" }],
-                price: 16.9,
-                status: "on-auction"
-            }, {
-                name: "Hex Pot #10353",
-                collection: "Hex Pot",
-                lottie: "https://nft.fragment.com/gift/hexpot-10353.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Shadow" }, { trait_type: "Backdrop",
-                    value: "Void" }, { trait_type: "Symbol", value: "Moon" }],
-                price: 28.1,
-                status: "for-sale"
-            },
+        function generateNFTs() {
+            const allNFTs = [];
+            const collections = Object.keys(COLLECTIONS_DATA);
 
-            // ===== ASTRAL SHARD (3) =====
-            {
-                name: "Astral Shard #2047",
-                collection: "Astral Shard",
-                lottie: "https://nft.fragment.com/gift/astralshard-2047.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Nebula" }, { trait_type: "Backdrop",
-                    value: "Cosmic" }, { trait_type: "Rarity", value: "Rare" }],
-                price: 8.2,
-                status: "for-sale"
-            }, {
-                name: "Astral Shard #2048",
-                collection: "Astral Shard",
-                lottie: "https://nft.fragment.com/gift/astralshard-2048.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Supernova" }, { trait_type: "Backdrop",
-                    value: "Dark Matter" }, { trait_type: "Rarity", value: "Legendary" }],
-                price: 25.4,
-                status: "on-auction"
-            }, {
-                name: "Astral Shard #2049",
-                collection: "Astral Shard",
-                lottie: "https://nft.fragment.com/gift/astralshard-2049.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Galaxy" }, { trait_type: "Backdrop",
-                    value: "Stellar" }, { trait_type: "Rarity", value: "Common" }],
-                price: 6.1,
-                status: "for-sale"
-            },
+            // Для каждой коллекции генерируем по 6-8 NFT
+            collections.forEach((collection, colIndex) => {
+                const count = 6 + (colIndex % 3); // 6, 7, или 8
+                const baseNumber = colIndex * 1000 + 100;
 
-            // ===== PIXEL FOX (3) =====
-            {
-                name: "Pixel Fox #8912",
-                collection: "Pixel Fox",
-                lottie: "https://nft.fragment.com/gift/pixelfox-8912.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Cyber" }, { trait_type: "Backdrop",
-                    value: "Neon Grid" }, { trait_type: "Style", value: "Pixel Art" }],
-                price: 5.7,
-                status: "for-sale"
-            }, {
-                name: "Pixel Fox #8913",
-                collection: "Pixel Fox",
-                lottie: "https://nft.fragment.com/gift/pixelfox-8913.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Vaporwave" }, { trait_type: "Backdrop",
-                    value: "Synthwave" }, { trait_type: "Style", value: "Glitch" }],
-                price: 9.3,
-                status: "on-auction"
-            }, {
-                name: "Pixel Fox #8914",
-                collection: "Pixel Fox",
-                lottie: "https://nft.fragment.com/gift/pixelfox-8914.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Retro" }, { trait_type: "Backdrop",
-                    value: "Arcade" }, { trait_type: "Style", value: "Classic" }],
-                price: 0,
-                status: "sold"
-            },
+                // Модели для каждой коллекции
+                const models = {
+                    "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal", "Shadow", "Sunset",
+                        "Frost"
+                    ],
+                    "Astral Shard": ["Nebula", "Supernova", "Galaxy", "Pulsar", "Quasar", "Void", "Stellar",
+                        "Cosmic"
+                    ],
+                    "Pixel Fox": ["Cyber", "Vaporwave", "Retro", "Glitch", "Neon", "Classic", "Modern", "Pixel"],
+                    "Crystal Orb": ["Sapphire", "Ruby", "Amethyst", "Emerald", "Diamond", "Opal", "Topaz", "Jade"],
+                    "Void Mask": ["Obsidian", "Moonstone", "Shadow", "Celestial", "Abyss", "Eclipse", "Dusk",
+                        "Aurora"
+                    ],
+                    "Plush Pepe": ["Classic", "Rare", "Legendary", "Golden", "Rainbow", "Dark", "Shiny", "Mystic"],
+                    "Bonded Ring": ["Silver", "Gold", "Platinum", "Rose", "Black", "White", "Titanium", "Mithril"],
+                    "Bow Tie Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Gold", "Diamond", "Platinum",
+                        "Royal", "Supreme"
+                    ],
+                    "Diamond Ring": ["Classic", "Royal", "Imperial", "Elegant", "Crown", "Pearl", "Sapphire",
+                        "Ruby"
+                    ],
+                    "Evil Eye": ["Classic", "Dark", "Ancient", "Golden", "Crystal", "Shadow", "Light", "Storm"],
+                    "Eternal Rose": ["Red", "Blue", "Golden", "White", "Black", "Pink", "Purple", "Rainbow"],
+                    "Ion Gem": ["Blue", "Red", "Rainbow", "Gold", "Plasma", "Fusion", "Quantum", "Infinite"],
+                    "Kissed Frog": ["Prince", "Princess", "King", "Queen", "Jester", "Mage", "Knight", "Dragon"],
+                    "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby", "Sapphire", "Emerald"],
+                    "Precious Peach": ["Golden", "Royal", "Sweet", "Honey", "Sunset", "Blush", "Tropical",
+                    "Deluxe"],
+                    "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith", "Specter", "Ghoul", "Demon"]
+                };
 
-            // ===== CRYSTAL ORB (3) =====
-            {
-                name: "Crystal Orb #5562",
-                collection: "Crystal Orb",
-                lottie: "https://nft.fragment.com/gift/crystalorb-5562.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Sapphire" }, { trait_type: "Backdrop",
-                    value: "Starlight" }, { trait_type: "Element", value: "Water" }],
-                price: 15.3,
-                status: "for-sale"
-            }, {
-                name: "Crystal Orb #5563",
-                collection: "Crystal Orb",
-                lottie: "https://nft.fragment.com/gift/crystalorb-5563.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Ruby" }, { trait_type: "Backdrop",
-                    value: "Ember" }, { trait_type: "Element", value: "Fire" }],
-                price: 19.8,
-                status: "on-auction"
-            }, {
-                name: "Crystal Orb #5564",
-                collection: "Crystal Orb",
-                lottie: "https://nft.fragment.com/gift/crystalorb-5564.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Amethyst" }, { trait_type: "Backdrop",
-                    value: "Twilight" }, { trait_type: "Element", value: "Spirit" }],
-                price: 0,
-                status: "sold"
-            },
+                const descriptions = {
+                    "Hex Pot": "Mystical hexagonal NFT with unique powers",
+                    "Astral Shard": "Cosmic fragment from the astral plane",
+                    "Pixel Fox": "Retro pixel art fox with unique traits",
+                    "Crystal Orb": "Elemental orb with mystical properties",
+                    "Void Mask": "Ancient mask from the void dimension",
+                    "Plush Pepe": "Collectible plush frog from the swamp",
+                    "Bonded Ring": "Eternal ring bonded by ancient magic",
+                    "Bow Tie Durov's Cap": "Durov's legendary bow tie cap",
+                    "Diamond Ring": "Rare diamond ring from the deep earth",
+                    "Evil Eye": "Protective amulet against dark forces",
+                    "Eternal Rose": "Immortal rose that never withers",
+                    "Ion Gem": "Crystalline gem charged with cosmic energy",
+                    "Kissed Frog": "Magical frog that transforms with a kiss",
+                    "Nail Bracelet": "Elegant bracelet with mystical gems",
+                    "Precious Peach": "Rare enchanted peach with golden aura",
+                    "Scared Cat": "Mysterious cat from the shadow realm"
+                };
 
-            // ===== VOID MASK (3) =====
-            {
-                name: "Void Mask #7721",
-                collection: "Void Mask",
-                lottie: "https://nft.fragment.com/gift/voidmask-7721.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Obsidian" }, { trait_type: "Backdrop",
-                    value: "Shadow" }, { trait_type: "Realm", value: "Dark" }],
-                price: 22.1,
-                status: "for-sale"
-            }, {
-                name: "Void Mask #7722",
-                collection: "Void Mask",
-                lottie: "https://nft.fragment.com/gift/voidmask-7722.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Moonstone" }, { trait_type: "Backdrop",
-                    value: "Astral" }, { trait_type: "Realm", value: "Celestial" }],
-                price: 34.6,
-                status: "on-auction"
-            }, {
-                name: "Void Mask #7723",
-                collection: "Void Mask",
-                lottie: "https://nft.fragment.com/gift/voidmask-7723.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Shadow" }, { trait_type: "Backdrop",
-                    value: "Abyss" }, { trait_type: "Realm", value: "Void" }],
-                price: 28.9,
-                status: "for-sale"
-            },
+                const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Frost", "Storm"];
 
-            // ===== PLUSH PEPE (3) =====
-            {
-                name: "Plush Pepe #3312",
-                collection: "Plush Pepe",
-                lottie: "https://nft.fragment.com/gift/plushpepe-3312.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Classic" }, { trait_type: "Backdrop",
-                    value: "Swamp" }, { trait_type: "Expression", value: "Smile" }],
-                price: 6.8,
-                status: "for-sale"
-            }, {
-                name: "Plush Pepe #3313",
-                collection: "Plush Pepe",
-                lottie: "https://nft.fragment.com/gift/plushpepe-3313.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Rare" }, { trait_type: "Backdrop",
-                    value: "Golden" }, { trait_type: "Expression", value: "Wink" }],
-                price: 14.2,
-                status: "on-auction"
-            }, {
-                name: "Plush Pepe #3314",
-                collection: "Plush Pepe",
-                lottie: "https://nft.fragment.com/gift/plushpepe-3314.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Legendary" }, { trait_type: "Backdrop",
-                    value: "Rainbow" }, { trait_type: "Expression", value: "Laugh" }],
-                price: 0,
-                status: "sold"
-            },
+                for (let i = 0; i < count; i++) {
+                    const num = baseNumber + i;
+                    const model = models[collection] ? models[collection][i % models[collection].length] : "Classic";
+                    const backdrop = backdrops[i % backdrops.length];
+                    const price = (COLLECTIONS_DATA[collection].floorPrice + (i * 1.2 + Math.random() * 2)).toFixed(1);
+                    const statuses = ["for-sale", "for-sale", "for-sale", "for-sale", "on-auction", "sold", "sold"];
+                    const status = i < 4 ? "for-sale" : statuses[i % statuses.length];
 
-            // ===== BONDED RING (3) =====
-            {
-                name: "Bonded Ring #1123",
-                collection: "Bonded Ring",
-                lottie: "https://nft.fragment.com/gift/bondedring-1123.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Silver" }, { trait_type: "Gem", value: "Sapphire" },
-                { trait_type: "Magic", value: "Protection" }],
-                price: 45.2,
-                status: "for-sale"
-            }, {
-                name: "Bonded Ring #1124",
-                collection: "Bonded Ring",
-                lottie: "https://nft.fragment.com/gift/bondedring-1124.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Gold" }, { trait_type: "Gem", value: "Ruby" },
-                { trait_type: "Magic", value: "Strength" }],
-                price: 68.9,
-                status: "on-auction"
-            }, {
-                name: "Bonded Ring #1125",
-                collection: "Bonded Ring",
-                lottie: "https://nft.fragment.com/gift/bondedring-1125.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Platinum" }, { trait_type: "Gem", value: "Diamond" },
-                    { trait_type: "Magic", value: "Eternal" }],
-                price: 0,
-                status: "sold"
-            },
+                    // Формируем имя для Lottie URL
+                    const slug = collection.toLowerCase()
+                        .replace(/\s/g, '')
+                        .replace(/'/g, '')
+                        .replace(/đ/g, 'durovs');
 
-            // ===== BOW TIE DUROV'S CAP (3) =====
-            {
-                name: "Bow Tie Durov's Cap #0042",
-                collection: "Bow Tie Durov's Cap",
-                lottie: "https://nft.fragment.com/gift/bowtiedurovscap-0042.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Classic" }, { trait_type: "Color", value: "Black" },
-                { trait_type: "Style", value: "Elegant" }],
-                price: 89.7,
-                status: "for-sale"
-            }, {
-                name: "Bow Tie Durov's Cap #0043",
-                collection: "Bow Tie Durov's Cap",
-                lottie: "https://nft.fragment.com/gift/bowtiedurovscap-0043.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Limited" }, { trait_type: "Color", value: "Gold" },
-                    { trait_type: "Style", value: "Royal" }],
-                price: 156.3,
-                status: "on-auction"
-            }, {
-                name: "Bow Tie Durov's Cap #0044",
-                collection: "Bow Tie Durov's Cap",
-                lottie: "https://nft.fragment.com/gift/bowtiedurovscap-0044.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Ultra Rare" }, { trait_type: "Color", value: "Diamond" },
-                    { trait_type: "Style", value: "Legendary" }],
-                price: 0,
-                status: "sold"
-            },
+                    allNFTs.push({
+                        name: `${collection} #${num}`,
+                        collection: collection,
+                        lottie: `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`,
+                        description: descriptions[collection] || "Unique NFT gift",
+                        attributes: [
+                            { trait_type: "Model", value: model },
+                            { trait_type: "Backdrop", value: backdrop },
+                            { trait_type: "Rarity", value: ["Common", "Uncommon", "Rare", "Epic", "Legendary"][i %
+                                5] }
+                        ],
+                        price: parseFloat(price),
+                        status: status,
+                        number: num
+                    });
+                }
+            });
 
-            // ===== DIAMOND RING (3) =====
-            {
-                name: "Diamond Ring #5512",
-                collection: "Diamond Ring",
-                lottie: "https://nft.fragment.com/gift/diamondring-5512.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Classic" }, { trait_type: "Carat", value: "1.5" },
-                { trait_type: "Cut", value: "Round" }],
-                price: 67.3,
-                status: "for-sale"
-            }, {
-                name: "Diamond Ring #5513",
-                collection: "Diamond Ring",
-                lottie: "https://nft.fragment.com/gift/diamondring-5513.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Royal" }, { trait_type: "Carat", value: "3.2" },
-                { trait_type: "Cut", value: "Emerald" }],
-                price: 124.8,
-                status: "on-auction"
-            }, {
-                name: "Diamond Ring #5514",
-                collection: "Diamond Ring",
-                lottie: "https://nft.fragment.com/gift/diamondring-5514.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Imperial" }, { trait_type: "Carat", value: "5.0" },
-                    { trait_type: "Cut", value: "Heart" }],
-                price: 0,
-                status: "sold"
-            },
+            return allNFTs;
+        }
 
-            // ===== EVIL EYE (3) =====
-            {
-                name: "Evil Eye #2231",
-                collection: "Evil Eye",
-                lottie: "https://nft.fragment.com/gift/evileye-2231.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Classic" }, { trait_type: "Color", value: "Blue" },
-                { trait_type: "Power", value: "Protection" }],
-                price: 4.5,
-                status: "for-sale"
-            }, {
-                name: "Evil Eye #2232",
-                collection: "Evil Eye",
-                lottie: "https://nft.fragment.com/gift/evileye-2232.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Dark" }, { trait_type: "Color", value: "Purple" },
-                { trait_type: "Power", value: "Curse" }],
-                price: 9.7,
-                status: "on-auction"
-            }, {
-                name: "Evil Eye #2233",
-                collection: "Evil Eye",
-                lottie: "https://nft.fragment.com/gift/evileye-2233.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Ancient" }, { trait_type: "Color", value: "Gold" },
-                    { trait_type: "Power", value: "Destiny" }],
-                price: 0,
-                status: "sold"
-            },
-
-            // ===== ETERNAL ROSE (3) =====
-            {
-                name: "Eternal Rose #7781",
-                collection: "Eternal Rose",
-                lottie: "https://nft.fragment.com/gift/eternalrose-7781.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Red" }, { trait_type: "Petal", value: "Velvet" },
-                { trait_type: "Magic", value: "Love" }],
-                price: 34.8,
-                status: "for-sale"
-            }, {
-                name: "Eternal Rose #7782",
-                collection: "Eternal Rose",
-                lottie: "https://nft.fragment.com/gift/eternalrose-7782.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Blue" }, { trait_type: "Petal", value: "Crystal" },
-                { trait_type: "Magic", value: "Truth" }],
-                price: 52.3,
-                status: "on-auction"
-            }, {
-                name: "Eternal Rose #7783",
-                collection: "Eternal Rose",
-                lottie: "https://nft.fragment.com/gift/eternalrose-7783.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Golden" }, { trait_type: "Petal", value: "Diamond" },
-                    { trait_type: "Magic", value: "Eternity" }],
-                price: 0,
-                status: "sold"
-            },
-
-            // ===== ION GEM (3) =====
-            {
-                name: "Ion Gem #3381",
-                collection: "Ion Gem",
-                lottie: "https://nft.fragment.com/gift/iongem-3381.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Blue" }, { trait_type: "Energy", value: "Plasma" },
-                { trait_type: "Charge", value: "High" }],
-                price: 56.4,
-                status: "for-sale"
-            }, {
-                name: "Ion Gem #3382",
-                collection: "Ion Gem",
-                lottie: "https://nft.fragment.com/gift/iongem-3382.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Red" }, { trait_type: "Energy", value: "Fusion" },
-                { trait_type: "Charge", value: "Ultra" }],
-                price: 78.9,
-                status: "on-auction"
-            }, {
-                name: "Ion Gem #3383",
-                collection: "Ion Gem",
-                lottie: "https://nft.fragment.com/gift/iongem-3383.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Rainbow" }, { trait_type: "Energy",
-                    value: "Quantum" }, { trait_type: "Charge", value: "Infinite" }],
-                price: 0,
-                status: "sold"
-            },
-
-            // ===== KISSED FROG (3) =====
-            {
-                name: "Kissed Frog #4562",
-                collection: "Kissed Frog",
-                lottie: "https://nft.fragment.com/gift/kissedfrog-4562.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Prince" }, { trait_type: "Crown", value: "Gold" },
-                { trait_type: "Magic", value: "Charming" }],
-                price: 9.6,
-                status: "for-sale"
-            }, {
-                name: "Kissed Frog #4563",
-                collection: "Kissed Frog",
-                lottie: "https://nft.fragment.com/gift/kissedfrog-4563.lottie.json",
-                attributes: [{ trait_type: "Model", value: "Princess" }, { trait_type: "Crown", value: "Silver" },
-                    { trait_type: "Magic", value: "Enchanting" }],
-                price: 14.8,
-                status: "on-auction"
-            }, {
-                name: "Kissed Frog #4564",
-                collection: "Kissed Frog",
-                lottie: "https://nft.fragment.com/gift/kissedfrog-4564.lottie.json",
-                attributes: [{ trait_type: "Model", value: "King" }, { trait_type: "Crown", value: "Diamond" },
-                    { trait_type: "Magic", value: "Majestic" }],
-                price: 0,
-                status: "sold"
-            }
-        ];
+        const NFT_DATA = generateNFTs();
 
         // ============================================================
         // 3. КОРЗИНА
@@ -1163,18 +805,21 @@
             updateCartUI();
         }
 
-        function addToCart(nftName, price) {
+        function addToCart(nftName) {
             if (cart.includes(nftName)) {
                 cart = cart.filter(item => item !== nftName);
             } else {
                 cart.push(nftName);
             }
             saveCart();
+            renderGrid();
         }
 
         function removeFromCart(nftName) {
             cart = cart.filter(item => item !== nftName);
             saveCart();
+            renderCartItems();
+            updateCartUI();
         }
 
         function getCartTotal() {
@@ -1195,18 +840,6 @@
             document.getElementById('cartCount').textContent = count;
             document.getElementById('cartTotal').textContent = total.toFixed(2);
             document.getElementById('modalCartTotal').textContent = total.toFixed(2);
-
-            document.querySelectorAll('.btn-action[data-action="cart"]').forEach(btn => {
-                const name = btn.dataset.nft;
-                if (isInCart(name)) {
-                    btn.textContent = '✓ В корзине';
-                    btn.classList.add('primary');
-                } else {
-                    btn.textContent = '🛒 В корзину';
-                    btn.classList.remove('primary');
-                }
-            });
-
             document.getElementById('checkoutBtn').disabled = count === 0;
             renderCartItems();
         }
@@ -1218,7 +851,7 @@
                     <div class="empty-cart">
                         <div class="icon">🛒</div>
                         <p>Корзина пуста</p>
-                        <p style="font-size:13px; margin-top:4px;">Добавьте NFT для покупки</p>
+                        <p style="font-size:13px; margin-top:4px; color:#6e6e80;">Добавьте NFT для покупки</p>
                     </div>
                 `;
                 return;
@@ -1228,17 +861,16 @@
             cart.forEach(name => {
                 const nft = NFT_DATA.find(n => n.name === name);
                 if (!nft) return;
-                const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
                 html += `
                     <div class="cart-item">
-                        <div style="width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:20px;">
+                        <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:18px;">
                             ${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}
                         </div>
                         <div class="item-info">
                             <div class="item-name">${nft.name}</div>
-                            <div style="font-size:11px;color:#6e6e80;">${nft.collection}</div>
+                            <div class="item-collection">${nft.collection}</div>
                         </div>
-                        <div class="item-price">${nft.price.toFixed(2)} TON</div>
+                        <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
                         <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
                     </div>
                 `;
@@ -1258,8 +890,7 @@
             return {
                 bg: `hsl(${hue1}, ${sat}%, ${lig}%)`,
                 bgGradient: `linear-gradient(145deg, hsl(${hue1}, ${sat}%, ${lig-5}%), hsl(${hue2}, ${sat-10}%, ${lig+5}%))`,
-                accent: `hsl(${hue1}, ${sat+20}%, ${lig+25}%)`,
-                glow: `hsl(${hue1}, ${sat}%, ${lig+10}%)`
+                accent: `hsl(${hue1}, ${sat+20}%, ${lig+25}%)`
             };
         }
 
@@ -1267,10 +898,12 @@
         // 5. РЕНДЕРИНГ
         // ============================================================
         let currentFilter = 'all';
+        let expandedCard = null;
         const grid = document.getElementById('nftGrid');
         const filtersContainer = document.getElementById('filtersContainer');
 
-        const collections = ['all', ...new Set(NFT_DATA.map(item => item.collection))];
+        // Фильтры
+        const collections = ['all', ...Object.keys(COLLECTIONS_DATA)];
 
         collections.forEach(col => {
             const btn = document.createElement('button');
@@ -1282,10 +915,13 @@
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = col;
+                expandedCard = null;
                 renderGrid();
             });
             filtersContainer.appendChild(btn);
         });
+
+        document.getElementById('totalCount').textContent = NFT_DATA.length;
 
         function renderGrid() {
             const filtered = currentFilter === 'all' ?
@@ -1294,146 +930,148 @@
 
             if (filtered.length === 0) {
                 grid.innerHTML =
-                    `<div class="loading" style="padding:40px 20px; color:#6e6e80;">Нет подарков в этой коллекции</div>`;
+                    `<div class="loading" style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;">Нет подарков в этой коллекции</div>`;
                 return;
             }
 
-            const grouped = filtered.reduce((acc, item) => {
-                if (!acc[item.collection]) acc[item.collection] = [];
-                acc[item.collection].push(item);
-                return acc;
-            }, {});
-
             let html = '';
 
-            Object.entries(grouped).forEach(([collectionName, items]) => {
-                const colors = getCollectionColors(collectionName);
-                const colData = COLLECTIONS_DATA[collectionName];
+            filtered.forEach((nft, index) => {
+                const colors = getCollectionColors(nft.collection);
+                const number = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
+                const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
+                const backdrop = nft.attributes.find(a => a.trait_type === 'Backdrop')?.value || '';
+                const rarity = nft.attributes.find(a => a.trait_type === 'Rarity')?.value || '';
+
+                const lottieId = `lottie-${nft.collection.replace(/\s/g, '')}-${number}`;
+                const isExpanded = expandedCard === nft.name;
+
+                const statusEmoji = {
+                    'sold': '🔴',
+                    'for-sale': '🟢',
+                    'on-auction': '🟡'
+                } [nft.status] || '⚪';
+
+                const statusLabel = {
+                    'sold': 'Продано',
+                    'for-sale': 'В продаже',
+                    'on-auction': 'На аукционе'
+                } [nft.status] || '';
+
+                const statusClass = {
+                    'sold': 'sold',
+                    'for-sale': 'for-sale',
+                    'on-auction': 'on-auction'
+                } [nft.status] || '';
+
+                const inCart = isInCart(nft.name);
 
                 html += `
-                    <div class="collection-header">
-                        <span class="collection-name">
-                            <span class="icon">${colData?.icon || '🎁'}</span>
-                            ${collectionName}
-                        </span>
-                        <span class="collection-count">${items.length} шт.</span>
-                    </div>
-                `;
+                    <div class="nft-card ${isExpanded ? 'expanded' : ''}" 
+                         data-name="${nft.name}"
+                         onclick="toggleExpand('${nft.name}')">
+                        <div class="nft-card-inner" style="background: ${colors.bgGradient};">
+                            <div class="lottie-wrapper" style="background: ${colors.bg};">
+                                <div class="lottie-container" id="${lottieId}"></div>
+                                ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
+                            </div>
 
-                items.forEach((nft, index) => {
-                    const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
-                    const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
-                    const extraTraits = nft.attributes.filter(a => a.trait_type !== 'Model');
-
-                    const lottieId = `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
-                    const statusEmoji = {
-                        'sold': '🔴',
-                        'for-sale': '🟢',
-                        'on-auction': '🟡'
-                    } [nft.status] || '⚪';
-
-                    const statusLabel = {
-                        'sold': 'Продано',
-                        'for-sale': 'В продаже',
-                        'on-auction': 'На аукционе'
-                    } [nft.status] || '';
-
-                    const statusClass = {
-                        'sold': 'sold',
-                        'for-sale': 'for-sale',
-                        'on-auction': 'on-auction'
-                    } [nft.status] || '';
-
-                    const isInCartState = isInCart(nft.name);
-
-                    html += `
-                        <div class="nft-card" onclick="window.open('https://fragment.com/gift/${nft.name.toLowerCase().replace(/\s/g, '-').replace(/#/g, '')}', '_blank')">
-                            <div class="nft-card-inner" style="background: ${colors.bgGradient}; border: 1px solid rgba(255,255,255,0.04);">
-                                <div class="lottie-wrapper" style="background: ${colors.bg};">
-                                    <div class="lottie-container" id="${lottieId}"></div>
-                                    ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
-                                </div>
-                                <div class="nft-info">
-                                    <div class="nft-name">${nft.name}</div>
-                                    ${model ? `<div class="nft-model">${model}</div>` : ''}
-                                    <div class="nft-traits">
-                                        ${extraTraits.slice(0, 2).map(t => 
-                                            `<span class="trait-tag">✦ <span class="trait-value">${t.value}</span></span>`
-                                        ).join('')}
-                                    </div>
-                                    ${nft.price > 0 ? `
-                                        <div class="nft-price">
-                                            <span class="ton-icon">₿</span>
-                                            ${nft.price.toFixed(2)} TON
-                                            <span class="usd">≈ $${(nft.price * 5.2).toFixed(2)}</span>
-                                        </div>
-                                    ` : `
-                                        <div style="font-size:12px;color:#6e6e80;">Не в продаже</div>
-                                    `}
-                                </div>
-                                <div class="nft-actions">
-                                    <button class="btn-number">#${number}</button>
-                                    ${nft.price > 0 && nft.status !== 'sold' ? `
-                                        <button class="btn-action ${isInCartState ? 'primary' : ''}" 
-                                                data-action="cart" 
-                                                data-nft="${nft.name}"
-                                                onclick="event.stopPropagation(); addToCart('${nft.name}', ${nft.price});">
-                                            ${isInCartState ? '✓ В корзине' : '🛒 В корзину'}
-                                        </button>
-                                    ` : ''}
-                                    ${nft.status === 'sold' ? `
-                                        <button class="btn-action danger" disabled>🔴 Продано</button>
-                                    ` : ''}
+                            <!-- COMPACT INFO -->
+                            <div class="nft-info-compact">
+                                <div class="nft-name-compact">${nft.name}</div>
+                                <div class="nft-model-compact">${model}</div>
+                                <div class="nft-price" style="font-size:13px;margin-top:4px;">
+                                    <span class="gram-icon">G</span>
+                                    ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
                                 </div>
                             </div>
+
+                            <!-- EXPANDED INFO -->
+                            <div class="nft-info-expanded">
+                                <div class="nft-name-expanded">${nft.collection}</div>
+                                <div class="nft-number-expanded">#${number}</div>
+                                <div class="nft-description">${nft.description || 'Unique NFT gift from Telegram'}</div>
+                                <div class="nft-details">
+                                    ${model ? `<div class="nft-detail-item"><span class="label">Модель:</span> <span class="value">${model}</span></div>` : ''}
+                                    ${backdrop ? `<div class="nft-detail-item"><span class="label">Фон:</span> <span class="value">${backdrop}</span></div>` : ''}
+                                    ${rarity ? `<div class="nft-detail-item"><span class="label">Редкость:</span> <span class="value">${rarity}</span></div>` : ''}
+                                </div>
+                                <div class="nft-price">
+                                    <span class="gram-icon">G</span>
+                                    ${nft.price > 0 ? `${nft.price.toFixed(2)} GRAM` : 'Не в продаже'}
+                                    ${nft.price > 0 ? `<span class="usd">≈ $${(nft.price * 5.2).toFixed(2)}</span>` : ''}
+                                </div>
+                                <button class="btn-buy ${nft.status === 'sold' || nft.price === 0 ? 'sold-out' : ''}" 
+                                        onclick="event.stopPropagation(); ${nft.status !== 'sold' && nft.price > 0 ? `addToCart('${nft.name}')` : ''}"
+                                        ${nft.status === 'sold' || nft.price === 0 ? 'disabled' : ''}>
+                                    ${nft.status === 'sold' ? '🔴 Продано' : inCart ? '✓ В корзине' : '💎 Купить'}
+                                </button>
+                            </div>
                         </div>
-                    `;
-                });
+                    </div>
+                `;
             });
 
             grid.innerHTML = html;
 
+            // Загрузка Lottie
             setTimeout(() => {
-                Object.entries(grouped).forEach(([collectionName, items]) => {
-                    items.forEach((nft, index) => {
-                        const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
-                        const containerId =
-                            `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
-                        const container = document.getElementById(containerId);
+                filtered.forEach((nft) => {
+                    const number = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
+                    const containerId = `lottie-${nft.collection.replace(/\s/g, '')}-${number}`;
+                    const container = document.getElementById(containerId);
 
-                        if (container && nft.lottie) {
-                            try {
-                                const anim = lottie.loadAnimation({
-                                    container: container,
-                                    path: nft.lottie,
-                                    renderer: 'svg',
-                                    loop: true,
-                                    autoplay: true
-                                });
+                    if (container && nft.lottie) {
+                        try {
+                            const anim = lottie.loadAnimation({
+                                container: container,
+                                path: nft.lottie,
+                                renderer: 'svg',
+                                loop: true,
+                                autoplay: true
+                            });
 
-                                const colors = getCollectionColors(collectionName);
-                                container.style.background = colors.bg;
+                            const colors = getCollectionColors(nft.collection);
+                            container.style.background = colors.bg;
 
-                                document.addEventListener('visibilitychange', () => {
-                                    if (!document.hidden) {
-                                        anim.play();
-                                    }
-                                });
+                            document.addEventListener('visibilitychange', () => {
+                                if (!document.hidden) {
+                                    anim.play();
+                                }
+                            });
 
-                            } catch (e) {
-                                console.warn('Lottie error:', e);
-                                container.innerHTML =
-                                    `<div style="color:#6e6e80; font-size:28px;">${COLLECTIONS_DATA[collectionName]?.icon || '🎁'}</div>`;
-                            }
+                        } catch (e) {
+                            console.warn('Lottie error:', e);
+                            container.innerHTML =
+                                `<div style="color:#6e6e80;font-size:28px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>`;
                         }
-                    });
+                    }
                 });
                 updateCartUI();
-            }, 150);
+            }, 200);
         }
 
         // ============================================================
-        // 6. КОРЗИНА - ОТКРЫТИЕ/ЗАКРЫТИЕ
+        // 6. РАЗВОРАЧИВАНИЕ КАРТОЧКИ
+        // ============================================================
+        function toggleExpand(name) {
+            if (expandedCard === name) {
+                expandedCard = null;
+            } else {
+                expandedCard = name;
+            }
+            renderGrid();
+            // Прокрутка к карточке
+            setTimeout(() => {
+                const expanded = document.querySelector('.nft-card.expanded');
+                if (expanded) {
+                    expanded.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+
+        // ============================================================
+        // 7. КОРЗИНА - ОТКРЫТИЕ/ЗАКРЫТИЕ
         // ============================================================
         const cartModal = document.getElementById('cartModal');
 
@@ -1454,24 +1092,13 @@
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             const total = getCartTotal();
-            if (confirm(`💎 Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(2)} TON`)) {
-                alert(`✅ Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(2)} TON`);
+            if (confirm(`💎 Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(2)} GRAM`)) {
+                alert(`✅ Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(2)} GRAM`);
                 cart = [];
                 saveCart();
                 cartModal.classList.remove('open');
                 renderGrid();
             }
-        });
-
-        // ============================================================
-        // 7. ОБНОВЛЕНИЕ
-        // ============================================================
-        document.getElementById('refreshBtn').addEventListener('click', () => {
-            renderGrid();
-            document.getElementById('refreshBtn').style.transform = 'rotate(360deg)';
-            setTimeout(() => {
-                document.getElementById('refreshBtn').style.transform = 'rotate(0deg)';
-            }, 300);
         });
 
         // ============================================================
