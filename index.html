@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NFT Подарки</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
+    </script>
     <style>
         * {
             margin: 0;
@@ -789,7 +790,7 @@
 
     <script>
         // ============================================================
-        // 1. ВСЕ КОЛЛЕКЦИИ (ВЕРНУЛ ВСЕ)
+        // 1. ВСЕ КОЛЛЕКЦИИ
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -817,7 +818,7 @@
 
             // ВСЕ РЕАЛЬНЫЕ НОМЕРА И ЦЕНЫ С FRAGMENT
             const realNFTs = [
-                // ===== PLUSH PEPE (НОВЫЕ) =====
+                // ===== PLUSH PEPE =====
                 { collection: "Plush Pepe", number: 2656, price: 4.574 },
                 { collection: "Plush Pepe", number: 100, price: 6.791 },
                 { collection: "Plush Pepe", number: 1412, price: 5.555 },
@@ -825,7 +826,7 @@
                 { collection: "Plush Pepe", number: 2658, price: 25.585 },
                 { collection: "Plush Pepe", number: 1179, price: 20.888 },
 
-                // ===== NAIL BRACELET (НОВЫЕ) =====
+                // ===== NAIL BRACELET =====
                 { collection: "Nail Bracelet", number: 2655, price: 2.655 },
                 { collection: "Nail Bracelet", number: 3517, price: 700 },
                 { collection: "Nail Bracelet", number: 891, price: 320 },
@@ -886,6 +887,14 @@
                 { collection: "Precious Peach", number: 8841, price: 42.3 },
                 { collection: "Precious Peach", number: 8842, price: 38.7 },
                 { collection: "Precious Peach", number: 8843, price: 29.9 },
+                // НОВЫЕ
+                { collection: "Precious Peach", number: 2153, price: 11.111 },
+                { collection: "Precious Peach", number: 11, price: 1.999 },
+                { collection: "Precious Peach", number: 1080, price: 3.250 },
+                { collection: "Precious Peach", number: 1508, price: 600 },
+                { collection: "Precious Peach", number: 1780, price: 399 },
+                { collection: "Precious Peach", number: 1348, price: 1.234 },
+                { collection: "Precious Peach", number: 663, price: 349 },
 
                 // ===== SCARED CAT =====
                 { collection: "Scared Cat", number: 6651, price: 18.9 },
@@ -896,11 +905,25 @@
                 { collection: "Vintage Cigar", number: 4000, price: 35.7 },
                 { collection: "Vintage Cigar", number: 4001, price: 42.1 },
                 { collection: "Vintage Cigar", number: 4002, price: 38.4 },
+                // НОВЫЕ
+                { collection: "Vintage Cigar", number: 14931, price: 1.234 },
+                { collection: "Vintage Cigar", number: 11571, price: 333 },
+                { collection: "Vintage Cigar", number: 4587, price: 333 },
+                { collection: "Vintage Cigar", number: 10389, price: 150 },
+                { collection: "Vintage Cigar", number: 21254, price: 125 },
 
                 // ===== SHARP TONGUE =====
                 { collection: "Sharp Tongue", number: 1281, price: 25.4 },
                 { collection: "Sharp Tongue", number: 1282, price: 31.2 },
-                { collection: "Sharp Tongue", number: 1283, price: 28.6 }
+                { collection: "Sharp Tongue", number: 1283, price: 28.6 },
+                // НОВЫЕ
+                { collection: "Sharp Tongue", number: 377, price: 1000 },
+                { collection: "Sharp Tongue", number: 84, price: 100 },
+                { collection: "Sharp Tongue", number: 6478, price: 45 },
+                { collection: "Sharp Tongue", number: 4803, price: 250 },
+                { collection: "Sharp Tongue", number: 589, price: 888 },
+                { collection: "Sharp Tongue", number: 6565, price: 120 },
+                { collection: "Sharp Tongue", number: 248, price: 2500 }
             ];
 
             // Модели для каждой коллекции
@@ -916,10 +939,10 @@
                 "Ion Gem": ["Blue", "Red", "Rainbow"],
                 "Kissed Frog": ["Prince", "Princess", "King"],
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
-                "Precious Peach": ["Golden", "Royal", "Sweet"],
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit"],
-                "Vintage Cigar": ["Classic", "Maduro", "Rosado"],
-                "Sharp Tongue": ["Venom", "Bite", "Strike"]
+                "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano"],
+                "Sharp Tongue": ["Venom", "Bite", "Strike", "Fang", "Poison"]
             };
 
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame"];
@@ -945,7 +968,8 @@
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
-                const model = (models[collection] || ["Classic"])[index % (models[collection] || ["Classic"]).length];
+                const modelList = models[collection] || ["Classic"];
+                const model = modelList[index % modelList.length];
                 const backdrop = backdrops[index % backdrops.length];
                 const symbol = symbols[index % symbols.length];
 
@@ -1035,12 +1059,12 @@
             const container = document.getElementById('cartItems');
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-cart">
-                        <div class="icon">🛒</div>
-                        <p>Корзина пуста</p>
-                        <p style="font-size:13px; margin-top:4px; color:#6e6e80;">Добавьте NFT для покупки</p>
-                    </div>
-                `;
+                        <div class="empty-cart">
+                            <div class="icon">🛒</div>
+                            <p>Корзина пуста</p>
+                            <p style="font-size:13px; margin-top:4px; color:#6e6e80;">Добавьте NFT для покупки</p>
+                        </div>
+                    `;
                 return;
             }
 
@@ -1049,18 +1073,18 @@
                 const nft = NFT_DATA.find(n => n.name === name);
                 if (!nft) return;
                 html += `
-                    <div class="cart-item">
-                        <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:18px;">
-                            ${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}
+                        <div class="cart-item">
+                            <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:18px;">
+                                ${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}
+                            </div>
+                            <div class="item-info">
+                                <div class="item-name">${nft.name}</div>
+                                <div class="item-collection">${nft.collection}</div>
+                            </div>
+                            <div class="item-price">${nft.price.toFixed(3)} GRAM</div>
+                            <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
                         </div>
-                        <div class="item-info">
-                            <div class="item-name">${nft.name}</div>
-                            <div class="item-collection">${nft.collection}</div>
-                        </div>
-                        <div class="item-price">${nft.price.toFixed(3)} GRAM</div>
-                        <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
-                    </div>
-                `;
+                    `;
             });
             container.innerHTML = html;
         }
@@ -1104,12 +1128,12 @@
             option.dataset.collection = col;
             const icon = col === 'all' ? '📋' : COLLECTIONS_DATA[col]?.icon || '🎁';
             option.innerHTML = `
-                <span class="emoji">${icon}</span>
-                ${col === 'all' ? 'Все' : col}
-                <span class="mini-lottie" id="mini-${col.replace(/\s/g, '')}">
-                    <div class="lottie-container"></div>
-                </span>
-            `;
+                    <span class="emoji">${icon}</span>
+                    ${col === 'all' ? 'Все' : col}
+                    <span class="mini-lottie" id="mini-${col.replace(/\s/g, '')}">
+                        <div class="lottie-container"></div>
+                    </span>
+                `;
             option.addEventListener('click', () => {
                 document.querySelectorAll('.filter-option').forEach(el => el.classList.remove('active'));
                 option.classList.add('active');
@@ -1213,25 +1237,25 @@
                 } [nft.status] || '';
 
                 html += `
-                    <div class="nft-card" onclick="openDetail('${nft.name}')">
-                        <div class="nft-card-inner">
-                            <div class="lottie-wrapper">
-                                <div class="lottie-container" id="${lottieId}"></div>
-                                ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
-                            </div>
-                            <div class="nft-info-compact">
-                                <div class="nft-name-compact">${nft.name}</div>
-                                <div class="nft-model-compact">${model}</div>
-                                <div class="nft-price-compact">
-                                    <span class="gram-icon">
-                                        <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
-                                    </span>
-                                    ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
+                        <div class="nft-card" onclick="openDetail('${nft.name}')">
+                            <div class="nft-card-inner">
+                                <div class="lottie-wrapper">
+                                    <div class="lottie-container" id="${lottieId}"></div>
+                                    ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
+                                </div>
+                                <div class="nft-info-compact">
+                                    <div class="nft-name-compact">${nft.name}</div>
+                                    <div class="nft-model-compact">${model}</div>
+                                    <div class="nft-price-compact">
+                                        <span class="gram-icon">
+                                            <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
+                                        </span>
+                                        ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
             });
 
             grid.innerHTML = html;
