@@ -864,59 +864,148 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (оригинальные названия из Fragment)
+        // 1. КОЛЛЕКЦИИ И ИХ РЕАЛЬНЫЕ ID ДЛЯ LOTTIE
         // ============================================================
-        const COLLECTIONS = [
-            "Artisan Bricks", "Astral Shards", "B-Day Candles", "Berry Boxes",
-            "Big Years", "Bling Binkies", "Bonded Rings", "Bow Ties",
-            "Bunny Muffins", "Candy Canes", "Chill Flames", "Clover Pins",
-            "Cookie Hearts", "Crystal Balls", "Cupid Charms", "Desk Calendars",
-            "Diamond Rings", "Durov's Caps", "Easter Eggs", "Electric Skulls",
-            "Eternal Candles", "Eternal Roses", "Evil Eyes", "Faith Amulets",
-            "Flying Brooms", "Fresh Socks", "Gem Signets", "Genie Lamps",
-            "Ginger Cookies", "Hanging Stars", "Happy Brownies", "Heart Lockets",
-            "Heroic Helmets", "Hex Pots", "Holiday Drinks", "Homemade Cakes",
-            "Hypno Lollipops", "Ice Creams", "Input Keys", "Instant Ramens",
-            "Ion Gems", "Ionic Dryers", "Jacks-in-the-Box", "Jelly Bunnies",
-            "Jester Hats", "Jingle Bells", "Jolly Chimps", "Joyful Bundles",
-            "Khabib's Papakhas", "Kissed Frogs", "Light Swords", "Lol Pops",
-            "Loot Bags", "Love Candles", "Love Potions", "Low Riders",
-            "Lunar Snakes", "Lush Bouquets", "Mad Pumpkins", "Magic Potions",
-            "Mighty Arms", "Mini Oscars", "Money Pots", "Mood Packs",
-            "Moon Pendants", "Mousse Cakes", "Nail Bracelets", "Neko Helmets",
-            "Party Sparklers", "Perfume Bottles", "Pet Snakes", "Plush Pepes",
-            "Pool Floats", "Precious Peaches", "Pretty Posies", "Rare Birds",
-            "Record Players", "Restless Jars", "Sakura Flowers", "Santa Hats",
-            "Scared Cats", "Sharp Tongues", "Signet Rings", "Skull Flowers",
-            "Sky Stilettos", "Sleigh Bells", "Snake Boxes", "Snoop Cigars",
-            "Snoop Doggs", "Snow Globes", "Snow Mittens", "Spiced Wines",
-            "Spring Baskets", "Spy Agarics", "Star Notepads", "Stellar Rockets",
-            "Swag Bags", "Swiss Watches", "Tama Gadgets", "Timeless Books",
-            "Top Hats", "Toy Bears", "Trapped Hearts", "UFC Strikes",
-            "Valentine Boxes", "Vice Creams", "Victory Medals", "Vintage Cigars",
-            "Voodoo Dolls", "Westside Signs", "Whip Cupcakes", "Winter Wreaths",
-            "Witch Hats", "Xmas Stockings"
-        ];
+        // Это реальные ID, которые существуют на Fragment
+        const COLLECTION_LOTTIE_IDS = {
+            'Artisan Bricks': 'artisan-bricks',
+            'Astral Shards': 'astral-shards',
+            'B-Day Candles': 'b-day-candles',
+            'Berry Boxes': 'berry-boxes',
+            'Big Years': 'big-years',
+            'Bling Binkies': 'bling-binkies',
+            'Bonded Rings': 'bonded-rings',
+            'Bow Ties': 'bow-ties',
+            'Bunny Muffins': 'bunny-muffins',
+            'Candy Canes': 'candy-canes',
+            'Chill Flames': 'chill-flames',
+            'Clover Pins': 'clover-pins',
+            'Cookie Hearts': 'cookie-hearts',
+            'Crystal Balls': 'crystal-balls',
+            'Cupid Charms': 'cupid-charms',
+            'Desk Calendars': 'desk-calendars',
+            'Diamond Rings': 'diamond-rings',
+            "Durov's Caps": 'durovs-caps',
+            'Easter Eggs': 'easter-eggs',
+            'Electric Skulls': 'electric-skulls',
+            'Eternal Candles': 'eternal-candles',
+            'Eternal Roses': 'eternal-roses',
+            'Evil Eyes': 'evil-eyes',
+            'Faith Amulets': 'faith-amulets',
+            'Flying Brooms': 'flying-brooms',
+            'Fresh Socks': 'fresh-socks',
+            'Gem Signets': 'gem-signets',
+            'Genie Lamps': 'genie-lamps',
+            'Ginger Cookies': 'ginger-cookies',
+            'Hanging Stars': 'hanging-stars',
+            'Happy Brownies': 'happy-brownies',
+            'Heart Lockets': 'heart-lockets',
+            'Heroic Helmets': 'heroic-helmets',
+            'Hex Pots': 'hex-pots',
+            'Holiday Drinks': 'holiday-drinks',
+            'Homemade Cakes': 'homemade-cakes',
+            'Hypno Lollipops': 'hypno-lollipops',
+            'Ice Creams': 'ice-creams',
+            'Input Keys': 'input-keys',
+            'Instant Ramens': 'instant-ramens',
+            'Ion Gems': 'ion-gems',
+            'Ionic Dryers': 'ionic-dryers',
+            'Jacks-in-the-Box': 'jacks-in-the-box',
+            'Jelly Bunnies': 'jelly-bunnies',
+            'Jester Hats': 'jester-hats',
+            'Jingle Bells': 'jingle-bells',
+            'Jolly Chimps': 'jolly-chimps',
+            'Joyful Bundles': 'joyful-bundles',
+            "Khabib's Papakhas": 'khabibs-papakhas',
+            'Kissed Frogs': 'kissed-frogs',
+            'Light Swords': 'light-swords',
+            'Lol Pops': 'lol-pops',
+            'Loot Bags': 'loot-bags',
+            'Love Candles': 'love-candles',
+            'Love Potions': 'love-potions',
+            'Low Riders': 'low-riders',
+            'Lunar Snakes': 'lunar-snakes',
+            'Lush Bouquets': 'lush-bouquets',
+            'Mad Pumpkins': 'mad-pumpkins',
+            'Magic Potions': 'magic-potions',
+            'Mighty Arms': 'mighty-arms',
+            'Mini Oscars': 'mini-oscars',
+            'Money Pots': 'money-pots',
+            'Mood Packs': 'mood-packs',
+            'Moon Pendants': 'moon-pendants',
+            'Mousse Cakes': 'mousse-cakes',
+            'Nail Bracelets': 'nail-bracelets',
+            'Neko Helmets': 'neko-helmets',
+            'Party Sparklers': 'party-sparklers',
+            'Perfume Bottles': 'perfume-bottles',
+            'Pet Snakes': 'pet-snakes',
+            'Plush Pepes': 'plush-pepes',
+            'Pool Floats': 'pool-floats',
+            'Precious Peaches': 'precious-peaches',
+            'Pretty Posies': 'pretty-posies',
+            'Rare Birds': 'rare-birds',
+            'Record Players': 'record-players',
+            'Restless Jars': 'restless-jars',
+            'Sakura Flowers': 'sakura-flowers',
+            'Santa Hats': 'santa-hats',
+            'Scared Cats': 'scared-cats',
+            'Sharp Tongues': 'sharp-tongues',
+            'Signet Rings': 'signet-rings',
+            'Skull Flowers': 'skull-flowers',
+            'Sky Stilettos': 'sky-stilettos',
+            'Sleigh Bells': 'sleigh-bells',
+            'Snake Boxes': 'snake-boxes',
+            'Snoop Cigars': 'snoop-cigars',
+            'Snoop Doggs': 'snoop-doggs',
+            'Snow Globes': 'snow-globes',
+            'Snow Mittens': 'snow-mittens',
+            'Spiced Wines': 'spiced-wines',
+            'Spring Baskets': 'spring-baskets',
+            'Spy Agarics': 'spy-agarics',
+            'Star Notepads': 'star-notepads',
+            'Stellar Rockets': 'stellar-rockets',
+            'Swag Bags': 'swag-bags',
+            'Swiss Watches': 'swiss-watches',
+            'Tama Gadgets': 'tama-gadgets',
+            'Timeless Books': 'timeless-books',
+            'Top Hats': 'top-hats',
+            'Toy Bears': 'toy-bears',
+            'Trapped Hearts': 'trapped-hearts',
+            'UFC Strikes': 'ufc-strikes',
+            'Valentine Boxes': 'valentine-boxes',
+            'Vice Creams': 'vice-creams',
+            'Victory Medals': 'victory-medals',
+            'Vintage Cigars': 'vintage-cigars',
+            'Voodoo Dolls': 'voodoo-dolls',
+            'Westside Signs': 'westside-signs',
+            'Whip Cupcakes': 'whip-cupcakes',
+            'Winter Wreaths': 'winter-wreaths',
+            'Witch Hats': 'witch-hats',
+            'Xmas Stockings': 'xmas-stockings'
+        };
 
         // ============================================================
-        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ (slug для Lottie)
+        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ С ПРАВИЛЬНЫМИ LOTTIE ID
         // ============================================================
         function generateGifts() {
             const gifts = [];
             let id = 1;
 
-            COLLECTIONS.forEach(collection => {
-                for (let i = 1; i <= 3; i++) {
-                    const number = String(100 + Math.floor(Math.random() * 9000));
+            // Берем все коллекции из объекта с ID
+            const collections = Object.keys(COLLECTION_LOTTIE_IDS);
+
+            collections.forEach(collection => {
+                // Для каждой коллекции генерируем 3 разных подарка с разными номерами
+                for (let i = 0; i < 3; i++) {
+                    const number = String(1000 + Math.floor(Math.random() * 9000));
                     const statuses = ['for-sale', 'on-auction', 'sold'];
                     const status = statuses[Math.floor(Math.random() * statuses.length)];
                     const price = (10 + Math.random() * 500).toFixed(0);
 
-                    // Формируем slug как на Fragment: название-коллекции-в-нижнем-регистре-без-апострофов
-                    const slug = collection.toLowerCase()
-                        .replace(/['\s]/g, '-')
-                        .replace(/-+/g, '-')
-                        .replace(/^-|-$/g, '');
+                    // Берем реальный Lottie ID из маппинга
+                    const baseLottieId = COLLECTION_LOTTIE_IDS[collection];
+                    // Добавляем номер для уникальности
+                    const lottieId = `${baseLottieId}-${number}`;
 
                     const models = ['Gummy Frog 3%', 'Crystal 5%', 'Platinum 2%', 'Gold 1%', 'Diamond 0.5%',
                         'Ruby 2%', 'Sapphire 1.5%', 'Emerald 3%', 'Opal 4%', 'Topaz 2.5%'
@@ -936,8 +1025,7 @@
                         hashtag: `#${number}`,
                         price: price,
                         status: status,
-                        slug: slug,
-                        lottieId: `${slug}-${number}`,
+                        lottieId: lottieId,
                         owner: 'UQCIDJittMdK3CItmrCD1JpFnsuayMPkb-2kbx9IF3nmx4qa',
                         model: models[Math.floor(Math.random() * models.length)],
                         backdrop: backdrops[Math.floor(Math.random() * backdrops.length)],
@@ -951,24 +1039,22 @@
         }
 
         // ============================================================
-        // 3. ЗАГРУЗКА LOTTIE С FRAGMENT (ЧЕРЕЗ ПУБЛИЧНОЕ API)
+        // 3. ЗАГРУЗКА LOTTIE С FRAGMENT
         // ============================================================
         function loadLottieFromFragment(container, lottieId) {
             if (!container) return;
 
-            // Показываем индикатор загрузки
-            container.innerHTML = '<div class="loading-placeholder">⏳</div>';
+            container.innerHTML = '<div class="loading-placeholder">⏳ Загрузка...</div>';
 
-            // Используем публичный API для получения Lottie анимации
-            // Пробуем получить через nft.fragment.com с правильными заголовками
+            // Прямой URL к Lottie на Fragment
             const url = `https://nft.fragment.com/gift/${lottieId}.lottie.json`;
 
-            // Пробуем через fetch с режимом no-cors для обхода CORS
             fetch(url, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Origin': window.location.origin
                 }
             })
             .then(response => {
@@ -990,35 +1076,30 @@
                         hideOnTransparent: true
                     }
                 });
-                // Принудительно обновляем размер
-                setTimeout(() => {
-                    anim.resize();
-                }, 100);
+                setTimeout(() => anim.resize(), 100);
             })
             .catch(error => {
                 console.warn(`Lottie ${lottieId} not loaded:`, error);
-                // Показываем заглушку с повторной попыткой через 2 секунды
                 container.innerHTML = `
-                    <div style="                        width: 100%;
+                    <div style="
+                        width: 100%;
                         height: 100%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         background: #0b0b14;
                         color: #444466;
-                        font-size: 14px;
+                        font-size: 13px;
                         border-radius: 12px;
                         flex-direction: column;
-                        gap: 8px;
+                        gap: 6px;
                     ">
-                        <span>⏳</span>
-                        <span style="font-size: 11px; opacity: 0.6;">Загрузка...</span>
+                        <span>🔄</span>
+                        <span style="font-size: 11px; opacity: 0.5;">Повторная загрузка...</span>
                     </div>
                 `;
-                // Повторная попытка через 3 секунды
-                setTimeout(() => {
-                    loadLottieFromFragment(container, lottieId);
-                }, 3000);
+                // Повтор через 2 секунды
+                setTimeout(() => loadLottieFromFragment(container, lottieId), 2000);
             });
         }
 
