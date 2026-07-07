@@ -51,7 +51,7 @@
         .header .profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             transition: opacity 0.2s;
             -webkit-tap-highlight-color: transparent;
@@ -77,7 +77,7 @@
             object-fit: cover;
         }
         .header .profile .avatar .avatar-placeholder {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #ffffff;
             display: flex;
@@ -86,18 +86,31 @@
             width: 100%;
             height: 100%;
         }
-        .header .profile .username {
-            font-size: 13px;
+        .header .profile .balance-wrap {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 10px 4px 6px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .header .profile .balance-wrap .mini-gram {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .header .profile .balance-wrap .mini-gram img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .header .profile .balance-wrap .balance-text {
+            font-size: 12px;
             font-weight: 600;
             color: #ffffff;
-            max-width: 120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .header .profile .username span {
-            color: #8e8ea0;
-            font-weight: 400;
         }
         .filter-section {
             padding: 12px 16px;
@@ -763,6 +776,11 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .profile-modal-content::-webkit-scrollbar {
+            width: 0;
         }
         .profile-modal-close {
             position: absolute;
@@ -807,12 +825,12 @@
             font-size: 20px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .profile-modal .profile-id {
             font-size: 14px;
             color: #8e8ea0;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             font-weight: 500;
         }
         .profile-modal .profile-balance {
@@ -827,7 +845,7 @@
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .profile-modal .profile-balance .mini-gram {
             width: 24px;
@@ -840,26 +858,143 @@
             height: 100%;
             object-fit: cover;
         }
-        .profile-modal .add-gift-btn {
-            width: 100%;
-            padding: 14px;
+        .profile-modal .profile-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.04);
+            margin: 12px 0 14px 0;
+        }
+        .profile-modal .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .profile-modal .btn-row .add-gift-btn {
+            flex: 1;
+            padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 12px;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .profile-modal .add-gift-btn:active {
+        .profile-modal .btn-row .add-gift-btn:active {
             transform: scale(0.97);
         }
-        .profile-modal .profile-divider {
-            height: 1px;
+        .profile-modal .btn-row .withdraw-btn {
+            flex: 1;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.04);
-            margin: 12px 0 16px 0;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .profile-modal .btn-row .withdraw-btn:active {
+            transform: scale(0.97);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .withdraw-section {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .withdraw-section.open {
+            display: block;
+        }
+        .withdraw-section .withdraw-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8ea0;
+            text-align: left;
+            margin-bottom: 6px;
+        }
+        .withdraw-section .withdraw-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border 0.2s ease;
+            margin-bottom: 10px;
+        }
+        .withdraw-section .withdraw-input:focus {
+            border-color: #4a8af4;
+        }
+        .withdraw-section .withdraw-input::placeholder {
+            color: #6e6e80;
+        }
+        .withdraw-section .withdraw-row {
+            display: flex;
+            gap: 10px;
+        }
+        .withdraw-section .withdraw-row .withdraw-amount {
+            flex: 1;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border 0.2s ease;
+        }
+        .withdraw-section .withdraw-row .withdraw-amount:focus {
+            border-color: #4a8af4;
+        }
+        .withdraw-section .withdraw-row .withdraw-amount::placeholder {
+            color: #6e6e80;
+        }
+        .withdraw-section .withdraw-row .withdraw-submit {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .withdraw-section .withdraw-row .withdraw-submit:active {
+            transform: scale(0.97);
+        }
+        .withdraw-section .withdraw-error {
+            color: #ff6b6b;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 8px;
+            display: none;
+        }
+        .withdraw-section .withdraw-error.show {
+            display: block;
+        }
+        .withdraw-section .withdraw-success {
+            color: #4bc88a;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 8px;
+            display: none;
+        }
+        .withdraw-section .withdraw-success.show {
+            display: block;
         }
         @media (min-width: 600px) {
             .detail-content {
@@ -891,7 +1026,12 @@
                     <img id="avatarImg" style="display:none;" alt="avatar">
                     <div class="avatar-placeholder" id="avatarPlaceholder">👤</div>
                 </div>
-                <div class="username" id="usernameDisplay">Профиль <span>▼</span></div>
+                <div class="balance-wrap" id="balanceWrap">
+                    <span class="mini-gram">
+                        <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
+                    </span>
+                    <span class="balance-text" id="headerBalance">0.00</span>
+                </div>
             </div>
         </div>
 
@@ -1006,14 +1146,28 @@
                     <span id="profileBalance">0.00</span> GRAM
                 </div>
                 <div class="profile-divider"></div>
-                <button class="add-gift-btn" id="addGiftBtn">➕ Добавить подарок</button>
+                <div class="btn-row">
+                    <button class="add-gift-btn" id="addGiftBtn">➕ Добавить подарок</button>
+                    <button class="withdraw-btn" id="withdrawToggleBtn">💳 Вывести</button>
+                </div>
+                <div class="withdraw-section" id="withdrawSection">
+                    <div class="withdraw-label">Адрес кошелька TON</div>
+                    <input class="withdraw-input" id="walletInput" type="text" placeholder="Введите адрес кошелька...">
+                    <div class="withdraw-label">Сумма (GRAM)</div>
+                    <div class="withdraw-row">
+                        <input class="withdraw-amount" id="amountInput" type="number" placeholder="0.00" min="0.01" step="0.01">
+                        <button class="withdraw-submit" id="withdrawSubmitBtn">Вывести</button>
+                    </div>
+                    <div class="withdraw-error" id="withdrawError">⚠️ У вас недостаточно средств для вывода</div>
+                    <div class="withdraw-success" id="withdrawSuccess">✅ Заявка на вывод успешно отправлена!</div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (Berry Box удалена, добавлена Heart Locket)
+        // 1. КОЛЛЕКЦИИ
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -1417,17 +1571,21 @@
         // 4. ПРОФИЛЬ (FULLY WORKING)
         // ============================================================
         let currentUser = null;
+        let userBalance = 0;
+
+        function updateBalanceUI() {
+            document.getElementById('headerBalance').textContent = userBalance.toFixed(2);
+            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+        }
 
         function initProfile() {
             const avatarImg = document.getElementById('avatarImg');
             const avatarPlaceholder = document.getElementById('avatarPlaceholder');
-            const usernameDisplay = document.getElementById('usernameDisplay');
 
             const bigAvatarImg = document.getElementById('bigAvatarImg');
             const bigAvatarPlaceholder = document.getElementById('bigAvatarPlaceholder');
             const profileName = document.getElementById('profileName');
             const profileId = document.getElementById('profileId');
-            const profileBalance = document.getElementById('profileBalance');
 
             function updateProfileUI(user) {
                 if (user) {
@@ -1442,8 +1600,6 @@
                         avatarPlaceholder.style.display = 'flex';
                         avatarImg.style.display = 'none';
                     }
-                    const name = user.first_name || 'Пользователь';
-                    usernameDisplay.innerHTML = `${name} <span>▼</span>`;
 
                     // Большая аватарка в модалке
                     if (user.photo_url) {
@@ -1463,8 +1619,8 @@
                     profileId.textContent = `ID: ${userId}`;
 
                     // Баланс (заглушка, т.к. реальный баланс требует API)
-                    const balance = (Math.random() * 500 + 50).toFixed(2);
-                    profileBalance.textContent = balance;
+                    userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
+                    updateBalanceUI();
 
                     currentUser = user;
                 } else {
@@ -1472,14 +1628,14 @@
                     avatarPlaceholder.textContent = '👤';
                     avatarPlaceholder.style.display = 'flex';
                     avatarImg.style.display = 'none';
-                    usernameDisplay.innerHTML = `Профиль <span>▼</span>`;
 
                     bigAvatarPlaceholder.textContent = '👤';
                     bigAvatarPlaceholder.style.display = 'flex';
                     bigAvatarImg.style.display = 'none';
                     profileName.textContent = 'Пользователь';
                     profileId.textContent = 'ID: —';
-                    profileBalance.textContent = '0.00';
+                    userBalance = 0;
+                    updateBalanceUI();
                 }
             }
 
@@ -1490,7 +1646,6 @@
                     if (user) {
                         updateProfileUI(user);
                     } else {
-                        // Пробуем получить позже
                         setTimeout(() => {
                             const user2 = window.Telegram.WebApp.initDataUnsafe?.user;
                             if (user2) {
@@ -1505,7 +1660,6 @@
                     updateProfileUI(null);
                 }
             } else {
-                // Если не в Telegram — показываем заглушку
                 updateProfileUI(null);
             }
 
@@ -1514,7 +1668,6 @@
                 e.preventDefault();
                 e.stopPropagation();
 
-                // Обновляем данные перед открытием
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
                         const user = window.Telegram.WebApp.initDataUnsafe?.user;
@@ -1525,6 +1678,10 @@
                 }
 
                 document.getElementById('profileModal').classList.add('open');
+                // Скрываем секцию вывода при открытии
+                document.getElementById('withdrawSection').classList.remove('open');
+                document.getElementById('withdrawError').classList.remove('show');
+                document.getElementById('withdrawSuccess').classList.remove('show');
             });
 
             // Закрытие модалки
@@ -1540,25 +1697,74 @@
 
             // Кнопка "Добавить подарок"
             document.getElementById('addGiftBtn').addEventListener('click', function() {
-                const botUsername = '@AllowMarketGifts';
-                const message = 'Для отображения подарка на маркете, пожалуйста передайте его боту @AllowMarketGifts';
-
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
-                        // Открываем бота в Telegram
                         window.Telegram.WebApp.openLink(`https://t.me/AllowMarketGifts`);
                     } catch (e) {
-                        // Если не получилось, показываем alert
-                        alert(message);
+                        alert('Для отображения подарка на маркете, пожалуйста передайте его боту @AllowMarketGifts');
                     }
                 } else {
-                    // Если не в Telegram, пробуем открыть ссылку
                     try {
                         window.open(`https://t.me/AllowMarketGifts`, '_blank');
                     } catch (e) {
-                        alert(message);
+                        alert('Для отображения подарка на маркете, пожалуйста передайте его боту @AllowMarketGifts');
                     }
                 }
+            });
+
+            // Кнопка "Вывести" - toggle
+            document.getElementById('withdrawToggleBtn').addEventListener('click', function() {
+                const section = document.getElementById('withdrawSection');
+                section.classList.toggle('open');
+                document.getElementById('withdrawError').classList.remove('show');
+                document.getElementById('withdrawSuccess').classList.remove('show');
+            });
+
+            // Кнопка "Вывести средства"
+            document.getElementById('withdrawSubmitBtn').addEventListener('click', function() {
+                const wallet = document.getElementById('walletInput').value.trim();
+                const amount = parseFloat(document.getElementById('amountInput').value);
+
+                const errorEl = document.getElementById('withdrawError');
+                const successEl = document.getElementById('withdrawSuccess');
+
+                errorEl.classList.remove('show');
+                successEl.classList.remove('show');
+
+                // Проверка адреса кошелька (минимальная валидация)
+                if (!wallet || wallet.length < 10) {
+                    alert('Пожалуйста, введите корректный адрес кошелька TON');
+                    return;
+                }
+
+                // Проверка суммы
+                if (!amount || amount <= 0) {
+                    alert('Пожалуйста, введите сумму для вывода');
+                    return;
+                }
+
+                // Проверка баланса
+                if (amount > userBalance) {
+                    errorEl.textContent = '⚠️ У вас недостаточно средств для вывода';
+                    errorEl.classList.add('show');
+                    return;
+                }
+
+                // Успешный вывод
+                userBalance = parseFloat((userBalance - amount).toFixed(2));
+                updateBalanceUI();
+
+                successEl.textContent = `✅ Заявка на вывод ${amount.toFixed(2)} GRAM на адрес ${wallet.substring(0, 6)}...${wallet.substring(wallet.length - 4)} успешно отправлена!`;
+                successEl.classList.add('show');
+
+                // Очищаем поля
+                document.getElementById('walletInput').value = '';
+                document.getElementById('amountInput').value = '';
+
+                // Через 5 секунд скрываем успех
+                setTimeout(() => {
+                    successEl.classList.remove('show');
+                }, 5000);
             });
         }
 
