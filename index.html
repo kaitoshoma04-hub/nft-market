@@ -23,7 +23,6 @@
             justify-content: center;
         }
 
-        /* ===== ФОН как на Fragment ===== */
         .app {
             max-width: 430px;
             width: 100%;
@@ -33,6 +32,7 @@
             position: relative;
         }
 
+        /* Фон как на Fragment - серый градиент */
         .app::before {
             content: '';
             position: fixed;
@@ -40,9 +40,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(ellipse at 20% 50%, rgba(74, 138, 244, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(108, 92, 231, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(74, 138, 244, 0.02) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.01) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -132,11 +132,11 @@
             gap: 10px;
         }
 
-        /* ===== NFT CARD ===== */
+        /* ===== NFT CARD - СЕРЫЙ ДИЗАЙН ===== */
         .nft-card {
-            background: linear-gradient(145deg, #14141e 0%, #1a1a2e 100%);
+            background: #1a1a1f;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
@@ -153,6 +153,7 @@
             flex-direction: column;
             padding: 10px;
             gap: 8px;
+            background: #1a1a1f;
         }
 
         .lottie-wrapper {
@@ -160,7 +161,7 @@
             aspect-ratio: 1/1;
             border-radius: 12px;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.02);
+            background: #121216;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -237,25 +238,22 @@
         .gram-icon {
             width: 16px;
             height: 16px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 7px;
-            font-weight: 800;
-            color: #ffffff;
             flex-shrink: 0;
+            overflow: hidden;
         }
 
         .gram-icon img {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 50%;
         }
 
-        /* ===== MODAL / DETAIL VIEW (уменьшенный) ===== */
+        /* ===== MODAL / DETAIL VIEW ===== */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -288,7 +286,7 @@
         }
 
         .detail-content {
-            background: #14141e;
+            background: #1a1a1f;
             border-radius: 20px;
             max-width: 400px;
             width: 100%;
@@ -337,7 +335,7 @@
             aspect-ratio: 1/1;
             border-radius: 14px;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.02);
+            background: #121216;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -407,12 +405,6 @@
             white-space: nowrap;
         }
 
-        .detail-stat .value .percent {
-            font-size: 10px;
-            color: #6e6e80;
-            font-weight: 400;
-        }
-
         .detail-price {
             display: flex;
             align-items: center;
@@ -433,8 +425,8 @@
         }
 
         .detail-price .gram-icon img {
-            width: 16px;
-            height: 16px;
+            width: 22px;
+            height: 22px;
         }
 
         .detail-price .usd {
@@ -801,8 +793,8 @@
                         </div>
                         <div class="detail-price" id="detailPrice">
                             <span class="gram-icon">
-    <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
-</span>
+                                <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
+                            </span>
                             <span id="detailPriceAmount">0.00 GRAM</span>
                             <span class="usd" id="detailPriceUsd">≈ $0.00</span>
                         </div>
@@ -840,7 +832,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ
+        // 1. КОЛЛЕКЦИИ (17 штук)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -850,7 +842,7 @@
             "Void Mask": { icon: "👹", floorPrice: 22.1 },
             "Plush Pepe": { icon: "🐸", floorPrice: 6.8 },
             "Bonded Ring": { icon: "💍", floorPrice: 45.2 },
-            "Bow Tie Durov's Cap": { icon: "🎩", floorPrice: 89.7 },
+            "Durov's Cap": { icon: "🎩", floorPrice: 89.7 },
             "Diamond Ring": { icon: "💎", floorPrice: 67.3 },
             "Evil Eye": { icon: "👁️", floorPrice: 4.5 },
             "Eternal Rose": { icon: "🌹", floorPrice: 34.8 },
@@ -883,12 +875,21 @@
                     "Plush Pepe": ["Classic", "Rare", "Legendary", "Golden", "Rainbow", "Dark", "Shiny", "Mystic",
                         "Royal", "Crystal", "Shadow", "Frost", "Ember", "Storm", "Celestial"
                     ],
-                    "Bow Tie Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Gold", "Diamond", "Platinum",
+                    "Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Gold", "Diamond", "Platinum",
                         "Royal", "Supreme", "Elegant", "Crown", "Pearl", "Sapphire", "Ruby", "Emerald", "Onyx"
                     ],
                     "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Claro", "Oscuro", "Candela", "Habano",
                         "Connecticut", "Ecuador", "Nicaragua", "Cuban", "Dominican", "Honduran", "Mexican",
                         "Peruvian"
+                    ],
+                    "Pixel Fox": ["Cyber", "Vaporwave", "Retro", "Glitch", "Neon", "Classic", "Modern", "Pixel",
+                        "Digital", "Matrix", "Synth", "Wave", "Future", "Vintage", "Retro"
+                    ],
+                    "Crystal Orb": ["Sapphire", "Ruby", "Amethyst", "Emerald", "Diamond", "Opal", "Topaz", "Jade",
+                        "Quartz", "Garnet", "Turquoise", "Lapis", "Onyx", "Pearl", "Coral"
+                    ],
+                    "Void Mask": ["Obsidian", "Moonstone", "Shadow", "Celestial", "Abyss", "Eclipse", "Dusk",
+                        "Aurora", "Nebula", "Void", "Dark", "Light", "Star", "Comet", "Galaxy"
                     ]
                 };
 
@@ -926,7 +927,8 @@
                     ];
                     const status = statuses[i % statuses.length];
 
-                    const slug = collection.toLowerCase()
+                    // Формируем URL для Lottie
+                    let slug = collection.toLowerCase()
                         .replace(/\s/g, '')
                         .replace(/'/g, '')
                         .replace(/đ/g, 'durovs');
@@ -935,10 +937,12 @@
                     let lottieUrl;
                     if (collection === "Plush Pepe") {
                         lottieUrl =
-                            `https://nft.fragment.com/gift/plushpepe-${1000 + (i % 10)}.lottie.json`;
-                    } else if (collection === "Bow Tie Durov's Cap") {
+                        `https://nft.fragment.com/gift/plushpepe-${1000 + (i % 10)}.lottie.json`;
+                    } else if (collection === "Durov's Cap") {
+                        // Используем рабочие URL для Durov's Cap
+                        const capNumbers = [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434];
                         lottieUrl =
-                            `https://nft.fragment.com/gift/bowtiedurovscap-${400 + (i % 10)}.lottie.json`;
+                            `https://nft.fragment.com/gift/durovscap-${capNumbers[i % capNumbers.length]}.lottie.json`;
                     } else if (collection === "Vintage Cigar") {
                         lottieUrl =
                             `https://nft.fragment.com/gift/vintagecigar-${4000 + i}.lottie.json`;
@@ -1082,23 +1086,7 @@
         }
 
         // ============================================================
-        // 4. ГЕНЕРАЦИЯ ЦВЕТОВ
-        // ============================================================
-        function getCollectionColors(collectionName) {
-            const hash = collectionName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-            const hue1 = (hash * 137.5) % 360;
-            const hue2 = (hue1 + 40) % 360;
-            const sat = 55 + (hash % 20);
-            const lig = 20 + (hash % 15);
-            return {
-                bg: `hsl(${hue1}, ${sat}%, ${lig}%)`,
-                bgGradient: `linear-gradient(145deg, hsl(${hue1}, ${sat}%, ${lig-5}%), hsl(${hue2}, ${sat-10}%, ${lig+5}%))`,
-                accent: `hsl(${hue1}, ${sat+20}%, ${lig+25}%)`
-            };
-        }
-
-        // ============================================================
-        // 5. РЕНДЕРИНГ
+        // 4. РЕНДЕРИНГ
         // ============================================================
         let currentFilter = 'all';
         const grid = document.getElementById('nftGrid');
@@ -1106,7 +1094,6 @@
 
         const collections = ['all', ...Object.keys(COLLECTIONS_DATA)];
 
-        // Очищаем фильтры перед добавлением (чтобы не дублировать)
         filtersContainer.innerHTML = '';
 
         collections.forEach(col => {
@@ -1119,7 +1106,6 @@
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = col;
-                // Закрываем детальный просмотр при смене фильтра
                 closeDetail();
                 renderGrid();
             });
@@ -1128,7 +1114,6 @@
 
         document.getElementById('totalCount').textContent = NFT_DATA.length;
 
-        // Кеш для Lottie анимаций, чтобы не перезагружать
         const lottieCache = new Map();
 
         function renderGrid() {
@@ -1145,7 +1130,6 @@
             let html = '';
 
             filtered.forEach((nft) => {
-                const colors = getCollectionColors(nft.collection);
                 const number = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
                 const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
 
@@ -1171,8 +1155,8 @@
 
                 html += `
                     <div class="nft-card" onclick="openDetail('${nft.name}')">
-                        <div class="nft-card-inner" style="background: ${colors.bgGradient};">
-                            <div class="lottie-wrapper" style="background: ${colors.bg};">
+                        <div class="nft-card-inner">
+                            <div class="lottie-wrapper">
                                 <div class="lottie-container" id="${lottieId}"></div>
                                 ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
                             </div>
@@ -1180,7 +1164,9 @@
                                 <div class="nft-name-compact">${nft.name}</div>
                                 <div class="nft-model-compact">${model}</div>
                                 <div class="nft-price-compact">
-                                    <span class="gram-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%234a8af4'/%3E%3Ctext x='12' y='16' text-anchor='middle' fill='white' font-size='12' font-weight='bold' font-family='Arial'%3EG%3C/text%3E%3C/svg%3E" alt="GRAM"></span>
+                                    <span class="gram-icon">
+                                        <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
+                                    </span>
                                     ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
                                 </div>
                             </div>
@@ -1191,7 +1177,7 @@
 
             grid.innerHTML = html;
 
-            // Загрузка Lottie с кешированием
+            // Загрузка Lottie
             setTimeout(() => {
                 filtered.forEach((nft) => {
                     const number = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
@@ -1199,19 +1185,17 @@
                     const container = document.getElementById(containerId);
 
                     if (container && nft.lottie) {
-                        // Проверяем кеш
                         if (lottieCache.has(nft.lottie)) {
                             const cached = lottieCache.get(nft.lottie);
                             container.innerHTML = '';
-                            const anim = lottie.loadAnimation({
+                            lottie.loadAnimation({
                                 container: container,
                                 animationData: cached,
                                 renderer: 'svg',
                                 loop: true,
                                 autoplay: true
                             });
-                            const colors = getCollectionColors(nft.collection);
-                            container.style.background = colors.bg;
+                            container.style.background = '#121216';
                             return;
                         }
 
@@ -1223,15 +1207,14 @@
                                 })
                                 .then(data => {
                                     lottieCache.set(nft.lottie, data);
-                                    const anim = lottie.loadAnimation({
+                                    lottie.loadAnimation({
                                         container: container,
                                         animationData: data,
                                         renderer: 'svg',
                                         loop: true,
                                         autoplay: true
                                     });
-                                    const colors = getCollectionColors(nft.collection);
-                                    container.style.background = colors.bg;
+                                    container.style.background = '#121216';
                                 })
                                 .catch(() => {
                                     container.innerHTML =
@@ -1248,7 +1231,7 @@
         }
 
         // ============================================================
-        // 6. ДЕТАЛЬНЫЙ ПРОСМОТР (уменьшенный)
+        // 5. ДЕТАЛЬНЫЙ ПРОСМОТР
         // ============================================================
         const detailOverlay = document.getElementById('detailOverlay');
 
@@ -1258,7 +1241,6 @@
 
             window._currentDetailNft = nft;
 
-            const colors = getCollectionColors(nft.collection);
             const number = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
             const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
             const backdrop = nft.attributes.find(a => a.trait_type === 'Backdrop')?.value || '';
@@ -1295,14 +1277,14 @@
 
             if (lottieCache.has(nft.lottie)) {
                 const cached = lottieCache.get(nft.lottie);
-                const anim = lottie.loadAnimation({
+                lottie.loadAnimation({
                     container: detailContainer,
                     animationData: cached,
                     renderer: 'svg',
                     loop: true,
                     autoplay: true
                 });
-                document.getElementById('detailLottieWrapper').style.background = colors.bg;
+                document.getElementById('detailLottieWrapper').style.background = '#121216';
             } else {
                 try {
                     fetch(nft.lottie)
@@ -1312,14 +1294,14 @@
                         })
                         .then(data => {
                             lottieCache.set(nft.lottie, data);
-                            const anim = lottie.loadAnimation({
+                            lottie.loadAnimation({
                                 container: detailContainer,
                                 animationData: data,
                                 renderer: 'svg',
                                 loop: true,
                                 autoplay: true
                             });
-                            document.getElementById('detailLottieWrapper').style.background = colors.bg;
+                            document.getElementById('detailLottieWrapper').style.background = '#121216';
                         })
                         .catch(() => {
                             detailContainer.innerHTML =
@@ -1351,7 +1333,7 @@
         });
 
         // ============================================================
-        // 7. КОРЗИНА - ОТКРЫТИЕ/ЗАКРЫТИЕ
+        // 6. КОРЗИНА
         // ============================================================
         const cartModal = document.getElementById('cartModal');
 
@@ -1383,20 +1365,10 @@
         });
 
         // ============================================================
-        // 8. ЗАПУСК
+        // 7. ЗАПУСК
         // ============================================================
         renderGrid();
         updateCartUI();
-
-        // Обработка видимости для перезапуска анимаций
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                // Перезапускаем все Lottie анимации на видимых карточках
-                document.querySelectorAll('.lottie-container').forEach(el => {
-                    // Просто пересоздаем контейнеры? Или используем глобальный подход
-                });
-            }
-        });
     </script>
 
 </body>
