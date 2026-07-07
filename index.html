@@ -861,7 +861,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (добавлена B-Day Candle)
+        // 1. КОЛЛЕКЦИИ (B-Day Candle удалена, добавлена Precious Peach)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -877,11 +877,11 @@
             "Nail Bracelet": { icon: "📿", floorPrice: 28.5 },
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
-            "B-Day Candle": { icon: "🕯️", floorPrice: 6 }
+            "Precious Peach": { icon: "🍑", floorPrice: 29.9 }
         };
 
         // ============================================================
-        // 2. ВСЕ NFT (добавлена B-Day Candle)
+        // 2. ВСЕ NFT (добавлена Precious Peach 18 шт)
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
@@ -1054,16 +1054,25 @@
                 { collection: "Vintage Cigar", number: 4013, price: 36.9 },
                 { collection: "Vintage Cigar", number: 4014, price: 43.2 },
 
-                // ===== B-DAY CANDLE (9 шт) =====
-                { collection: "B-Day Candle", number: 17748, price: 40 },
-                { collection: "B-Day Candle", number: 54517, price: 39 },
-                { collection: "B-Day Candle", number: 207778, price: 50 },
-                { collection: "B-Day Candle", number: 56908, price: 12 },
-                { collection: "B-Day Candle", number: 133846, price: 15 },
-                { collection: "B-Day Candle", number: 24750, price: 12 },
-                { collection: "B-Day Candle", number: 152061, price: 8 },
-                { collection: "B-Day Candle", number: 116680, price: 6 },
-                { collection: "B-Day Candle", number: 32252, price: 6 }
+                // ===== PRECIOUS PEACH (18 шт) =====
+                { collection: "Precious Peach", number: 8841, price: 42.3 },
+                { collection: "Precious Peach", number: 8842, price: 38.7 },
+                { collection: "Precious Peach", number: 8843, price: 29.9 },
+                { collection: "Precious Peach", number: 2153, price: 11.111 },
+                { collection: "Precious Peach", number: 11, price: 1.999 },
+                { collection: "Precious Peach", number: 1080, price: 3.250 },
+                { collection: "Precious Peach", number: 1508, price: 600 },
+                { collection: "Precious Peach", number: 1780, price: 399 },
+                { collection: "Precious Peach", number: 1348, price: 1.234 },
+                { collection: "Precious Peach", number: 663, price: 349 },
+                { collection: "Precious Peach", number: 5001, price: 52.7 },
+                { collection: "Precious Peach", number: 5002, price: 48.3 },
+                { collection: "Precious Peach", number: 5003, price: 67.1 },
+                { collection: "Precious Peach", number: 5004, price: 23.8 },
+                { collection: "Precious Peach", number: 5005, price: 88.4 },
+                { collection: "Precious Peach", number: 5006, price: 34.5 },
+                { collection: "Precious Peach", number: 5007, price: 55.9 },
+                { collection: "Precious Peach", number: 5008, price: 41.2 }
             ];
 
             // Модели для каждой коллекции
@@ -1081,7 +1090,7 @@
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
-                "B-Day Candle": ["Classic", "Golden", "Silver", "Rainbow", "Crystal", "Flame"]
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe", "Premium"]
             };
 
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow", "Aurora",
@@ -1104,9 +1113,6 @@
                     .replace(/'/g, '')
                     .replace(/đ/g, 'durovs')
                     .replace(/-/g, '');
-
-                // Специальные случаи для слагов
-                if (collection === "B-Day Candle") slug = "b-day-candle";
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
