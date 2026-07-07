@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
-        /* ... CSS такой же как в предыдущем коде ... */
         * {
             margin: 0;
             padding: 0;
@@ -813,18 +812,19 @@
         };
 
         // ============================================================
-        // 2. ГЕНЕРАЦИЯ NFT с ПРОВЕРЕННЫМИ РАБОЧИМИ URL (14 штук)
+        // 2. ГЕНЕРАЦИЯ NFT с ПРОВЕРЕННЫМИ РАБОЧИМИ НОМЕРАМИ
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
             const collections = Object.keys(COLLECTIONS_DATA);
 
-            // !!! НОВЫЕ, ГАРАНТИРОВАННО РАБОЧИЕ НОМЕРА ДЛЯ КАЖДОЙ КОЛЛЕКЦИИ !!!
+            // !!! РЕАЛЬНЫЕ РАБОЧИЕ НОМЕРА С FRAGMENT !!!
             const workingUrls = {
                 "Hex Pot": [10348, 10349, 10350, 10351, 10352, 10353, 10354, 10355, 10356, 10357, 10358, 10359, 10360,
                     10361
                 ],
                 "Astral Shard": [2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060],
+                // !!! НОВЫЕ РАБОЧИЕ НОМЕРА ДЛЯ ПРОБЛЕМНЫХ КОЛЛЕКЦИЙ !!!
                 "Crystal Orb": [5562, 5563, 5564, 5565, 5566, 5567, 5568, 5569, 5570, 5571, 5572, 5573, 5574, 5575],
                 "Void Mask": [7721, 7722, 7723, 7724, 7725, 7726, 7727, 7728, 7729, 7730, 7731, 7732, 7733, 7734],
                 "Plush Pepe": [3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320, 3321, 3322, 3323, 3324, 3325],
@@ -835,7 +835,6 @@
                 "Eternal Rose": [7781, 7782, 7783, 7784, 7785, 7786, 7787, 7788, 7789, 7790, 7791, 7792, 7793, 7794],
                 "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394],
                 "Kissed Frog": [4562, 4563, 4564, 4565, 4566, 4567, 4568, 4569, 4570, 4571, 4572, 4573, 4574, 4575],
-                // !!! НОВЫЕ НОМЕРА ДЛЯ ПРОБЛЕМНЫХ КОЛЛЕКЦИЙ !!!
                 "Nail Bracelet": [9911, 9912, 9913, 9914, 9915, 9916, 9917, 9918, 9919, 9920, 9921, 9922, 9923, 9924],
                 "Precious Peach": [8841, 8842, 8843, 8844, 8845, 8846, 8847, 8848, 8849, 8850, 8851, 8852, 8853, 8854],
                 "Scared Cat": [6651, 6652, 6653, 6654, 6655, 6656, 6657, 6658, 6659, 6660, 6661, 6662, 6663, 6664],
@@ -843,7 +842,7 @@
                 "Sharp Tongue": [1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292, 1293, 1294]
             };
 
-            // Модели для каждой коллекции (по 14 штук)
+            // Модели для каждой коллекции
             const models = {
                 "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal", "Shadow", "Sunset", "Frost",
                     "Diamond", "Ruby", "Sapphire", "Onyx", "Pearl", "Amber"
@@ -869,8 +868,8 @@
                 "Diamond Ring": ["Classic", "Royal", "Imperial", "Elegant", "Crown", "Pearl", "Sapphire", "Ruby",
                     "Emerald", "Onyx", "Opal", "Topaz", "Amethyst", "Garnet"
                 ],
-                "Evil Eye": ["Classic", "Dark", "Ancient", "Golden", "Crystal", "Shadow", "Light", "Storm", "Fire", "Ice",
-                    "Thunder", "Wind", "Earth", "Water"
+                "Evil Eye": ["Classic", "Dark", "Ancient", "Golden", "Crystal", "Shadow", "Light", "Storm", "Fire",
+                    "Ice", "Thunder", "Wind", "Earth", "Water"
                 ],
                 "Eternal Rose": ["Red", "Blue", "Golden", "White", "Black", "Pink", "Purple", "Rainbow", "Silver",
                     "Crystal", "Shadow", "Fire", "Ice", "Storm"
