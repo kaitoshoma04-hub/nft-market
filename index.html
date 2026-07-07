@@ -216,6 +216,7 @@
         .gift-card .gift-animation svg {
             width: 100%;
             height: 100%;
+            display: block;
         }
 
         .gift-card .gift-name {
@@ -509,6 +510,7 @@
         .modal-animation svg {
             width: 100%;
             height: 100%;
+            display: block;
         }
 
         .modal-status {
@@ -862,7 +864,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ И ИХ ЭМОДЗИ
+        // 1. КОЛЛЕКЦИИ (оригинальные названия из Fragment)
         // ============================================================
         const COLLECTIONS = [
             "Artisan Bricks", "Astral Shards", "B-Day Candles", "Berry Boxes",
@@ -896,90 +898,8 @@
             "Witch Hats", "Xmas Stockings"
         ];
 
-        const GIFT_EMOJIS = {
-            'Artisan Bricks': '🧱', 'Astral Shards': '✨', 'B-Day Candles': '🎂',
-            'Berry Boxes': '🫐', 'Big Years': '🎉', 'Bling Binkies': '💎',
-            'Bonded Rings': '💍', 'Bow Ties': '🎀', 'Bunny Muffins': '🐰',
-            'Candy Canes': '🍬', 'Chill Flames': '🔥', 'Clover Pins': '🍀',
-            'Cookie Hearts': '🍪', 'Crystal Balls': '🔮', 'Cupid Charms': '💘',
-            'Desk Calendars': '📅', 'Diamond Rings': '💎', "Durov's Caps": '🧢',
-            'Easter Eggs': '🥚', 'Electric Skulls': '⚡', 'Eternal Candles': '🕯️',
-            'Eternal Roses': '🌹', 'Evil Eyes': '👁️', 'Faith Amulets': '📿',
-            'Flying Brooms': '🧹', 'Fresh Socks': '🧦', 'Gem Signets': '💠',
-            'Genie Lamps': '🪔', 'Ginger Cookies': '🍪', 'Hanging Stars': '⭐',
-            'Happy Brownies': '🍫', 'Heart Lockets': '💕', 'Heroic Helmets': '⛑️',
-            'Hex Pots': '🧪', 'Holiday Drinks': '🍹', 'Homemade Cakes': '🎂',
-            'Hypno Lollipops': '🍭', 'Ice Creams': '🍦', 'Input Keys': '🔑',
-            'Instant Ramens': '🍜', 'Ion Gems': '💎', 'Ionic Dryers': '💨',
-            'Jacks-in-the-Box': '🎁', 'Jelly Bunnies': '🐇', 'Jester Hats': '🎭',
-            'Jingle Bells': '🔔', 'Jolly Chimps': '🐵', 'Joyful Bundles': '🎊',
-            "Khabib's Papakhas": '🧢', 'Kissed Frogs': '🐸', 'Light Swords': '⚔️',
-            'Lol Pops': '🍭', 'Loot Bags': '💰', 'Love Candles': '❤️',
-            'Love Potions': '💝', 'Low Riders': '🚗', 'Lunar Snakes': '🐍',
-            'Lush Bouquets': '💐', 'Mad Pumpkins': '🎃', 'Magic Potions': '🧙',
-            'Mighty Arms': '💪', 'Mini Oscars': '🏆', 'Money Pots': '🏺',
-            'Mood Packs': '😊', 'Moon Pendants': '🌙', 'Mousse Cakes': '🍰',
-            'Nail Bracelets': '📿', 'Neko Helmets': '🐱', 'Party Sparklers': '🎆',
-            'Perfume Bottles': '🧴', 'Pet Snakes': '🐍', 'Plush Pepes': '🐸',
-            'Pool Floats': '🏊', 'Precious Peaches': '🍑', 'Pretty Posies': '🌸',
-            'Rare Birds': '🐦', 'Record Players': '🎵', 'Restless Jars': '🏺',
-            'Sakura Flowers': '🌸', 'Santa Hats': '🎅', 'Scared Cats': '🐱',
-            'Sharp Tongues': '👅', 'Signet Rings': '💍', 'Skull Flowers': '💀',
-            'Sky Stilettos': '👠', 'Sleigh Bells': '🛷', 'Snake Boxes': '🐍',
-            'Snoop Cigars': '🚬', 'Snoop Doggs': '🐕', 'Snow Globes': '❄️',
-            'Snow Mittens': '🧤', 'Spiced Wines': '🍷', 'Spring Baskets': '🧺',
-            'Spy Agarics': '🍄', 'Star Notepads': '📓', 'Stellar Rockets': '🚀',
-            'Swag Bags': '🛍️', 'Swiss Watches': '⌚', 'Tama Gadgets': '📱',
-            'Timeless Books': '📚', 'Top Hats': '🎩', 'Toy Bears': '🧸',
-            'Trapped Hearts': '💔', 'UFC Strikes': '🥊', 'Valentine Boxes': '💌',
-            'Vice Creams': '🍨', 'Victory Medals': '🥇', 'Vintage Cigars': '🚬',
-            'Voodoo Dolls': '🪆', 'Westside Signs': '🤙', 'Whip Cupcakes': '🧁',
-            'Winter Wreaths': '🎄', 'Witch Hats': '🧙', 'Xmas Stockings': '🧦'
-        };
-
-        const GIFT_COLORS = {
-            'Artisan Bricks': '#8B4513', 'Astral Shards': '#6C5CE7', 'B-Day Candles': '#FDCB6E',
-            'Berry Boxes': '#E17055', 'Big Years': '#00B894', 'Bling Binkies': '#FDCB6E',
-            'Bonded Rings': '#E17055', 'Bow Ties': '#6C5CE7', 'Bunny Muffins': '#FDCB6E',
-            'Candy Canes': '#E17055', 'Chill Flames': '#E17055', 'Clover Pins': '#00B894',
-            'Cookie Hearts': '#E17055', 'Crystal Balls': '#6C5CE7', 'Cupid Charms': '#FDCB6E',
-            'Desk Calendars': '#00B894', 'Diamond Rings': '#6C5CE7', "Durov's Caps": '#E17055',
-            'Easter Eggs': '#FDCB6E', 'Electric Skulls': '#6C5CE7', 'Eternal Candles': '#E17055',
-            'Eternal Roses': '#E17055', 'Evil Eyes': '#6C5CE7', 'Faith Amulets': '#00B894',
-            'Flying Brooms': '#6C5CE7', 'Fresh Socks': '#00B894', 'Gem Signets': '#6C5CE7',
-            'Genie Lamps': '#FDCB6E', 'Ginger Cookies': '#E17055', 'Hanging Stars': '#FDCB6E',
-            'Happy Brownies': '#8B4513', 'Heart Lockets': '#E17055', 'Heroic Helmets': '#6C5CE7',
-            'Hex Pots': '#6C5CE7', 'Holiday Drinks': '#00B894', 'Homemade Cakes': '#E17055',
-            'Hypno Lollipops': '#6C5CE7', 'Ice Creams': '#FDCB6E', 'Input Keys': '#6C5CE7',
-            'Instant Ramens': '#E17055', 'Ion Gems': '#6C5CE7', 'Ionic Dryers': '#00B894',
-            'Jacks-in-the-Box': '#E17055', 'Jelly Bunnies': '#FDCB6E', 'Jester Hats': '#6C5CE7',
-            'Jingle Bells': '#FDCB6E', 'Jolly Chimps': '#8B4513', 'Joyful Bundles': '#00B894',
-            "Khabib's Papakhas": '#E17055', 'Kissed Frogs': '#00B894', 'Light Swords': '#6C5CE7',
-            'Lol Pops': '#FDCB6E', 'Loot Bags': '#00B894', 'Love Candles': '#E17055',
-            'Love Potions': '#E17055', 'Low Riders': '#6C5CE7', 'Lunar Snakes': '#6C5CE7',
-            'Lush Bouquets': '#E17055', 'Mad Pumpkins': '#E17055', 'Magic Potions': '#6C5CE7',
-            'Mighty Arms': '#E17055', 'Mini Oscars': '#FDCB6E', 'Money Pots': '#00B894',
-            'Mood Packs': '#FDCB6E', 'Moon Pendants': '#6C5CE7', 'Mousse Cakes': '#E17055',
-            'Nail Bracelets': '#E17055', 'Neko Helmets': '#6C5CE7', 'Party Sparklers': '#FDCB6E',
-            'Perfume Bottles': '#E17055', 'Pet Snakes': '#00B894', 'Plush Pepes': '#00B894',
-            'Pool Floats': '#6C5CE7', 'Precious Peaches': '#E17055', 'Pretty Posies': '#E17055',
-            'Rare Birds': '#6C5CE7', 'Record Players': '#6C5CE7', 'Restless Jars': '#E17055',
-            'Sakura Flowers': '#E17055', 'Santa Hats': '#E17055', 'Scared Cats': '#6C5CE7',
-            'Sharp Tongues': '#E17055', 'Signet Rings': '#6C5CE7', 'Skull Flowers': '#6C5CE7',
-            'Sky Stilettos': '#E17055', 'Sleigh Bells': '#FDCB6E', 'Snake Boxes': '#00B894',
-            'Snoop Cigars': '#8B4513', 'Snoop Doggs': '#6C5CE7', 'Snow Globes': '#6C5CE7',
-            'Snow Mittens': '#00B894', 'Spiced Wines': '#E17055', 'Spring Baskets': '#00B894',
-            'Spy Agarics': '#E17055', 'Star Notepads': '#FDCB6E', 'Stellar Rockets': '#6C5CE7',
-            'Swag Bags': '#00B894', 'Swiss Watches': '#E17055', 'Tama Gadgets': '#6C5CE7',
-            'Timeless Books': '#8B4513', 'Top Hats': '#6C5CE7', 'Toy Bears': '#E17055',
-            'Trapped Hearts': '#E17055', 'UFC Strikes': '#E17055', 'Valentine Boxes': '#E17055',
-            'Vice Creams': '#FDCB6E', 'Victory Medals': '#FDCB6E', 'Vintage Cigars': '#8B4513',
-            'Voodoo Dolls': '#6C5CE7', 'Westside Signs': '#6C5CE7', 'Whip Cupcakes': '#E17055',
-            'Winter Wreaths': '#00B894', 'Witch Hats': '#6C5CE7', 'Xmas Stockings': '#E17055'
-        };
-
         // ============================================================
-        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ
+        // 2. ГЕНЕРАЦИЯ ПОДАРКОВ (slug для Lottie)
         // ============================================================
         function generateGifts() {
             const gifts = [];
@@ -992,6 +912,7 @@
                     const status = statuses[Math.floor(Math.random() * statuses.length)];
                     const price = (10 + Math.random() * 500).toFixed(0);
 
+                    // Формируем slug как на Fragment: название-коллекции-в-нижнем-регистре-без-апострофов
                     const slug = collection.toLowerCase()
                         .replace(/['\s]/g, '-')
                         .replace(/-+/g, '-')
@@ -1021,9 +942,7 @@
                         model: models[Math.floor(Math.random() * models.length)],
                         backdrop: backdrops[Math.floor(Math.random() * backdrops.length)],
                         symbol: symbols[Math.floor(Math.random() * symbols.length)],
-                        issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`,
-                        emoji: GIFT_EMOJIS[collection] || '🎁',
-                        color: GIFT_COLORS[collection] || '#6C5CE7'
+                        issued: `${1000 + Math.floor(Math.random() * 2000)} of ${2000 + Math.floor(Math.random() * 1000)}`
                     });
                 }
             });
@@ -1032,14 +951,15 @@
         }
 
         // ============================================================
-        // 3. ЗАГРУЗКА LOTTIE С ФРАГМЕНТА (ПРЯМОЙ URL)
+        // 3. ЗАГРУЗКА LOTTIE С FRAGMENT (ПРЯМОЙ URL, БЕЗ ЭМОДЗИ)
         // ============================================================
         function loadLottieFromFragment(container, lottieId) {
             if (!container) return;
 
+            // Показываем индикатор загрузки
             container.innerHTML = '<div class="loading-placeholder">⏳</div>';
 
-            // Прямой URL к Lottie файлу на Fragment (убираем прокси, используем напрямую)
+            // Прямой URL к Lottie файлу на Fragment (без прокси, CORS разрешен)
             const url = `https://nft.fragment.com/gift/${lottieId}.lottie.json`;
 
             fetch(url, { mode: 'cors' })
@@ -1061,53 +981,28 @@
                     });
                 })
                 .catch(error => {
-                    console.warn(`Failed to load Lottie for ${lottieId}:`, error);
-                    const collection = Object.keys(GIFT_EMOJIS).find(key =>
-                        lottieId.startsWith(key.toLowerCase().replace(/['\s]/g, '-'))
-                    );
-                    const emoji = collection ? GIFT_EMOJIS[collection] : '🎁';
-                    const color = collection ? GIFT_COLORS[collection] : '#6C5CE7';
-                    container.innerHTML = createEmojiHTML(emoji, color);
+                    console.warn(`Lottie ${lottieId} not loaded:`, error);
+                    // Если анимация не загрузилась — показываем просто заглушку "нет анимации"
+                    container.innerHTML = `
+                        <div style="
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: #0b0b14;
+                            color: #444466;
+                            font-size: 14px;
+                            border-radius: 12px;
+                        ">
+                            ⚡
+                        </div>
+                    `;
                 });
         }
 
         // ============================================================
-        // 4. СОЗДАНИЕ HTML С ЭМОДЗИ
-        // ============================================================
-        function createEmojiHTML(emoji, color, size = 60) {
-            return `
-                <div style="
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: ${size}px;
-                    background: radial-gradient(circle at center, ${color}33, #0b0b14);
-                    animation: pulse 2s ease-in-out infinite;
-                    border-radius: 12px;
-                ">
-                    <span style="
-                        display: block;
-                        animation: float 3s ease-in-out infinite;
-                        filter: drop-shadow(0 0 20px ${color}66);
-                    ">${emoji}</span>
-                </div>
-                <style>
-                    @keyframes float {
-                        0%, 100% { transform: translateY(0px) rotate(0deg); }
-                        50% { transform: translateY(-10px) rotate(5deg); }
-                    }
-                    @keyframes pulse {
-                        0%, 100% { opacity: 1; }
-                        50% { opacity: 0.8; }
-                    }
-                </style>
-            `;
-        }
-
-        // ============================================================
-        // 5. РАБОТА С LOCALSTORAGE
+        // 4. РАБОТА С LOCALSTORAGE
         // ============================================================
         function getStorageData() {
             try {
@@ -1151,7 +1046,7 @@
         }
 
         // ============================================================
-        // 6. НАСТРОЙКИ
+        // 5. НАСТРОЙКИ
         // ============================================================
         const CONFIG = {
             USERNAME: 'your_username',
@@ -1164,7 +1059,7 @@
         let profileVisible = false;
 
         // ============================================================
-        // 7. РЕНДЕРИНГ ПОДАРКОВ
+        // 6. РЕНДЕРИНГ ПОДАРКОВ
         // ============================================================
         function renderGifts(filter = 'all') {
             const container = document.getElementById('gifts-container');
@@ -1229,7 +1124,7 @@
         }
 
         // ============================================================
-        // 8. ДЕТАЛЬНАЯ СТРАНИЦА
+        // 7. ДЕТАЛЬНАЯ СТРАНИЦА
         // ============================================================
         function openDetail(giftId) {
             const gift = allGifts.find(g => g.id === giftId);
@@ -1280,7 +1175,7 @@
         }
 
         // ============================================================
-        // 9. ОБНОВЛЕНИЕ UI
+        // 8. ОБНОВЛЕНИЕ UI
         // ============================================================
         function updateUI() {
             const user = getUserProfile();
@@ -1314,7 +1209,7 @@
         }
 
         // ============================================================
-        // 10. ПРОФИЛЬ
+        // 9. ПРОФИЛЬ
         // ============================================================
         function toggleProfile() {
             const section = document.getElementById('profileSection');
@@ -1333,7 +1228,7 @@
         document.getElementById('closeProfileBtn').addEventListener('click', toggleProfile);
 
         // ============================================================
-        // 11. МОИ ПОДАРКИ
+        // 10. МОИ ПОДАРКИ
         // ============================================================
         document.getElementById('myGiftsBtn').addEventListener('click', () => {
             const section = document.getElementById('profileSection');
@@ -1344,7 +1239,7 @@
         });
 
         // ============================================================
-        // 12. ВЫВЕСТИ СРЕДСТВА
+        // 11. ВЫВЕСТИ СРЕДСТВА
         // ============================================================
         document.getElementById('withdrawBtn').addEventListener('click', () => {
             const user = getUserProfile();
@@ -1354,7 +1249,7 @@
         });
 
         // ============================================================
-        // 13. ДОБАВИТЬ ПОДАРОК
+        // 12. ДОБАВИТЬ ПОДАРОК
         // ============================================================
         document.getElementById('addGiftBtn').addEventListener('click', () => {
             document.getElementById('addModal').classList.add('active');
@@ -1369,7 +1264,7 @@
         });
 
         // ============================================================
-        // 14. КОПИРОВАТЬ ЮЗЕРНЕЙМ
+        // 13. КОПИРОВАТЬ ЮЗЕРНЕЙМ
         // ============================================================
         document.getElementById('copyUsernameBtn').addEventListener('click', () => {
             const user = getUserProfile();
@@ -1383,7 +1278,7 @@
         });
 
         // ============================================================
-        // 15. ФИЛЬТРЫ
+        // 14. ФИЛЬТРЫ
         // ============================================================
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1395,7 +1290,7 @@
         });
 
         // ============================================================
-        // 16. ЗАКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ
+        // 15. ЗАКРЫТИЕ ДЕТАЛЬНОЙ СТРАНИЦЫ
         // ============================================================
         document.getElementById('detailCloseBtn').addEventListener('click', () => {
             document.getElementById('detailModal').classList.remove('active');
@@ -1407,7 +1302,7 @@
         });
 
         // ============================================================
-        // 17. ЗАПУСК
+        // 16. ЗАПУСК
         // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
             renderGifts('all');
