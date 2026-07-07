@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NFT Подарки Telegram</title>
+    <title>NFT Подарки</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
@@ -18,14 +18,18 @@
             background: #0a0a0f;
             color: #ffffff;
             min-height: 100vh;
-            padding: 16px;
+            padding: 0;
             display: flex;
             justify-content: center;
         }
 
         .app {
-            max-width: 420px;
+            max-width: 430px;
             width: 100%;
+            min-height: 100vh;
+            background: #0a0a0f;
+            position: relative;
+            padding-bottom: 80px;
         }
 
         /* ===== HEADER ===== */
@@ -33,11 +37,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0 20px 0;
+            padding: 16px 16px 12px 16px;
+            background: #0a0a0f;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             background: linear-gradient(135deg, #ffffff 0%, #8e8ea0 100%);
             -webkit-background-clip: text;
@@ -45,25 +55,47 @@
             letter-spacing: -0.5px;
         }
 
-        .header .stats {
+        .header-actions {
             display: flex;
             gap: 12px;
             align-items: center;
         }
 
-        .header .stat-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 12px;
-            font-weight: 500;
+        .header-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
             color: #8e8ea0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
-        .header .stat-item span {
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
+        }
+
+        .header-btn .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ff6b6b;
+            color: #ffffff;
+            font-size: 10px;
             font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ===== FILTERS ===== */
@@ -71,8 +103,9 @@
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding: 4px 0 16px 0;
+            padding: 12px 16px;
             scrollbar-width: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .filters::-webkit-scrollbar {
@@ -82,7 +115,7 @@
         .filter-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 20px;
             color: #8e8ea0;
             font-size: 13px;
@@ -105,10 +138,10 @@
 
         /* ===== NFT GRID ===== */
         .nft-grid {
+            padding: 12px 16px;
             display: flex;
             flex-direction: column;
             gap: 16px;
-            padding-bottom: 20px;
         }
 
         /* ===== COLLECTION HEADER ===== */
@@ -116,14 +149,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 4px 8px 4px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 8px 0 4px 0;
         }
 
         .collection-name {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .collection-name .icon {
+            font-size: 20px;
         }
 
         .collection-count {
@@ -144,32 +183,64 @@
         }
 
         .nft-card:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
         .nft-card-inner {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             padding: 12px;
             align-items: center;
         }
 
         /* ===== LOTTIE CONTAINER ===== */
         .lottie-wrapper {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             flex-shrink: 0;
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
             background: rgba(255, 255, 255, 0.02);
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
+        }
+
+        /* Status badge on Lottie */
+        .status-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.sold {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .status-badge['for-sale'] {
+            background: rgba(75, 200, 138, 0.2);
+            color: #4bc88a;
+            border: 1px solid rgba(75, 200, 138, 0.2);
+        }
+
+        .status-badge['on-auction'] {
+            background: rgba(255, 200, 50, 0.2);
+            color: #ffc832;
+            border: 1px solid rgba(255, 200, 50, 0.2);
         }
 
         /* ===== INFO ===== */
@@ -179,58 +250,80 @@
         }
 
         .nft-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 2px;
-            letter-spacing: -0.3px;
+            margin-bottom: 1px;
+            letter-spacing: -0.2px;
         }
 
         .nft-model {
-            font-size: 13px;
+            font-size: 12px;
             color: #8e8ea0;
             font-weight: 500;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .nft-traits {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .trait-tag {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 9px;
             font-weight: 600;
-            color: #8e8ea0;
+            color: #6e6e80;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
 
         .trait-tag .trait-value {
-            color: #c0c0d0;
+            color: #a0a0b0;
+        }
+
+        /* ===== PRICE ===== */
+        .nft-price {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .nft-price .ton-icon {
+            font-size: 14px;
+        }
+
+        .nft-price .usd {
+            font-size: 11px;
+            font-weight: 400;
+            color: #6e6e80;
         }
 
         /* ===== BUTTONS ===== */
         .nft-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
             flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
-        .btn-auction {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 6px 14px;
-            border-radius: 14px;
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 5px 12px;
+            border-radius: 12px;
             color: #ffffff;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
@@ -241,28 +334,273 @@
             gap: 4px;
         }
 
-        .btn-auction:hover {
+        .btn-action:hover {
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .btn-auction:active {
+        .btn-action:active {
             transform: scale(0.92);
         }
 
-        .btn-auction .icon {
-            font-size: 14px;
+        .btn-action.primary {
+            background: rgba(75, 200, 138, 0.15);
+            border-color: rgba(75, 200, 138, 0.2);
+            color: #4bc88a;
+        }
+
+        .btn-action.primary:hover {
+            background: rgba(75, 200, 138, 0.25);
+        }
+
+        .btn-action.danger {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .btn-action .icon {
+            font-size: 12px;
         }
 
         .btn-number {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 6px 12px;
-            border-radius: 14px;
+            padding: 5px 10px;
+            border-radius: 12px;
             color: #6e6e80;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             white-space: nowrap;
+        }
+
+        /* ===== CART BUTTON (Floating) ===== */
+        .cart-floating {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(145deg, #1a1a2e, #14141e);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 24px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            z-index: 200;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-floating:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        .cart-floating .cart-icon {
+            font-size: 20px;
+            position: relative;
+        }
+
+        .cart-floating .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #4bc88a;
+            color: #0a0a0f;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-floating .cart-total {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .cart-floating .cart-total .ton {
+            color: #8e8ea0;
+            font-weight: 400;
+        }
+
+        /* ===== CART MODAL ===== */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 300;
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .cart-modal.open {
+            display: flex;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cart-modal-content {
+            background: #14141e;
+            border-radius: 24px 24px 0 0;
+            max-width: 430px;
+            width: 100%;
+            max-height: 80vh;
+            padding: 20px 16px 30px 16px;
+            overflow-y: auto;
+        }
+
+        .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .cart-modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .cart-close {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #8e8ea0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cart-close:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .cart-item .item-info {
+            flex: 1;
+        }
+
+        .cart-item .item-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .cart-item .item-price {
+            font-size: 13px;
+            color: #4bc88a;
+            font-weight: 600;
+        }
+
+        .cart-item .item-remove {
+            background: rgba(255, 107, 107, 0.1);
+            border: none;
+            color: #ff6b6b;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cart-item .item-remove:hover {
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .cart-total-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 8px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 8px;
+        }
+
+        .cart-total-section .total-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #8e8ea0;
+        }
+
+        .cart-total-section .total-amount {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .cart-total-section .total-amount .ton {
+            color: #8e8ea0;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4bc88a, #2ea86a);
+            border: none;
+            border-radius: 16px;
+            color: #0a0a0f;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 12px;
+        }
+
+        .btn-checkout:active {
+            transform: scale(0.97);
+        }
+
+        .btn-checkout:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6e6e80;
+        }
+
+        .empty-cart .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
         }
 
         /* ===== LOADING ===== */
@@ -296,14 +634,23 @@
             }
 
             .lottie-wrapper {
-                width: 70px;
-                height: 70px;
+                width: 64px;
+                height: 64px;
             }
 
             .nft-actions {
                 width: 100%;
                 justify-content: flex-end;
-                margin-top: 4px;
+                margin-top: 2px;
+            }
+
+            .cart-floating {
+                padding: 10px 16px;
+                bottom: 12px;
+            }
+
+            .cart-floating .cart-total {
+                font-size: 12px;
             }
         }
     </style>
@@ -314,9 +661,8 @@
         <!-- HEADER -->
         <div class="header">
             <h1>🎁 Подарки</h1>
-            <div class="stats">
-                <div class="stat-item">Всего <span id="totalCount">0</span></div>
-                <div class="stat-item">Коллекций <span id="collectionCount">0</span></div>
+            <div class="header-actions">
+                <button class="header-btn" id="refreshBtn" title="Обновить">⟳</button>
             </div>
         </div>
 
@@ -332,126 +678,338 @@
                 Загрузка подарков...
             </div>
         </div>
+
+        <!-- FLOATING CART -->
+        <div class="cart-floating" id="cartFloating">
+            <div class="cart-icon">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+            <div class="cart-total">
+                <span id="cartTotal">0.00</span> <span class="ton">TON</span>
+            </div>
+        </div>
+
+        <!-- CART MODAL -->
+        <div class="cart-modal" id="cartModal">
+            <div class="cart-modal-content">
+                <div class="cart-modal-header">
+                    <h2>🛒 Корзина</h2>
+                    <button class="cart-close" id="cartClose">✕</button>
+                </div>
+                <div id="cartItems"></div>
+                <div class="cart-total-section">
+                    <span class="total-label">Итого</span>
+                    <span class="total-amount"><span id="modalCartTotal">0.00</span> <span class="ton">TON</span></span>
+                </div>
+                <button class="btn-checkout" id="checkoutBtn">💎 Купить все</button>
+            </div>
+        </div>
     </div>
 
     <script>
         // ============================================================
-        // 1. РЕАЛЬНЫЕ ДАННЫЕ С FRAGMENT (разные коллекции)
+        // 1. JSON ДАННЫЕ (встроенные для удобства)
         // ============================================================
+        const COLLECTIONS_DATA = {
+            "Hex Pot": {
+                icon: "🔮",
+                description: "Mystical hexagonal NFTs with unique powers",
+                totalSupply: 10000,
+                floorPrice: 12.5
+            },
+            "Astral Shard": {
+                icon: "💎",
+                description: "Cosmic fragments from the astral plane",
+                totalSupply: 5000,
+                floorPrice: 8.2
+            },
+            "Pixel Fox": {
+                icon: "🦊",
+                description: "Retro pixel art foxes with unique traits",
+                totalSupply: 3000,
+                floorPrice: 5.7
+            },
+            "Crystal Orb": {
+                icon: "🔮",
+                description: "Elemental orbs with mystical properties",
+                totalSupply: 2000,
+                floorPrice: 15.3
+            },
+            "Void Mask": {
+                icon: "👹",
+                description: "Ancient masks from the void dimension",
+                totalSupply: 1500,
+                floorPrice: 22.1
+            }
+        };
+
         const NFT_DATA = [{
             name: "Hex Pot #10348",
-            description: "An exclusive Hex Pot with the appearance Violet Veil on a English Violet background with Baphomet icons.",
-            image: "https://nft.fragment.com/gift/hexpot-10348.webp",
+            collection: "Hex Pot",
             lottie: "https://nft.fragment.com/gift/hexpot-10348.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Violet Veil" },
                 { trait_type: "Backdrop", value: "English Violet" },
                 { trait_type: "Symbol", value: "Baphomet" }
             ],
-            collection: "Hex Pot"
+            price: 12.5,
+            status: "for-sale"
         }, {
             name: "Hex Pot #10349",
-            description: "An exclusive Hex Pot with the appearance Blood Moon on a Midnight background with Pentagram icons.",
-            image: "https://nft.fragment.com/gift/hexpot-10349.webp",
+            collection: "Hex Pot",
             lottie: "https://nft.fragment.com/gift/hexpot-10349.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Blood Moon" },
                 { trait_type: "Backdrop", value: "Midnight" },
                 { trait_type: "Symbol", value: "Pentagram" }
             ],
-            collection: "Hex Pot"
+            price: 18.7,
+            status: "on-auction"
+        }, {
+            name: "Hex Pot #10350",
+            collection: "Hex Pot",
+            lottie: "https://nft.fragment.com/gift/hexpot-10350.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Emerald" },
+                { trait_type: "Backdrop", value: "Forest" },
+                { trait_type: "Symbol", value: "Tree" }
+            ],
+            price: 0,
+            status: "sold"
         }, {
             name: "Astral Shard #2047",
-            description: "A rare Astral Shard with the appearance Nebula on a Cosmic background.",
-            image: "https://nft.fragment.com/gift/astralshard-2047.webp",
+            collection: "Astral Shard",
             lottie: "https://nft.fragment.com/gift/astralshard-2047.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Nebula" },
                 { trait_type: "Backdrop", value: "Cosmic" },
                 { trait_type: "Rarity", value: "Rare" }
             ],
-            collection: "Astral Shard"
+            price: 8.2,
+            status: "for-sale"
         }, {
             name: "Astral Shard #2048",
-            description: "A legendary Astral Shard with the appearance Supernova on a Dark Matter background.",
-            image: "https://nft.fragment.com/gift/astralshard-2048.webp",
+            collection: "Astral Shard",
             lottie: "https://nft.fragment.com/gift/astralshard-2048.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Supernova" },
                 { trait_type: "Backdrop", value: "Dark Matter" },
                 { trait_type: "Rarity", value: "Legendary" }
             ],
-            collection: "Astral Shard"
+            price: 25.4,
+            status: "on-auction"
+        }, {
+            name: "Astral Shard #2049",
+            collection: "Astral Shard",
+            lottie: "https://nft.fragment.com/gift/astralshard-2049.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Galaxy" },
+                { trait_type: "Backdrop", value: "Stellar" },
+                { trait_type: "Rarity", value: "Common" }
+            ],
+            price: 6.1,
+            status: "for-sale"
         }, {
             name: "Pixel Fox #8912",
-            description: "A colorful Pixel Fox with the appearance Cyber on a Neon Grid background.",
-            image: "https://nft.fragment.com/gift/pixelfox-8912.webp",
+            collection: "Pixel Fox",
             lottie: "https://nft.fragment.com/gift/pixelfox-8912.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Cyber" },
                 { trait_type: "Backdrop", value: "Neon Grid" },
                 { trait_type: "Style", value: "Pixel Art" }
             ],
-            collection: "Pixel Fox"
+            price: 5.7,
+            status: "for-sale"
         }, {
             name: "Pixel Fox #8913",
-            description: "A glitchy Pixel Fox with the appearance Vaporwave on a Synthwave background.",
-            image: "https://nft.fragment.com/gift/pixelfox-8913.webp",
+            collection: "Pixel Fox",
             lottie: "https://nft.fragment.com/gift/pixelfox-8913.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Vaporwave" },
                 { trait_type: "Backdrop", value: "Synthwave" },
                 { trait_type: "Style", value: "Glitch" }
             ],
-            collection: "Pixel Fox"
+            price: 9.3,
+            status: "on-auction"
+        }, {
+            name: "Pixel Fox #8914",
+            collection: "Pixel Fox",
+            lottie: "https://nft.fragment.com/gift/pixelfox-8914.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Retro" },
+                { trait_type: "Backdrop", value: "Arcade" },
+                { trait_type: "Style", value: "Classic" }
+            ],
+            price: 0,
+            status: "sold"
         }, {
             name: "Crystal Orb #5562",
-            description: "A mystical Crystal Orb with the appearance Sapphire on a Starlight background.",
-            image: "https://nft.fragment.com/gift/crystalorb-5562.webp",
+            collection: "Crystal Orb",
             lottie: "https://nft.fragment.com/gift/crystalorb-5562.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Sapphire" },
                 { trait_type: "Backdrop", value: "Starlight" },
                 { trait_type: "Element", value: "Water" }
             ],
-            collection: "Crystal Orb"
+            price: 15.3,
+            status: "for-sale"
         }, {
             name: "Crystal Orb #5563",
-            description: "A fiery Crystal Orb with the appearance Ruby on a Ember background.",
-            image: "https://nft.fragment.com/gift/crystalorb-5563.webp",
+            collection: "Crystal Orb",
             lottie: "https://nft.fragment.com/gift/crystalorb-5563.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Ruby" },
                 { trait_type: "Backdrop", value: "Ember" },
                 { trait_type: "Element", value: "Fire" }
             ],
-            collection: "Crystal Orb"
+            price: 19.8,
+            status: "on-auction"
+        }, {
+            name: "Crystal Orb #5564",
+            collection: "Crystal Orb",
+            lottie: "https://nft.fragment.com/gift/crystalorb-5564.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Amethyst" },
+                { trait_type: "Backdrop", value: "Twilight" },
+                { trait_type: "Element", value: "Spirit" }
+            ],
+            price: 0,
+            status: "sold"
         }, {
             name: "Void Mask #7721",
-            description: "An ancient Void Mask with the appearance Obsidian on a Shadow realm background.",
-            image: "https://nft.fragment.com/gift/voidmask-7721.webp",
+            collection: "Void Mask",
             lottie: "https://nft.fragment.com/gift/voidmask-7721.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Obsidian" },
                 { trait_type: "Backdrop", value: "Shadow" },
                 { trait_type: "Realm", value: "Dark" }
             ],
-            collection: "Void Mask"
+            price: 22.1,
+            status: "for-sale"
         }, {
             name: "Void Mask #7722",
-            description: "A celestial Void Mask with the appearance Moonstone on a Astral background.",
-            image: "https://nft.fragment.com/gift/voidmask-7722.webp",
+            collection: "Void Mask",
             lottie: "https://nft.fragment.com/gift/voidmask-7722.lottie.json",
             attributes: [
                 { trait_type: "Model", value: "Moonstone" },
                 { trait_type: "Backdrop", value: "Astral" },
                 { trait_type: "Realm", value: "Celestial" }
             ],
-            collection: "Void Mask"
+            price: 34.6,
+            status: "on-auction"
+        }, {
+            name: "Void Mask #7723",
+            collection: "Void Mask",
+            lottie: "https://nft.fragment.com/gift/voidmask-7723.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Shadow" },
+                { trait_type: "Backdrop", value: "Abyss" },
+                { trait_type: "Realm", value: "Void" }
+            ],
+            price: 28.9,
+            status: "for-sale"
         }];
 
         // ============================================================
-        // 2. ГЕНЕРАЦИЯ УНИКАЛЬНЫХ ЦВЕТОВ ДЛЯ КАЖДОЙ КОЛЛЕКЦИИ
+        // 2. КОРЗИНА (LocalStorage)
+        // ============================================================
+        let cart = JSON.parse(localStorage.getItem('nft_cart') || '[]');
+
+        function saveCart() {
+            localStorage.setItem('nft_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function addToCart(nftName, price) {
+            if (cart.includes(nftName)) {
+                cart = cart.filter(item => item !== nftName);
+            } else {
+                cart.push(nftName);
+            }
+            saveCart();
+        }
+
+        function removeFromCart(nftName) {
+            cart = cart.filter(item => item !== nftName);
+            saveCart();
+        }
+
+        function getCartTotal() {
+            return cart.reduce((sum, name) => {
+                const nft = NFT_DATA.find(n => n.name === name);
+                return sum + (nft ? nft.price : 0);
+            }, 0);
+        }
+
+        function isInCart(nftName) {
+            return cart.includes(nftName);
+        }
+
+        function updateCartUI() {
+            const count = cart.length;
+            const total = getCartTotal();
+
+            document.getElementById('cartCount').textContent = count;
+            document.getElementById('cartTotal').textContent = total.toFixed(2);
+            document.getElementById('modalCartTotal').textContent = total.toFixed(2);
+
+            // Update all cart buttons
+            document.querySelectorAll('.btn-action[data-action="cart"]').forEach(btn => {
+                const name = btn.dataset.nft;
+                if (isInCart(name)) {
+                    btn.textContent = '✓ В корзине';
+                    btn.classList.add('primary');
+                } else {
+                    btn.textContent = '🛒 В корзину';
+                    btn.classList.remove('primary');
+                }
+            });
+
+            // Update checkout button
+            document.getElementById('checkoutBtn').disabled = count === 0;
+
+            // Render cart items
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="icon">🛒</div>
+                        <p>Корзина пуста</p>
+                        <p style="font-size:13px; margin-top:4px;">Добавьте NFT для покупки</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            cart.forEach(name => {
+                const nft = NFT_DATA.find(n => n.name === name);
+                if (!nft) return;
+                const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
+                html += `
+                    <div class="cart-item">
+                        <div style="width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:20px;">
+                            ${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}
+                        </div>
+                        <div class="item-info">
+                            <div class="item-name">${nft.name}</div>
+                            <div style="font-size:11px;color:#6e6e80;">${nft.collection}</div>
+                        </div>
+                        <div class="item-price">${nft.price.toFixed(2)} TON</div>
+                        <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        // 3. ГЕНЕРАЦИЯ УНИКАЛЬНЫХ ЦВЕТОВ
         // ============================================================
         function getCollectionColors(collectionName) {
             const hash = collectionName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -468,23 +1026,21 @@
         }
 
         // ============================================================
-        // 3. РЕНДЕРИНГ
+        // 4. РЕНДЕРИНГ
         // ============================================================
         let currentFilter = 'all';
         const grid = document.getElementById('nftGrid');
         const filtersContainer = document.getElementById('filtersContainer');
-        const totalCount = document.getElementById('totalCount');
-        const collectionCount = document.getElementById('collectionCount');
 
-        // 3.1 Сбор коллекций
+        // 4.1 Фильтры
         const collections = ['all', ...new Set(NFT_DATA.map(item => item.collection))];
 
-        // 3.2 Фильтры
         collections.forEach(col => {
             const btn = document.createElement('button');
             btn.className = `filter-btn${col === 'all' ? ' active' : ''}`;
             btn.dataset.collection = col;
-            btn.textContent = col === 'all' ? 'Все' : col;
+            const icon = col === 'all' ? '📋' : COLLECTIONS_DATA[col]?.icon || '🎁';
+            btn.textContent = col === 'all' ? 'Все' : `${icon} ${col}`;
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -494,22 +1050,19 @@
             filtersContainer.appendChild(btn);
         });
 
-        // 3.3 Статистика
-        totalCount.textContent = NFT_DATA.length;
-        collectionCount.textContent = collections.length - 1;
-
-        // 3.4 Рендер карточек
+        // 4.2 Рендер
         function renderGrid() {
             const filtered = currentFilter === 'all' ?
                 NFT_DATA :
                 NFT_DATA.filter(item => item.collection === currentFilter);
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="loading" style="padding:40px 20px; color:#6e6e80;">Нет подарков в этой коллекции</div>`;
+                grid.innerHTML =
+                    `<div class="loading" style="padding:40px 20px; color:#6e6e80;">Нет подарков в этой коллекции</div>`;
                 return;
             }
 
-            // Группируем по коллекциям
+            // Группируем
             const grouped = filtered.reduce((acc, item) => {
                 if (!acc[item.collection]) acc[item.collection] = [];
                 acc[item.collection].push(item);
@@ -520,10 +1073,14 @@
 
             Object.entries(grouped).forEach(([collectionName, items]) => {
                 const colors = getCollectionColors(collectionName);
+                const colData = COLLECTIONS_DATA[collectionName];
 
                 html += `
                     <div class="collection-header">
-                        <span class="collection-name">${collectionName}</span>
+                        <span class="collection-name">
+                            <span class="icon">${colData?.icon || '🎁'}</span>
+                            ${collectionName}
+                        </span>
                         <span class="collection-count">${items.length} шт.</span>
                     </div>
                 `;
@@ -531,40 +1088,67 @@
                 items.forEach((nft, index) => {
                     const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
                     const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
-                    const backdrop = nft.attributes.find(a => a.trait_type === 'Backdrop')?.value || '';
-                    const extraTrait = nft.attributes.find(a =>
-                        a.trait_type !== 'Model' && a.trait_type !== 'Backdrop'
-                    );
+                    const extraTraits = nft.attributes.filter(a => a.trait_type !== 'Model');
 
-                    // Ссылка на аукцион
-                    const fragmentSlug = nft.name
-                        .toLowerCase()
-                        .replace(/\s/g, '-')
-                        .replace(/#/g, '');
-                    const auctionUrl = `https://fragment.com/gift/${fragmentSlug}`;
-
-                    // Уникальный ID для Lottie
                     const lottieId = `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
+                    const statusEmoji = {
+                        'sold': '🔴',
+                        'for-sale': '🟢',
+                        'on-auction': '🟡'
+                    } [nft.status] || '⚪';
+
+                    const statusLabel = {
+                        'sold': 'Продано',
+                        'for-sale': 'В продаже',
+                        'on-auction': 'На аукционе'
+                    } [nft.status] || '';
+
+                    const statusClass = {
+                        'sold': 'sold',
+                        'for-sale': 'for-sale',
+                        'on-auction': 'on-auction'
+                    } [nft.status] || '';
+
+                    const isInCartState = isInCart(nft.name);
 
                     html += `
-                        <div class="nft-card" onclick="window.open('${auctionUrl}', '_blank')">
+                        <div class="nft-card" onclick="window.open('https://fragment.com/gift/${nft.name.toLowerCase().replace(/\s/g, '-').replace(/#/g, '')}', '_blank')">
                             <div class="nft-card-inner" style="background: ${colors.bgGradient}; border: 1px solid rgba(255,255,255,0.04);">
                                 <div class="lottie-wrapper" style="background: ${colors.bg};">
                                     <div class="lottie-container" id="${lottieId}"></div>
+                                    ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
                                 </div>
                                 <div class="nft-info">
                                     <div class="nft-name">${nft.name}</div>
                                     ${model ? `<div class="nft-model">${model}</div>` : ''}
                                     <div class="nft-traits">
-                                        ${backdrop ? `<span class="trait-tag">🎨 <span class="trait-value">${backdrop}</span></span>` : ''}
-                                        ${extraTrait ? `<span class="trait-tag">✦ <span class="trait-value">${extraTrait.value}</span></span>` : ''}
+                                        ${extraTraits.slice(0, 2).map(t => 
+                                            `<span class="trait-tag">✦ <span class="trait-value">${t.value}</span></span>`
+                                        ).join('')}
                                     </div>
+                                    ${nft.price > 0 ? `
+                                        <div class="nft-price">
+                                            <span class="ton-icon">₿</span>
+                                            ${nft.price.toFixed(2)} TON
+                                            <span class="usd">≈ $${(nft.price * 5.2).toFixed(2)}</span>
+                                        </div>
+                                    ` : `
+                                        <div style="font-size:12px;color:#6e6e80;">Не в продаже</div>
+                                    `}
                                 </div>
                                 <div class="nft-actions">
                                     <button class="btn-number">#${number}</button>
-                                    <button class="btn-auction" onclick="event.stopPropagation(); window.open('${auctionUrl}', '_blank')">
-                                        <span class="icon">⚡</span> Аукцион
-                                    </button>
+                                    ${nft.price > 0 && nft.status !== 'sold' ? `
+                                        <button class="btn-action ${isInCartState ? 'primary' : ''}" 
+                                                data-action="cart" 
+                                                data-nft="${nft.name}"
+                                                onclick="event.stopPropagation(); addToCart('${nft.name}', ${nft.price});">
+                                            ${isInCartState ? '✓ В корзине' : '🛒 В корзину'}
+                                        </button>
+                                    ` : ''}
+                                    ${nft.status === 'sold' ? `
+                                        <button class="btn-action danger" disabled>🔴 Продано</button>
+                                    ` : ''}
                                 </div>
                             </div>
                         </div>
@@ -574,14 +1158,13 @@
 
             grid.innerHTML = html;
 
-            // ============================================================
-            // 4. ЗАГРУЗКА LOTTIE АНИМАЦИЙ
-            // ============================================================
+            // Загрузка Lottie
             setTimeout(() => {
                 Object.entries(grouped).forEach(([collectionName, items]) => {
                     items.forEach((nft, index) => {
                         const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
-                        const containerId = `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
+                        const containerId =
+                            `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
                         const container = document.getElementById(containerId);
 
                         if (container && nft.lottie) {
@@ -594,11 +1177,9 @@
                                     autoplay: true
                                 });
 
-                                // Ставим фон для контейнера
                                 const colors = getCollectionColors(collectionName);
                                 container.style.background = colors.bg;
 
-                                // Перезапускаем при фокусе (для Telegram WebView)
                                 document.addEventListener('visibilitychange', () => {
                                     if (!document.hidden) {
                                         anim.play();
@@ -607,16 +1188,64 @@
 
                             } catch (e) {
                                 console.warn('Lottie error:', e);
-                                container.innerHTML = `<div style="color:#6e6e80; font-size:28px;">🎁</div>`;
+                                container.innerHTML =
+                                    `<div style="color:#6e6e80; font-size:28px;">${COLLECTIONS_DATA[collectionName]?.icon || '🎁'}</div>`;
                             }
                         }
                     });
                 });
-            }, 100);
+                updateCartUI();
+            }, 150);
         }
 
-        // Запуск
+        // ============================================================
+        // 5. КОРЗИНА - ОТКРЫТИЕ/ЗАКРЫТИЕ
+        // ============================================================
+        const cartModal = document.getElementById('cartModal');
+
+        document.getElementById('cartFloating').addEventListener('click', () => {
+            cartModal.classList.toggle('open');
+            renderCartItems();
+            updateCartUI();
+        });
+
+        document.getElementById('cartClose').addEventListener('click', () => {
+            cartModal.classList.remove('open');
+        });
+
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) cartModal.classList.remove('open');
+        });
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) return;
+            const total = getCartTotal();
+            if (confirm(`💎 Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(2)} TON`)) {
+                alert(`✅ Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(2)} TON`);
+                cart = [];
+                saveCart();
+                cartModal.classList.remove('open');
+                renderGrid();
+            }
+        });
+
+        // ============================================================
+        // 6. ОБНОВЛЕНИЕ
+        // ============================================================
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            renderGrid();
+            // Анимация обновления
+            document.getElementById('refreshBtn').style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                document.getElementById('refreshBtn').style.transform = 'rotate(0deg)';
+            }, 300);
+        });
+
+        // ============================================================
+        // 7. ЗАПУСК
+        // ============================================================
         renderGrid();
+        updateCartUI();
     </script>
 
 </body>
