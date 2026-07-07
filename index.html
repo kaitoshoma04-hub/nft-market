@@ -7,12 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
+        /* ... весь стиль такой же как в предыдущем коде ... */
+        /* (я оставлю тот же CSS для краткости) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a0f;
@@ -22,7 +23,6 @@
             display: flex;
             justify-content: center;
         }
-
         .app {
             max-width: 430px;
             width: 100%;
@@ -31,7 +31,6 @@
             padding-bottom: 20px;
             position: relative;
         }
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -44,7 +43,6 @@
             z-index: 100;
             backdrop-filter: blur(20px);
         }
-
         .header h1 {
             font-size: 22px;
             font-weight: 800;
@@ -52,18 +50,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .header .stats {
             font-size: 13px;
             color: #6e6e80;
         }
-
         .header .stats span {
             color: #ffffff;
             font-weight: 700;
         }
-
-        /* ===== FILTER BUTTON ===== */
         .filter-section {
             padding: 12px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -72,7 +66,6 @@
             align-items: center;
             flex-wrap: wrap;
         }
-
         .filter-toggle-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -88,20 +81,16 @@
             align-items: center;
             gap: 8px;
         }
-
         .filter-toggle-btn:hover {
             background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
         }
-
         .filter-toggle-btn .arrow {
             transition: transform 0.3s ease;
         }
-
         .filter-toggle-btn .arrow.open {
             transform: rotate(180deg);
         }
-
         .filter-dropdown {
             display: none;
             flex-wrap: wrap;
@@ -110,11 +99,9 @@
             width: 100%;
             animation: slideDown 0.3s ease;
         }
-
         .filter-dropdown.open {
             display: flex;
         }
-
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -125,7 +112,6 @@
                 transform: translateY(0);
             }
         }
-
         .filter-option {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -142,7 +128,6 @@
             gap: 4px;
             white-space: nowrap;
         }
-
         .filter-option .mini-lottie {
             width: 20px;
             height: 20px;
@@ -151,35 +136,28 @@
             flex-shrink: 0;
             background: #121216;
         }
-
         .filter-option .mini-lottie .lottie-container {
             width: 100%;
             height: 100%;
         }
-
         .filter-option:hover {
             background: rgba(255, 255, 255, 0.06);
             color: #ffffff;
         }
-
         .filter-option.active {
             background: rgba(74, 138, 244, 0.15);
             border-color: rgba(74, 138, 244, 0.2);
             color: #4a8af4;
         }
-
         .filter-option .emoji {
             font-size: 14px;
         }
-
-        /* ===== NFT GRID ===== */
         .nft-grid {
             padding: 12px 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
         .nft-card {
             background: #1a1a1f;
             border-radius: 16px;
@@ -190,11 +168,9 @@
             cursor: pointer;
             position: relative;
         }
-
         .nft-card:active {
             transform: scale(0.97);
         }
-
         .nft-card-inner {
             display: flex;
             flex-direction: column;
@@ -202,7 +178,6 @@
             gap: 8px;
             background: #1a1a1f;
         }
-
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
@@ -214,12 +189,10 @@
             justify-content: center;
             position: relative;
         }
-
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
-
         .status-badge {
             position: absolute;
             top: 4px;
@@ -231,7 +204,6 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-
         .status-badge.sold {
             background: rgba(255, 107, 107, 0.2);
             color: #ff6b6b;
@@ -247,13 +219,11 @@
             color: #ffc832;
             border: 1px solid rgba(255, 200, 50, 0.15);
         }
-
         .nft-info-compact {
             display: flex;
             flex-direction: column;
             gap: 2px;
         }
-
         .nft-name-compact {
             font-size: 12px;
             font-weight: 700;
@@ -262,7 +232,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .nft-model-compact {
             font-size: 10px;
             color: #8e8ea0;
@@ -271,7 +240,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .nft-price-compact {
             display: flex;
             align-items: center;
@@ -281,7 +249,6 @@
             color: #ffffff;
             margin-top: 4px;
         }
-
         .gram-icon {
             width: 16px;
             height: 16px;
@@ -292,15 +259,12 @@
             flex-shrink: 0;
             overflow: hidden;
         }
-
         .gram-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
         }
-
-        /* ===== DETAIL MODAL ===== */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -316,11 +280,9 @@
             padding: 20px;
             animation: fadeIn 0.25s ease;
         }
-
         .detail-overlay.open {
             display: flex;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -331,7 +293,6 @@
                 transform: scale(1);
             }
         }
-
         .detail-content {
             background: #1a1a1f;
             border-radius: 20px;
@@ -343,11 +304,9 @@
             position: relative;
             overflow-y: auto;
         }
-
         .detail-content::-webkit-scrollbar {
             width: 0;
         }
-
         .detail-close {
             position: sticky;
             float: right;
@@ -364,18 +323,15 @@
             z-index: 10;
             margin-bottom: 8px;
         }
-
         .detail-close:hover {
             background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
         }
-
         .detail-layout {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-
         .detail-lottie-wrapper {
             width: 100%;
             max-height: 200px;
@@ -389,40 +345,34 @@
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .detail-lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
-
         .detail-title {
             font-size: 17px;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 1px;
         }
-
         .detail-number {
             font-size: 14px;
             font-weight: 700;
             color: #4a8af4;
             margin-bottom: 6px;
         }
-
         .detail-description {
             font-size: 12px;
             color: #8e8ea0;
             line-height: 1.4;
             margin-bottom: 10px;
         }
-
         .detail-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px 16px;
             margin-bottom: 10px;
         }
-
         .detail-stat {
             display: flex;
             justify-content: space-between;
@@ -430,17 +380,14 @@
             padding: 3px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-
         .detail-stat.full-width {
             grid-column: 1 / -1;
         }
-
         .detail-stat .label {
             font-size: 11px;
             color: #6e6e80;
             font-weight: 500;
         }
-
         .detail-stat .value {
             font-size: 11px;
             color: #ffffff;
@@ -451,7 +398,6 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .detail-price {
             display: flex;
             align-items: center;
@@ -465,23 +411,19 @@
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .detail-price .gram-icon {
             width: 22px;
             height: 22px;
         }
-
         .detail-price .gram-icon img {
             width: 22px;
             height: 22px;
         }
-
         .detail-price .usd {
             font-size: 12px;
             font-weight: 400;
             color: #6e6e80;
         }
-
         .detail-buy-btn {
             width: 100%;
             padding: 12px;
@@ -495,27 +437,21 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
         .detail-buy-btn:active {
             transform: scale(0.97);
         }
-
         .detail-buy-btn:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
-
         .detail-buy-btn.sold-out {
             background: rgba(255, 255, 255, 0.05);
             color: #6e6e80;
         }
-
         .detail-buy-btn.in-cart {
             background: rgba(75, 200, 138, 0.2);
             color: #4bc88a;
         }
-
-        /* ===== CART ===== */
         .cart-floating {
             position: fixed;
             bottom: 20px;
@@ -534,16 +470,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .cart-floating:active {
             transform: translateX(-50%) scale(0.95);
         }
-
         .cart-floating .cart-icon {
             font-size: 18px;
             position: relative;
         }
-
         .cart-floating .cart-count {
             position: absolute;
             top: -6px;
@@ -559,18 +492,15 @@
             align-items: center;
             justify-content: center;
         }
-
         .cart-floating .cart-total {
             font-size: 13px;
             font-weight: 600;
             color: #ffffff;
         }
-
         .cart-floating .cart-total .ton {
             color: #6e6e80;
             font-weight: 400;
         }
-
         .cart-modal {
             position: fixed;
             top: 0;
@@ -585,11 +515,9 @@
             align-items: flex-end;
             animation: fadeUp 0.3s ease;
         }
-
         .cart-modal.open {
             display: flex;
         }
-
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -600,7 +528,6 @@
                 transform: translateY(0);
             }
         }
-
         .cart-modal-content {
             background: #14141e;
             border-radius: 24px 24px 0 0;
@@ -610,7 +537,6 @@
             padding: 20px 16px 30px 16px;
             overflow-y: auto;
         }
-
         .cart-modal-header {
             display: flex;
             justify-content: space-between;
@@ -619,12 +545,10 @@
             padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .cart-modal-header h2 {
             font-size: 20px;
             font-weight: 700;
         }
-
         .cart-close {
             background: rgba(255, 255, 255, 0.04);
             border: none;
@@ -635,7 +559,6 @@
             font-size: 18px;
             cursor: pointer;
         }
-
         .cart-item {
             display: flex;
             align-items: center;
@@ -643,27 +566,22 @@
             padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-
         .cart-item .item-info {
             flex: 1;
         }
-
         .cart-item .item-name {
             font-size: 14px;
             font-weight: 600;
         }
-
         .cart-item .item-collection {
             font-size: 11px;
             color: #6e6e80;
         }
-
         .cart-item .item-price {
             font-size: 13px;
             color: #4a8af4;
             font-weight: 600;
         }
-
         .cart-item .item-remove {
             background: rgba(255, 107, 107, 0.1);
             border: none;
@@ -674,7 +592,6 @@
             font-size: 14px;
             cursor: pointer;
         }
-
         .cart-total-section {
             display: flex;
             justify-content: space-between;
@@ -683,25 +600,21 @@
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             margin-top: 8px;
         }
-
         .cart-total-section .total-label {
             font-size: 16px;
             font-weight: 600;
             color: #8e8ea0;
         }
-
         .cart-total-section .total-amount {
             font-size: 20px;
             font-weight: 800;
             color: #ffffff;
         }
-
         .cart-total-section .total-amount .ton {
             color: #8e8ea0;
             font-weight: 400;
             font-size: 14px;
         }
-
         .btn-checkout {
             width: 100%;
             padding: 14px;
@@ -716,27 +629,22 @@
             transition: all 0.2s ease;
             margin-top: 12px;
         }
-
         .btn-checkout:active {
             transform: scale(0.97);
         }
-
         .btn-checkout:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
-
         .empty-cart {
             text-align: center;
             padding: 40px 20px;
             color: #6e6e80;
         }
-
         .empty-cart .icon {
             font-size: 48px;
             margin-bottom: 12px;
         }
-
         .loading {
             text-align: center;
             padding: 60px 20px;
@@ -744,7 +652,6 @@
             font-size: 14px;
             grid-column: 1 / -1;
         }
-
         .loading .spinner {
             width: 32px;
             height: 32px;
@@ -754,13 +661,11 @@
             animation: spin 0.8s linear infinite;
             margin: 0 auto 16px auto;
         }
-
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
-
         @media (min-width: 600px) {
             .detail-content {
                 max-width: 480px;
@@ -789,7 +694,6 @@
             <div class="stats"><span id="totalCount">0</span> NFT</div>
         </div>
 
-        <!-- FILTER SECTION -->
         <div class="filter-section">
             <button class="filter-toggle-btn" id="filterToggle">
                 <span>🔍</span> Фильтр
@@ -809,7 +713,6 @@
             </div>
         </div>
 
-        <!-- DETAIL MODAL -->
         <div class="detail-overlay" id="detailOverlay">
             <div class="detail-content">
                 <button class="detail-close" id="detailClose">✕</button>
@@ -907,11 +810,11 @@
             "Precious Peach": { icon: "🍑", floorPrice: 42.3 },
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
-            "19 Sharp Tongue": { icon: "👅", floorPrice: 25.4 }
+            "Sharp Tongue": { icon: "👅", floorPrice: 25.4 }
         };
 
         // ============================================================
-        // 2. ГЕНЕРАЦИЯ NFT (по 12 штук в коллекции)
+        // 2. ГЕНЕРАЦИЯ NFT с ПРАВИЛЬНЫМИ URL
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
@@ -971,7 +874,7 @@
                     "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Claro", "Oscuro", "Candela", "Habano",
                         "Connecticut", "Ecuador", "Nicaragua", "Cuban", "Dominican"
                     ],
-                    "19 Sharp Tongue": ["Venom", "Bite", "Strike", "Poison", "Sharp", "Fangs", "Toxic", "Deadly",
+                    "Sharp Tongue": ["Venom", "Bite", "Strike", "Poison", "Sharp", "Fangs", "Toxic", "Deadly",
                         "Venomous", "Savage", "Wild", "Fierce"
                     ]
                 };
@@ -992,6 +895,19 @@
                     "UQCdEfGhIjKlMnOpQrStUvWxYzAbCdEfGhIjKlMnOpQr"
                 ];
 
+                // ПРАВИЛЬНЫЕ URL ДЛЯ КАЖДОЙ КОЛЛЕКЦИИ
+                const urlMap = {
+                    "Crystal Orb": [5562, 5563, 5564, 5565, 5566, 5567, 5568, 5569, 5570, 5571, 5572, 5573],
+                    "Void Mask": [7721, 7722, 7723, 7724, 7725, 7726, 7727, 7728, 7729, 7730, 7731, 7732],
+                    "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392],
+                    "Precious Peach": [8841, 8842, 8843, 8844, 8845, 8846, 8847, 8848, 8849, 8850, 8851, 8852],
+                    "Nail Bracelet": [9911, 9912, 9913, 9914, 9915, 9916, 9917, 9918, 9919, 9920, 9921, 9922],
+                    "Sharp Tongue": [1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292],
+                    "Plush Pepe": [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011],
+                    "Durov's Cap": [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431],
+                    "Vintage Cigar": [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011]
+                };
+
                 for (let i = 0; i < count; i++) {
                     const num = baseNumber + i;
                     const model = (models[collection] || ["Classic", "Rare", "Epic", "Legendary", "Mystic", "Shadow",
@@ -1011,38 +927,19 @@
                         .replace(/\s/g, '')
                         .replace(/'/g, '')
                         .replace(/đ/g, 'durovs')
-                        .replace(/ğ/g, 'g')
-                        .replace(/19/g, 'nineteen');
+                        .replace(/ğ/g, 'g');
 
-                    // Специальные URL для проблемных коллекций
                     let lottieUrl;
-                    const collectionFix = collection;
 
-                    if (collectionFix === "Plush Pepe") {
-                        lottieUrl = `https://nft.fragment.com/gift/plushpepe-${1000 + (i % 10)}.lottie.json`;
-                    } else if (collectionFix === "Durov's Cap") {
-                        const capNumbers = [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431];
-                        lottieUrl = `https://nft.fragment.com/gift/durovscap-${capNumbers[i % capNumbers.length]}.lottie.json`;
-                    } else if (collectionFix === "Vintage Cigar") {
-                        lottieUrl = `https://nft.fragment.com/gift/vintagecigar-${4000 + i}.lottie.json`;
-                    } else if (collectionFix === "Crystal Orb") {
-                        const orbNumbers = [5562, 5563, 5564, 5565, 5566, 5567, 5568, 5569, 5570, 5571, 5572, 5573];
-                        lottieUrl = `https://nft.fragment.com/gift/crystalorb-${orbNumbers[i % orbNumbers.length]}.lottie.json`;
-                    } else if (collectionFix === "Void Mask") {
-                        const maskNumbers = [7721, 7722, 7723, 7724, 7725, 7726, 7727, 7728, 7729, 7730, 7731, 7732];
-                        lottieUrl = `https://nft.fragment.com/gift/voidmask-${maskNumbers[i % maskNumbers.length]}.lottie.json`;
-                    } else if (collectionFix === "Ion Gem") {
-                        const gemNumbers = [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392];
-                        lottieUrl = `https://nft.fragment.com/gift/iongem-${gemNumbers[i % gemNumbers.length]}.lottie.json`;
-                    } else if (collectionFix === "Nail Bracelet") {
-                        const nailNumbers = [9911, 9912, 9913, 9914, 9915, 9916, 9917, 9918, 9919, 9920, 9921, 9922];
-                        lottieUrl = `https://nft.fragment.com/gift/nailbracelet-${nailNumbers[i % nailNumbers.length]}.lottie.json`;
-                    } else if (collectionFix === "Precious Peach") {
-                        const peachNumbers = [8841, 8842, 8843, 8844, 8845, 8846, 8847, 8848, 8849, 8850, 8851, 8852];
-                        lottieUrl = `https://nft.fragment.com/gift/preciouspeach-${peachNumbers[i % peachNumbers.length]}.lottie.json`;
-                    } else if (collectionFix === "19 Sharp Tongue") {
-                        const tongueNumbers = [1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292];
-                        lottieUrl = `https://nft.fragment.com/gift/sharp-tongue-${tongueNumbers[i % tongueNumbers.length]}.lottie.json`;
+                    // Используем правильные URL из карты
+                    if (urlMap[collection]) {
+                        const fixedNum = urlMap[collection][i % urlMap[collection].length];
+                        // Специальный slug для Sharp Tongue
+                        let finalSlug = slug;
+                        if (collection === "Sharp Tongue") {
+                            finalSlug = "sharp-tongue";
+                        }
+                        lottieUrl = `https://nft.fragment.com/gift/${finalSlug}-${fixedNum}.lottie.json`;
                     } else {
                         lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
                     }
@@ -1190,7 +1087,6 @@
         const grid = document.getElementById('nftGrid');
         const filterDropdown = document.getElementById('filterDropdown');
 
-        // Создаем фильтры
         const collections = ['all', ...Object.keys(COLLECTIONS_DATA)];
 
         collections.forEach(col => {
@@ -1211,14 +1107,12 @@
                 currentFilter = col;
                 closeDetail();
                 renderGrid();
-                // Закрываем дропдаун после выбора
                 document.getElementById('filterDropdown').classList.remove('open');
                 document.getElementById('filterArrow').classList.remove('open');
             });
             filterDropdown.appendChild(option);
         });
 
-        // Toggle фильтра
         document.getElementById('filterToggle').addEventListener('click', () => {
             const dropdown = document.getElementById('filterDropdown');
             const arrow = document.getElementById('filterArrow');
@@ -1229,6 +1123,48 @@
         document.getElementById('totalCount').textContent = NFT_DATA.length;
 
         const lottieCache = new Map();
+
+        function loadLottie(container, url, isMini = false) {
+            if (lottieCache.has(url)) {
+                const cached = lottieCache.get(url);
+                container.innerHTML = '';
+                lottie.loadAnimation({
+                    container: container,
+                    animationData: cached,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true
+                });
+                if (!isMini) container.style.background = '#121216';
+                return;
+            }
+
+            try {
+                fetch(url)
+                    .then(res => {
+                        if (!res.ok) throw new Error('Network error');
+                        return res.json();
+                    })
+                    .then(data => {
+                        lottieCache.set(url, data);
+                        lottie.loadAnimation({
+                            container: container,
+                            animationData: data,
+                            renderer: 'svg',
+                            loop: true,
+                            autoplay: true
+                        });
+                        if (!isMini) container.style.background = '#121216';
+                    })
+                    .catch(() => {
+                        container.innerHTML =
+                            `<div style="color:#6e6e80;font-size:${isMini ? '14px' : '28px'};">${isMini ? '🎁' : '🎁'}</div>`;
+                    });
+            } catch (e) {
+                container.innerHTML =
+                    `<div style="color:#6e6e80;font-size:${isMini ? '14px' : '28px'};">${isMini ? '🎁' : '🎁'}</div>`;
+            }
+        }
 
         function renderGrid() {
             const filtered = currentFilter === 'all' ?
@@ -1291,7 +1227,6 @@
 
             grid.innerHTML = html;
 
-            // Загрузка Lottie для карточек
             setTimeout(() => {
                 filtered.forEach((nft) => {
                     const number = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
@@ -1303,61 +1238,16 @@
                     }
                 });
                 updateCartUI();
-                // Загружаем мини Lottie для фильтров
                 updateFilterMiniLottie();
             }, 150);
         }
 
-        function loadLottie(container, url, isMini = false) {
-            if (lottieCache.has(url)) {
-                const cached = lottieCache.get(url);
-                container.innerHTML = '';
-                lottie.loadAnimation({
-                    container: container,
-                    animationData: cached,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true
-                });
-                if (!isMini) container.style.background = '#121216';
-                return;
-            }
-
-            try {
-                fetch(url)
-                    .then(res => {
-                        if (!res.ok) throw new Error('Network error');
-                        return res.json();
-                    })
-                    .then(data => {
-                        lottieCache.set(url, data);
-                        lottie.loadAnimation({
-                            container: container,
-                            animationData: data,
-                            renderer: 'svg',
-                            loop: true,
-                            autoplay: true
-                        });
-                        if (!isMini) container.style.background = '#121216';
-                    })
-                    .catch(() => {
-                        container.innerHTML =
-                            `<div style="color:#6e6e80;font-size:${isMini ? '14px' : '28px'};">${isMini ? '🎁' : '🎁'}</div>`;
-                    });
-            } catch (e) {
-                container.innerHTML =
-                    `<div style="color:#6e6e80;font-size:${isMini ? '14px' : '28px'};">${isMini ? '🎁' : '🎁'}</div>`;
-            }
-        }
-
         function updateFilterMiniLottie() {
-            // Загружаем мини Lottie для каждого фильтра
             Object.keys(COLLECTIONS_DATA).forEach(collection => {
                 const miniId = `mini-${collection.replace(/\s/g, '')}`;
                 const container = document.querySelector(`#${miniId} .lottie-container`);
                 if (!container) return;
 
-                // Находим первый NFT этой коллекции для Lottie
                 const nft = NFT_DATA.find(n => n.collection === collection);
                 if (nft && nft.lottie) {
                     loadLottie(container, nft.lottie, true);
@@ -1406,7 +1296,6 @@
                 document.getElementById('detailPrice').style.display = 'none';
             }
 
-            // Lottie в деталях
             const detailContainer = document.getElementById('detailLottie');
             detailContainer.innerHTML = '';
 
@@ -1505,7 +1394,6 @@
         renderGrid();
         updateCartUI();
 
-        // Закрываем дропдаун при клике вне
         document.addEventListener('click', (e) => {
             const filterSection = document.querySelector('.filter-section');
             if (filterSection && !filterSection.contains(e.target)) {
