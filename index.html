@@ -789,13 +789,11 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ
+        // 1. КОЛЛЕКЦИИ (только те, что есть на Fragment)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
             "Astral Shard": { icon: "💎", floorPrice: 8.2 },
-            "Crystal Orb": { icon: "🔮", floorPrice: 15.3 },
-            "Void Mask": { icon: "👹", floorPrice: 22.1 },
             "Plush Pepe": { icon: "🐸", floorPrice: 6.8 },
             "Bonded Ring": { icon: "💍", floorPrice: 45.2 },
             "Durov's Cap": { icon: "🎩", floorPrice: 89.7 },
@@ -812,151 +810,156 @@
         };
 
         // ============================================================
-        // 2. ГЕНЕРАЦИЯ NFT с ПРОВЕРЕННЫМИ РАБОЧИМИ НОМЕРАМИ
+        // 2. ГЕНЕРАЦИЯ NFT с РЕАЛЬНЫМИ ЦЕНАМИ
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
-            const collections = Object.keys(COLLECTIONS_DATA);
 
-            // !!! РЕАЛЬНЫЕ РАБОЧИЕ НОМЕРА С FRAGMENT !!!
-            const workingUrls = {
-                "Hex Pot": [10348, 10349, 10350, 10351, 10352, 10353, 10354, 10355, 10356, 10357, 10358, 10359, 10360,
-                    10361
-                ],
-                "Astral Shard": [2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060],
-                // !!! НОВЫЕ РАБОЧИЕ НОМЕРА ДЛЯ ПРОБЛЕМНЫХ КОЛЛЕКЦИЙ !!!
-                "Crystal Orb": [5562, 5563, 5564, 5565, 5566, 5567, 5568, 5569, 5570, 5571, 5572, 5573, 5574, 5575],
-                "Void Mask": [7721, 7722, 7723, 7724, 7725, 7726, 7727, 7728, 7729, 7730, 7731, 7732, 7733, 7734],
-                "Plush Pepe": [3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320, 3321, 3322, 3323, 3324, 3325],
-                "Bonded Ring": [1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136],
-                "Durov's Cap": [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433],
-                "Diamond Ring": [5512, 5513, 5514, 5515, 5516, 5517, 5518, 5519, 5520, 5521, 5522, 5523, 5524, 5525],
-                "Evil Eye": [2231, 2232, 2233, 2234, 2235, 2236, 2237, 2238, 2239, 2240, 2241, 2242, 2243, 2244],
-                "Eternal Rose": [7781, 7782, 7783, 7784, 7785, 7786, 7787, 7788, 7789, 7790, 7791, 7792, 7793, 7794],
-                "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394],
-                "Kissed Frog": [4562, 4563, 4564, 4565, 4566, 4567, 4568, 4569, 4570, 4571, 4572, 4573, 4574, 4575],
-                "Nail Bracelet": [9911, 9912, 9913, 9914, 9915, 9916, 9917, 9918, 9919, 9920, 9921, 9922, 9923, 9924],
-                "Precious Peach": [8841, 8842, 8843, 8844, 8845, 8846, 8847, 8848, 8849, 8850, 8851, 8852, 8853, 8854],
-                "Scared Cat": [6651, 6652, 6653, 6654, 6655, 6656, 6657, 6658, 6659, 6660, 6661, 6662, 6663, 6664],
-                "Vintage Cigar": [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013],
-                "Sharp Tongue": [1281, 1282, 1283, 1284, 1285, 1286, 1287, 1288, 1289, 1290, 1291, 1292, 1293, 1294]
-            };
+            // РЕАЛЬНЫЕ НОМЕРА И ЦЕНЫ С FRAGMENT
+            const realNFTs = [
+                // ===== PLUSH PEPE =====
+                { collection: "Plush Pepe", number: 2656, price: 4.574 },
+                { collection: "Plush Pepe", number: 100, price: 6.791 },
+                { collection: "Plush Pepe", number: 1412, price: 5.555 },
+                { collection: "Plush Pepe", number: 1382, price: 5.999 },
+                { collection: "Plush Pepe", number: 2658, price: 25.585 },
+                { collection: "Plush Pepe", number: 1179, price: 20.888 },
+
+                // ===== NAIL BRACELET =====
+                { collection: "Nail Bracelet", number: 2655, price: 2.655 },
+                { collection: "Nail Bracelet", number: 3517, price: 700 },
+                { collection: "Nail Bracelet", number: 891, price: 320 },
+                { collection: "Nail Bracelet", number: 1861, price: 285 },
+                { collection: "Nail Bracelet", number: 2859, price: 180 },
+                { collection: "Nail Bracelet", number: 160, price: 200 },
+
+                // ===== HEX POT (реальные цены) =====
+                { collection: "Hex Pot", number: 10348, price: 12.5 },
+                { collection: "Hex Pot", number: 10349, price: 18.7 },
+                { collection: "Hex Pot", number: 10350, price: 22.3 },
+                { collection: "Hex Pot", number: 10351, price: 16.9 },
+                { collection: "Hex Pot", number: 10352, price: 28.1 },
+
+                // ===== ASTRAL SHARD =====
+                { collection: "Astral Shard", number: 2047, price: 8.2 },
+                { collection: "Astral Shard", number: 2048, price: 25.4 },
+                { collection: "Astral Shard", number: 2049, price: 6.1 },
+
+                // ===== BONDED RING =====
+                { collection: "Bonded Ring", number: 1123, price: 45.2 },
+                { collection: "Bonded Ring", number: 1124, price: 68.9 },
+
+                // ===== DUROV'S CAP =====
+                { collection: "Durov's Cap", number: 420, price: 89.7 },
+                { collection: "Durov's Cap", number: 421, price: 156.3 },
+
+                // ===== DIAMOND RING =====
+                { collection: "Diamond Ring", number: 5512, price: 67.3 },
+                { collection: "Diamond Ring", number: 5513, price: 124.8 },
+
+                // ===== EVIL EYE =====
+                { collection: "Evil Eye", number: 2231, price: 4.5 },
+                { collection: "Evil Eye", number: 2232, price: 9.7 },
+
+                // ===== ETERNAL ROSE =====
+                { collection: "Eternal Rose", number: 7781, price: 34.8 },
+                { collection: "Eternal Rose", number: 7782, price: 52.3 },
+
+                // ===== ION GEM =====
+                { collection: "Ion Gem", number: 3381, price: 56.4 },
+                { collection: "Ion Gem", number: 3382, price: 78.9 },
+
+                // ===== KISSED FROG =====
+                { collection: "Kissed Frog", number: 4562, price: 9.6 },
+                { collection: "Kissed Frog", number: 4563, price: 14.8 },
+
+                // ===== PRECIOUS PEACH =====
+                { collection: "Precious Peach", number: 8841, price: 42.3 },
+                { collection: "Precious Peach", number: 8842, price: 38.7 },
+
+                // ===== SCARED CAT =====
+                { collection: "Scared Cat", number: 6651, price: 18.9 },
+                { collection: "Scared Cat", number: 6652, price: 25.6 },
+
+                // ===== VINTAGE CIGAR =====
+                { collection: "Vintage Cigar", number: 4000, price: 35.7 },
+                { collection: "Vintage Cigar", number: 4001, price: 42.1 },
+
+                // ===== SHARP TONGUE =====
+                { collection: "Sharp Tongue", number: 1281, price: 25.4 },
+                { collection: "Sharp Tongue", number: 1282, price: 31.2 }
+            ];
 
             // Модели для каждой коллекции
             const models = {
-                "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal", "Shadow", "Sunset", "Frost",
-                    "Diamond", "Ruby", "Sapphire", "Onyx", "Pearl", "Amber"
-                ],
-                "Astral Shard": ["Nebula", "Supernova", "Galaxy", "Pulsar", "Quasar", "Void", "Stellar", "Cosmic",
-                    "Orion", "Sirius", "Vega", "Polaris", "Andromeda", "Cassiopeia"
-                ],
-                "Crystal Orb": ["Sapphire", "Ruby", "Amethyst", "Emerald", "Diamond", "Opal", "Topaz", "Jade", "Quartz",
-                    "Garnet", "Turquoise", "Lapis", "Onyx", "Pearl"
-                ],
-                "Void Mask": ["Obsidian", "Moonstone", "Shadow", "Celestial", "Abyss", "Eclipse", "Dusk", "Aurora",
-                    "Nebula", "Void", "Dark", "Light", "Star", "Comet"
-                ],
-                "Plush Pepe": ["Classic", "Rare", "Legendary", "Golden", "Rainbow", "Dark", "Shiny", "Mystic", "Royal",
-                    "Crystal", "Shadow", "Frost", "Ember", "Storm"
-                ],
-                "Bonded Ring": ["Silver", "Gold", "Platinum", "Rose", "Black", "White", "Titanium", "Mithril", "Bronze",
-                    "Copper", "Steel", "Iron", "Cobalt", "Nickel"
-                ],
-                "Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Gold", "Diamond", "Platinum", "Royal", "Supreme",
-                    "Elegant", "Crown", "Pearl", "Sapphire", "Ruby", "Emerald"
-                ],
-                "Diamond Ring": ["Classic", "Royal", "Imperial", "Elegant", "Crown", "Pearl", "Sapphire", "Ruby",
-                    "Emerald", "Onyx", "Opal", "Topaz", "Amethyst", "Garnet"
-                ],
-                "Evil Eye": ["Classic", "Dark", "Ancient", "Golden", "Crystal", "Shadow", "Light", "Storm", "Fire",
-                    "Ice", "Thunder", "Wind", "Earth", "Water"
-                ],
-                "Eternal Rose": ["Red", "Blue", "Golden", "White", "Black", "Pink", "Purple", "Rainbow", "Silver",
-                    "Crystal", "Shadow", "Fire", "Ice", "Storm"
-                ],
-                "Ion Gem": ["Blue", "Red", "Rainbow", "Gold", "Plasma", "Fusion", "Quantum", "Infinite", "Crystal",
-                    "Shadow", "Light", "Storm", "Fire", "Ice"
-                ],
-                "Kissed Frog": ["Prince", "Princess", "King", "Queen", "Jester", "Mage", "Knight", "Dragon", "Wizard",
-                    "Elf", "Orc", "Goblin", "Troll", "Fairy"
-                ],
-                "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby", "Sapphire", "Emerald", "Onyx",
-                    "Opal", "Topaz", "Amethyst", "Garnet", "Turquoise"
-                ],
-                "Precious Peach": ["Golden", "Royal", "Sweet", "Honey", "Sunset", "Blush", "Tropical", "Deluxe",
-                    "Crystal", "Shadow", "Light", "Storm", "Fire", "Ice"
-                ],
-                "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith", "Specter", "Ghoul", "Demon", "Angel",
-                    "Beast", "Void", "Light", "Storm", "Fire"
-                ],
-                "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Claro", "Oscuro", "Candela", "Habano", "Connecticut",
-                    "Ecuador", "Nicaragua", "Cuban", "Dominican", "Honduran", "Mexican"
-                ],
-                "Sharp Tongue": ["Venom", "Bite", "Strike", "Poison", "Sharp", "Fangs", "Toxic", "Deadly", "Venomous",
-                    "Savage", "Wild", "Fierce", "Brutal", "Vicious"
-                ]
+                "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal"],
+                "Astral Shard": ["Nebula", "Supernova", "Galaxy", "Pulsar", "Quasar"],
+                "Plush Pepe": ["Classic", "Rare", "Legendary", "Golden", "Rainbow", "Dark"],
+                "Bonded Ring": ["Silver", "Gold", "Platinum", "Rose", "Black"],
+                "Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Gold", "Diamond"],
+                "Diamond Ring": ["Classic", "Royal", "Imperial", "Elegant", "Crown"],
+                "Evil Eye": ["Classic", "Dark", "Ancient", "Golden", "Crystal"],
+                "Eternal Rose": ["Red", "Blue", "Golden", "White", "Black"],
+                "Ion Gem": ["Blue", "Red", "Rainbow", "Gold", "Plasma"],
+                "Kissed Frog": ["Prince", "Princess", "King", "Queen", "Jester"],
+                "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl"],
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Honey", "Sunset"],
+                "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
+                "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Claro", "Oscuro"],
+                "Sharp Tongue": ["Venom", "Bite", "Strike", "Poison", "Sharp"]
             };
 
-            const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Frost", "Storm",
-                "Nebula", "Galaxy", "Aurora", "Eclipse", "Twilight", "Dawn"
-            ];
-            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Dragon", "Phoenix",
-                "Wolf", "Eagle", "Lion", "Snake", "Owl"
-            ];
+            const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal"];
+            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun"];
             const ownerAddresses = [
                 "UQC0hzwcQrtP58TS6ugiYVQ8owyMRw5mdyy8sBoQwnuH2vVV",
-                "UQDPxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxX",
-                "UQAkLhFwQxRzYqTpMdNwXvZxLkPqRsTuVwYzAbCdEfGhIjK",
-                "UQBxYzAbCdEfGhIjKlMnOpQrStUvWxYzAbCdEfGhIjKlM",
-                "UQCdEfGhIjKlMnOpQrStUvWxYzAbCdEfGhIjKlMnOpQr"
+                "UQDPxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxX"
             ];
 
-            collections.forEach((collection) => {
-                const count = 14;
+            realNFTs.forEach((item, index) => {
+                const collection = item.collection;
+                const num = item.number;
+                const price = item.price;
 
-                for (let i = 0; i < count; i++) {
-                    const num = workingUrls[collection] ? workingUrls[collection][i] : 1000 + i;
-                    const model = (models[collection] || ["Classic", "Rare", "Epic", "Legendary", "Mystic", "Shadow",
-                        "Golden", "Crystal", "Royal", "Celestial", "Void", "Storm", "Fire", "Ice"
-                    ])[i % 14];
-                    const backdrop = backdrops[i % backdrops.length];
-                    const symbol = symbols[i % symbols.length];
-                    const price = (COLLECTIONS_DATA[collection].floorPrice + (i * 0.7 + Math.random() * 1.5)).toFixed(
-                    1);
-                    const statuses = ["for-sale", "for-sale", "for-sale", "for-sale", "for-sale", "for-sale",
-                        "for-sale", "on-auction", "on-auction", "sold", "sold", "sold", "sold", "sold"
-                    ];
-                    const status = statuses[i % statuses.length];
+                // Формируем slug для URL
+                let slug = collection.toLowerCase()
+                    .replace(/\s/g, '')
+                    .replace(/'/g, '')
+                    .replace(/đ/g, 'durovs')
+                    .replace(/ğ/g, 'g');
 
-                    let slug = collection.toLowerCase()
-                        .replace(/\s/g, '')
-                        .replace(/'/g, '')
-                        .replace(/đ/g, 'durovs')
-                        .replace(/ğ/g, 'g');
-
-                    if (collection === "Sharp Tongue") {
-                        slug = "sharp-tongue";
-                    }
-
-                    const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
-
-                    allNFTs.push({
-                        name: `${collection} #${num}`,
-                        collection: collection,
-                        lottie: lottieUrl,
-                        description: `An exclusive ${collection} with ${model} appearance on ${backdrop} background with ${symbol} icon.`,
-                        attributes: [
-                            { trait_type: "Model", value: model },
-                            { trait_type: "Backdrop", value: backdrop },
-                            { trait_type: "Symbol", value: symbol }
-                        ],
-                        price: parseFloat(price),
-                        status: status,
-                        number: num,
-                        owner: ownerAddresses[i % ownerAddresses.length],
-                        issued: `${i + 1} of ${count}`
-                    });
+                if (collection === "Sharp Tongue") {
+                    slug = "sharp-tongue";
                 }
+
+                const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
+
+                const model = (models[collection] || ["Classic"])[index % (models[collection] || ["Classic"]).length];
+                const backdrop = backdrops[index % backdrops.length];
+                const symbol = symbols[index % symbols.length];
+
+                // Статусы: первые 70% - for-sale, остальные - on-auction или sold
+                const statuses = ["for-sale", "for-sale", "for-sale", "for-sale", "for-sale", "for-sale", "for-sale",
+                    "on-auction", "on-auction", "sold"
+                ];
+                const status = statuses[index % statuses.length];
+
+                allNFTs.push({
+                    name: `${collection} #${num}`,
+                    collection: collection,
+                    lottie: lottieUrl,
+                    description: `An exclusive ${collection} with ${model} appearance on ${backdrop} background with ${symbol} icon.`,
+                    attributes: [
+                        { trait_type: "Model", value: model },
+                        { trait_type: "Backdrop", value: backdrop },
+                        { trait_type: "Symbol", value: symbol }
+                    ],
+                    price: price,
+                    status: status,
+                    number: num,
+                    owner: ownerAddresses[index % ownerAddresses.length],
+                    issued: `${index + 1} of ${realNFTs.length}`
+                });
             });
 
             return allNFTs;
@@ -1044,7 +1047,7 @@
                             <div class="item-name">${nft.name}</div>
                             <div class="item-collection">${nft.collection}</div>
                         </div>
-                        <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
+                        <div class="item-price">${nft.price.toFixed(3)} GRAM</div>
                         <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
                     </div>
                 `;
@@ -1285,7 +1288,7 @@
             document.getElementById('detailStatus').textContent = statusMap[nft.status] || nft.status;
 
             if (nft.price > 0) {
-                document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(2)} GRAM`;
+                document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(3)} GRAM`;
                 document.getElementById('detailPriceUsd').textContent = `≈ $${(nft.price * 5.2).toFixed(2)}`;
                 document.getElementById('detailPrice').style.display = 'flex';
             } else {
@@ -1374,8 +1377,8 @@
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             const total = getCartTotal();
-            if (confirm(`💎 Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(2)} GRAM`)) {
-                alert(`✅ Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(2)} GRAM`);
+            if (confirm(`💎 Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(3)} GRAM`)) {
+                alert(`✅ Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM`);
                 cart = [];
                 saveCart();
                 cartModal.classList.remove('open');
