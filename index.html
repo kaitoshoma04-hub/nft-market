@@ -867,7 +867,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ
+        // 1. КОЛЛЕКЦИИ (Swiss Watch удалена, добавлена Berry Box)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -884,7 +884,7 @@
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
             "Precious Peach": { icon: "🍑", floorPrice: 29.9 },
-            "Swiss Watch": { icon: "⌚", floorPrice: 299 }
+            "Berry Box": { icon: "🍓", floorPrice: 12 }
         };
 
         // ============================================================
@@ -894,7 +894,7 @@
             const allNFTs = [];
 
             const realNFTs = [
-                // ===== PLUSH PEPE (13 шт - удалены #8008 и #9009) =====
+                // ===== PLUSH PEPE (13 шт) =====
                 { collection: "Plush Pepe", number: 2656, price: 4230 },
                 { collection: "Plush Pepe", number: 100, price: 5555 },
                 { collection: "Plush Pepe", number: 1412, price: 4870 },
@@ -1059,7 +1059,7 @@
                 { collection: "Vintage Cigar", number: 4013, price: 36.9 },
                 { collection: "Vintage Cigar", number: 4014, price: 43.2 },
 
-                // ===== PRECIOUS PEACH (7 шт - удалены #8841, #8842, #8843) =====
+                // ===== PRECIOUS PEACH (7 шт) =====
                 { collection: "Precious Peach", number: 2153, price: 11.111 },
                 { collection: "Precious Peach", number: 11, price: 1.999 },
                 { collection: "Precious Peach", number: 1080, price: 3.250 },
@@ -1068,20 +1068,30 @@
                 { collection: "Precious Peach", number: 1348, price: 1.234 },
                 { collection: "Precious Peach", number: 663, price: 349 },
 
-                // ===== SWISS WATCH (13 шт) =====
-                { collection: "Swiss Watch", number: 7799, price: 13588 },
-                { collection: "Swiss Watch", number: 3964, price: 1234 },
-                { collection: "Swiss Watch", number: 15777, price: 2777 },
-                { collection: "Swiss Watch", number: 11240, price: 555 },
-                { collection: "Swiss Watch", number: 16315, price: 450 },
-                { collection: "Swiss Watch", number: 1904, price: 999 },
-                { collection: "Swiss Watch", number: 16539, price: 1555 },
-                { collection: "Swiss Watch", number: 23288, price: 299 },
-                { collection: "Swiss Watch", number: 4141, price: 888 },
-                { collection: "Swiss Watch", number: 7777, price: 4444 },
-                { collection: "Swiss Watch", number: 10001, price: 3333 },
-                { collection: "Swiss Watch", number: 20202, price: 2222 },
-                { collection: "Swiss Watch", number: 30303, price: 1111 }
+                // ===== BERRY BOX (23 шт) =====
+                { collection: "Berry Box", number: 1, price: 12 },
+                { collection: "Berry Box", number: 2, price: 15 },
+                { collection: "Berry Box", number: 3, price: 18 },
+                { collection: "Berry Box", number: 4, price: 22 },
+                { collection: "Berry Box", number: 5, price: 25 },
+                { collection: "Berry Box", number: 6, price: 30 },
+                { collection: "Berry Box", number: 7, price: 35 },
+                { collection: "Berry Box", number: 8, price: 40 },
+                { collection: "Berry Box", number: 9, price: 45 },
+                { collection: "Berry Box", number: 10, price: 50 },
+                { collection: "Berry Box", number: 11, price: 55 },
+                { collection: "Berry Box", number: 12, price: 60 },
+                { collection: "Berry Box", number: 13, price: 65 },
+                { collection: "Berry Box", number: 14, price: 70 },
+                { collection: "Berry Box", number: 15, price: 75 },
+                { collection: "Berry Box", number: 16, price: 80 },
+                { collection: "Berry Box", number: 17, price: 85 },
+                { collection: "Berry Box", number: 18, price: 90 },
+                { collection: "Berry Box", number: 19, price: 95 },
+                { collection: "Berry Box", number: 20, price: 100 },
+                { collection: "Berry Box", number: 21, price: 110 },
+                { collection: "Berry Box", number: 22, price: 120 },
+                { collection: "Berry Box", number: 23, price: 130 }
             ];
 
             // Модели для каждой коллекции
@@ -1100,7 +1110,11 @@
                 "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
                 "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe"],
-                "Swiss Watch": ["Classic", "Sport", "Elegant", "Luxury", "Diamond", "Platinum", "Gold", "Rose Gold"]
+                "Berry Box": ["Strawberry", "Blueberry", "Raspberry", "Blackberry", "Cherry", "Cranberry",
+                    "Gooseberry", "Elderberry", "Mulberry", "Cloudberry", "Huckleberry", "Lingonberry",
+                    "Boysenberry", "Marionberry", "Salmonberry", "Thimbleberry", "Wineberry", "Youngberry",
+                    "Loganberry", "Tayberry", "Tumbleberry", "Wonderberry", "Miracleberry"
+                ]
             };
 
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow", "Aurora",
@@ -1124,7 +1138,7 @@
                     .replace(/đ/g, 'durovs')
                     .replace(/-/g, '');
 
-                if (collection === "Swiss Watch") slug = "swiss-watch";
+                if (collection === "Berry Box") slug = "berry-box";
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
