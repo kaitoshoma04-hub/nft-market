@@ -737,7 +737,6 @@
     ============================================================ -->
     <div class="top-bar">
         <div class="logo" id="logoBtn">
-            <!-- Логотип TON (встроенный SVG) -->
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#47a1ff"/>
                 <path d="M12 4L6 12L12 20L18 12L12 4Z" fill="#ffffff" fill-opacity="0.8"/>
@@ -762,13 +761,11 @@
     ОСНОВНОЙ КОНТЕНТ
     ============================================================ -->
     <div id="app">
-        <!-- Заголовок -->
         <div class="page-header">
             <h1>🔥 Все подарки</h1>
             <span class="gift-count" id="giftCount">0 шт.</span>
         </div>
 
-        <!-- Фильтры -->
         <div class="filters" id="filtersContainer">
             <button class="filter-btn active" data-filter="all">Все</button>
             <button class="filter-btn" data-filter="for-sale">Продаётся</button>
@@ -776,12 +773,8 @@
             <button class="filter-btn" data-filter="sold">Продано</button>
         </div>
 
-        <!-- Сетка подарков -->
         <div id="gifts-container"></div>
 
-        <!-- ============================================================
-        ПРОФИЛЬ (как на Fragment)
-        ============================================================ -->
         <div class="profile-section" id="profileSection">
             <div class="profile-header">
                 <div class="avatar-big" id="avatarBig">
@@ -891,7 +884,7 @@
 
     <script>
         // ============================================================
-        // 1. ВСЕ 114 КОЛЛЕКЦИЙ С ФРАГМЕНТА (РЕАЛЬНЫЕ НАЗВАНИЯ)
+        // 1. ВСЕ КОЛЛЕКЦИИ С ФРАГМЕНТА (РЕАЛЬНЫЕ НАЗВАНИЯ)
         // ============================================================
         const COLLECTIONS = [
             "Artisan Bricks", "Astral Shards", "B-Day Candles", "Berry Boxes",
@@ -933,14 +926,12 @@
             let id = 1;
 
             COLLECTIONS.forEach(collection => {
-                // Для каждой коллекции генерируем 5 подарков с разными номерами
                 for (let i = 1; i <= 5; i++) {
                     const number = String(100 + Math.floor(Math.random() * 9000));
                     const statuses = ['for-sale', 'on-auction', 'sold'];
                     const status = statuses[Math.floor(Math.random() * statuses.length)];
                     const price = (10 + Math.random() * 500).toFixed(0);
 
-                    // Создаем слаг для URL (как на Fragment)
                     const slug = collection.toLowerCase()
                         .replace(/['\s]/g, '-')
                         .replace(/-+/g, '-')
@@ -978,10 +969,45 @@
         }
 
         // ============================================================
-        // 3. ФУНКЦИЯ ДЛЯ ПОЛУЧЕНИЯ LOTTIE С FRAGMENT
+        // 3. ПОЛУЧЕНИЕ LOTTIE С ОБХОДОМ CORS
         // ============================================================
+        // Используем прокси для обхода CORS
         function getLottieUrl(slug, number) {
-            return `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
+            // Прямой URL
+            const directUrl = `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
+            // Прокси через CORS-сервис
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`;
+            return proxyUrl;
+        }
+
+        // Альтернативный способ - загрузка через fetch + blob
+        async function loadLottieWithProxy(container, slug, number) {
+            try {
+                const directUrl = `https://nft.fragment.com/gift/${slug}-${number}.lottie.json`;
+                // Используем прокси
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`;
+
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const jsonData = await response.json();
+
+                // Загружаем анимацию из полученных данных
+                lottie.loadAnimation({
+                    container: container,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    animationData: jsonData,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid meet'
+                    }
+                });
+                return true;
+            } catch (error) {
+                console.error(`Failed to load Lottie for ${slug}-${number}:`, error);
+                return false;
+            }
         }
 
         // ============================================================
@@ -1054,7 +1080,6 @@
                 filtered = allGifts.filter(g => g.status === filter);
             }
 
-            // Если профиль открыт, показываем только купленные подарки
             if (profileVisible && document.getElementById('profileSection').classList.contains('active')) {
                 filtered = allGifts.filter(g => user.purchased.includes(g.id));
             }
@@ -1063,8 +1088,6 @@
                 const card = document.createElement('div');
                 card.className = 'gift-card';
                 const animId = `lottie-${gift.id}`;
-                const lottieUrl = getLottieUrl(gift.slug, gift.number);
-                const isPurchased = user.purchased.includes(gift.id);
 
                 const statusLabels = {
                     'for-sale': 'Продаётся',
@@ -1073,7 +1096,7 @@
                 };
 
                 card.innerHTML = `
-                    <div id="${animId}" class="gift-animation"></div>
+                    <div id="${animId}" class="gift-animation"><div style="color:#666;font-size:12px;">Загрузка...</div></div>
                     <div class="gift-name">${gift.name}</div>
                     <div class="gift-hashtag">${gift.hashtag}</div>
                     <div class="gift-price-row">
@@ -1094,23 +1117,21 @@
 
                 container.appendChild(card);
 
-                // Загрузка Lottie
+                // Загрузка Lottie через прокси
                 const animContainer = document.getElementById(animId);
                 if (animContainer) {
-                    try {
-                        lottie.loadAnimation({
-                            container: animContainer,
-                            renderer: 'svg',
-                            loop: true,
-                            autoplay: true,
-                            path: lottieUrl,
-                            rendererSettings: {
-                                preserveAspectRatio: 'xMidYMid meet'
+                    // Показываем индикатор загрузки
+                    animContainer.innerHTML = '<div style="color:#666;font-size:12px;">⏳</div>';
+
+                    loadLottieWithProxy(animContainer, gift.slug, gift.number)
+                        .then(success => {
+                            if (!success) {
+                                animContainer.innerHTML = '<div style="color:#666;font-size:12px;">⚠️</div>';
                             }
+                        })
+                        .catch(() => {
+                            animContainer.innerHTML = '<div style="color:#666;font-size:12px;">⚠️</div>';
                         });
-                    } catch (e) {
-                        // Тихая ошибка - анимация просто не загрузится
-                    }
                 }
 
                 card.addEventListener('click', () => {
@@ -1168,23 +1189,17 @@
 
             // Загрузка анимации в модалку
             const animContainer = document.getElementById('detailAnimation');
-            animContainer.innerHTML = '';
-            const lottieUrl = getLottieUrl(gift.slug, gift.number);
+            animContainer.innerHTML = '<div style="color:#666;font-size:16px;">⏳ Загрузка...</div>';
 
-            try {
-                lottie.loadAnimation({
-                    container: animContainer,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: lottieUrl,
-                    rendererSettings: {
-                        preserveAspectRatio: 'xMidYMid meet'
+            loadLottieWithProxy(animContainer, gift.slug, gift.number)
+                .then(success => {
+                    if (!success) {
+                        animContainer.innerHTML = '<div style="color:#666;font-size:16px;">⚠️ Не удалось загрузить</div>';
                     }
+                })
+                .catch(() => {
+                    animContainer.innerHTML = '<div style="color:#666;font-size:16px;">⚠️ Не удалось загрузить</div>';
                 });
-            } catch (e) {
-                // Тихая ошибка
-            }
 
             document.getElementById('detailModal').classList.add('active');
         }
@@ -1224,7 +1239,7 @@
         }
 
         // ============================================================
-        // 9. ПРОФИЛЬ (открытие/закрытие)
+        // 9. ПРОФИЛЬ
         // ============================================================
         function toggleProfile() {
             const section = document.getElementById('profileSection');
@@ -1253,7 +1268,6 @@
             const user = getUserProfile();
             const filtered = allGifts.filter(g => user.purchased.includes(g.id));
             document.getElementById('giftCount').textContent = `${filtered.length} шт.`;
-            // Перерисовываем только купленные
             renderGifts('all');
         });
 
@@ -1268,7 +1282,7 @@
         });
 
         // ============================================================
-        // 12. ДОБАВИТЬ ПОДАРОК (в модалке)
+        // 12. ДОБАВИТЬ ПОДАРОК
         // ============================================================
         document.getElementById('addGiftBtn').addEventListener('click', () => {
             document.getElementById('addModal').classList.add('active');
