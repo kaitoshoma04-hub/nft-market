@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NFT Подарки</title>
+    <title>Allow Market</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
@@ -45,17 +45,57 @@
         .header h1 {
             font-size: 22px;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #8e8ea0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .header .stats {
-            font-size: 13px;
-            color: #6e6e80;
-        }
-        .header .stats span {
             color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        .header .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .header .profile:active {
+            opacity: 0.7;
+        }
+        .header .profile .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
             font-weight: 700;
+            color: #ffffff;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+        }
+        .header .profile .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .header .profile .avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .header .profile .username {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .header .profile .username span {
+            color: #8e8ea0;
+            font-weight: 400;
         }
         .filter-section {
             padding: 12px 16px;
@@ -689,8 +729,14 @@
 
     <div class="app" id="app">
         <div class="header">
-            <h1>🎁 Подарки</h1>
-            <div class="stats"><span id="totalCount">0</span> NFT</div>
+            <h1>Allow Market</h1>
+            <div class="profile" id="profileBtn">
+                <div class="avatar" id="avatarContainer">
+                    <div class="avatar-placeholder" id="avatarPlaceholder">👤</div>
+                    <img id="avatarImg" style="display:none;" alt="avatar">
+                </div>
+                <div class="username" id="usernameDisplay">Профиль <span>▼</span></div>
+            </div>
         </div>
 
         <div class="filter-section">
@@ -790,12 +836,12 @@
 
     <script>
         // ============================================================
-        // 1. ВСЕ КОЛЛЕКЦИИ
+        // 1. КОЛЛЕКЦИИ (обновлённые)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
             "Astral Shard": { icon: "💎", floorPrice: 8.2 },
-            "Plush Pepe": { icon: "🐸", floorPrice: 6.8 },
+            "Plush Pepe": { icon: "🐸", floorPrice: 4000 },
             "Bonded Ring": { icon: "💍", floorPrice: 45.2 },
             "Durov's Cap": { icon: "🎩", floorPrice: 89.7 },
             "Diamond Ring": { icon: "💎", floorPrice: 67.3 },
@@ -804,27 +850,27 @@
             "Ion Gem": { icon: "⚡", floorPrice: 56.4 },
             "Kissed Frog": { icon: "🐸", floorPrice: 9.6 },
             "Nail Bracelet": { icon: "📿", floorPrice: 28.5 },
-            "Precious Peach": { icon: "🍑", floorPrice: 42.3 },
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
-            "Sharp Tongue": { icon: "👅", floorPrice: 25.4 }
+            "Artisan Brick": { icon: "🧱", floorPrice: 99 },
+            "Snoop Cigar": { icon: "🚬", floorPrice: 100 },
+            "Snoop Dogg": { icon: "🐶", floorPrice: 77 }
         };
 
         // ============================================================
-        // 2. ВСЕ NFT (ВЕРНУЛ ВСЕ + ДОБАВИЛ НОВЫЕ)
+        // 2. ВСЕ NFT (обновлённые)
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
 
-            // ВСЕ РЕАЛЬНЫЕ НОМЕРА И ЦЕНЫ С FRAGMENT
             const realNFTs = [
-                // ===== PLUSH PEPE =====
-                { collection: "Plush Pepe", number: 2656, price: 4.574 },
-                { collection: "Plush Pepe", number: 100, price: 6.791 },
-                { collection: "Plush Pepe", number: 1412, price: 5.555 },
-                { collection: "Plush Pepe", number: 1382, price: 5.999 },
-                { collection: "Plush Pepe", number: 2658, price: 25.585 },
-                { collection: "Plush Pepe", number: 1179, price: 20.888 },
+                // ===== PLUSH PEPE (новые цены 4000-5555) =====
+                { collection: "Plush Pepe", number: 2656, price: 4230 },
+                { collection: "Plush Pepe", number: 100, price: 5555 },
+                { collection: "Plush Pepe", number: 1412, price: 4870 },
+                { collection: "Plush Pepe", number: 1382, price: 5120 },
+                { collection: "Plush Pepe", number: 2658, price: 4000 },
+                { collection: "Plush Pepe", number: 1179, price: 4420 },
 
                 // ===== NAIL BRACELET =====
                 { collection: "Nail Bracelet", number: 2655, price: 2.655 },
@@ -883,19 +929,6 @@
                 { collection: "Kissed Frog", number: 4563, price: 14.8 },
                 { collection: "Kissed Frog", number: 4564, price: 11.2 },
 
-                // ===== PRECIOUS PEACH =====
-                { collection: "Precious Peach", number: 8841, price: 42.3 },
-                { collection: "Precious Peach", number: 8842, price: 38.7 },
-                { collection: "Precious Peach", number: 8843, price: 29.9 },
-                // НОВЫЕ
-                { collection: "Precious Peach", number: 2153, price: 11.111 },
-                { collection: "Precious Peach", number: 11, price: 1.999 },
-                { collection: "Precious Peach", number: 1080, price: 3.250 },
-                { collection: "Precious Peach", number: 1508, price: 600 },
-                { collection: "Precious Peach", number: 1780, price: 399 },
-                { collection: "Precious Peach", number: 1348, price: 1.234 },
-                { collection: "Precious Peach", number: 663, price: 349 },
-
                 // ===== SCARED CAT =====
                 { collection: "Scared Cat", number: 6651, price: 18.9 },
                 { collection: "Scared Cat", number: 6652, price: 25.6 },
@@ -905,25 +938,34 @@
                 { collection: "Vintage Cigar", number: 4000, price: 35.7 },
                 { collection: "Vintage Cigar", number: 4001, price: 42.1 },
                 { collection: "Vintage Cigar", number: 4002, price: 38.4 },
-                // НОВЫЕ
-                { collection: "Vintage Cigar", number: 14931, price: 1.234 },
-                { collection: "Vintage Cigar", number: 11571, price: 333 },
-                { collection: "Vintage Cigar", number: 4587, price: 333 },
-                { collection: "Vintage Cigar", number: 10389, price: 150 },
-                { collection: "Vintage Cigar", number: 21254, price: 125 },
 
-                // ===== SHARP TONGUE =====
-                { collection: "Sharp Tongue", number: 1281, price: 25.4 },
-                { collection: "Sharp Tongue", number: 1282, price: 31.2 },
-                { collection: "Sharp Tongue", number: 1283, price: 28.6 },
-                // НОВЫЕ
-                { collection: "Sharp Tongue", number: 377, price: 1000 },
-                { collection: "Sharp Tongue", number: 84, price: 100 },
-                { collection: "Sharp Tongue", number: 6478, price: 45 },
-                { collection: "Sharp Tongue", number: 4803, price: 250 },
-                { collection: "Sharp Tongue", number: 589, price: 888 },
-                { collection: "Sharp Tongue", number: 6565, price: 120 },
-                { collection: "Sharp Tongue", number: 248, price: 2500 }
+                // ===== ARTISAN BRICK (новая коллекция) =====
+                { collection: "Artisan Brick", number: 5436, price: 550 },
+                { collection: "Artisan Brick", number: 3399, price: 301 },
+                { collection: "Artisan Brick", number: 2178, price: 444 },
+                { collection: "Artisan Brick", number: 1229, price: 150 },
+                { collection: "Artisan Brick", number: 754, price: 147.92 },
+                { collection: "Artisan Brick", number: 234, price: 150 },
+                { collection: "Artisan Brick", number: 1060, price: 122 },
+                { collection: "Artisan Brick", number: 4323, price: 99 },
+
+                // ===== SNOOP CIGAR (новая коллекция) =====
+                { collection: "Snoop Cigar", number: 8744, price: 999 },
+                { collection: "Snoop Cigar", number: 111111, price: 666 },
+                { collection: "Snoop Cigar", number: 2311, price: 250 },
+                { collection: "Snoop Cigar", number: 103429, price: 100 },
+                { collection: "Snoop Cigar", number: 268, price: 100 },
+
+                // ===== SNOOP DOGG (новая коллекция) =====
+                { collection: "Snoop Dogg", number: 223159, price: 499 },
+                { collection: "Snoop Dogg", number: 543421, price: 250 },
+                { collection: "Snoop Dogg", number: 133462, price: 188 },
+                { collection: "Snoop Dogg", number: 266423, price: 115 },
+                { collection: "Snoop Dogg", number: 289827, price: 99 },
+                { collection: "Snoop Dogg", number: 96357, price: 88 },
+                { collection: "Snoop Dogg", number: 202222, price: 77 },
+                { collection: "Snoop Dogg", number: 55555, price: 1000 },
+                { collection: "Snoop Dogg", number: 276231, price: 77 }
             ];
 
             // Модели для каждой коллекции
@@ -939,17 +981,19 @@
                 "Ion Gem": ["Blue", "Red", "Rainbow"],
                 "Kissed Frog": ["Prince", "Princess", "King"],
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
-                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano"],
-                "Sharp Tongue": ["Venom", "Bite", "Strike", "Fang", "Poison"]
+                "Artisan Brick": ["Rustic", "Polished", "Glazed", "Matte", "Textured", "Smooth"],
+                "Snoop Cigar": ["Blunt", "Cuban", "Premium", "Gold", "Platinum"],
+                "Snoop Dogg": ["OG", "West Coast", "Chronic", "G-funk", "Legendary", "Iconic", "Diamond", "Platinum"]
             };
 
-            const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame"];
-            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon"];
+            const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
+            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
             const ownerAddresses = [
                 "UQC0hzwcQrtP58TS6ugiYVQ8owyMRw5mdyy8sBoQwnuH2vVV",
-                "UQDPxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxX"
+                "UQDPxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxX",
+                "UQAxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxY"
             ];
 
             realNFTs.forEach((item, index) => {
@@ -962,9 +1006,9 @@
                     .replace(/'/g, '')
                     .replace(/đ/g, 'durovs');
 
-                if (collection === "Sharp Tongue") {
-                    slug = "sharp-tongue";
-                }
+                if (collection === "Artisan Brick") slug = "artisan-brick";
+                if (collection === "Snoop Cigar") slug = "snoop-cigar";
+                if (collection === "Snoop Dogg") slug = "snoop-dogg";
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
@@ -1114,7 +1158,49 @@
         }
 
         // ============================================================
-        // 4. РЕНДЕРИНГ
+        // 4. ПРОФИЛЬ (Telegram Avatar)
+        // ============================================================
+        function initProfile() {
+            const avatarImg = document.getElementById('avatarImg');
+            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+            const usernameDisplay = document.getElementById('usernameDisplay');
+
+            // Пытаемся получить данные пользователя из Telegram WebApp
+            if (window.Telegram && window.Telegram.WebApp) {
+                const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                if (user) {
+                    if (user.photo_url) {
+                        avatarImg.src = user.photo_url;
+                        avatarImg.style.display = 'block';
+                        avatarPlaceholder.style.display = 'none';
+                    } else {
+                        const initials = user.first_name?.charAt(0).toUpperCase() || '👤';
+                        avatarPlaceholder.textContent = initials;
+                        avatarPlaceholder.style.display = 'flex';
+                        avatarImg.style.display = 'none';
+                    }
+                    usernameDisplay.innerHTML = `${user.first_name || 'Пользователь'} <span>▼</span>`;
+                }
+            } else {
+                // Демо-режим: показываем заглушку
+                avatarPlaceholder.textContent = '👤';
+                avatarPlaceholder.style.display = 'flex';
+                avatarImg.style.display = 'none';
+                usernameDisplay.innerHTML = `Профиль <span>▼</span>`;
+            }
+
+            // Клик по профилю
+            document.getElementById('profileBtn').addEventListener('click', () => {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    window.Telegram.WebApp.openLink('https://t.me/me');
+                } else {
+                    alert('👤 Профиль пользователя\n\nЗдесь будет ваша аватарка и имя из Telegram.');
+                }
+            });
+        }
+
+        // ============================================================
+        // 5. РЕНДЕРИНГ
         // ============================================================
         let currentFilter = 'all';
         const grid = document.getElementById('nftGrid');
@@ -1153,7 +1239,7 @@
             arrow.classList.toggle('open');
         });
 
-        document.getElementById('totalCount').textContent = NFT_DATA.length;
+        // Убираем счётчик сверху справа, он больше не нужен
 
         const lottieCache = new Map();
 
@@ -1289,7 +1375,7 @@
         }
 
         // ============================================================
-        // 5. ДЕТАЛЬНЫЙ ПРОСМОТР
+        // 6. ДЕТАЛЬНЫЙ ПРОСМОТР
         // ============================================================
         const detailOverlay = document.getElementById('detailOverlay');
 
@@ -1390,7 +1476,7 @@
         });
 
         // ============================================================
-        // 6. КОРЗИНА
+        // 7. КОРЗИНА
         // ============================================================
         const cartModal = document.getElementById('cartModal');
 
@@ -1422,8 +1508,9 @@
         });
 
         // ============================================================
-        // 7. ЗАПУСК
+        // 8. ЗАПУСК
         // ============================================================
+        initProfile();
         renderGrid();
         updateCartUI();
 
