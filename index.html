@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NFT Gift Market</title>
-    <!-- Lottie Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
-        /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +23,6 @@
             padding: 12px;
         }
 
-        /* Main App Container — как у Fragment */
         .app-container {
             max-width: 420px;
             width: 100%;
@@ -34,11 +31,8 @@
             padding: 20px 16px 24px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             border: 1px solid #2a3340;
-            position: relative;
-            transition: all 0.2s;
         }
 
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -53,7 +47,6 @@
             background: linear-gradient(135deg, #a57cff, #6f9eff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
         }
 
         .profile-icon {
@@ -76,7 +69,6 @@
             object-fit: cover;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 8px;
@@ -106,7 +98,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
-        /* Filter Row */
         .filter-row {
             display: flex;
             gap: 10px;
@@ -148,12 +139,12 @@
             height: 28px;
         }
 
-        /* Gift Grid */
         .gift-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 14px;
             margin-bottom: 20px;
+            min-height: 200px;
         }
 
         .gift-card {
@@ -165,6 +156,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
 
         .gift-card .lottie-box {
@@ -179,16 +171,12 @@
             overflow: hidden;
         }
 
-        .gift-card .lottie-box lottie-player {
-            width: 100%;
-            height: 100%;
-        }
-
         .gift-name {
             font-weight: 600;
             font-size: 15px;
             margin-bottom: 4px;
             color: #f0f4fa;
+            text-align: center;
         }
 
         .gift-price-row {
@@ -226,7 +214,18 @@
             border-radius: 30px;
         }
 
-        /* Buttons */
+        .gift-number {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #2a3a4e;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            color: #8b9bb5;
+            border: 1px solid #3d5068;
+        }
+
         .action-btn {
             background: #2a3a4e;
             border: none;
@@ -256,7 +255,6 @@
             border-color: #2f4055;
         }
 
-        /* Profile Section */
         .profile-section {
             display: none;
             flex-direction: column;
@@ -314,7 +312,6 @@
             color: #8b9bb5;
         }
 
-        /* Toast message */
         .toast {
             background: #1e2a3a;
             padding: 12px 18px;
@@ -332,7 +329,6 @@
             display: block;
         }
 
-        /* hide market content when profile active */
         .market-content.hidden {
             display: none;
         }
@@ -341,18 +337,48 @@
             display: none;
         }
 
-        /* small */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8b9bb5;
+            grid-column: 1/-1;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #2a3a4e;
+            border-top-color: #6f9eff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .small-note {
             font-size: 12px;
             color: #6a7d99;
             margin-top: 6px;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            padding: 10px;
+            text-align: center;
+            background: #2a1a1a;
+            border-radius: 12px;
+            border: 1px solid #4a2a2a;
+            grid-column: 1/-1;
         }
     </style>
 </head>
 <body>
 
 <div class="app-container" id="app">
-    <!-- Header -->
     <div class="header">
         <h1>🎁 NFT Market</h1>
         <div class="profile-icon" id="profileToggle">
@@ -360,34 +386,28 @@
         </div>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs">
         <button class="tab active" data-tab="market">Маркет</button>
         <button class="tab" data-tab="profile">Профиль</button>
     </div>
 
-    <!-- Market Content -->
     <div id="marketContent" class="market-content">
-        <!-- Filter Row with mini Lottie -->
         <div class="filter-row" id="filterRow">
             <div class="filter-item active" data-filter="all">
                 <span>Все</span>
             </div>
-            <!-- filters will be injected from JS -->
         </div>
-
-        <!-- Gift Grid -->
-        <div class="gift-grid" id="giftGrid"></div>
-
-        <!-- Add Gift Button -->
+        <div class="gift-grid" id="giftGrid">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <div>Загрузка подарков из блокчейна...</div>
+            </div>
+        </div>
         <button class="action-btn primary" id="addGiftBtn">➕ Добавить подарок</button>
-        <div id="toastMessage" class="toast">Для отображения подарка на маркете, пожалуйста передайте его боту @myGiftBot</div>
-        
-        <!-- Withdraw button -->
+        <div id="toastMessage" class="toast"></div>
         <button class="action-btn secondary" id="withdrawBtn" style="margin-top: 10px;">⬆️ Вывести</button>
     </div>
 
-    <!-- Profile Content -->
     <div id="profileContent" class="profile-content hidden">
         <div class="profile-section active">
             <div class="profile-avatar">
@@ -404,9 +424,7 @@
                     <div class="stat-label">TON</div>
                 </div>
             </div>
-            <div style="width:100%; margin-top: 10px;">
-                <button class="action-btn primary" id="editProfileBtn" style="background: #2f4055;">Редактировать</button>
-            </div>
+            <button class="action-btn primary" id="editProfileBtn" style="background: #2f4055;">Редактировать</button>
             <div class="small-note" style="margin-top: 16px;">Аватар синхронизирован с Telegram</div>
         </div>
     </div>
@@ -414,129 +432,254 @@
 
 <script>
     (function() {
-        // ---------- DATA ----------
-        // База данных в localStorage
+        // ---------- КОНФИГУРАЦИЯ ----------
+        // Замените на ваш API ключ TON Center
+        const TON_API_KEY = '045d99debf6b8527dee4f34cb22347fec997027bf8770923b247cbd8a974e49c';
+        const TON_API_URL = 'https://toncenter.com/api/v2/';
+
+        // Адреса ваших NFT-подарков (замените на реальные адреса из TON Center)
+        const NFT_ADDRESSES = [
+            'EQD4pM...', // адрес первого NFT
+            'EQC3dN...', // адрес второго NFT
+            'EQF7xR...', // адрес третьего NFT
+        ];
+
+        // ---------- СОСТОЯНИЕ ----------
         const DB_KEY = 'nftGiftMarketDB';
-
-        // Официальные коллекции и подарки (с Lottie анимациями)
-        const OFFICIAL_COLLECTIONS = [
-            { id: 'cyber', name: 'CyberPunk', icon: '🤖' },
-            { id: 'space', name: 'Space Odyssey', icon: '🚀' },
-            { id: 'animals', name: 'Animalia', icon: '🐉' },
-        ];
-
-        // Lottie анимации (встроенные JSON или ссылки на публичные)
-        // Используем публичные Lottie для демонстрации
-        const LOTTIE_ANIMATIONS = {
-            'cyber': 'https://assets9.lottiefiles.com/packages/lf20_yr6kc3bq.json',
-            'space': 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
-            'animals': 'https://assets1.lottiefiles.com/packages/lf20_qzy1wqni.json',
-            'default': 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
-            'mini_cyber': 'https://assets6.lottiefiles.com/packages/lf20_psxfyhrl.json',
-            'mini_space': 'https://assets7.lottiefiles.com/packages/lf20_w9wzcm2n.json',
-            'mini_animals': 'https://assets9.lottiefiles.com/packages/lf20_ysoh3xtv.json',
-        };
-
-        // Начальные подарки
-        const DEFAULT_GIFTS = [
-            { id: 1, name: 'Nebula Orb', collection: 'space', price: 12.5, lottie: LOTTIE_ANIMATIONS.space },
-            { id: 2, name: 'Cyber Eye', collection: 'cyber', price: 8.0, lottie: LOTTIE_ANIMATIONS.cyber },
-            { id: 3, name: 'Dragon Scale', collection: 'animals', price: 15.0, lottie: LOTTIE_ANIMATIONS.animals },
-            { id: 4, name: 'Star Fragment', collection: 'space', price: 6.5, lottie: LOTTIE_ANIMATIONS.space },
-            { id: 5, name: 'Neon Mask', collection: 'cyber', price: 9.9, lottie: LOTTIE_ANIMATIONS.cyber },
-            { id: 6, name: 'Phoenix Wing', collection: 'animals', price: 22.0, lottie: LOTTIE_ANIMATIONS.animals },
-        ];
-
-        // Состояние
         let state = {
             gifts: [],
+            collections: [],
             filter: 'all',
             profile: {
                 name: 'Пользователь',
                 avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=default',
             },
             currentTab: 'market',
+            isLoading: false,
         };
 
-        // ---------- INIT DB ----------
+        // ---------- РАБОТА С БД ----------
         function loadDB() {
             const stored = localStorage.getItem(DB_KEY);
             if (stored) {
                 try {
                     const parsed = JSON.parse(stored);
-                    state.gifts = parsed.gifts || [];
                     state.profile = parsed.profile || state.profile;
-                    // если нет подарков, загрузим дефолтные
-                    if (state.gifts.length === 0) {
-                        state.gifts = JSON.parse(JSON.stringify(DEFAULT_GIFTS));
-                    }
-                    return;
+                    state.gifts = parsed.gifts || [];
+                    state.collections = parsed.collections || [];
                 } catch (e) {}
             }
-            // если нет или ошибка
-            state.gifts = JSON.parse(JSON.stringify(DEFAULT_GIFTS));
-            saveDB();
         }
 
         function saveDB() {
             localStorage.setItem(DB_KEY, JSON.stringify({
-                gifts: state.gifts,
                 profile: state.profile,
+                gifts: state.gifts,
+                collections: state.collections,
             }));
         }
 
-        // ---------- RENDER ----------
-        function renderFilters() {
-            const container = document.getElementById('filterRow');
-            // очистим кроме "все"
-            const allFilter = container.querySelector('[data-filter="all"]');
-            container.innerHTML = '';
-            container.appendChild(allFilter);
+        // ---------- ЗАГРУЗКА ДАННЫХ ИЗ TON CENTER ----------
+        async function fetchNFTData(address) {
+            try {
+                // 1. Получаем данные NFT через TON Center API
+                const response = await fetch(
+                    `${TON_API_URL}getTokenData?address=${address}`,
+                    {
+                        headers: {
+                            'X-API-Key': TON_API_KEY,
+                        }
+                    }
+                );
 
-            const collections = [...new Set(state.gifts.map(g => g.collection))];
-            collections.forEach(col => {
-                const found = OFFICIAL_COLLECTIONS.find(c => c.id === col);
-                const label = found ? found.name : col;
-                const icon = found ? found.icon : '🎁';
-                const div = document.createElement('div');
-                div.className = `filter-item${state.filter === col ? ' active' : ''}`;
-                div.dataset.filter = col;
-                // mini lottie
-                const miniLottie = document.createElement('div');
-                miniLottie.className = 'mini-lottie';
-                miniLottie.id = `miniLottie_${col}`;
-                div.appendChild(miniLottie);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
 
-                const span = document.createElement('span');
-                span.textContent = `${icon} ${label}`;
-                div.appendChild(span);
+                const data = await response.json();
+                
+                if (!data.result) {
+                    throw new Error('NFT не найден');
+                }
 
-                div.addEventListener('click', (e) => {
-                    document.querySelectorAll('.filter-item').forEach(f => f.classList.remove('active'));
-                    div.classList.add('active');
-                    state.filter = col;
-                    renderGifts();
-                });
-                container.appendChild(div);
+                const tokenData = data.result;
+                
+                // 2. Получаем номер NFT (index)
+                let index = tokenData.index || 0;
+                if (tokenData.metadata && tokenData.metadata.index) {
+                    index = tokenData.metadata.index;
+                }
 
-                // Загружаем мини Lottie
-                const animKey = `mini_${col}`;
-                const path = LOTTIE_ANIMATIONS[animKey] || LOTTIE_ANIMATIONS.default;
-                lottie.loadAnimation({
-                    container: miniLottie,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: path,
-                });
-            });
+                // 3. Получаем коллекцию
+                let collection = tokenData.collection || 'Без коллекции';
+                if (tokenData.metadata && tokenData.metadata.collection) {
+                    collection = tokenData.metadata.collection;
+                }
 
-            // обновим состояние активного фильтра
-            document.querySelectorAll('.filter-item').forEach(f => {
-                f.classList.toggle('active', f.dataset.filter === state.filter);
-            });
+                // 4. Извлекаем метаданные
+                let name = tokenData.metadata?.name || `NFT #${index}`;
+                let price = tokenData.metadata?.price || 0;
+                let lottieUrl = null;
+
+                // 5. Обрабатываем URI если есть
+                if (tokenData.metadata?.uri) {
+                    let uri = tokenData.metadata.uri;
+                    if (uri.startsWith('ipfs://')) {
+                        uri = uri.replace('ipfs://', 'https://ipfs.io/ipfs/');
+                    }
+                    
+                    try {
+                        const metaResponse = await fetch(uri);
+                        if (metaResponse.ok) {
+                            const metaData = await metaResponse.json();
+                            name = metaData.name || name;
+                            price = metaData.price || price;
+                            collection = metaData.collection || collection;
+                            lottieUrl = metaData.lottie || metaData.animation_url || null;
+                            
+                            // Если есть атрибуты с номером
+                            if (metaData.attributes) {
+                                const indexAttr = metaData.attributes.find(a => a.trait_type === 'index' || a.trait_type === 'number');
+                                if (indexAttr) {
+                                    index = parseInt(indexAttr.value) || index;
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('Не удалось загрузить метаданные по URI:', uri);
+                    }
+                }
+
+                // 6. Если lottie напрямую в метаданных
+                if (!lottieUrl && tokenData.metadata?.lottie) {
+                    lottieUrl = tokenData.metadata.lottie;
+                }
+
+                // 7. Конвертируем IPFS ссылки
+                if (lottieUrl && lottieUrl.startsWith('ipfs://')) {
+                    lottieUrl = lottieUrl.replace('ipfs://', 'https://ipfs.io/ipfs/');
+                }
+
+                // 8. Если нет Lottie - используем дефолтную
+                if (!lottieUrl) {
+                    lottieUrl = 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json';
+                }
+
+                return {
+                    id: address,
+                    index: index,
+                    name: name,
+                    price: parseFloat(price) || 0,
+                    collection: collection,
+                    lottie: lottieUrl,
+                    address: address,
+                };
+
+            } catch (error) {
+                console.error(`Ошибка загрузки NFT ${address}:`, error);
+                return null;
+            }
         }
 
+        async function fetchCollectionData(collectionAddress) {
+            try {
+                const response = await fetch(
+                    `${TON_API_URL}getCollectionData?address=${collectionAddress}`,
+                    {
+                        headers: {
+                            'X-API-Key': TON_API_KEY,
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.result || null;
+            } catch (error) {
+                console.error('Ошибка загрузки коллекции:', error);
+                return null;
+            }
+        }
+
+        async function loadGiftsFromBlockchain() {
+            if (state.isLoading) return;
+            state.isLoading = true;
+
+            const grid = document.getElementById('giftGrid');
+            grid.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <div>Загрузка подарков из блокчейна...</div>
+                    <div style="font-size: 12px; margin-top: 8px; color: #6a7d99;">Синхронизация с TON Center</div>
+                </div>
+            `;
+
+            const gifts = [];
+            const collections = new Set();
+
+            for (const address of NFT_ADDRESSES) {
+                const gift = await fetchNFTData(address);
+                if (gift) {
+                    gifts.push(gift);
+                    collections.add(gift.collection);
+                    
+                    // Добавляем информацию о коллекции
+                    if (!state.collections.find(c => c.name === gift.collection)) {
+                        state.collections.push({
+                            name: gift.collection,
+                            count: 0,
+                        });
+                    }
+                }
+                // Небольшая задержка между запросами
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+
+            // Обновляем количество в коллекциях
+            state.collections.forEach(col => {
+                col.count = gifts.filter(g => g.collection === col.name).length;
+            });
+
+            // Если не загрузилось ни одного подарка - используем тестовые
+            if (gifts.length === 0) {
+                gifts.push({
+                    id: 'test1',
+                    index: 1,
+                    name: 'Тестовый подарок #1',
+                    price: 5,
+                    collection: 'Test Collection',
+                    lottie: 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
+                    address: 'test1',
+                });
+                gifts.push({
+                    id: 'test2',
+                    index: 2,
+                    name: 'Тестовый подарок #2',
+                    price: 10,
+                    collection: 'Test Collection',
+                    lottie: 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
+                    address: 'test2',
+                });
+                collections.add('Test Collection');
+                state.collections = [{ name: 'Test Collection', count: 2 }];
+            }
+
+            // Сортируем по индексу
+            gifts.sort((a, b) => a.index - b.index);
+
+            state.gifts = gifts;
+            state.isLoading = false;
+            
+            renderGifts();
+            renderFilters();
+            updateProfileStats();
+            saveDB();
+        }
+
+        // ---------- ОТОБРАЖЕНИЕ ----------
         function renderGifts() {
             const grid = document.getElementById('giftGrid');
             const filtered = state.filter === 'all' 
@@ -552,6 +695,12 @@
             filtered.forEach(gift => {
                 const card = document.createElement('div');
                 card.className = 'gift-card';
+
+                // Номер подарка
+                const numberDiv = document.createElement('div');
+                numberDiv.className = 'gift-number';
+                numberDiv.textContent = `#${gift.index}`;
+                card.appendChild(numberDiv);
 
                 const lottieBox = document.createElement('div');
                 lottieBox.className = 'lottie-box';
@@ -577,8 +726,7 @@
 
                 const collectionDiv = document.createElement('div');
                 collectionDiv.className = 'gift-collection';
-                const coll = OFFICIAL_COLLECTIONS.find(c => c.id === gift.collection);
-                collectionDiv.textContent = coll ? coll.name : gift.collection;
+                collectionDiv.textContent = gift.collection;
 
                 card.appendChild(lottieBox);
                 card.appendChild(nameDiv);
@@ -587,41 +735,90 @@
                 grid.appendChild(card);
 
                 // Загружаем Lottie
-                const animPath = gift.lottie || LOTTIE_ANIMATIONS.default;
-                lottie.loadAnimation({
-                    container: lottieContainer,
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: animPath,
-                });
+                try {
+                    lottie.loadAnimation({
+                        container: lottieContainer,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: gift.lottie,
+                    });
+                } catch (e) {
+                    console.error('Ошибка загрузки Lottie:', e);
+                    lottie.loadAnimation({
+                        container: lottieContainer,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
+                    });
+                }
             });
         }
 
-        function renderProfile() {
-            const avatar = document.getElementById('profileAvatarImg');
-            const name = document.getElementById('profileName');
-            const count = document.getElementById('giftCount');
-            const total = document.getElementById('totalValue');
+        function renderFilters() {
+            const container = document.getElementById('filterRow');
+            const allFilter = container.querySelector('[data-filter="all"]');
+            container.innerHTML = '';
+            container.appendChild(allFilter);
 
-            avatar.src = state.profile.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=default';
-            name.textContent = state.profile.name || 'Пользователь';
-            count.textContent = state.gifts.length;
+            // Показываем только коллекции, в которых есть подарки
+            const collections = [...new Set(state.gifts.map(g => g.collection))];
+            collections.forEach(col => {
+                const count = state.gifts.filter(g => g.collection === col).length;
+                const div = document.createElement('div');
+                div.className = `filter-item${state.filter === col ? ' active' : ''}`;
+                div.dataset.filter = col;
+                
+                const miniLottie = document.createElement('div');
+                miniLottie.className = 'mini-lottie';
+                miniLottie.id = `miniLottie_${col.replace(/\s/g, '_')}`;
+                div.appendChild(miniLottie);
+
+                const span = document.createElement('span');
+                span.textContent = `${col} (${count})`;
+                div.appendChild(span);
+
+                div.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-item').forEach(f => f.classList.remove('active'));
+                    div.classList.add('active');
+                    state.filter = col;
+                    renderGifts();
+                });
+                container.appendChild(div);
+
+                // Загружаем мини Lottie
+                try {
+                    lottie.loadAnimation({
+                        container: miniLottie,
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
+                    });
+                } catch (e) {
+                    console.error('Ошибка загрузки мини Lottie:', e);
+                }
+            });
+
+            document.querySelectorAll('.filter-item').forEach(f => {
+                f.classList.toggle('active', f.dataset.filter === state.filter);
+            });
+        }
+
+        function updateProfileStats() {
+            document.getElementById('giftCount').textContent = state.gifts.length;
             const sum = state.gifts.reduce((acc, g) => acc + g.price, 0);
-            total.textContent = sum.toFixed(1);
+            document.getElementById('totalValue').textContent = sum.toFixed(1);
         }
 
-        function updateAvatarFromTelegram() {
-            // Имитация получения аватара из Telegram (используем seed)
-            const seed = Math.random().toString(36).substring(7);
-            const url = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
-            state.profile.avatar = url;
-            document.getElementById('avatarImg').src = url;
-            document.getElementById('profileAvatarImg').src = url;
-            saveDB();
+        function renderProfile() {
+            document.getElementById('profileAvatarImg').src = state.profile.avatar;
+            document.getElementById('profileName').textContent = state.profile.name;
+            updateProfileStats();
         }
 
-        // ---------- UI EVENTS ----------
+        // ---------- ИНИЦИАЛИЗАЦИЯ UI ----------
         function initUI() {
             // Tabs
             document.querySelectorAll('.tab').forEach(tab => {
@@ -643,7 +840,7 @@
                 });
             });
 
-            // Profile toggle (header avatar)
+            // Profile toggle
             document.getElementById('profileToggle').addEventListener('click', function() {
                 document.querySelector('.tab[data-tab="profile"]').click();
             });
@@ -651,7 +848,7 @@
             // Add gift
             document.getElementById('addGiftBtn').addEventListener('click', function() {
                 const toast = document.getElementById('toastMessage');
-                toast.textContent = 'Для отображения подарка на маркете, пожалуйста передайте его боту @myGiftBot (замените на нужный юзернейм)';
+                toast.textContent = 'Для отображения подарка на маркете, передайте его боту @your_bot_username';
                 toast.classList.add('show');
                 setTimeout(() => toast.classList.remove('show'), 4000);
             });
@@ -669,30 +866,50 @@
                     saveDB();
                     renderProfile();
                 }
-                // обновим аватар (симуляция)
-                updateAvatarFromTelegram();
             });
 
-            // Загрузка аватара при старте
             document.getElementById('avatarImg').src = state.profile.avatar;
             document.getElementById('profileAvatarImg').src = state.profile.avatar;
         }
 
-        // ---------- START ----------
+        // ---------- ЗАПУСК ----------
         loadDB();
-        renderFilters();
-        renderGifts();
-        renderProfile();
         initUI();
 
-        // Сохраняем при выходе (перед закрытием)
-        window.addEventListener('beforeunload', function() {
-            saveDB();
-        });
+        // Загружаем подарки из блокчейна
+        if (NFT_ADDRESSES.length > 0 && NFT_ADDRESSES[0] !== 'EQD4pM...') {
+            loadGiftsFromBlockchain();
+        } else {
+            // Если адресов нет - показываем демо-данные
+            state.gifts = [
+                {
+                    id: 'demo1',
+                    index: 1,
+                    name: 'Demo Gift #1',
+                    price: 5,
+                    collection: 'Demo Collection',
+                    lottie: 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
+                },
+                {
+                    id: 'demo2',
+                    index: 2,
+                    name: 'Demo Gift #2',
+                    price: 10,
+                    collection: 'Demo Collection',
+                    lottie: 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
+                }
+            ];
+            state.collections = [{ name: 'Demo Collection', count: 2 }];
+            renderGifts();
+            renderFilters();
+            updateProfileStats();
+        }
 
-        // дополнительно: автосохранение при изменении
-        // (в демо изменения только через редактирование профиля)
-        console.log('NFT Market готов!');
+        // Сохраняем при выходе
+        window.addEventListener('beforeunload', saveDB);
+
+        console.log('🚀 NFT Market готов! Адреса NFT:', NFT_ADDRESSES.length);
+        console.log('📊 Загружено подарков:', state.gifts.length);
     })();
 </script>
 
