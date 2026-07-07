@@ -867,7 +867,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (добавлена Swiss Watch)
+        // 1. КОЛЛЕКЦИИ
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -894,7 +894,7 @@
             const allNFTs = [];
 
             const realNFTs = [
-                // ===== PLUSH PEPE (15 шт - все с реальными номерами) =====
+                // ===== PLUSH PEPE (13 шт - удалены #8008 и #9009) =====
                 { collection: "Plush Pepe", number: 2656, price: 4230 },
                 { collection: "Plush Pepe", number: 100, price: 5555 },
                 { collection: "Plush Pepe", number: 1412, price: 4870 },
@@ -907,8 +907,6 @@
                 { collection: "Plush Pepe", number: 858, price: 15000 },
                 { collection: "Plush Pepe", number: 487, price: 12345 },
                 { collection: "Plush Pepe", number: 123, price: 11999 },
-                { collection: "Plush Pepe", number: 8008, price: 4450 },
-                { collection: "Plush Pepe", number: 9009, price: 5250 },
                 { collection: "Plush Pepe", number: 1010, price: 4700 },
 
                 // ===== NAIL BRACELET =====
@@ -1061,10 +1059,7 @@
                 { collection: "Vintage Cigar", number: 4013, price: 36.9 },
                 { collection: "Vintage Cigar", number: 4014, price: 43.2 },
 
-                // ===== PRECIOUS PEACH (10 шт) =====
-                { collection: "Precious Peach", number: 8841, price: 42.3 },
-                { collection: "Precious Peach", number: 8842, price: 38.7 },
-                { collection: "Precious Peach", number: 8843, price: 29.9 },
+                // ===== PRECIOUS PEACH (7 шт - удалены #8841, #8842, #8843) =====
                 { collection: "Precious Peach", number: 2153, price: 11.111 },
                 { collection: "Precious Peach", number: 11, price: 1.999 },
                 { collection: "Precious Peach", number: 1080, price: 3.250 },
@@ -1073,7 +1068,7 @@
                 { collection: "Precious Peach", number: 1348, price: 1.234 },
                 { collection: "Precious Peach", number: 663, price: 349 },
 
-                // ===== SWISS WATCH (8 шт) =====
+                // ===== SWISS WATCH (13 шт) =====
                 { collection: "Swiss Watch", number: 7799, price: 13588 },
                 { collection: "Swiss Watch", number: 3964, price: 1234 },
                 { collection: "Swiss Watch", number: 15777, price: 2777 },
@@ -1081,7 +1076,12 @@
                 { collection: "Swiss Watch", number: 16315, price: 450 },
                 { collection: "Swiss Watch", number: 1904, price: 999 },
                 { collection: "Swiss Watch", number: 16539, price: 1555 },
-                { collection: "Swiss Watch", number: 23288, price: 299 }
+                { collection: "Swiss Watch", number: 23288, price: 299 },
+                { collection: "Swiss Watch", number: 4141, price: 888 },
+                { collection: "Swiss Watch", number: 7777, price: 4444 },
+                { collection: "Swiss Watch", number: 10001, price: 3333 },
+                { collection: "Swiss Watch", number: 20202, price: 2222 },
+                { collection: "Swiss Watch", number: 30303, price: 1111 }
             ];
 
             // Модели для каждой коллекции
@@ -1099,7 +1099,7 @@
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
-                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe", "Premium"],
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe"],
                 "Swiss Watch": ["Classic", "Sport", "Elegant", "Luxury", "Diamond", "Platinum", "Gold", "Rose Gold"]
             };
 
