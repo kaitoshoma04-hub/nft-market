@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
             margin: 0;
@@ -80,7 +81,7 @@
             font-size: 14px;
             font-weight: 700;
             color: #ffffff;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             width: 100%;
@@ -817,6 +818,7 @@
         .profile-modal .big-avatar .big-placeholder {
             font-size: 32px;
             color: #ffffff;
+            display: none;
         }
         .profile-modal .profile-name {
             font-size: 20px;
@@ -1566,34 +1568,24 @@
             const bigAvatarImg = document.getElementById('bigAvatarImg');
             const bigAvatarPlaceholder = document.getElementById('bigAvatarPlaceholder');
 
-            // Маленькая аватарка
             if (user && user.photo_url) {
+                // Показываем аватарку
                 avatarImg.src = user.photo_url;
                 avatarImg.style.display = 'block';
                 avatarPlaceholder.style.display = 'none';
-            } else {
-                avatarPlaceholder.style.display = 'flex';
-                avatarImg.style.display = 'none';
-                if (user && user.first_name) {
-                    avatarPlaceholder.textContent = user.first_name.charAt(0).toUpperCase();
-                } else {
-                    avatarPlaceholder.textContent = '👤';
-                }
-            }
 
-            // Большая аватарка
-            if (user && user.photo_url) {
                 bigAvatarImg.src = user.photo_url;
                 bigAvatarImg.style.display = 'block';
                 bigAvatarPlaceholder.style.display = 'none';
             } else {
-                bigAvatarPlaceholder.style.display = 'flex';
+                // Скрываем аватарку, показываем плейсхолдер
+                avatarImg.style.display = 'none';
+                avatarPlaceholder.style.display = 'flex';
+                avatarPlaceholder.textContent = '👤';
+
                 bigAvatarImg.style.display = 'none';
-                if (user && user.first_name) {
-                    bigAvatarPlaceholder.textContent = user.first_name.charAt(0).toUpperCase();
-                } else {
-                    bigAvatarPlaceholder.textContent = '👤';
-                }
+                bigAvatarPlaceholder.style.display = 'flex';
+                bigAvatarPlaceholder.textContent = '👤';
             }
         }
 
@@ -1604,7 +1596,7 @@
             function updateProfileUI(user) {
                 if (user) {
                     currentUser = user;
-
+                    
                     // Обновляем аватарки
                     updateAvatarUI(user);
 
@@ -1618,6 +1610,8 @@
                     // Баланс (заглушка)
                     userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
                     updateBalanceUI();
+                    
+                    console.log('✅ Профиль загружен:', user.first_name, 'ID:', user.id);
                 } else {
                     currentUser = null;
                     updateAvatarUI(null);
@@ -1625,44 +1619,42 @@
                     profileId.textContent = 'ID: —';
                     userBalance = 0;
                     updateBalanceUI();
+                    console.log('❌ Пользователь не найден');
                 }
             }
 
             // Получаем данные пользователя из Telegram WebApp
-            if (window.Telegram && window.Telegram.WebApp) {
+            function getTelegramUser() {
                 try {
-                    const user = window.Telegram.WebApp.initDataUnsafe?.user;
-                    if (user) {
-                        updateProfileUI(user);
-                    } else {
-                        // Пробуем ещё раз через 500ms
-                        setTimeout(() => {
-                            const user2 = window.Telegram.WebApp.initDataUnsafe?.user;
-                            if (user2) {
-                                updateProfileUI(user2);
-                            } else {
-                                updateProfileUI(null);
-                            }
-                        }, 500);
+                    if (window.Telegram && window.Telegram.WebApp) {
+                        const webapp = window.Telegram.WebApp;
+                        const user = webapp.initDataUnsafe?.user;
+                        if (user) {
+                            updateProfileUI(user);
+                            return true;
+                        }
                     }
                 } catch (e) {
-                    console.warn('Telegram WebApp error:', e);
-                    updateProfileUI(null);
+                    console.warn('Ошибка получения данных Telegram:', e);
                 }
-            } else {
-                // Если не в Telegram — пробуем получить через Telegram WebApp (если он появится позже)
-                setTimeout(() => {
-                    if (window.Telegram && window.Telegram.WebApp) {
-                        try {
-                            const user = window.Telegram.WebApp.initDataUnsafe?.user;
-                            if (user) {
-                                updateProfileUI(user);
-                                return;
-                            }
-                        } catch (e) {}
+                return false;
+            }
+
+            // Пробуем получить сразу
+            if (!getTelegramUser()) {
+                // Если не получилось, пробуем через интервалы
+                let attempts = 0;
+                const maxAttempts = 10;
+                const interval = setInterval(() => {
+                    attempts++;
+                    if (getTelegramUser() || attempts >= maxAttempts) {
+                        clearInterval(interval);
+                        if (attempts >= maxAttempts) {
+                            console.log('⚠️ Не удалось получить данные пользователя Telegram');
+                            updateProfileUI(null);
+                        }
                     }
-                    updateProfileUI(null);
-                }, 1000);
+                }, 300);
             }
 
             // Клик по профилю — открываем модалку
