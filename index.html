@@ -214,9 +214,6 @@
             border-color: rgba(74, 138, 244, 0.2);
             color: #4a8af4;
         }
-        .filter-option .emoji {
-            font-size: 14px;
-        }
         .nft-grid {
             padding: 12px 12px;
             display: grid;
@@ -1037,13 +1034,11 @@
 
         <div class="filter-section">
             <button class="filter-toggle-btn" id="filterToggle">
-                <span>🔍</span> Фильтр
+                <span>Фильтр</span>
                 <span class="arrow" id="filterArrow">▼</span>
             </button>
             <div class="filter-dropdown" id="filterDropdown">
-                <div class="filter-option active" data-collection="all">
-                    <span class="emoji">📋</span> Все
-                </div>
+                <div class="filter-option active" data-collection="all">Все</div>
             </div>
         </div>
 
@@ -1098,7 +1093,7 @@
                             <span id="detailPriceAmount">0.00 GRAM</span>
                             <span class="usd" id="detailPriceUsd">≈ $0.00</span>
                         </div>
-                        <button class="detail-buy-btn" id="detailBuyBtn">💎 Купить</button>
+                        <button class="detail-buy-btn" id="detailBuyBtn">Купить</button>
                     </div>
                 </div>
             </div>
@@ -1117,7 +1112,7 @@
         <div class="cart-modal" id="cartModal">
             <div class="cart-modal-content">
                 <div class="cart-modal-header">
-                    <h2>🛒 Корзина</h2>
+                    <h2>Корзина</h2>
                     <button class="cart-close" id="cartClose">✕</button>
                 </div>
                 <div id="cartItems"></div>
@@ -1147,8 +1142,8 @@
                 </div>
                 <div class="profile-divider"></div>
                 <div class="btn-row">
-                    <button class="add-gift-btn" id="addGiftBtn">➕ Добавить подарок</button>
-                    <button class="withdraw-btn" id="withdrawToggleBtn">💳 Вывести</button>
+                    <button class="add-gift-btn" id="addGiftBtn">Добавить подарок</button>
+                    <button class="withdraw-btn" id="withdrawToggleBtn">Вывести</button>
                 </div>
                 <div class="withdraw-section" id="withdrawSection">
                     <div class="withdraw-label">Адрес кошелька TON</div>
@@ -1158,8 +1153,8 @@
                         <input class="withdraw-amount" id="amountInput" type="number" placeholder="0.00" min="0.01" step="0.01">
                         <button class="withdraw-submit" id="withdrawSubmitBtn">Вывести</button>
                     </div>
-                    <div class="withdraw-error" id="withdrawError">⚠️ У вас недостаточно средств для вывода</div>
-                    <div class="withdraw-success" id="withdrawSuccess">✅ Заявка на вывод успешно отправлена!</div>
+                    <div class="withdraw-error" id="withdrawError">У вас недостаточно средств для вывода</div>
+                    <div class="withdraw-success" id="withdrawSuccess">Заявка на вывод успешно отправлена!</div>
                 </div>
             </div>
         </div>
@@ -1167,7 +1162,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ
+        // 1. КОЛЛЕКЦИИ (Heart Locket удалена)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -1183,12 +1178,11 @@
             "Nail Bracelet": { icon: "📿", floorPrice: 28.5 },
             "Scared Cat": { icon: "🐱", floorPrice: 18.9 },
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
-            "Precious Peach": { icon: "🍑", floorPrice: 29.9 },
-            "Heart Locket": { icon: "❤️", floorPrice: 1797 }
+            "Precious Peach": { icon: "🍑", floorPrice: 29.9 }
         };
 
         // ============================================================
-        // 2. ВСЕ NFT
+        // 2. ВСЕ NFT (Heart Locket удалена)
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
@@ -1366,16 +1360,7 @@
                 { collection: "Precious Peach", number: 1508, price: 600 },
                 { collection: "Precious Peach", number: 1780, price: 399 },
                 { collection: "Precious Peach", number: 1348, price: 1.234 },
-                { collection: "Precious Peach", number: 663, price: 349 },
-
-                // ===== HEART LOCKET (7 шт) =====
-                { collection: "Heart Locket", number: 875, price: 12733.88 },
-                { collection: "Heart Locket", number: 65, price: 2950 },
-                { collection: "Heart Locket", number: 290, price: 1797 },
-                { collection: "Heart Locket", number: 1117, price: 10000 },
-                { collection: "Heart Locket", number: 1546, price: 25000 },
-                { collection: "Heart Locket", number: 444, price: 18000 },
-                { collection: "Heart Locket", number: 1950, price: 7000 }
+                { collection: "Precious Peach", number: 663, price: 349 }
             ];
 
             // Модели для каждой коллекции
@@ -1393,8 +1378,7 @@
                 "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
                 "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
                 "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
-                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe"],
-                "Heart Locket": ["Classic", "Golden", "Silver", "Diamond", "Rose", "Platinum", "Ruby"]
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe"]
             };
 
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow", "Aurora",
@@ -1417,8 +1401,6 @@
                     .replace(/'/g, '')
                     .replace(/đ/g, 'durovs')
                     .replace(/-/g, '');
-
-                if (collection === "Heart Locket") slug = "heart-locket";
 
                 const lottieUrl = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
 
@@ -1549,17 +1531,17 @@
             const btn = document.getElementById('detailBuyBtn');
             const inCart = isInCart(nft.name);
             if (nft.status === 'sold' || nft.price === 0) {
-                btn.textContent = '🔴 Продано';
+                btn.textContent = 'Продано';
                 btn.className = 'detail-buy-btn sold-out';
                 btn.disabled = true;
             } else if (inCart) {
-                btn.textContent = '✓ В корзине';
+                btn.textContent = 'В корзине';
                 btn.className = 'detail-buy-btn in-cart';
                 btn.disabled = false;
                 btn.onclick = () => { addToCart(nft.name);
                     updateDetailButtons(); };
             } else {
-                btn.textContent = '💎 Купить';
+                btn.textContent = 'Купить';
                 btn.className = 'detail-buy-btn';
                 btn.disabled = false;
                 btn.onclick = () => { addToCart(nft.name);
@@ -1568,7 +1550,7 @@
         }
 
         // ============================================================
-        // 4. ПРОФИЛЬ (FULLY WORKING)
+        // 4. ПРОФИЛЬ (Telegram Avatar + ID)
         // ============================================================
         let currentUser = null;
         let userBalance = 0;
@@ -1578,60 +1560,73 @@
             document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
         }
 
-        function initProfile() {
+        function updateAvatarUI(user) {
             const avatarImg = document.getElementById('avatarImg');
             const avatarPlaceholder = document.getElementById('avatarPlaceholder');
-
             const bigAvatarImg = document.getElementById('bigAvatarImg');
             const bigAvatarPlaceholder = document.getElementById('bigAvatarPlaceholder');
+
+            // Маленькая аватарка
+            if (user && user.photo_url) {
+                avatarImg.src = user.photo_url;
+                avatarImg.style.display = 'block';
+                avatarPlaceholder.style.display = 'none';
+            } else {
+                avatarPlaceholder.style.display = 'flex';
+                avatarImg.style.display = 'none';
+                if (user && user.first_name) {
+                    avatarPlaceholder.textContent = user.first_name.charAt(0).toUpperCase();
+                } else {
+                    avatarPlaceholder.textContent = '👤';
+                }
+            }
+
+            // Большая аватарка
+            if (user && user.photo_url) {
+                bigAvatarImg.src = user.photo_url;
+                bigAvatarImg.style.display = 'block';
+                bigAvatarPlaceholder.style.display = 'none';
+            } else {
+                bigAvatarPlaceholder.style.display = 'flex';
+                bigAvatarImg.style.display = 'none';
+                if (user && user.first_name) {
+                    bigAvatarPlaceholder.textContent = user.first_name.charAt(0).toUpperCase();
+                } else {
+                    bigAvatarPlaceholder.textContent = '👤';
+                }
+            }
+        }
+
+        function initProfile() {
             const profileName = document.getElementById('profileName');
             const profileId = document.getElementById('profileId');
+            const usernameDisplay = document.getElementById('usernameDisplay');
 
             function updateProfileUI(user) {
                 if (user) {
-                    // Маленькая аватарка в хедере
-                    if (user.photo_url) {
-                        avatarImg.src = user.photo_url;
-                        avatarImg.style.display = 'block';
-                        avatarPlaceholder.style.display = 'none';
-                    } else {
-                        const initials = user.first_name?.charAt(0).toUpperCase() || '👤';
-                        avatarPlaceholder.textContent = initials;
-                        avatarPlaceholder.style.display = 'flex';
-                        avatarImg.style.display = 'none';
-                    }
+                    currentUser = user;
 
-                    // Большая аватарка в модалке
-                    if (user.photo_url) {
-                        bigAvatarImg.src = user.photo_url;
-                        bigAvatarImg.style.display = 'block';
-                        bigAvatarPlaceholder.style.display = 'none';
-                    } else {
-                        const initials = user.first_name?.charAt(0).toUpperCase() || '👤';
-                        bigAvatarPlaceholder.textContent = initials;
-                        bigAvatarPlaceholder.style.display = 'flex';
-                        bigAvatarImg.style.display = 'none';
-                    }
+                    // Обновляем аватарки
+                    updateAvatarUI(user);
+
+                    // Имя в хедере
+                    const name = user.first_name || 'Пользователь';
+                    usernameDisplay.innerHTML = `${name}`;
+
+                    // Имя в модалке
                     profileName.textContent = user.first_name || 'Пользователь';
 
                     // ID пользователя
                     const userId = user.id || '—';
                     profileId.textContent = `ID: ${userId}`;
 
-                    // Баланс (заглушка, т.к. реальный баланс требует API)
+                    // Баланс (заглушка)
                     userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
                     updateBalanceUI();
-
-                    currentUser = user;
                 } else {
-                    // Заглушка если пользователь не найден
-                    avatarPlaceholder.textContent = '👤';
-                    avatarPlaceholder.style.display = 'flex';
-                    avatarImg.style.display = 'none';
-
-                    bigAvatarPlaceholder.textContent = '👤';
-                    bigAvatarPlaceholder.style.display = 'flex';
-                    bigAvatarImg.style.display = 'none';
+                    currentUser = null;
+                    updateAvatarUI(null);
+                    usernameDisplay.innerHTML = 'Профиль';
                     profileName.textContent = 'Пользователь';
                     profileId.textContent = 'ID: —';
                     userBalance = 0;
@@ -1646,6 +1641,7 @@
                     if (user) {
                         updateProfileUI(user);
                     } else {
+                        // Пробуем ещё раз через 500ms
                         setTimeout(() => {
                             const user2 = window.Telegram.WebApp.initDataUnsafe?.user;
                             if (user2) {
@@ -1660,7 +1656,19 @@
                     updateProfileUI(null);
                 }
             } else {
-                updateProfileUI(null);
+                // Если не в Telegram — пробуем получить через Telegram WebApp (если он появится позже)
+                setTimeout(() => {
+                    if (window.Telegram && window.Telegram.WebApp) {
+                        try {
+                            const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                            if (user) {
+                                updateProfileUI(user);
+                                return;
+                            }
+                        } catch (e) {}
+                    }
+                    updateProfileUI(null);
+                }, 1000);
             }
 
             // Клик по профилю — открываем модалку
@@ -1668,6 +1676,7 @@
                 e.preventDefault();
                 e.stopPropagation();
 
+                // Обновляем данные перед открытием
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
                         const user = window.Telegram.WebApp.initDataUnsafe?.user;
@@ -1678,7 +1687,6 @@
                 }
 
                 document.getElementById('profileModal').classList.add('open');
-                // Скрываем секцию вывода при открытии
                 document.getElementById('withdrawSection').classList.remove('open');
                 document.getElementById('withdrawError').classList.remove('show');
                 document.getElementById('withdrawSuccess').classList.remove('show');
@@ -1699,13 +1707,13 @@
             document.getElementById('addGiftBtn').addEventListener('click', function() {
                 if (window.Telegram && window.Telegram.WebApp) {
                     try {
-                        window.Telegram.WebApp.openLink(`https://t.me/AllowMarketGifts`);
+                        window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
                     } catch (e) {
                         alert('Для отображения подарка на маркете, пожалуйста передайте его боту @AllowMarketGifts');
                     }
                 } else {
                     try {
-                        window.open(`https://t.me/AllowMarketGifts`, '_blank');
+                        window.open('https://t.me/AllowMarketGifts', '_blank');
                     } catch (e) {
                         alert('Для отображения подарка на маркете, пожалуйста передайте его боту @AllowMarketGifts');
                     }
@@ -1731,37 +1739,32 @@
                 errorEl.classList.remove('show');
                 successEl.classList.remove('show');
 
-                // Проверка адреса кошелька (минимальная валидация)
                 if (!wallet || wallet.length < 10) {
                     alert('Пожалуйста, введите корректный адрес кошелька TON');
                     return;
                 }
 
-                // Проверка суммы
                 if (!amount || amount <= 0) {
                     alert('Пожалуйста, введите сумму для вывода');
                     return;
                 }
 
-                // Проверка баланса
                 if (amount > userBalance) {
-                    errorEl.textContent = '⚠️ У вас недостаточно средств для вывода';
+                    errorEl.textContent = 'У вас недостаточно средств для вывода';
                     errorEl.classList.add('show');
                     return;
                 }
 
-                // Успешный вывод
                 userBalance = parseFloat((userBalance - amount).toFixed(2));
                 updateBalanceUI();
 
-                successEl.textContent = `✅ Заявка на вывод ${amount.toFixed(2)} GRAM на адрес ${wallet.substring(0, 6)}...${wallet.substring(wallet.length - 4)} успешно отправлена!`;
+                successEl.textContent =
+                    `Заявка на вывод ${amount.toFixed(2)} GRAM на адрес ${wallet.substring(0, 6)}...${wallet.substring(wallet.length - 4)} успешно отправлена!`;
                 successEl.classList.add('show');
 
-                // Очищаем поля
                 document.getElementById('walletInput').value = '';
                 document.getElementById('amountInput').value = '';
 
-                // Через 5 секунд скрываем успех
                 setTimeout(() => {
                     successEl.classList.remove('show');
                 }, 5000);
@@ -1781,14 +1784,7 @@
             const option = document.createElement('div');
             option.className = `filter-option${col === 'all' ? ' active' : ''}`;
             option.dataset.collection = col;
-            const icon = col === 'all' ? '📋' : COLLECTIONS_DATA[col]?.icon || '🎁';
-            option.innerHTML = `
-                    <span class="emoji">${icon}</span>
-                    ${col === 'all' ? 'Все' : col}
-                    <span class="mini-lottie" id="mini-${col.replace(/\s/g, '')}">
-                        <div class="lottie-container"></div>
-                    </span>
-                `;
+            option.textContent = col === 'all' ? 'Все' : col;
             option.addEventListener('click', () => {
                 document.querySelectorAll('.filter-option').forEach(el => el.classList.remove('active'));
                 option.classList.add('active');
@@ -2086,8 +2082,8 @@
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             const total = getCartTotal();
-            if (confirm(`💎 Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(3)} GRAM`)) {
-                alert(`✅ Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM`);
+            if (confirm(`Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(3)} GRAM`)) {
+                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM`);
                 cart = [];
                 saveCart();
                 cartModal.classList.remove('open');
