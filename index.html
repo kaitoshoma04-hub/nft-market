@@ -1615,6 +1615,8 @@
                     // Баланс (заглушка)
                     userBalance = parseFloat((Math.random() * 500 + 50).toFixed(2));
                     updateBalanceUI();
+
+                    console.log('✅ Данные пользователя загружены:', user);
                 } else {
                     currentUser = null;
                     updateAvatarUI(null);
@@ -1623,6 +1625,7 @@
                     profileId.textContent = 'ID: —';
                     userBalance = 0;
                     updateBalanceUI();
+                    console.log('❌ Данные пользователя не найдены');
                 }
             }
 
@@ -1630,20 +1633,16 @@
             function getTelegramUser() {
                 try {
                     if (window.Telegram && window.Telegram.WebApp) {
-                        const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                        const data = window.Telegram.WebApp.initDataUnsafe;
+                        console.log('📦 initDataUnsafe:', data);
+                        const user = data?.user;
                         if (user && user.id) {
                             return user;
                         }
                     }
-                    // Пробуем через localStorage (для отладки)
-                    const savedUser = localStorage.getItem('telegram_user');
-                    if (savedUser) {
-                        try {
-                            return JSON.parse(savedUser);
-                        } catch (e) {}
-                    }
                     return null;
                 } catch (e) {
+                    console.error('Ошибка получения пользователя:', e);
                     return null;
                 }
             }
@@ -1656,7 +1655,7 @@
             } else {
                 // Пробуем ещё несколько раз с задержкой
                 let attempts = 0;
-                const maxAttempts = 5;
+                const maxAttempts = 10;
 
                 function tryGetUser() {
                     attempts++;
@@ -1669,6 +1668,8 @@
                         setTimeout(tryGetUser, 500);
                     } else {
                         updateProfileUI(null);
+                        console.log('❌ Не удалось получить данные пользователя после ' + maxAttempts + ' попыток');
+                        console.log('⚠️ Убедитесь, что приложение открыто внутри Telegram');
                     }
                 }
 
@@ -1680,8 +1681,7 @@
                 e.preventDefault();
                 e.stopPropagation();
 
-                // Обновляем данные перед открытием
-                const u = getTelegramUser();
+                // Обновляем данные перед открытием                const u = getTelegramUser();
                 if (u) {
                     updateProfileUI(u);
                 }
@@ -2114,6 +2114,11 @@
                 document.getElementById('filterArrow').classList.remove('open');
             }
         });
+
+        // Выводим информацию в консоль для отладки
+        console.log('🔍 Откройте консоль (F12) чтобы увидеть данные пользователя');
+        console.log('📱 Если вы открыли приложение в Telegram, данные должны загрузиться');
+        console.log('⚠️ Если вы открыли в браузере - данные не будут переданы');
     </script>
 
 </body>
