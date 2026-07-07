@@ -1166,7 +1166,7 @@
 
     <script>
         // ============================================================
-        // 1. КОЛЛЕКЦИИ (Heart Locket удалена)
+        // 1. КОЛЛЕКЦИИ
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -1186,13 +1186,12 @@
         };
 
         // ============================================================
-        // 2. ВСЕ NFT (Heart Locket удалена)
+        // 2. ВСЕ NFT
         // ============================================================
         function generateNFTs() {
             const allNFTs = [];
 
             const realNFTs = [
-                // ===== PLUSH PEPE (13 шт) =====
                 { collection: "Plush Pepe", number: 2656, price: 4230 },
                 { collection: "Plush Pepe", number: 100, price: 5555 },
                 { collection: "Plush Pepe", number: 1412, price: 4870 },
@@ -1206,30 +1205,22 @@
                 { collection: "Plush Pepe", number: 487, price: 12345 },
                 { collection: "Plush Pepe", number: 123, price: 11999 },
                 { collection: "Plush Pepe", number: 1010, price: 4700 },
-
-                // ===== NAIL BRACELET =====
                 { collection: "Nail Bracelet", number: 2655, price: 2.655 },
                 { collection: "Nail Bracelet", number: 3517, price: 700 },
                 { collection: "Nail Bracelet", number: 891, price: 320 },
                 { collection: "Nail Bracelet", number: 1861, price: 285 },
                 { collection: "Nail Bracelet", number: 2859, price: 180 },
                 { collection: "Nail Bracelet", number: 160, price: 200 },
-
-                // ===== HEX POT =====
                 { collection: "Hex Pot", number: 10348, price: 12.5 },
                 { collection: "Hex Pot", number: 10349, price: 18.7 },
                 { collection: "Hex Pot", number: 10350, price: 22.3 },
                 { collection: "Hex Pot", number: 10351, price: 16.9 },
                 { collection: "Hex Pot", number: 10352, price: 28.1 },
                 { collection: "Hex Pot", number: 10353, price: 14.2 },
-
-                // ===== ASTRAL SHARD =====
                 { collection: "Astral Shard", number: 2047, price: 8.2 },
                 { collection: "Astral Shard", number: 2048, price: 25.4 },
                 { collection: "Astral Shard", number: 2049, price: 6.1 },
                 { collection: "Astral Shard", number: 2050, price: 12.8 },
-
-                // ===== BONDED RING (15 шт) =====
                 { collection: "Bonded Ring", number: 1123, price: 45.2 },
                 { collection: "Bonded Ring", number: 1124, price: 68.9 },
                 { collection: "Bonded Ring", number: 1125, price: 52.7 },
@@ -1245,8 +1236,6 @@
                 { collection: "Bonded Ring", number: 1135, price: 88.4 },
                 { collection: "Bonded Ring", number: 1136, price: 50.3 },
                 { collection: "Bonded Ring", number: 1137, price: 76.8 },
-
-                // ===== DUROV'S CAP (10 шт) =====
                 { collection: "Durov's Cap", number: 420, price: 89.7 },
                 { collection: "Durov's Cap", number: 421, price: 156.3 },
                 { collection: "Durov's Cap", number: 422, price: 112.8 },
@@ -1257,8 +1246,6 @@
                 { collection: "Durov's Cap", number: 427, price: 223.1 },
                 { collection: "Durov's Cap", number: 428, price: 167.9 },
                 { collection: "Durov's Cap", number: 429, price: 145.6 },
-
-                // ===== DIAMOND RING (10 шт) =====
                 { collection: "Diamond Ring", number: 5512, price: 67.3 },
                 { collection: "Diamond Ring", number: 5513, price: 124.8 },
                 { collection: "Diamond Ring", number: 5514, price: 89.5 },
@@ -1269,8 +1256,6 @@
                 { collection: "Diamond Ring", number: 5519, price: 234.5 },
                 { collection: "Diamond Ring", number: 5520, price: 143.8 },
                 { collection: "Diamond Ring", number: 5521, price: 87.6 },
-
-                // ===== EVIL EYE (15 шт) =====
                 { collection: "Evil Eye", number: 2231, price: 4.5 },
                 { collection: "Evil Eye", number: 2232, price: 9.7 },
                 { collection: "Evil Eye", number: 2233, price: 7.2 },
@@ -1286,8 +1271,6 @@
                 { collection: "Evil Eye", number: 2243, price: 5.5 },
                 { collection: "Evil Eye", number: 2244, price: 10.9 },
                 { collection: "Evil Eye", number: 2245, price: 8.4 },
-
-                // ===== ETERNAL ROSE (15 шт) =====
                 { collection: "Eternal Rose", number: 7781, price: 34.8 },
                 { collection: "Eternal Rose", number: 7782, price: 52.3 },
                 { collection: "Eternal Rose", number: 7783, price: 41.6 },
@@ -1303,8 +1286,6 @@
                 { collection: "Eternal Rose", number: 7793, price: 67.8 },
                 { collection: "Eternal Rose", number: 7794, price: 50.4 },
                 { collection: "Eternal Rose", number: 7795, price: 43.1 },
-
-                // ===== ION GEM (10 шт) =====
                 { collection: "Ion Gem", number: 3381, price: 56.4 },
                 { collection: "Ion Gem", number: 3382, price: 78.9 },
                 { collection: "Ion Gem", number: 3383, price: 63.2 },
@@ -1315,8 +1296,6 @@
                 { collection: "Ion Gem", number: 3388, price: 52.9 },
                 { collection: "Ion Gem", number: 3389, price: 68.4 },
                 { collection: "Ion Gem", number: 3390, price: 37.6 },
-
-                // ===== KISSED FROG (10 шт) =====
                 { collection: "Kissed Frog", number: 4562, price: 9.6 },
                 { collection: "Kissed Frog", number: 4563, price: 14.8 },
                 { collection: "Kissed Frog", number: 4564, price: 11.2 },
@@ -1327,8 +1306,6 @@
                 { collection: "Kissed Frog", number: 4569, price: 16.4 },
                 { collection: "Kissed Frog", number: 4570, price: 10.5 },
                 { collection: "Kissed Frog", number: 4571, price: 12.1 },
-
-                // ===== SCARED CAT (10 шт) =====
                 { collection: "Scared Cat", number: 6651, price: 18.9 },
                 { collection: "Scared Cat", number: 6652, price: 25.6 },
                 { collection: "Scared Cat", number: 6653, price: 21.4 },
@@ -1339,8 +1316,6 @@
                 { collection: "Scared Cat", number: 6658, price: 23.1 },
                 { collection: "Scared Cat", number: 6659, price: 16.2 },
                 { collection: "Scared Cat", number: 6660, price: 29.4 },
-
-                // ===== VINTAGE CIGAR (15 шт) =====
                 { collection: "Vintage Cigar", number: 4000, price: 35.7 },
                 { collection: "Vintage Cigar", number: 4001, price: 42.1 },
                 { collection: "Vintage Cigar", number: 4002, price: 38.4 },
@@ -1356,8 +1331,6 @@
                 { collection: "Vintage Cigar", number: 4012, price: 53.4 },
                 { collection: "Vintage Cigar", number: 4013, price: 36.9 },
                 { collection: "Vintage Cigar", number: 4014, price: 43.2 },
-
-                // ===== PRECIOUS PEACH (7 шт) =====
                 { collection: "Precious Peach", number: 2153, price: 11.111 },
                 { collection: "Precious Peach", number: 11, price: 1.999 },
                 { collection: "Precious Peach", number: 1080, price: 3.250 },
@@ -1367,7 +1340,6 @@
                 { collection: "Precious Peach", number: 663, price: 349 }
             ];
 
-            // Модели для каждой коллекции
             const models = {
                 "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal", "Shadow"],
                 "Astral Shard": ["Nebula", "Supernova", "Galaxy", "Pulsar"],
@@ -1442,13 +1414,20 @@
         const NFT_DATA = generateNFTs();
 
         // ============================================================
-        // 3. КОРЗИНА (ПОЛНОСТЬЮ СОХРАНЯЕТСЯ)
+        // 3. КОРЗИНА (ПРИВЯЗАНА К ID ПОЛЬЗОВАТЕЛЯ)
         // ============================================================
         let cart = [];
+        let currentUserId = null;
 
-        // Загружаем корзину из localStorage
+        function getStorageKey(type) {
+            // Формируем ключ с ID пользователя
+            if (!currentUserId) return `allow_${type}_guest`;
+            return `allow_${type}_${currentUserId}`;
+        }
+
         function loadCart() {
-            const saved = localStorage.getItem('allow_cart');
+            const key = getStorageKey('cart');
+            const saved = localStorage.getItem(key);
             if (saved) {
                 try {
                     cart = JSON.parse(saved);
@@ -1464,7 +1443,8 @@
         }
 
         function saveCart() {
-            localStorage.setItem('allow_cart', JSON.stringify(cart));
+            const key = getStorageKey('cart');
+            localStorage.setItem(key, JSON.stringify(cart));
             updateCartUI();
         }
 
@@ -1571,7 +1551,7 @@
         }
 
         // ============================================================
-        // 4. ПРОФИЛЬ (Telegram Avatar + ID + БАЛАНС 0 ДЛЯ НОВЫХ)
+        // 4. ПРОФИЛЬ (Telegram Avatar + ID + БАЛАНС ПРИВЯЗАН К ID)
         // ============================================================
         let currentUser = null;
         let userBalance = 0;
@@ -1614,13 +1594,14 @@
                 if (user) {
                     currentUser = user;
                     const userId = user.id || '—';
+                    currentUserId = userId;
                     
                     updateAvatarUI(user);
                     profileName.textContent = user.first_name || 'Пользователь';
                     profileId.textContent = `ID: ${userId}`;
 
-                    // Загружаем баланс из localStorage по ID пользователя
-                    const balanceKey = `allow_balance_${userId}`;
+                    // Загружаем баланс по ID пользователя
+                    const balanceKey = getStorageKey('balance');
                     const savedBalance = localStorage.getItem(balanceKey);
                     
                     if (savedBalance !== null) {
@@ -1631,15 +1612,21 @@
                         localStorage.setItem(balanceKey, '0');
                     }
                     
+                    // Загружаем корзину для этого пользователя
+                    loadCart();
+                    
                     updateBalanceUI();
                     console.log('✅ Профиль загружен:', user.first_name, 'ID:', user.id, 'Баланс:', userBalance);
                 } else {
                     currentUser = null;
+                    currentUserId = null;
                     updateAvatarUI(null);
                     profileName.textContent = 'Пользователь';
                     profileId.textContent = 'ID: —';
                     userBalance = 0;
                     updateBalanceUI();
+                    cart = [];
+                    updateCartUI();
                     console.log('❌ Пользователь не найден');
                 }
             }
@@ -1754,11 +1741,9 @@
                 }
 
                 userBalance = parseFloat((userBalance - amount).toFixed(2));
-                // Сохраняем баланс в localStorage по ID пользователя
-                if (currentUser && currentUser.id) {
-                    const balanceKey = `allow_balance_${currentUser.id}`;
-                    localStorage.setItem(balanceKey, String(userBalance));
-                }
+                // Сохраняем баланс по ID пользователя
+                const balanceKey = getStorageKey('balance');
+                localStorage.setItem(balanceKey, String(userBalance));
                 updateBalanceUI();
 
                 successEl.textContent =
@@ -2092,10 +2077,8 @@
             if (confirm(`Подтвердите покупку ${cart.length} NFT на сумму ${total.toFixed(3)} GRAM`)) {
                 // Списываем средства
                 userBalance = parseFloat((userBalance - total).toFixed(2));
-                if (currentUser && currentUser.id) {
-                    const balanceKey = `allow_balance_${currentUser.id}`;
-                    localStorage.setItem(balanceKey, String(userBalance));
-                }
+                const balanceKey = getStorageKey('balance');
+                localStorage.setItem(balanceKey, String(userBalance));
                 updateBalanceUI();
                 
                 alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM\nОстаток на балансе: ${userBalance.toFixed(3)} GRAM`);
@@ -2111,14 +2094,12 @@
         // 8. ЗАПУСК
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            loadCart(); // Загружаем корзину
             initProfile();
             renderGrid();
             updateCartUI();
         });
 
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            loadCart();
             initProfile();
             renderGrid();
             updateCartUI();
