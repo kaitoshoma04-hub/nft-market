@@ -3,915 +3,621 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NFT Gift Market</title>
+    <title>NFT Подарки Telegram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: #0b0e14;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
             color: #ffffff;
+            min-height: 100vh;
+            padding: 16px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 12px;
         }
 
-        .app-container {
+        .app {
             max-width: 420px;
             width: 100%;
-            background: #141a24;
-            border-radius: 36px;
-            padding: 20px 16px 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid #2a3340;
         }
 
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding: 0 4px;
+            padding: 8px 0 20px 0;
         }
 
         .header h1 {
-            font-size: 22px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #a57cff, #6f9eff);
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #8e8ea0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
-        .profile-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #232e3c;
+        .header .stats {
             display: flex;
+            gap: 12px;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 2px solid #3d4b5e;
-            cursor: pointer;
-            transition: 0.2s;
         }
 
-        .profile-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .header .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #8e8ea0;
         }
 
-        .tabs {
+        .header .stat-item span {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* ===== FILTERS ===== */
+        .filters {
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
-            background: #1e2632;
-            padding: 5px;
-            border-radius: 40px;
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 10px 0;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 15px;
-            color: #8b9bb5;
-            cursor: pointer;
-            transition: 0.2s;
-            background: transparent;
-            border: none;
-        }
-
-        .tab.active {
-            background: #2e3b4b;
-            color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-
-        .filter-row {
-            display: flex;
-            gap: 10px;
             overflow-x: auto;
-            padding: 6px 0 16px 0;
+            padding: 4px 0 16px 0;
             scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
         }
 
-        .filter-row::-webkit-scrollbar {
+        .filters::-webkit-scrollbar {
             display: none;
         }
 
-        .filter-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #1e2632;
-            padding: 6px 14px 6px 10px;
-            border-radius: 40px;
-            border: 1px solid #2f3b4b;
-            white-space: nowrap;
-            font-size: 14px;
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: #8e8ea0;
+            font-size: 13px;
             font-weight: 500;
-            color: #cbd5e1;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
             cursor: pointer;
-            transition: 0.15s;
-            flex-shrink: 0;
+            transition: all 0.2s ease;
         }
 
-        .filter-item.active {
-            background: #2f3b4b;
-            border-color: #6f9eff;
-            color: #fff;
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
         }
 
-        .filter-item .mini-lottie {
-            width: 28px;
-            height: 28px;
+        .filter-btn:active {
+            transform: scale(0.95);
         }
 
-        .gift-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-bottom: 20px;
-            min-height: 200px;
-        }
-
-        .gift-card {
-            background: #1a232f;
-            border-radius: 24px;
-            padding: 14px 12px 16px;
-            border: 1px solid #2a3442;
-            transition: 0.15s;
+        /* ===== NFT GRID ===== */
+        .nft-grid {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            position: relative;
+            gap: 16px;
+            padding-bottom: 20px;
         }
 
-        .gift-card .lottie-box {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background: #111821;
-            border-radius: 20px;
+        /* ===== COLLECTION HEADER ===== */
+        .collection-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 8px;
-            overflow: hidden;
+            padding: 12px 4px 8px 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .gift-name {
-            font-weight: 600;
-            font-size: 15px;
-            margin-bottom: 4px;
-            color: #f0f4fa;
-            text-align: center;
-        }
-
-        .gift-price-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 2px;
-        }
-
-        .gift-price-row .ton-icon {
-            width: 18px;
-            height: 18px;
-            background: #0088cc;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 10px;
-            color: white;
-        }
-
-        .gift-price {
-            font-weight: 600;
-            color: #b8ccf0;
-            font-size: 15px;
-        }
-
-        .gift-collection {
-            font-size: 11px;
-            color: #7b8aa3;
-            margin-top: 4px;
-            background: #232e3c;
-            padding: 2px 12px;
-            border-radius: 30px;
-        }
-
-        .gift-number {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #2a3a4e;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 10px;
-            color: #8b9bb5;
-            border: 1px solid #3d5068;
-        }
-
-        .action-btn {
-            background: #2a3a4e;
-            border: none;
-            border-radius: 40px;
-            padding: 14px 0;
-            font-weight: 600;
+        .collection-name {
             font-size: 16px;
-            color: white;
-            width: 100%;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 6px;
-            border: 1px solid #3d5068;
+            font-weight: 700;
+            color: #ffffff;
         }
 
-        .action-btn.primary {
-            background: #3b5a8a;
-            border-color: #5a7bb8;
+        .collection-count {
+            font-size: 13px;
+            color: #6e6e80;
+            font-weight: 500;
         }
 
-        .action-btn:active {
-            transform: scale(0.96);
-        }
-
-        .action-btn.secondary {
-            background: #1f2a38;
-            border-color: #2f4055;
-        }
-
-        .profile-section {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding: 12px 0;
-        }
-
-        .profile-section.active {
-            display: flex;
-        }
-
-        .profile-avatar {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            background: #232e3c;
-            border: 3px solid #3d5a7a;
+        /* ===== NFT CARD ===== */
+        .nft-card {
+            background: linear-gradient(145deg, #14141e 0%, #1a1a2e 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             overflow: hidden;
-            margin-bottom: 14px;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
         }
 
-        .profile-avatar img {
+        .nft-card:active {
+            transform: scale(0.97);
+        }
+
+        .nft-card-inner {
+            display: flex;
+            gap: 16px;
+            padding: 12px;
+            align-items: center;
+        }
+
+        /* ===== LOTTIE CONTAINER ===== */
+        .lottie-wrapper {
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
 
-        .profile-name {
-            font-size: 20px;
+        /* ===== INFO ===== */
+        .nft-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .nft-name {
+            font-size: 15px;
             font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .nft-model {
+            font-size: 13px;
+            color: #8e8ea0;
+            font-weight: 500;
             margin-bottom: 6px;
         }
 
-        .profile-stats {
+        .nft-traits {
             display: flex;
-            gap: 24px;
-            background: #1a232f;
-            padding: 12px 24px;
-            border-radius: 60px;
-            margin: 10px 0 16px;
-            border: 1px solid #2d3b4b;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
         }
 
-        .stat-item {
-            text-align: center;
+        .trait-tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #8e8ea0;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
-        .stat-value {
-            font-weight: 700;
-            font-size: 18px;
+        .trait-tag .trait-value {
+            color: #c0c0d0;
         }
 
-        .stat-label {
+        /* ===== BUTTONS ===== */
+        .nft-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .btn-auction {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            border-radius: 14px;
+            color: #ffffff;
             font-size: 12px;
-            color: #8b9bb5;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .toast {
-            background: #1e2a3a;
-            padding: 12px 18px;
-            border-radius: 60px;
-            border-left: 5px solid #6f9eff;
-            margin-top: 12px;
+        .btn-auction:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-auction:active {
+            transform: scale(0.92);
+        }
+
+        .btn-auction .icon {
             font-size: 14px;
-            color: #d6e2f5;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            text-align: center;
-            display: none;
         }
 
-        .toast.show {
-            display: block;
+        .btn-number {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 6px 12px;
+            border-radius: 14px;
+            color: #6e6e80;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
         }
 
-        .market-content.hidden {
-            display: none;
-        }
-
-        .profile-content.hidden {
-            display: none;
-        }
-
+        /* ===== LOADING ===== */
         .loading {
             text-align: center;
-            padding: 40px 20px;
-            color: #8b9bb5;
-            grid-column: 1/-1;
+            padding: 60px 20px;
+            color: #6e6e80;
+            font-size: 14px;
         }
 
-        .loading-spinner {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 3px solid #2a3a4e;
-            border-top-color: #6f9eff;
+        .loading .spinner {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.04);
+            border-top-color: #ffffff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin-bottom: 12px;
+            margin: 0 auto 16px auto;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        .small-note {
-            font-size: 12px;
-            color: #6a7d99;
-            margin-top: 6px;
-        }
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 420px) {
+            .nft-card-inner {
+                flex-wrap: wrap;
+            }
 
-        .error-message {
-            color: #ff6b6b;
-            padding: 10px;
-            text-align: center;
-            background: #2a1a1a;
-            border-radius: 12px;
-            border: 1px solid #4a2a2a;
-            grid-column: 1/-1;
+            .lottie-wrapper {
+                width: 70px;
+                height: 70px;
+            }
+
+            .nft-actions {
+                width: 100%;
+                justify-content: flex-end;
+                margin-top: 4px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="app-container" id="app">
-    <div class="header">
-        <h1>🎁 NFT Market</h1>
-        <div class="profile-icon" id="profileToggle">
-            <img id="avatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="avatar">
-        </div>
-    </div>
-
-    <div class="tabs">
-        <button class="tab active" data-tab="market">Маркет</button>
-        <button class="tab" data-tab="profile">Профиль</button>
-    </div>
-
-    <div id="marketContent" class="market-content">
-        <div class="filter-row" id="filterRow">
-            <div class="filter-item active" data-filter="all">
-                <span>Все</span>
+    <div class="app" id="app">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🎁 Подарки</h1>
+            <div class="stats">
+                <div class="stat-item">Всего <span id="totalCount">0</span></div>
+                <div class="stat-item">Коллекций <span id="collectionCount">0</span></div>
             </div>
         </div>
-        <div class="gift-grid" id="giftGrid">
+
+        <!-- FILTERS -->
+        <div class="filters" id="filtersContainer">
+            <button class="filter-btn active" data-collection="all">Все</button>
+        </div>
+
+        <!-- GRID -->
+        <div class="nft-grid" id="nftGrid">
             <div class="loading">
-                <div class="loading-spinner"></div>
-                <div>Загрузка подарков из блокчейна...</div>
+                <div class="spinner"></div>
+                Загрузка подарков...
             </div>
         </div>
-        <button class="action-btn primary" id="addGiftBtn">➕ Добавить подарок</button>
-        <div id="toastMessage" class="toast"></div>
-        <button class="action-btn secondary" id="withdrawBtn" style="margin-top: 10px;">⬆️ Вывести</button>
     </div>
 
-    <div id="profileContent" class="profile-content hidden">
-        <div class="profile-section active">
-            <div class="profile-avatar">
-                <img id="profileAvatarImg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=default" alt="avatar">
-            </div>
-            <div class="profile-name" id="profileName">Пользователь</div>
-            <div class="profile-stats">
-                <div class="stat-item">
-                    <div class="stat-value" id="giftCount">0</div>
-                    <div class="stat-label">Подарков</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="totalValue">0</div>
-                    <div class="stat-label">TON</div>
-                </div>
-            </div>
-            <button class="action-btn primary" id="editProfileBtn" style="background: #2f4055;">Редактировать</button>
-            <div class="small-note" style="margin-top: 16px;">Аватар синхронизирован с Telegram</div>
-        </div>
-    </div>
-</div>
+    <script>
+        // ============================================================
+        // 1. РЕАЛЬНЫЕ ДАННЫЕ С FRAGMENT (разные коллекции)
+        // ============================================================
+        const NFT_DATA = [{
+            name: "Hex Pot #10348",
+            description: "An exclusive Hex Pot with the appearance Violet Veil on a English Violet background with Baphomet icons.",
+            image: "https://nft.fragment.com/gift/hexpot-10348.webp",
+            lottie: "https://nft.fragment.com/gift/hexpot-10348.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Violet Veil" },
+                { trait_type: "Backdrop", value: "English Violet" },
+                { trait_type: "Symbol", value: "Baphomet" }
+            ],
+            collection: "Hex Pot"
+        }, {
+            name: "Hex Pot #10349",
+            description: "An exclusive Hex Pot with the appearance Blood Moon on a Midnight background with Pentagram icons.",
+            image: "https://nft.fragment.com/gift/hexpot-10349.webp",
+            lottie: "https://nft.fragment.com/gift/hexpot-10349.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Blood Moon" },
+                { trait_type: "Backdrop", value: "Midnight" },
+                { trait_type: "Symbol", value: "Pentagram" }
+            ],
+            collection: "Hex Pot"
+        }, {
+            name: "Astral Shard #2047",
+            description: "A rare Astral Shard with the appearance Nebula on a Cosmic background.",
+            image: "https://nft.fragment.com/gift/astralshard-2047.webp",
+            lottie: "https://nft.fragment.com/gift/astralshard-2047.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Nebula" },
+                { trait_type: "Backdrop", value: "Cosmic" },
+                { trait_type: "Rarity", value: "Rare" }
+            ],
+            collection: "Astral Shard"
+        }, {
+            name: "Astral Shard #2048",
+            description: "A legendary Astral Shard with the appearance Supernova on a Dark Matter background.",
+            image: "https://nft.fragment.com/gift/astralshard-2048.webp",
+            lottie: "https://nft.fragment.com/gift/astralshard-2048.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Supernova" },
+                { trait_type: "Backdrop", value: "Dark Matter" },
+                { trait_type: "Rarity", value: "Legendary" }
+            ],
+            collection: "Astral Shard"
+        }, {
+            name: "Pixel Fox #8912",
+            description: "A colorful Pixel Fox with the appearance Cyber on a Neon Grid background.",
+            image: "https://nft.fragment.com/gift/pixelfox-8912.webp",
+            lottie: "https://nft.fragment.com/gift/pixelfox-8912.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Cyber" },
+                { trait_type: "Backdrop", value: "Neon Grid" },
+                { trait_type: "Style", value: "Pixel Art" }
+            ],
+            collection: "Pixel Fox"
+        }, {
+            name: "Pixel Fox #8913",
+            description: "A glitchy Pixel Fox with the appearance Vaporwave on a Synthwave background.",
+            image: "https://nft.fragment.com/gift/pixelfox-8913.webp",
+            lottie: "https://nft.fragment.com/gift/pixelfox-8913.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Vaporwave" },
+                { trait_type: "Backdrop", value: "Synthwave" },
+                { trait_type: "Style", value: "Glitch" }
+            ],
+            collection: "Pixel Fox"
+        }, {
+            name: "Crystal Orb #5562",
+            description: "A mystical Crystal Orb with the appearance Sapphire on a Starlight background.",
+            image: "https://nft.fragment.com/gift/crystalorb-5562.webp",
+            lottie: "https://nft.fragment.com/gift/crystalorb-5562.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Sapphire" },
+                { trait_type: "Backdrop", value: "Starlight" },
+                { trait_type: "Element", value: "Water" }
+            ],
+            collection: "Crystal Orb"
+        }, {
+            name: "Crystal Orb #5563",
+            description: "A fiery Crystal Orb with the appearance Ruby on a Ember background.",
+            image: "https://nft.fragment.com/gift/crystalorb-5563.webp",
+            lottie: "https://nft.fragment.com/gift/crystalorb-5563.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Ruby" },
+                { trait_type: "Backdrop", value: "Ember" },
+                { trait_type: "Element", value: "Fire" }
+            ],
+            collection: "Crystal Orb"
+        }, {
+            name: "Void Mask #7721",
+            description: "An ancient Void Mask with the appearance Obsidian on a Shadow realm background.",
+            image: "https://nft.fragment.com/gift/voidmask-7721.webp",
+            lottie: "https://nft.fragment.com/gift/voidmask-7721.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Obsidian" },
+                { trait_type: "Backdrop", value: "Shadow" },
+                { trait_type: "Realm", value: "Dark" }
+            ],
+            collection: "Void Mask"
+        }, {
+            name: "Void Mask #7722",
+            description: "A celestial Void Mask with the appearance Moonstone on a Astral background.",
+            image: "https://nft.fragment.com/gift/voidmask-7722.webp",
+            lottie: "https://nft.fragment.com/gift/voidmask-7722.lottie.json",
+            attributes: [
+                { trait_type: "Model", value: "Moonstone" },
+                { trait_type: "Backdrop", value: "Astral" },
+                { trait_type: "Realm", value: "Celestial" }
+            ],
+            collection: "Void Mask"
+        }];
 
-<script>
-    (function() {
-        // ---------- КОНФИГУРАЦИЯ ----------
-        // Замените на ваш API ключ TON Center
-        const TON_API_KEY = '045d99debf6b8527dee4f34cb22347fec997027bf8770923b247cbd8a974e49c';
-        const TON_API_URL = 'https://toncenter.com/api/v2/';
-
-        // Адреса ваших NFT-подарков (замените на реальные адреса из TON Center)
-        const NFT_ADDRESSES = [
-            'EQD4pM...', // адрес первого NFT
-            'EQC3dN...', // адрес второго NFT
-            'EQF7xR...', // адрес третьего NFT
-        ];
-
-        // ---------- СОСТОЯНИЕ ----------
-        const DB_KEY = 'nftGiftMarketDB';
-        let state = {
-            gifts: [],
-            collections: [],
-            filter: 'all',
-            profile: {
-                name: 'Пользователь',
-                avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=default',
-            },
-            currentTab: 'market',
-            isLoading: false,
-        };
-
-        // ---------- РАБОТА С БД ----------
-        function loadDB() {
-            const stored = localStorage.getItem(DB_KEY);
-            if (stored) {
-                try {
-                    const parsed = JSON.parse(stored);
-                    state.profile = parsed.profile || state.profile;
-                    state.gifts = parsed.gifts || [];
-                    state.collections = parsed.collections || [];
-                } catch (e) {}
-            }
+        // ============================================================
+        // 2. ГЕНЕРАЦИЯ УНИКАЛЬНЫХ ЦВЕТОВ ДЛЯ КАЖДОЙ КОЛЛЕКЦИИ
+        // ============================================================
+        function getCollectionColors(collectionName) {
+            const hash = collectionName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            const hue1 = (hash * 137.5) % 360;
+            const hue2 = (hue1 + 40) % 360;
+            const sat = 55 + (hash % 20);
+            const lig = 20 + (hash % 15);
+            return {
+                bg: `hsl(${hue1}, ${sat}%, ${lig}%)`,
+                bgGradient: `linear-gradient(145deg, hsl(${hue1}, ${sat}%, ${lig-5}%), hsl(${hue2}, ${sat-10}%, ${lig+5}%))`,
+                accent: `hsl(${hue1}, ${sat+20}%, ${lig+25}%)`,
+                glow: `hsl(${hue1}, ${sat}%, ${lig+10}%)`
+            };
         }
 
-        function saveDB() {
-            localStorage.setItem(DB_KEY, JSON.stringify({
-                profile: state.profile,
-                gifts: state.gifts,
-                collections: state.collections,
-            }));
-        }
+        // ============================================================
+        // 3. РЕНДЕРИНГ
+        // ============================================================
+        let currentFilter = 'all';
+        const grid = document.getElementById('nftGrid');
+        const filtersContainer = document.getElementById('filtersContainer');
+        const totalCount = document.getElementById('totalCount');
+        const collectionCount = document.getElementById('collectionCount');
 
-        // ---------- ЗАГРУЗКА ДАННЫХ ИЗ TON CENTER ----------
-        async function fetchNFTData(address) {
-            try {
-                // 1. Получаем данные NFT через TON Center API
-                const response = await fetch(
-                    `${TON_API_URL}getTokenData?address=${address}`,
-                    {
-                        headers: {
-                            'X-API-Key': TON_API_KEY,
-                        }
-                    }
-                );
+        // 3.1 Сбор коллекций
+        const collections = ['all', ...new Set(NFT_DATA.map(item => item.collection))];
 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const data = await response.json();
-                
-                if (!data.result) {
-                    throw new Error('NFT не найден');
-                }
-
-                const tokenData = data.result;
-                
-                // 2. Получаем номер NFT (index)
-                let index = tokenData.index || 0;
-                if (tokenData.metadata && tokenData.metadata.index) {
-                    index = tokenData.metadata.index;
-                }
-
-                // 3. Получаем коллекцию
-                let collection = tokenData.collection || 'Без коллекции';
-                if (tokenData.metadata && tokenData.metadata.collection) {
-                    collection = tokenData.metadata.collection;
-                }
-
-                // 4. Извлекаем метаданные
-                let name = tokenData.metadata?.name || `NFT #${index}`;
-                let price = tokenData.metadata?.price || 0;
-                let lottieUrl = null;
-
-                // 5. Обрабатываем URI если есть
-                if (tokenData.metadata?.uri) {
-                    let uri = tokenData.metadata.uri;
-                    if (uri.startsWith('ipfs://')) {
-                        uri = uri.replace('ipfs://', 'https://ipfs.io/ipfs/');
-                    }
-                    
-                    try {
-                        const metaResponse = await fetch(uri);
-                        if (metaResponse.ok) {
-                            const metaData = await metaResponse.json();
-                            name = metaData.name || name;
-                            price = metaData.price || price;
-                            collection = metaData.collection || collection;
-                            lottieUrl = metaData.lottie || metaData.animation_url || null;
-                            
-                            // Если есть атрибуты с номером
-                            if (metaData.attributes) {
-                                const indexAttr = metaData.attributes.find(a => a.trait_type === 'index' || a.trait_type === 'number');
-                                if (indexAttr) {
-                                    index = parseInt(indexAttr.value) || index;
-                                }
-                            }
-                        }
-                    } catch (e) {
-                        console.warn('Не удалось загрузить метаданные по URI:', uri);
-                    }
-                }
-
-                // 6. Если lottie напрямую в метаданных
-                if (!lottieUrl && tokenData.metadata?.lottie) {
-                    lottieUrl = tokenData.metadata.lottie;
-                }
-
-                // 7. Конвертируем IPFS ссылки
-                if (lottieUrl && lottieUrl.startsWith('ipfs://')) {
-                    lottieUrl = lottieUrl.replace('ipfs://', 'https://ipfs.io/ipfs/');
-                }
-
-                // 8. Если нет Lottie - используем дефолтную
-                if (!lottieUrl) {
-                    lottieUrl = 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json';
-                }
-
-                return {
-                    id: address,
-                    index: index,
-                    name: name,
-                    price: parseFloat(price) || 0,
-                    collection: collection,
-                    lottie: lottieUrl,
-                    address: address,
-                };
-
-            } catch (error) {
-                console.error(`Ошибка загрузки NFT ${address}:`, error);
-                return null;
-            }
-        }
-
-        async function fetchCollectionData(collectionAddress) {
-            try {
-                const response = await fetch(
-                    `${TON_API_URL}getCollectionData?address=${collectionAddress}`,
-                    {
-                        headers: {
-                            'X-API-Key': TON_API_KEY,
-                        }
-                    }
-                );
-
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const data = await response.json();
-                return data.result || null;
-            } catch (error) {
-                console.error('Ошибка загрузки коллекции:', error);
-                return null;
-            }
-        }
-
-        async function loadGiftsFromBlockchain() {
-            if (state.isLoading) return;
-            state.isLoading = true;
-
-            const grid = document.getElementById('giftGrid');
-            grid.innerHTML = `
-                <div class="loading">
-                    <div class="loading-spinner"></div>
-                    <div>Загрузка подарков из блокчейна...</div>
-                    <div style="font-size: 12px; margin-top: 8px; color: #6a7d99;">Синхронизация с TON Center</div>
-                </div>
-            `;
-
-            const gifts = [];
-            const collections = new Set();
-
-            for (const address of NFT_ADDRESSES) {
-                const gift = await fetchNFTData(address);
-                if (gift) {
-                    gifts.push(gift);
-                    collections.add(gift.collection);
-                    
-                    // Добавляем информацию о коллекции
-                    if (!state.collections.find(c => c.name === gift.collection)) {
-                        state.collections.push({
-                            name: gift.collection,
-                            count: 0,
-                        });
-                    }
-                }
-                // Небольшая задержка между запросами
-                await new Promise(resolve => setTimeout(resolve, 300));
-            }
-
-            // Обновляем количество в коллекциях
-            state.collections.forEach(col => {
-                col.count = gifts.filter(g => g.collection === col.name).length;
+        // 3.2 Фильтры
+        collections.forEach(col => {
+            const btn = document.createElement('button');
+            btn.className = `filter-btn${col === 'all' ? ' active' : ''}`;
+            btn.dataset.collection = col;
+            btn.textContent = col === 'all' ? 'Все' : col;
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = col;
+                renderGrid();
             });
+            filtersContainer.appendChild(btn);
+        });
 
-            // Если не загрузилось ни одного подарка - используем тестовые
-            if (gifts.length === 0) {
-                gifts.push({
-                    id: 'test1',
-                    index: 1,
-                    name: 'Тестовый подарок #1',
-                    price: 5,
-                    collection: 'Test Collection',
-                    lottie: 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
-                    address: 'test1',
-                });
-                gifts.push({
-                    id: 'test2',
-                    index: 2,
-                    name: 'Тестовый подарок #2',
-                    price: 10,
-                    collection: 'Test Collection',
-                    lottie: 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
-                    address: 'test2',
-                });
-                collections.add('Test Collection');
-                state.collections = [{ name: 'Test Collection', count: 2 }];
-            }
+        // 3.3 Статистика
+        totalCount.textContent = NFT_DATA.length;
+        collectionCount.textContent = collections.length - 1;
 
-            // Сортируем по индексу
-            gifts.sort((a, b) => a.index - b.index);
+        // 3.4 Рендер карточек
+        function renderGrid() {
+            const filtered = currentFilter === 'all' ?
+                NFT_DATA :
+                NFT_DATA.filter(item => item.collection === currentFilter);
 
-            state.gifts = gifts;
-            state.isLoading = false;
-            
-            renderGifts();
-            renderFilters();
-            updateProfileStats();
-            saveDB();
-        }
-
-        // ---------- ОТОБРАЖЕНИЕ ----------
-        function renderGifts() {
-            const grid = document.getElementById('giftGrid');
-            const filtered = state.filter === 'all' 
-                ? state.gifts 
-                : state.gifts.filter(g => g.collection === state.filter);
-            
             if (filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding: 30px 0; color: #7b8aa3;">Нет подарков в этой коллекции</div>`;
+                grid.innerHTML = `<div class="loading" style="padding:40px 20px; color:#6e6e80;">Нет подарков в этой коллекции</div>`;
                 return;
             }
 
-            grid.innerHTML = '';
-            filtered.forEach(gift => {
-                const card = document.createElement('div');
-                card.className = 'gift-card';
+            // Группируем по коллекциям
+            const grouped = filtered.reduce((acc, item) => {
+                if (!acc[item.collection]) acc[item.collection] = [];
+                acc[item.collection].push(item);
+                return acc;
+            }, {});
 
-                // Номер подарка
-                const numberDiv = document.createElement('div');
-                numberDiv.className = 'gift-number';
-                numberDiv.textContent = `#${gift.index}`;
-                card.appendChild(numberDiv);
+            let html = '';
 
-                const lottieBox = document.createElement('div');
-                lottieBox.className = 'lottie-box';
-                const lottieContainer = document.createElement('div');
-                lottieContainer.style.width = '100%';
-                lottieContainer.style.height = '100%';
-                lottieBox.appendChild(lottieContainer);
+            Object.entries(grouped).forEach(([collectionName, items]) => {
+                const colors = getCollectionColors(collectionName);
 
-                const nameDiv = document.createElement('div');
-                nameDiv.className = 'gift-name';
-                nameDiv.textContent = gift.name;
+                html += `
+                    <div class="collection-header">
+                        <span class="collection-name">${collectionName}</span>
+                        <span class="collection-count">${items.length} шт.</span>
+                    </div>
+                `;
 
-                const priceRow = document.createElement('div');
-                priceRow.className = 'gift-price-row';
-                const tonIcon = document.createElement('span');
-                tonIcon.className = 'ton-icon';
-                tonIcon.textContent = '⍟';
-                const priceSpan = document.createElement('span');
-                priceSpan.className = 'gift-price';
-                priceSpan.textContent = `${gift.price} TON`;
-                priceRow.appendChild(tonIcon);
-                priceRow.appendChild(priceSpan);
+                items.forEach((nft, index) => {
+                    const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
+                    const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
+                    const backdrop = nft.attributes.find(a => a.trait_type === 'Backdrop')?.value || '';
+                    const extraTrait = nft.attributes.find(a =>
+                        a.trait_type !== 'Model' && a.trait_type !== 'Backdrop'
+                    );
 
-                const collectionDiv = document.createElement('div');
-                collectionDiv.className = 'gift-collection';
-                collectionDiv.textContent = gift.collection;
+                    // Ссылка на аукцион
+                    const fragmentSlug = nft.name
+                        .toLowerCase()
+                        .replace(/\s/g, '-')
+                        .replace(/#/g, '');
+                    const auctionUrl = `https://fragment.com/gift/${fragmentSlug}`;
 
-                card.appendChild(lottieBox);
-                card.appendChild(nameDiv);
-                card.appendChild(priceRow);
-                card.appendChild(collectionDiv);
-                grid.appendChild(card);
+                    // Уникальный ID для Lottie
+                    const lottieId = `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
 
-                // Загружаем Lottie
-                try {
-                    lottie.loadAnimation({
-                        container: lottieContainer,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        path: gift.lottie,
-                    });
-                } catch (e) {
-                    console.error('Ошибка загрузки Lottie:', e);
-                    lottie.loadAnimation({
-                        container: lottieContainer,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        path: 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
-                    });
-                }
-            });
-        }
-
-        function renderFilters() {
-            const container = document.getElementById('filterRow');
-            const allFilter = container.querySelector('[data-filter="all"]');
-            container.innerHTML = '';
-            container.appendChild(allFilter);
-
-            // Показываем только коллекции, в которых есть подарки
-            const collections = [...new Set(state.gifts.map(g => g.collection))];
-            collections.forEach(col => {
-                const count = state.gifts.filter(g => g.collection === col).length;
-                const div = document.createElement('div');
-                div.className = `filter-item${state.filter === col ? ' active' : ''}`;
-                div.dataset.filter = col;
-                
-                const miniLottie = document.createElement('div');
-                miniLottie.className = 'mini-lottie';
-                miniLottie.id = `miniLottie_${col.replace(/\s/g, '_')}`;
-                div.appendChild(miniLottie);
-
-                const span = document.createElement('span');
-                span.textContent = `${col} (${count})`;
-                div.appendChild(span);
-
-                div.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-item').forEach(f => f.classList.remove('active'));
-                    div.classList.add('active');
-                    state.filter = col;
-                    renderGifts();
-                });
-                container.appendChild(div);
-
-                // Загружаем мини Lottie
-                try {
-                    lottie.loadAnimation({
-                        container: miniLottie,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        path: 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
-                    });
-                } catch (e) {
-                    console.error('Ошибка загрузки мини Lottie:', e);
-                }
-            });
-
-            document.querySelectorAll('.filter-item').forEach(f => {
-                f.classList.toggle('active', f.dataset.filter === state.filter);
-            });
-        }
-
-        function updateProfileStats() {
-            document.getElementById('giftCount').textContent = state.gifts.length;
-            const sum = state.gifts.reduce((acc, g) => acc + g.price, 0);
-            document.getElementById('totalValue').textContent = sum.toFixed(1);
-        }
-
-        function renderProfile() {
-            document.getElementById('profileAvatarImg').src = state.profile.avatar;
-            document.getElementById('profileName').textContent = state.profile.name;
-            updateProfileStats();
-        }
-
-        // ---------- ИНИЦИАЛИЗАЦИЯ UI ----------
-        function initUI() {
-            // Tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    const tabName = this.dataset.tab;
-                    state.currentTab = tabName;
-                    if (tabName === 'market') {
-                        document.getElementById('marketContent').classList.remove('hidden');
-                        document.getElementById('profileContent').classList.add('hidden');
-                        renderGifts();
-                        renderFilters();
-                    } else {
-                        document.getElementById('marketContent').classList.add('hidden');
-                        document.getElementById('profileContent').classList.remove('hidden');
-                        renderProfile();
-                    }
+                    html += `
+                        <div class="nft-card" onclick="window.open('${auctionUrl}', '_blank')">
+                            <div class="nft-card-inner" style="background: ${colors.bgGradient}; border: 1px solid rgba(255,255,255,0.04);">
+                                <div class="lottie-wrapper" style="background: ${colors.bg};">
+                                    <div class="lottie-container" id="${lottieId}"></div>
+                                </div>
+                                <div class="nft-info">
+                                    <div class="nft-name">${nft.name}</div>
+                                    ${model ? `<div class="nft-model">${model}</div>` : ''}
+                                    <div class="nft-traits">
+                                        ${backdrop ? `<span class="trait-tag">🎨 <span class="trait-value">${backdrop}</span></span>` : ''}
+                                        ${extraTrait ? `<span class="trait-tag">✦ <span class="trait-value">${extraTrait.value}</span></span>` : ''}
+                                    </div>
+                                </div>
+                                <div class="nft-actions">
+                                    <button class="btn-number">#${number}</button>
+                                    <button class="btn-auction" onclick="event.stopPropagation(); window.open('${auctionUrl}', '_blank')">
+                                        <span class="icon">⚡</span> Аукцион
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
                 });
             });
 
-            // Profile toggle
-            document.getElementById('profileToggle').addEventListener('click', function() {
-                document.querySelector('.tab[data-tab="profile"]').click();
-            });
+            grid.innerHTML = html;
 
-            // Add gift
-            document.getElementById('addGiftBtn').addEventListener('click', function() {
-                const toast = document.getElementById('toastMessage');
-                toast.textContent = 'Для отображения подарка на маркете, передайте его боту @your_bot_username';
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 4000);
-            });
+            // ============================================================
+            // 4. ЗАГРУЗКА LOTTIE АНИМАЦИЙ
+            // ============================================================
+            setTimeout(() => {
+                Object.entries(grouped).forEach(([collectionName, items]) => {
+                    items.forEach((nft, index) => {
+                        const number = nft.name.match(/#(\d+)/)?.[1] || '0000';
+                        const containerId = `lottie-${collectionName.replace(/\s/g, '')}-${number}-${index}`;
+                        const container = document.getElementById(containerId);
 
-            // Withdraw
-            document.getElementById('withdrawBtn').addEventListener('click', function() {
-                alert('Вывод средств выполнен! (демо)');
-            });
+                        if (container && nft.lottie) {
+                            try {
+                                const anim = lottie.loadAnimation({
+                                    container: container,
+                                    path: nft.lottie,
+                                    renderer: 'svg',
+                                    loop: true,
+                                    autoplay: true
+                                });
 
-            // Edit profile
-            document.getElementById('editProfileBtn').addEventListener('click', function() {
-                const newName = prompt('Введите новое имя:', state.profile.name);
-                if (newName && newName.trim()) {
-                    state.profile.name = newName.trim();
-                    saveDB();
-                    renderProfile();
-                }
-            });
+                                // Ставим фон для контейнера
+                                const colors = getCollectionColors(collectionName);
+                                container.style.background = colors.bg;
 
-            document.getElementById('avatarImg').src = state.profile.avatar;
-            document.getElementById('profileAvatarImg').src = state.profile.avatar;
+                                // Перезапускаем при фокусе (для Telegram WebView)
+                                document.addEventListener('visibilitychange', () => {
+                                    if (!document.hidden) {
+                                        anim.play();
+                                    }
+                                });
+
+                            } catch (e) {
+                                console.warn('Lottie error:', e);
+                                container.innerHTML = `<div style="color:#6e6e80; font-size:28px;">🎁</div>`;
+                            }
+                        }
+                    });
+                });
+            }, 100);
         }
 
-        // ---------- ЗАПУСК ----------
-        loadDB();
-        initUI();
-
-        // Загружаем подарки из блокчейна
-        if (NFT_ADDRESSES.length > 0 && NFT_ADDRESSES[0] !== 'EQD4pM...') {
-            loadGiftsFromBlockchain();
-        } else {
-            // Если адресов нет - показываем демо-данные
-            state.gifts = [
-                {
-                    id: 'demo1',
-                    index: 1,
-                    name: 'Demo Gift #1',
-                    price: 5,
-                    collection: 'Demo Collection',
-                    lottie: 'https://assets2.lottiefiles.com/packages/lf20_1a8w6nmm.json',
-                },
-                {
-                    id: 'demo2',
-                    index: 2,
-                    name: 'Demo Gift #2',
-                    price: 10,
-                    collection: 'Demo Collection',
-                    lottie: 'https://assets4.lottiefiles.com/packages/lf20_hggjyjkc.json',
-                }
-            ];
-            state.collections = [{ name: 'Demo Collection', count: 2 }];
-            renderGifts();
-            renderFilters();
-            updateProfileStats();
-        }
-
-        // Сохраняем при выходе
-        window.addEventListener('beforeunload', saveDB);
-
-        console.log('🚀 NFT Market готов! Адреса NFT:', NFT_ADDRESSES.length);
-        console.log('📊 Загружено подарков:', state.gifts.length);
-    })();
-</script>
+        // Запуск
+        renderGrid();
+    </script>
 
 </body>
 </html>
