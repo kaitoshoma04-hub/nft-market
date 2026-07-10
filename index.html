@@ -267,7 +267,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 12px 0;
+            padding: 12px 0 14px 0;
             z-index: 200;
         }
         .bottom-nav .nav-item {
@@ -276,17 +276,31 @@
             align-items: center;
             gap: 2px;
             color: #6e6e80;
-            font-size: 10px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
             cursor: pointer;
             transition: color 0.2s;
             background: none;
             border: none;
             font-family: 'Inter', sans-serif;
-            padding: 4px 12px;
+            padding: 6px 20px;
+            border-radius: 12px;
+            position: relative;
         }
         .bottom-nav .nav-item.active {
             color: #4a8af4;
+        }
+        .bottom-nav .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            border-radius: 4px;
+            background: #4a8af4;
         }
         .nft-grid {
             padding: 12px 12px;
@@ -1319,7 +1333,7 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAV (только текст) -->
+        <!-- BOTTOM NAV (увеличенный шрифт) -->
         <div class="bottom-nav">
             <button class="nav-item active" data-tab="market">Маркет</button>
             <button class="nav-item" data-tab="mygifts">Мои подарки</button>
