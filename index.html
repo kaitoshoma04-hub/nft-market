@@ -221,9 +221,10 @@
             color: #fff;
         }
         .filter-overlay .filter-option-big .icon {
-            font-size: 18px;
-            width: 28px;
+            font-size: 16px;
+            width: 24px;
             text-align: center;
+            color: #8e8ea0;
         }
         .filter-overlay .filter-option-big .count {
             color: #6e6e80;
@@ -294,8 +295,12 @@
             color: #4a8af4;
         }
         .bottom-nav .nav-item .nav-icon {
-            font-size: 20px;
+            font-size: 18px;
             line-height: 1;
+            color: #6e6e80;
+        }
+        .bottom-nav .nav-item.active .nav-icon {
+            color: #4a8af4;
         }
         .nft-grid {
             padding: 12px 12px;
@@ -1027,7 +1032,7 @@
                 transform: rotate(360deg);
             }
         }
-        /* ONBOARDING — выдвигается снизу, обрезанные верхние углы */
+        /* ONBOARDING — выдвигается снизу */
         .onboarding-overlay {
             position: fixed;
             top: 0;
@@ -1192,11 +1197,11 @@
             </div>
         </div>
 
-        <!-- FILTER SECTION (button only) -->
+        <!-- FILTER SECTION -->
         <div class="filter-section">
             <button class="filter-toggle-btn" id="filterToggle">
                 <span>Фильтр</span>
-                <span style="margin-left:4px;">⚙️</span>
+                <span style="margin-left:4px;">⚙</span>
             </button>
         </div>
 
@@ -1213,15 +1218,10 @@
             </div>
         </div>
 
-        <!-- NFT GRID -->
-        <div class="nft-grid" id="nftGrid">
-            <div class="loading">
-                <div class="spinner"></div>
-                Загрузка подарков...
-            </div>
-        </div>
+        <!-- NFT GRID (Маркет) -->
+        <div class="nft-grid" id="nftGrid"></div>
 
-        <!-- MY GIFTS SECTION -->
+        <!-- MY GIFTS SECTION (отдельный блок) -->
         <div class="my-gifts-section" id="myGiftsSection">
             <h3>Мои подарки</h3>
             <div class="my-gifts-grid" id="myGiftsGrid">
@@ -1342,7 +1342,7 @@
             </div>
         </div>
 
-        <!-- ONBOARDING OVERLAY (выдвигается снизу) -->
+        <!-- ONBOARDING OVERLAY -->
         <div class="onboarding-overlay" id="onboardingOverlay">
             <div class="onboarding-card">
                 <h2>Добро пожаловать!</h2>
@@ -1354,11 +1354,11 @@
         <!-- BOTTOM NAV (без эмодзи) -->
         <div class="bottom-nav">
             <button class="nav-item active" data-tab="market">
-                <span class="nav-icon">🏠</span>
+                <span class="nav-icon">■</span>
                 <span>Маркет</span>
             </button>
             <button class="nav-item" data-tab="mygifts">
-                <span class="nav-icon">📦</span>
+                <span class="nav-icon">◆</span>
                 <span>Мои подарки</span>
             </button>
         </div>
@@ -1891,7 +1891,7 @@
         }
 
         // ============================================================
-        // 6. FILTER (множественный выбор)
+        // 6. FILTER (множественный выбор, без эмодзи)
         // ============================================================
         function initFilter() {
             const container = document.getElementById('filterOptionsContainer');
@@ -1900,7 +1900,7 @@
             function renderFilterOptions() {
                 let html = '';
                 collections.forEach(col => {
-                    const icon = col === 'all' ? '★' : (COLLECTIONS_DATA[col]?.icon || '•');
+                    const icon = col === 'all' ? '☆' : '•';
                     const count = col === 'all' ? NFT_DATA.length : NFT_DATA.filter(n => n.collection === col)
                         .length;
                     const active = selectedCollections.has(col) ? 'active' : '';
@@ -1970,15 +1970,15 @@
         }
 
         // ============================================================
-        // 7. RENDER GRID
+        // 7. RENDER GRID (без индикатора загрузки)
         // ============================================================
-        function loadLottie(container, url, isMini = false) {
+        function loadLottie(container, url) {
             if (lottieCache.has(url)) {
                 const cached = lottieCache.get(url);
                 container.innerHTML = '';
                 try { lottie.loadAnimation({ container, animationData: cached, renderer: 'svg', loop: true,
                         autoplay: true }); } catch (e) { container.innerHTML =
-                        `<div style="color:#6e6e80;font-size:${isMini?'14px':'28px'};">🎁</div>`; }
+                        `<div style="color:#6e6e80;font-size:28px;">🎁</div>`; }
                 return;
             }
             try {
@@ -1987,11 +1987,11 @@
                     container.innerHTML = '';
                     try { lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
                             autoplay: true }); } catch (e) { container.innerHTML =
-                            `<div style="color:#6e6e80;font-size:${isMini?'14px':'28px'};">🎁</div>`; }
+                            `<div style="color:#6e6e80;font-size:28px;">🎁</div>`; }
                 }).catch(() => { container.innerHTML =
-                        `<div style="color:#6e6e80;font-size:${isMini?'14px':'28px'};">🎁</div>`; });
+                        `<div style="color:#6e6e80;font-size:28px;">🎁</div>`; });
             } catch (e) { container.innerHTML =
-                    `<div style="color:#6e6e80;font-size:${isMini?'14px':'28px'};">🎁</div>`; }
+                    `<div style="color:#6e6e80;font-size:28px;">🎁</div>`; }
         }
 
         function renderGrid() {
@@ -2006,7 +2006,7 @@
 
             if (filtered.length === 0) {
                 document.getElementById('nftGrid').innerHTML =
-                    `<div class="loading" style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;">Нет подарков</div>`;
+                    `<div style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;text-align:center;">Нет подарков</div>`;
                 return;
             }
             let html = '';
@@ -2142,7 +2142,7 @@
         });
 
         // ============================================================
-        // 10. BOTTOM NAV
+        // 10. BOTTOM NAV (переключение разделов)
         // ============================================================
         document.querySelectorAll('.nav-item').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2164,7 +2164,7 @@
         });
 
         // ============================================================
-        // 11. ONBOARDING — только для новых пользователей
+        // 11. ONBOARDING
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             const overlay = document.getElementById('onboardingOverlay');
