@@ -4,28 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Allow Market</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
-    <script src="https://telegram.org/js/telegram-web-app.js">
-    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a0f;
             color: #ffffff;
             min-height: 100vh;
+            padding: 0;
             display: flex;
             justify-content: center;
-            -webkit-tap-highlight-color: transparent;
         }
-
         .app {
             max-width: 430px;
             width: 100%;
@@ -34,41 +31,36 @@
             padding-bottom: 80px;
             position: relative;
         }
-
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 16px 16px 12px 16px;
-            background: rgba(10, 10, 15, 0.85);
+            background: rgba(10, 10, 15, 0.8);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(20px);
         }
-
         .header h1 {
             font-size: 22px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #fff 30%, #8e8ea0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            color: #ffffff;
             letter-spacing: -0.5px;
         }
-
-        .profile {
+        .header .profile {
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
             transition: opacity 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
-        .profile:active {
+        .header .profile:active {
             opacity: 0.7;
         }
-
-        .avatar {
+        .header .profile .avatar {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -80,23 +72,22 @@
             flex-shrink: 0;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
         }
-        .avatar img {
+        .header .profile .avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .avatar .avatar-placeholder {
-            font-size: 16px;
+        .header .profile .avatar .avatar-placeholder {
+            font-size: 14px;
             font-weight: 700;
-            color: #fff;
-            display: flex;
+            color: #ffffff;
+            display: none;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 100%;
         }
-
-        .balance-wrap {
+        .header .profile .balance-wrap {
             display: flex;
             align-items: center;
             gap: 4px;
@@ -105,53 +96,50 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-
-        .mini-gram {
+        .header .profile .balance-wrap .mini-gram {
             width: 16px;
             height: 16px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
         }
-        .mini-gram img {
+        .header .profile .balance-wrap .mini-gram img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .balance-text {
+        .header .profile .balance-wrap .balance-text {
             font-size: 12px;
             font-weight: 600;
             color: #ffffff;
         }
-
         .filter-section {
             padding: 12px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
-
         .filter-toggle-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 20px;
             color: #8e8ea0;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .filter-toggle-btn:hover {
             background: rgba(255, 255, 255, 0.08);
-            color: #fff;
+            color: #ffffff;
         }
-
         .filter-overlay {
             position: fixed;
             top: 0;
@@ -169,8 +157,7 @@
         .filter-overlay.open {
             display: flex;
         }
-
-        .filter-header {
+        .filter-overlay .filter-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -178,12 +165,11 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             margin-bottom: 20px;
         }
-        .filter-header h2 {
+        .filter-overlay .filter-header h2 {
             font-size: 20px;
             font-weight: 700;
         }
-
-        .filter-close {
+        .filter-overlay .filter-close {
             background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
@@ -194,12 +180,11 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .filter-close:hover {
+        .filter-overlay .filter-close:hover {
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
         }
-
-        .filter-option-big {
+        .filter-overlay .filter-option-big {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -214,10 +199,10 @@
             font-weight: 500;
             color: #ffffff;
         }
-        .filter-option-big:active {
+        .filter-overlay .filter-option-big:active {
             transform: scale(0.97);
         }
-        .filter-option-big .check {
+        .filter-overlay .filter-option-big .check {
             margin-left: auto;
             width: 22px;
             height: 22px;
@@ -230,26 +215,25 @@
             font-size: 12px;
             transition: all 0.2s;
         }
-        .filter-option-big.active .check {
+        .filter-overlay .filter-option-big.active .check {
             background: #4a8af4;
             border-color: #4a8af4;
             color: #fff;
         }
-        .filter-option-big .count {
+        .filter-overlay .filter-option-big .count {
             color: #6e6e80;
             font-size: 13px;
             font-weight: 400;
             margin-left: 4px;
         }
-
-        .filter-actions {
+        .filter-overlay .filter-actions {
             display: flex;
             gap: 10px;
             margin-top: 16px;
             padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .filter-actions button {
+        .filter-overlay .filter-actions button {
             flex: 1;
             padding: 12px;
             border-radius: 14px;
@@ -260,18 +244,17 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .filter-actions .apply-filter {
+        .filter-overlay .filter-actions .apply-filter {
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             color: #fff;
         }
-        .filter-actions .reset-filter {
+        .filter-overlay .filter-actions .reset-filter {
             background: rgba(255, 255, 255, 0.04);
             color: #8e8ea0;
         }
-        .filter-actions button:active {
+        .filter-overlay .filter-actions button:active {
             transform: scale(0.97);
         }
-
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -287,7 +270,6 @@
             padding: 12px 0 14px 0;
             z-index: 200;
         }
-
         .bottom-nav .nav-item {
             display: flex;
             flex-direction: column;
@@ -320,109 +302,73 @@
             border-radius: 4px;
             background: #4a8af4;
         }
-
         .nft-grid {
-            padding: 12px;
+            padding: 12px 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
-
         .nft-card {
-            background: #121216;
+            background: #1a1a1f;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            animation: cardAppear 0.4s ease forwards;
-            opacity: 0;
-            transform: translateY(15px);
+            position: relative;
         }
         .nft-card:active {
-            transform: scale(0.96);
+            transform: scale(0.97);
         }
-
-        @keyframes cardAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .nft-card-inner {
             display: flex;
             flex-direction: column;
             padding: 10px;
             gap: 8px;
+            background: #1a1a1f;
         }
-
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 12px;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #121216;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            min-height: 120px;
         }
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
-
-        .lottie-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #2a2a2f;
-            font-size: 32px;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.8;
-            }
-        }
-
         .status-badge {
             position: absolute;
-            top: 6px;
-            right: 6px;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 8px;
+            top: 4px;
+            right: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 7px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            backdrop-filter: blur(4px);
         }
         .status-badge.sold {
-            background: rgba(255, 107, 107, 0.25);
+            background: rgba(255, 107, 107, 0.2);
             color: #ff6b6b;
             border: 1px solid rgba(255, 107, 107, 0.2);
         }
         .status-badge.for-sale {
-            background: rgba(75, 200, 138, 0.2);
+            background: rgba(75, 200, 138, 0.15);
             color: #4bc88a;
             border: 1px solid rgba(75, 200, 138, 0.15);
         }
         .status-badge.on-auction {
-            background: rgba(255, 200, 50, 0.2);
+            background: rgba(255, 200, 50, 0.15);
             color: #ffc832;
             border: 1px solid rgba(255, 200, 50, 0.15);
         }
-
         .nft-info-compact {
             display: flex;
             flex-direction: column;
@@ -431,7 +377,7 @@
         .nft-name-compact {
             font-size: 12px;
             font-weight: 700;
-            color: #fff;
+            color: #ffffff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -444,21 +390,22 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .nft-price-compact {
             display: flex;
             align-items: center;
             gap: 4px;
             font-size: 13px;
             font-weight: 700;
-            color: #fff;
+            color: #ffffff;
             margin-top: 4px;
         }
-
         .gram-icon {
             width: 16px;
             height: 16px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
             overflow: hidden;
         }
@@ -466,8 +413,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 50%;
         }
-
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -480,41 +427,40 @@
             display: none;
             justify-content: center;
             align-items: center;
-            padding: 16px;
+            padding: 20px;
             animation: fadeIn 0.25s ease;
         }
         .detail-overlay.open {
             display: flex;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.96);
+                transform: scale(0.95);
             }
             to {
                 opacity: 1;
                 transform: scale(1);
             }
         }
-
         .detail-content {
-            background: #14141e;
-            border-radius: 24px;
+            background: #1a1a1f;
+            border-radius: 20px;
             max-width: 400px;
             width: 100%;
-            max-height: 90vh;
-            padding: 20px;
+            max-height: 85vh;
+            padding: 16px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
         .detail-content::-webkit-scrollbar {
             width: 0;
         }
-
         .detail-close {
+            position: sticky;
             float: right;
+            top: 0;
             background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
@@ -523,65 +469,65 @@
             border-radius: 50%;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            z-index: 10;
             margin-bottom: 8px;
         }
         .detail-close:hover {
             background: rgba(255, 255, 255, 0.08);
-            color: #fff;
+            color: #ffffff;
         }
-
         .detail-layout {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
-
         .detail-lottie-wrapper {
             width: 100%;
+            max-height: 200px;
             aspect-ratio: 1/1;
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #121216;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .detail-lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
-
         .detail-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
-            color: #fff;
+            color: #ffffff;
+            margin-bottom: 1px;
         }
         .detail-number {
             font-size: 14px;
             font-weight: 700;
             color: #4a8af4;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .detail-description {
             font-size: 12px;
             color: #8e8ea0;
-            line-height: 1.5;
-            margin-bottom: 8px;
+            line-height: 1.4;
+            margin-bottom: 10px;
         }
-
         .detail-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px 16px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .detail-stat {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 0;
+            padding: 3px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .detail-stat.full-width {
@@ -594,7 +540,7 @@
         }
         .detail-stat .value {
             font-size: 11px;
-            color: #fff;
+            color: #ffffff;
             font-weight: 600;
             text-align: right;
             max-width: 65%;
@@ -602,19 +548,18 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .detail-price {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 16px;
             font-weight: 800;
-            color: #fff;
+            color: #ffffff;
+            margin-bottom: 10px;
             padding: 10px 14px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            flex-wrap: wrap;
         }
         .detail-price .gram-icon {
             width: 22px;
@@ -625,29 +570,18 @@
             font-weight: 400;
             color: #6e6e80;
         }
-        .detail-price .stars {
-            font-size: 12px;
-            font-weight: 400;
-            color: #ffc832;
-            margin-left: auto;
-            background: rgba(255, 200, 50, 0.08);
-            padding: 2px 10px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 200, 50, 0.08);
-        }
-
         .detail-buy-btn {
             width: 100%;
             padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: #ffffff;
             font-size: 15px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         .detail-buy-btn:active {
             transform: scale(0.97);
@@ -664,7 +598,6 @@
             background: rgba(75, 200, 138, 0.2);
             color: #4bc88a;
         }
-
         .cart-floating {
             position: fixed;
             bottom: 76px;
@@ -672,7 +605,7 @@
             transform: translateX(-50%);
             background: linear-gradient(145deg, #1a1a2e, #14141e);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 22px;
+            padding: 10px 20px;
             border-radius: 30px;
             display: flex;
             align-items: center;
@@ -681,44 +614,35 @@
             backdrop-filter: blur(20px);
             z-index: 200;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
         .cart-floating:active {
             transform: translateX(-50%) scale(0.95);
         }
-
-        .cart-icon {
+        .cart-floating .cart-icon {
             font-size: 18px;
             position: relative;
         }
-        .cart-count {
+        .cart-floating .cart-count {
             position: absolute;
             top: -6px;
             right: -6px;
             background: #4a8af4;
-            color: #fff;
+            color: #ffffff;
             font-size: 9px;
             font-weight: 700;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .cart-total {
+        .cart-floating .cart-total {
             font-size: 13px;
             font-weight: 600;
-            color: #fff;
+            color: #ffffff;
         }
-        .cart-total .stars-total {
-            font-size: 10px;
-            color: #ffc832;
-            font-weight: 400;
-            margin-left: 4px;
-        }
-
         .cart-modal {
             position: fixed;
             top: 0;
@@ -736,7 +660,6 @@
         .cart-modal.open {
             display: flex;
         }
-
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -747,7 +670,6 @@
                 transform: translateY(0);
             }
         }
-
         .cart-modal-content {
             background: #14141e;
             border-radius: 24px 24px 0 0;
@@ -757,7 +679,6 @@
             padding: 20px 16px 30px 16px;
             overflow-y: auto;
         }
-
         .cart-modal-header {
             display: flex;
             justify-content: space-between;
@@ -770,7 +691,6 @@
             font-size: 20px;
             font-weight: 700;
         }
-
         .cart-close {
             background: rgba(255, 255, 255, 0.04);
             border: none;
@@ -781,7 +701,6 @@
             font-size: 18px;
             cursor: pointer;
         }
-
         .cart-item {
             display: flex;
             align-items: center;
@@ -805,12 +724,6 @@
             color: #4a8af4;
             font-weight: 600;
         }
-        .cart-item .item-stars {
-            font-size: 11px;
-            color: #ffc832;
-            font-weight: 500;
-            margin-left: 4px;
-        }
         .cart-item .item-remove {
             background: rgba(255, 107, 107, 0.1);
             border: none;
@@ -821,7 +734,6 @@
             font-size: 14px;
             cursor: pointer;
         }
-
         .cart-total-section {
             display: flex;
             justify-content: space-between;
@@ -829,7 +741,6 @@
             padding: 16px 0 8px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             margin-top: 8px;
-            flex-wrap: wrap;
         }
         .cart-total-section .total-label {
             font-size: 16px;
@@ -839,29 +750,20 @@
         .cart-total-section .total-amount {
             font-size: 20px;
             font-weight: 800;
-            color: #fff;
+            color: #ffffff;
         }
-        .cart-total-section .total-stars {
-            font-size: 14px;
-            color: #ffc832;
-            font-weight: 600;
-            width: 100%;
-            text-align: right;
-            margin-top: 4px;
-        }
-
         .btn-checkout {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 16px;
-            color: #fff;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             margin-top: 12px;
         }
         .btn-checkout:active {
@@ -871,13 +773,11 @@
             opacity: 0.3;
             cursor: not-allowed;
         }
-
         .empty-cart {
             text-align: center;
             padding: 40px 20px;
             color: #6e6e80;
         }
-
         .profile-modal {
             position: fixed;
             top: 0;
@@ -896,10 +796,9 @@
         .profile-modal.open {
             display: flex;
         }
-
         .profile-modal-content {
-            background: #14141e;
-            border-radius: 24px;
+            background: #1a1a1f;
+            border-radius: 20px;
             max-width: 380px;
             width: 100%;
             padding: 24px 20px 30px;
@@ -909,7 +808,6 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
         .profile-modal-close {
             position: absolute;
             top: 12px;
@@ -923,8 +821,7 @@
             font-size: 16px;
             cursor: pointer;
         }
-
-        .big-avatar {
+        .profile-modal .big-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -936,104 +833,92 @@
             align-items: center;
             justify-content: center;
         }
-        .big-avatar img {
+        .profile-modal .big-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .big-avatar .big-placeholder {
+        .profile-modal .big-avatar .big-placeholder {
             font-size: 32px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
+            color: #ffffff;
+            display: none;
         }
-
-        .profile-name {
+        .profile-modal .profile-name {
             font-size: 20px;
             font-weight: 700;
-            color: #fff;
+            color: #ffffff;
             margin-bottom: 2px;
         }
-        .profile-id {
+        .profile-modal .profile-id {
             font-size: 14px;
             color: #8e8ea0;
             margin-bottom: 14px;
             font-weight: 500;
         }
-
-        .profile-balance {
+        .profile-modal .profile-balance {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            color: #fff;
+            color: #ffffff;
             padding: 12px 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 8px;
-            flex-wrap: wrap;
+            margin-bottom: 14px;
         }
-        .profile-balance .mini-gram {
+        .profile-modal .profile-balance .mini-gram {
             width: 24px;
             height: 24px;
+            border-radius: 50%;
+            overflow: hidden;
         }
-
-        .profile-stars {
-            font-size: 14px;
-            color: #ffc832;
-            background: rgba(255, 200, 50, 0.06);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 200, 50, 0.06);
+        .profile-modal .profile-balance .mini-gram img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-
-        .profile-divider {
+        .profile-modal .profile-divider {
             height: 1px;
             background: rgba(255, 255, 255, 0.04);
             margin: 12px 0 14px 0;
         }
-
-        .btn-row {
+        .profile-modal .btn-row {
             display: flex;
             gap: 10px;
             margin-bottom: 10px;
         }
-        .add-gift-btn {
+        .profile-modal .btn-row .add-gift-btn {
             flex: 1;
             padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
-        .add-gift-btn:active {
+        .profile-modal .btn-row .add-gift-btn:active {
             transform: scale(0.97);
         }
-        .withdraw-btn {
+        .profile-modal .btn-row .withdraw-btn {
             flex: 1;
             padding: 12px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
-            color: #fff;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
-
         .withdraw-section {
             display: none;
             margin-top: 12px;
@@ -1045,80 +930,88 @@
         .withdraw-section.open {
             display: block;
         }
-
-        .withdraw-label {
+        .withdraw-section .withdraw-label {
             font-size: 13px;
             font-weight: 600;
             color: #8e8ea0;
             text-align: left;
             margin-bottom: 6px;
         }
-
-        .withdraw-input,
-        .withdraw-amount {
+        .withdraw-section .withdraw-input {
             width: 100%;
             padding: 10px 14px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 10px;
-            color: #fff;
+            color: #ffffff;
             font-size: 14px;
             font-family: 'Inter', sans-serif;
             outline: none;
             margin-bottom: 10px;
         }
-        .withdraw-input:focus,
-        .withdraw-amount:focus {
+        .withdraw-section .withdraw-input:focus {
             border-color: #4a8af4;
         }
-        .withdraw-input::placeholder,
-        .withdraw-amount::placeholder {
+        .withdraw-section .withdraw-input::placeholder {
             color: #6e6e80;
         }
-
-        .withdraw-row {
+        .withdraw-section .withdraw-row {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        .withdraw-submit {
+        .withdraw-section .withdraw-row .withdraw-amount {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+        .withdraw-section .withdraw-row .withdraw-amount:focus {
+            border-color: #4a8af4;
+        }
+        .withdraw-section .withdraw-row .withdraw-submit {
             width: 100%;
             padding: 10px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 10px;
-            color: #fff;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            margin-top: 4px;
         }
-        .withdraw-submit:active {
+        .withdraw-section .withdraw-row .withdraw-submit:active {
             transform: scale(0.97);
         }
-
-        .withdraw-error {
+        .withdraw-section .withdraw-error {
             color: #ff6b6b;
             font-size: 12px;
             font-weight: 500;
             margin-top: 8px;
             display: none;
         }
-        .withdraw-error.show {
+        .withdraw-section .withdraw-error.show {
             display: block;
         }
-        .withdraw-success {
+        .withdraw-section .withdraw-success {
             color: #4bc88a;
             font-size: 12px;
             font-weight: 500;
             margin-top: 8px;
             display: none;
         }
-        .withdraw-success.show {
+        .withdraw-section .withdraw-success.show {
             display: block;
         }
-
+        /* ONBOARDING — выдвигается снизу */
         .onboarding-overlay {
             position: fixed;
             top: 0;
@@ -1131,12 +1024,12 @@
             display: flex;
             align-items: flex-end;
             justify-content: center;
+            padding: 0;
             animation: slideUp 0.35s ease;
         }
         .onboarding-overlay.hidden {
             display: none;
         }
-
         @keyframes slideUp {
             from {
                 transform: translateY(100%);
@@ -1147,13 +1040,13 @@
                 opacity: 1;
             }
         }
-
         .onboarding-card {
-            background: #14141e;
+            background: #1a1a1f;
             border-radius: 28px 28px 0 0;
             max-width: 430px;
             width: 100%;
             padding: 32px 24px 36px;
+            border: none;
             text-align: center;
             box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.6);
         }
@@ -1161,7 +1054,7 @@
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #fff;
+            color: #ffffff;
         }
         .onboarding-card p {
             font-size: 15px;
@@ -1172,8 +1065,7 @@
         .onboarding-card p strong {
             color: #4a8af4;
         }
-
-        .btn-primary {
+        .onboarding-card .btn-primary {
             width: 100%;
             padding: 16px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
@@ -1183,64 +1075,60 @@
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
+            transition: 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        .btn-primary:active {
+        .onboarding-card .btn-primary:active {
             transform: scale(0.97);
         }
-
         .my-gifts-section {
             padding: 12px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             margin-top: 8px;
         }
         .my-gifts-section h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 12px;
-            color: #fff;
+            margin-bottom: 10px;
+            color: #ffffff;
         }
-
         .my-gifts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
         .my-gift-card {
             background: #121216;
             border-radius: 14px;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            transition: transform 0.2s;
-        }
-        .my-gift-card:active {
-            transform: scale(0.96);
+            gap: 4px;
         }
         .my-gift-card .mini-lottie-box {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 10px;
             background: #0a0a0f;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 28px;
         }
         .my-gift-card .gift-name {
             font-size: 11px;
             font-weight: 600;
-            color: #fff;
+            color: #ffffff;
+            margin-top: 4px;
             text-align: center;
         }
         .my-gift-card .gift-collection {
             font-size: 10px;
             color: #6e6e80;
         }
-
         .my-gifts-empty {
             color: #6e6e80;
             font-size: 13px;
@@ -1248,19 +1136,16 @@
             text-align: center;
             grid-column: 1 / -1;
         }
-
         .hidden-section {
             display: none !important;
         }
-
         @media (min-width: 600px) {
             .detail-content {
                 max-width: 480px;
-                padding: 24px;
+                padding: 20px;
             }
             .detail-layout {
                 flex-direction: row;
-                gap: 20px;
                 align-items: flex-start;
             }
             .detail-lottie-wrapper {
@@ -1294,7 +1179,7 @@
             </div>
         </div>
 
-        <!-- FILTER -->
+        <!-- FILTER SECTION -->
         <div class="filter-section">
             <button class="filter-toggle-btn" id="filterToggle">
                 <span>Фильтр</span>
@@ -1302,7 +1187,7 @@
             </button>
         </div>
 
-        <!-- FILTER OVERLAY -->
+        <!-- FULLSCREEN FILTER OVERLAY -->
         <div class="filter-overlay" id="filterOverlay">
             <div class="filter-header">
                 <h2>Коллекции</h2>
@@ -1315,10 +1200,10 @@
             </div>
         </div>
 
-        <!-- NFT GRID -->
+        <!-- NFT GRID (Маркет) -->
         <div class="nft-grid" id="nftGrid"></div>
 
-        <!-- MY GIFTS -->
+        <!-- MY GIFTS SECTION (отдельный раздел) -->
         <div class="my-gifts-section hidden-section" id="myGiftsSection">
             <h3>Мои подарки</h3>
             <div class="my-gifts-grid" id="myGiftsGrid">
@@ -1370,7 +1255,6 @@
                             </span>
                             <span id="detailPriceAmount">0.00 GRAM</span>
                             <span class="usd" id="detailPriceUsd">≈ $0.00</span>
-                            <span class="stars" id="detailPriceStars">⭐ 0</span>
                         </div>
                         <button class="detail-buy-btn" id="detailBuyBtn">Купить</button>
                     </div>
@@ -1385,8 +1269,7 @@
                 <span class="cart-count" id="cartCount">0</span>
             </div>
             <div class="cart-total">
-                <span id="cartTotal">0.00</span> GRAM
-                <span class="stars-total" id="cartStarsTotal">⭐ 0</span>
+                <span id="cartTotal">0.00</span> <span class="ton">GRAM</span>
             </div>
         </div>
 
@@ -1400,8 +1283,7 @@
                 <div id="cartItems"></div>
                 <div class="cart-total-section">
                     <span class="total-label">Итого</span>
-                    <span class="total-amount"><span id="modalCartTotal">0.00</span> GRAM</span>
-                    <span class="total-stars">⭐ <span id="modalCartStars">0</span></span>
+                    <span class="total-amount"><span id="modalCartTotal">0.00</span> <span class="ton">GRAM</span></span>
                 </div>
                 <button class="btn-checkout" id="checkoutBtn">Купить все</button>
             </div>
@@ -1422,7 +1304,6 @@
                         <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
                     </span>
                     <span id="profileBalance">0.00</span> GRAM
-                    <span class="profile-stars">⭐ <span id="profileStars">0</span></span>
                 </div>
                 <div class="profile-divider"></div>
                 <div class="btn-row">
@@ -1443,7 +1324,7 @@
             </div>
         </div>
 
-        <!-- ONBOARDING -->
+        <!-- ONBOARDING OVERLAY -->
         <div class="onboarding-overlay" id="onboardingOverlay">
             <div class="onboarding-card">
                 <h2>Добро пожаловать!</h2>
@@ -1452,7 +1333,7 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAV -->
+        <!-- BOTTOM NAV (увеличенный шрифт) -->
         <div class="bottom-nav">
             <button class="nav-item active" data-tab="market">Маркет</button>
             <button class="nav-item" data-tab="mygifts">Мои подарки</button>
@@ -1461,7 +1342,7 @@
 
     <script>
         // ============================================================
-        // 1. DATA — расширенный с реальными номерами и ценами
+        // 1. DATA
         // ============================================================
         const COLLECTIONS_DATA = {
             "Hex Pot": { icon: "🔮", floorPrice: 12.5 },
@@ -1480,15 +1361,9 @@
             "Precious Peach": { icon: "🍑", floorPrice: 29.9 }
         };
 
-        // Реальный курс: 1 GRAM = 5 Stars
-        const GRAM_TO_STARS = 5;
-
         function generateNFTs() {
             const all = [];
-
-            // Реальные данные с Fragment
             const realNFTs = [
-                // Plush Pepe — оригинальные цены (не меняем)
                 { collection: "Plush Pepe", number: 2656, price: 4230 },
                 { collection: "Plush Pepe", number: 100, price: 5555 },
                 { collection: "Plush Pepe", number: 1412, price: 4870 },
@@ -1502,457 +1377,165 @@
                 { collection: "Plush Pepe", number: 487, price: 12345 },
                 { collection: "Plush Pepe", number: 123, price: 11999 },
                 { collection: "Plush Pepe", number: 1010, price: 4700 },
-                { collection: "Plush Pepe", number: 777, price: 8900 },
-                { collection: "Plush Pepe", number: 2024, price: 6800 },
-                { collection: "Plush Pepe", number: 555, price: 9999 },
-                { collection: "Plush Pepe", number: 999, price: 12000 },
-                { collection: "Plush Pepe", number: 111, price: 7777 },
-                { collection: "Plush Pepe", number: 222, price: 8888 },
-                { collection: "Plush Pepe", number: 333, price: 6666 },
-                { collection: "Plush Pepe", number: 444, price: 5555 },
-                { collection: "Plush Pepe", number: 666, price: 7777 },
-                { collection: "Plush Pepe", number: 888, price: 9999 },
-                { collection: "Plush Pepe", number: 1212, price: 5100 },
-                { collection: "Plush Pepe", number: 1313, price: 5300 },
-                { collection: "Plush Pepe", number: 1414, price: 4900 },
-                { collection: "Plush Pepe", number: 1515, price: 5200 },
-                { collection: "Plush Pepe", number: 1616, price: 4800 },
-                { collection: "Plush Pepe", number: 1717, price: 5600 },
-                { collection: "Plush Pepe", number: 1818, price: 6100 },
-                { collection: "Plush Pepe", number: 1919, price: 5900 },
-                { collection: "Plush Pepe", number: 2020, price: 6300 },
-
-                // Nail Bracelet — дороже (x3)
-                { collection: "Nail Bracelet", number: 2655, price: 7.965 },
-                { collection: "Nail Bracelet", number: 3517, price: 2100 },
-                { collection: "Nail Bracelet", number: 891, price: 960 },
-                { collection: "Nail Bracelet", number: 1861, price: 855 },
-                { collection: "Nail Bracelet", number: 2859, price: 540 },
-                { collection: "Nail Bracelet", number: 160, price: 600 },
-                { collection: "Nail Bracelet", number: 4500, price: 1500 },
-                { collection: "Nail Bracelet", number: 1200, price: 750 },
-                { collection: "Nail Bracelet", number: 3333, price: 1800 },
-                { collection: "Nail Bracelet", number: 2222, price: 1200 },
-                { collection: "Nail Bracelet", number: 1000, price: 900 },
-                { collection: "Nail Bracelet", number: 5555, price: 2500 },
-                { collection: "Nail Bracelet", number: 7777, price: 3000 },
-                { collection: "Nail Bracelet", number: 8888, price: 3500 },
-                { collection: "Nail Bracelet", number: 9999, price: 4000 },
-                { collection: "Nail Bracelet", number: 1111, price: 800 },
-                { collection: "Nail Bracelet", number: 222, price: 650 },
-                { collection: "Nail Bracelet", number: 333, price: 700 },
-                { collection: "Nail Bracelet", number: 444, price: 850 },
-                { collection: "Nail Bracelet", number: 555, price: 950 },
-                { collection: "Nail Bracelet", number: 666, price: 1100 },
-                { collection: "Nail Bracelet", number: 777, price: 1300 },
-                { collection: "Nail Bracelet", number: 888, price: 1600 },
-                { collection: "Nail Bracelet", number: 999, price: 1900 },
-                { collection: "Nail Bracelet", number: 1010, price: 850 },
-                { collection: "Nail Bracelet", number: 2020, price: 1400 },
-                { collection: "Nail Bracelet", number: 3030, price: 1700 },
-                { collection: "Nail Bracelet", number: 4040, price: 2000 },
-                { collection: "Nail Bracelet", number: 5050, price: 2300 },
-                { collection: "Nail Bracelet", number: 6060, price: 2600 },
-                { collection: "Nail Bracelet", number: 7070, price: 2900 },
-
-                // Hex Pot — дороже (x3)
-                { collection: "Hex Pot", number: 10348, price: 37.5 },
-                { collection: "Hex Pot", number: 10349, price: 56.1 },
-                { collection: "Hex Pot", number: 10350, price: 66.9 },
-                { collection: "Hex Pot", number: 10351, price: 50.7 },
-                { collection: "Hex Pot", number: 10352, price: 84.3 },
-                { collection: "Hex Pot", number: 10353, price: 42.6 },
-                { collection: "Hex Pot", number: 10354, price: 95.4 },
-                { collection: "Hex Pot", number: 10355, price: 72.8 },
-                { collection: "Hex Pot", number: 10356, price: 61.2 },
-                { collection: "Hex Pot", number: 10357, price: 88.5 },
-                { collection: "Hex Pot", number: 10358, price: 49.3 },
-                { collection: "Hex Pot", number: 10359, price: 78.6 },
-                { collection: "Hex Pot", number: 10360, price: 55.8 },
-                { collection: "Hex Pot", number: 10361, price: 102.3 },
-                { collection: "Hex Pot", number: 10362, price: 67.5 },
-                { collection: "Hex Pot", number: 10363, price: 92.1 },
-                { collection: "Hex Pot", number: 10364, price: 44.7 },
-                { collection: "Hex Pot", number: 10365, price: 73.2 },
-                { collection: "Hex Pot", number: 10366, price: 59.4 },
-                { collection: "Hex Pot", number: 10367, price: 86.7 },
-                { collection: "Hex Pot", number: 10368, price: 51.6 },
-                { collection: "Hex Pot", number: 10369, price: 80.4 },
-                { collection: "Hex Pot", number: 10370, price: 63.9 },
-                { collection: "Hex Pot", number: 10371, price: 98.7 },
-                { collection: "Hex Pot", number: 10372, price: 47.2 },
-                { collection: "Hex Pot", number: 10373, price: 76.5 },
-                { collection: "Hex Pot", number: 10374, price: 54.3 },
-                { collection: "Hex Pot", number: 10375, price: 83.1 },
-                { collection: "Hex Pot", number: 10376, price: 69.6 },
-                { collection: "Hex Pot", number: 10377, price: 107.4 },
-
-                // Astral Shard — дороже (x3)
-                { collection: "Astral Shard", number: 2047, price: 24.6 },
-                { collection: "Astral Shard", number: 2048, price: 76.2 },
-                { collection: "Astral Shard", number: 2049, price: 18.3 },
-                { collection: "Astral Shard", number: 2050, price: 38.4 },
-                { collection: "Astral Shard", number: 2051, price: 52.7 },
-                { collection: "Astral Shard", number: 2052, price: 67.8 },
-                { collection: "Astral Shard", number: 2053, price: 29.1 },
-                { collection: "Astral Shard", number: 2054, price: 43.5 },
-                { collection: "Astral Shard", number: 2055, price: 58.2 },
-                { collection: "Astral Shard", number: 2056, price: 71.9 },
-                { collection: "Astral Shard", number: 2057, price: 34.8 },
-                { collection: "Astral Shard", number: 2058, price: 49.2 },
-                { collection: "Astral Shard", number: 2059, price: 63.6 },
-                { collection: "Astral Shard", number: 2060, price: 85.3 },
-                { collection: "Astral Shard", number: 2061, price: 41.7 },
-                { collection: "Astral Shard", number: 2062, price: 56.4 },
-                { collection: "Astral Shard", number: 2063, price: 74.1 },
-                { collection: "Astral Shard", number: 2064, price: 32.5 },
-                { collection: "Astral Shard", number: 2065, price: 47.8 },
-                { collection: "Astral Shard", number: 2066, price: 62.3 },
-                { collection: "Astral Shard", number: 2067, price: 79.5 },
-                { collection: "Astral Shard", number: 2068, price: 36.9 },
-                { collection: "Astral Shard", number: 2069, price: 51.6 },
-                { collection: "Astral Shard", number: 2070, price: 68.4 },
-                { collection: "Astral Shard", number: 2071, price: 88.7 },
-                { collection: "Astral Shard", number: 2072, price: 44.1 },
-                { collection: "Astral Shard", number: 2073, price: 59.7 },
-                { collection: "Astral Shard", number: 2074, price: 75.3 },
-                { collection: "Astral Shard", number: 2075, price: 92.8 },
-                { collection: "Astral Shard", number: 2076, price: 48.6 },
-
-                // Bonded Ring — дороже (x3)
-                { collection: "Bonded Ring", number: 1123, price: 135.6 },
-                { collection: "Bonded Ring", number: 1124, price: 206.7 },
-                { collection: "Bonded Ring", number: 1125, price: 158.1 },
-                { collection: "Bonded Ring", number: 1126, price: 234.9 },
-                { collection: "Bonded Ring", number: 1127, price: 184.2 },
-                { collection: "Bonded Ring", number: 1128, price: 167.7 },
-                { collection: "Bonded Ring", number: 1129, price: 276.3 },
-                { collection: "Bonded Ring", number: 1130, price: 143.4 },
-                { collection: "Bonded Ring", number: 1131, price: 250.8 },
-                { collection: "Bonded Ring", number: 1132, price: 177.6 },
-                { collection: "Bonded Ring", number: 1133, price: 214.5 },
-                { collection: "Bonded Ring", number: 1134, price: 194.1 },
-                { collection: "Bonded Ring", number: 1135, price: 265.2 },
-                { collection: "Bonded Ring", number: 1136, price: 150.9 },
-                { collection: "Bonded Ring", number: 1137, price: 230.4 },
-                { collection: "Bonded Ring", number: 1138, price: 198.3 },
-                { collection: "Bonded Ring", number: 1139, price: 288.6 },
-                { collection: "Bonded Ring", number: 1140, price: 162.3 },
-                { collection: "Bonded Ring", number: 1141, price: 241.2 },
-                { collection: "Bonded Ring", number: 1142, price: 189.6 },
-                { collection: "Bonded Ring", number: 1143, price: 259.5 },
-                { collection: "Bonded Ring", number: 1144, price: 155.7 },
-                { collection: "Bonded Ring", number: 1145, price: 223.8 },
-                { collection: "Bonded Ring", number: 1146, price: 175.2 },
-                { collection: "Bonded Ring", number: 1147, price: 281.7 },
-                { collection: "Bonded Ring", number: 1148, price: 138.9 },
-                { collection: "Bonded Ring", number: 1149, price: 257.1 },
-                { collection: "Bonded Ring", number: 1150, price: 205.8 },
-                { collection: "Bonded Ring", number: 1151, price: 291.3 },
-                { collection: "Bonded Ring", number: 1152, price: 170.4 },
-
-                // Durov's Cap — дороже (x3)
-                { collection: "Durov's Cap", number: 420, price: 269.1 },
-                { collection: "Durov's Cap", number: 421, price: 468.9 },
-                { collection: "Durov's Cap", number: 422, price: 338.4 },
-                { collection: "Durov's Cap", number: 423, price: 403.5 },
-                { collection: "Durov's Cap", number: 424, price: 605.1 },
-                { collection: "Durov's Cap", number: 425, price: 534.6 },
-                { collection: "Durov's Cap", number: 426, price: 286.2 },
-                { collection: "Durov's Cap", number: 427, price: 669.3 },
-                { collection: "Durov's Cap", number: 428, price: 503.7 },
-                { collection: "Durov's Cap", number: 429, price: 436.8 },
-                { collection: "Durov's Cap", number: 430, price: 357.9 },
-                { collection: "Durov's Cap", number: 431, price: 492.6 },
-                { collection: "Durov's Cap", number: 432, price: 578.4 },
-                { collection: "Durov's Cap", number: 433, price: 315.3 },
-                { collection: "Durov's Cap", number: 434, price: 417.6 },
-                { collection: "Durov's Cap", number: 435, price: 558.9 },
-                { collection: "Durov's Cap", number: 436, price: 374.1 },
-                { collection: "Durov's Cap", number: 437, price: 521.4 },
-                { collection: "Durov's Cap", number: 438, price: 459.3 },
-                { collection: "Durov's Cap", number: 439, price: 642.6 },
-                { collection: "Durov's Cap", number: 440, price: 298.8 },
-                { collection: "Durov's Cap", number: 441, price: 386.7 },
-                { collection: "Durov's Cap", number: 442, price: 547.2 },
-                { collection: "Durov's Cap", number: 443, price: 334.2 },
-                { collection: "Durov's Cap", number: 444, price: 481.5 },
-                { collection: "Durov's Cap", number: 445, price: 613.8 },
-                { collection: "Durov's Cap", number: 446, price: 424.5 },
-                { collection: "Durov's Cap", number: 447, price: 571.8 },
-                { collection: "Durov's Cap", number: 448, price: 353.7 },
-                { collection: "Durov's Cap", number: 449, price: 508.2 },
-
-                // Diamond Ring — дороже (x3)
-                { collection: "Diamond Ring", number: 5512, price: 201.9 },
-                { collection: "Diamond Ring", number: 5513, price: 374.4 },
-                { collection: "Diamond Ring", number: 5514, price: 268.5 },
-                { collection: "Diamond Ring", number: 5515, price: 470.1 },
-                { collection: "Diamond Ring", number: 5516, price: 236.7 },
-                { collection: "Diamond Ring", number: 5517, price: 594.6 },
-                { collection: "Diamond Ring", number: 5518, price: 337.2 },
-                { collection: "Diamond Ring", number: 5519, price: 703.5 },
-                { collection: "Diamond Ring", number: 5520, price: 431.4 },
-                { collection: "Diamond Ring", number: 5521, price: 262.8 },
-                { collection: "Diamond Ring", number: 5522, price: 514.2 },
-                { collection: "Diamond Ring", number: 5523, price: 358.5 },
-                { collection: "Diamond Ring", number: 5524, price: 628.8 },
-                { collection: "Diamond Ring", number: 5525, price: 296.4 },
-                { collection: "Diamond Ring", number: 5526, price: 447.3 },
-                { collection: "Diamond Ring", number: 5527, price: 552.6 },
-                { collection: "Diamond Ring", number: 5528, price: 384.9 },
-                { collection: "Diamond Ring", number: 5529, price: 679.2 },
-                { collection: "Diamond Ring", number: 5530, price: 318.6 },
-                { collection: "Diamond Ring", number: 5531, price: 492.3 },
-                { collection: "Diamond Ring", number: 5532, price: 576.9 },
-                { collection: "Diamond Ring", number: 5533, price: 405.6 },
-                { collection: "Diamond Ring", number: 5534, price: 645.3 },
-                { collection: "Diamond Ring", number: 5535, price: 280.5 },
-                { collection: "Diamond Ring", number: 5536, price: 463.8 },
-                { collection: "Diamond Ring", number: 5537, price: 531.9 },
-                { collection: "Diamond Ring", number: 5538, price: 349.2 },
-                { collection: "Diamond Ring", number: 5539, price: 612.6 },
-                { collection: "Diamond Ring", number: 5540, price: 422.7 },
-
-                // Evil Eye — дороже (x3)
-                { collection: "Evil Eye", number: 2231, price: 13.5 },
-                { collection: "Evil Eye", number: 2232, price: 29.1 },
-                { collection: "Evil Eye", number: 2233, price: 21.6 },
-                { collection: "Evil Eye", number: 2234, price: 36.9 },
-                { collection: "Evil Eye", number: 2235, price: 17.4 },
-                { collection: "Evil Eye", number: 2236, price: 26.7 },
-                { collection: "Evil Eye", number: 2237, price: 42.3 },
-                { collection: "Evil Eye", number: 2238, price: 19.2 },
-                { collection: "Evil Eye", number: 2239, price: 35.1 },
-                { collection: "Evil Eye", number: 2240, price: 27.6 },
-                { collection: "Evil Eye", number: 2241, price: 23.4 },
-                { collection: "Evil Eye", number: 2242, price: 40.5 },
-                { collection: "Evil Eye", number: 2243, price: 16.5 },
-                { collection: "Evil Eye", number: 2244, price: 32.7 },
-                { collection: "Evil Eye", number: 2245, price: 25.2 },
-                { collection: "Evil Eye", number: 2246, price: 38.7 },
-                { collection: "Evil Eye", number: 2247, price: 14.7 },
-                { collection: "Evil Eye", number: 2248, price: 30.9 },
-                { collection: "Evil Eye", number: 2249, price: 22.8 },
-                { collection: "Evil Eye", number: 2250, price: 44.1 },
-                { collection: "Evil Eye", number: 2251, price: 18.6 },
-                { collection: "Evil Eye", number: 2252, price: 28.8 },
-                { collection: "Evil Eye", number: 2253, price: 34.2 },
-                { collection: "Evil Eye", number: 2254, price: 46.8 },
-                { collection: "Evil Eye", number: 2255, price: 20.4 },
-                { collection: "Evil Eye", number: 2256, price: 37.2 },
-                { collection: "Evil Eye", number: 2257, price: 24.6 },
-                { collection: "Evil Eye", number: 2258, price: 41.7 },
-                { collection: "Evil Eye", number: 2259, price: 15.9 },
-
-                // Eternal Rose — дороже (x3)
-                { collection: "Eternal Rose", number: 7781, price: 104.4 },
-                { collection: "Eternal Rose", number: 7782, price: 156.9 },
-                { collection: "Eternal Rose", number: 7783, price: 124.8 },
-                { collection: "Eternal Rose", number: 7784, price: 86.7 },
-                { collection: "Eternal Rose", number: 7785, price: 191.1 },
-                { collection: "Eternal Rose", number: 7786, price: 141.6 },
-                { collection: "Eternal Rose", number: 7787, price: 167.4 },
-                { collection: "Eternal Rose", number: 7788, price: 115.2 },
-                { collection: "Eternal Rose", number: 7789, price: 214.5 },
-                { collection: "Eternal Rose", number: 7790, price: 134.7 },
-                { collection: "Eternal Rose", number: 7791, price: 177.9 },
-                { collection: "Eternal Rose", number: 7792, price: 98.1 },
-                { collection: "Eternal Rose", number: 7793, price: 203.4 },
-                { collection: "Eternal Rose", number: 7794, price: 151.2 },
-                { collection: "Eternal Rose", number: 7795, price: 129.3 },
-                { collection: "Eternal Rose", number: 7796, price: 184.2 },
-                { collection: "Eternal Rose", number: 7797, price: 109.5 },
-                { collection: "Eternal Rose", number: 7798, price: 163.8 },
-                { collection: "Eternal Rose", number: 7799, price: 138.6 },
-                { collection: "Eternal Rose", number: 7800, price: 197.7 },
-                { collection: "Eternal Rose", number: 7801, price: 121.5 },
-                { collection: "Eternal Rose", number: 7802, price: 172.2 },
-                { collection: "Eternal Rose", number: 7803, price: 145.8 },
-                { collection: "Eternal Rose", number: 7804, price: 210.6 },
-                { collection: "Eternal Rose", number: 7805, price: 94.2 },
-                { collection: "Eternal Rose", number: 7806, price: 158.4 },
-                { collection: "Eternal Rose", number: 7807, price: 132.9 },
-                { collection: "Eternal Rose", number: 7808, price: 188.7 },
-
-                // Ion Gem — дороже (x3)
-                { collection: "Ion Gem", number: 3381, price: 169.2 },
-                { collection: "Ion Gem", number: 3382, price: 236.7 },
-                { collection: "Ion Gem", number: 3383, price: 189.6 },
-                { collection: "Ion Gem", number: 3384, price: 137.1 },
-                { collection: "Ion Gem", number: 3385, price: 276.9 },
-                { collection: "Ion Gem", number: 3386, price: 215.4 },
-                { collection: "Ion Gem", number: 3387, price: 253.5 },
-                { collection: "Ion Gem", number: 3388, price: 158.7 },
-                { collection: "Ion Gem", number: 3389, price: 205.2 },
-                { collection: "Ion Gem", number: 3390, price: 112.8 },
-                { collection: "Ion Gem", number: 3391, price: 224.7 },
-                { collection: "Ion Gem", number: 3392, price: 181.5 },
-                { collection: "Ion Gem", number: 3393, price: 243.3 },
-                { collection: "Ion Gem", number: 3394, price: 147.3 },
-                { collection: "Ion Gem", number: 3395, price: 198.9 },
-                { collection: "Ion Gem", number: 3396, price: 264.6 },
-                { collection: "Ion Gem", number: 3397, price: 128.4 },
-                { collection: "Ion Gem", number: 3398, price: 231.9 },
-                { collection: "Ion Gem", number: 3399, price: 176.7 },
-                { collection: "Ion Gem", number: 3400, price: 259.8 },
-                { collection: "Ion Gem", number: 3401, price: 152.4 },
-                { collection: "Ion Gem", number: 3402, price: 209.7 },
-                { collection: "Ion Gem", number: 3403, price: 183.9 },
-                { collection: "Ion Gem", number: 3404, price: 248.1 },
-                { collection: "Ion Gem", number: 3405, price: 141.9 },
-                { collection: "Ion Gem", number: 3406, price: 194.7 },
-                { collection: "Ion Gem", number: 3407, price: 221.4 },
-                { collection: "Ion Gem", number: 3408, price: 161.1 },
-
-                // Kissed Frog — дороже (x3)
-                { collection: "Kissed Frog", number: 4562, price: 28.8 },
-                { collection: "Kissed Frog", number: 4563, price: 44.4 },
-                { collection: "Kissed Frog", number: 4564, price: 33.6 },
-                { collection: "Kissed Frog", number: 4565, price: 22.5 },
-                { collection: "Kissed Frog", number: 4566, price: 54.9 },
-                { collection: "Kissed Frog", number: 4567, price: 41.1 },
-                { collection: "Kissed Frog", number: 4568, price: 26.7 },
-                { collection: "Kissed Frog", number: 4569, price: 49.2 },
-                { collection: "Kissed Frog", number: 4570, price: 31.5 },
-                { collection: "Kissed Frog", number: 4571, price: 36.3 },
-                { collection: "Kissed Frog", number: 4572, price: 46.8 },
-                { collection: "Kissed Frog", number: 4573, price: 24.9 },
-                { collection: "Kissed Frog", number: 4574, price: 51.6 },
-                { collection: "Kissed Frog", number: 4575, price: 38.7 },
-                { collection: "Kissed Frog", number: 4576, price: 29.4 },
-                { collection: "Kissed Frog", number: 4577, price: 43.5 },
-                { collection: "Kissed Frog", number: 4578, price: 35.4 },
-                { collection: "Kissed Frog", number: 4579, price: 48.3 },
-                { collection: "Kissed Frog", number: 4580, price: 27.3 },
-                { collection: "Kissed Frog", number: 4581, price: 52.8 },
-                { collection: "Kissed Frog", number: 4582, price: 39.6 },
-                { collection: "Kissed Frog", number: 4583, price: 30.6 },
-                { collection: "Kissed Frog", number: 4584, price: 45.6 },
-                { collection: "Kissed Frog", number: 4585, price: 33.9 },
-                { collection: "Kissed Frog", number: 4586, price: 50.7 },
-                { collection: "Kissed Frog", number: 4587, price: 25.8 },
-                { collection: "Kissed Frog", number: 4588, price: 47.1 },
-
-                // Scared Cat — дороже (x3)
-                { collection: "Scared Cat", number: 6651, price: 56.7 },
-                { collection: "Scared Cat", number: 6652, price: 76.8 },
-                { collection: "Scared Cat", number: 6653, price: 64.2 },
-                { collection: "Scared Cat", number: 6654, price: 44.1 },
-                { collection: "Scared Cat", number: 6655, price: 98.4 },
-                { collection: "Scared Cat", number: 6656, price: 81.9 },
-                { collection: "Scared Cat", number: 6657, price: 58.5 },
-                { collection: "Scared Cat", number: 6658, price: 69.3 },
-                { collection: "Scared Cat", number: 6659, price: 48.6 },
-                { collection: "Scared Cat", number: 6660, price: 88.2 },
-                { collection: "Scared Cat", number: 6661, price: 73.5 },
-                { collection: "Scared Cat", number: 6662, price: 52.8 },
-                { collection: "Scared Cat", number: 6663, price: 94.8 },
-                { collection: "Scared Cat", number: 6664, price: 62.7 },
-                { collection: "Scared Cat", number: 6665, price: 78.6 },
-                { collection: "Scared Cat", number: 6666, price: 86.4 },
-                { collection: "Scared Cat", number: 6667, price: 46.5 },
-                { collection: "Scared Cat", number: 6668, price: 83.7 },
-                { collection: "Scared Cat", number: 6669, price: 59.4 },
-                { collection: "Scared Cat", number: 6670, price: 96.6 },
-                { collection: "Scared Cat", number: 6671, price: 50.7 },
-                { collection: "Scared Cat", number: 6672, price: 71.4 },
-                { collection: "Scared Cat", number: 6673, price: 89.7 },
-                { collection: "Scared Cat", number: 6674, price: 55.2 },
-                { collection: "Scared Cat", number: 6675, price: 92.1 },
-                { collection: "Scared Cat", number: 6676, price: 66.9 },
-                { collection: "Scared Cat", number: 6677, price: 102.3 },
-
-                // Vintage Cigar — дороже (x3)
-                { collection: "Vintage Cigar", number: 4000, price: 107.1 },
-                { collection: "Vintage Cigar", number: 4001, price: 126.3 },
-                { collection: "Vintage Cigar", number: 4002, price: 115.2 },
-                { collection: "Vintage Cigar", number: 4003, price: 149.4 },
-                { collection: "Vintage Cigar", number: 4004, price: 88.5 },
-                { collection: "Vintage Cigar", number: 4005, price: 168.9 },
-                { collection: "Vintage Cigar", number: 4006, price: 134.1 },
-                { collection: "Vintage Cigar", number: 4007, price: 98.7 },
-                { collection: "Vintage Cigar", number: 4008, price: 183.6 },
-                { collection: "Vintage Cigar", number: 4009, price: 118.8 },
-                { collection: "Vintage Cigar", number: 4010, price: 142.5 },
-                { collection: "Vintage Cigar", number: 4011, price: 83.4 },
-                { collection: "Vintage Cigar", number: 4012, price: 160.2 },
-                { collection: "Vintage Cigar", number: 4013, price: 110.7 },
-                { collection: "Vintage Cigar", number: 4014, price: 129.6 },
-                { collection: "Vintage Cigar", number: 4015, price: 154.8 },
-                { collection: "Vintage Cigar", number: 4016, price: 95.1 },
-                { collection: "Vintage Cigar", number: 4017, price: 138.3 },
-                { collection: "Vintage Cigar", number: 4018, price: 122.4 },
-                { collection: "Vintage Cigar", number: 4019, price: 177.3 },
-                { collection: "Vintage Cigar", number: 4020, price: 103.2 },
-                { collection: "Vintage Cigar", number: 4021, price: 146.7 },
-                { collection: "Vintage Cigar", number: 4022, price: 90.6 },
-                { collection: "Vintage Cigar", number: 4023, price: 165.6 },
-                { collection: "Vintage Cigar", number: 4024, price: 114.9 },
-
-                // Precious Peach — дороже (x3)
-                { collection: "Precious Peach", number: 2153, price: 33.333 },
-                { collection: "Precious Peach", number: 11, price: 5.997 },
-                { collection: "Precious Peach", number: 1080, price: 9.75 },
-                { collection: "Precious Peach", number: 1508, price: 1800 },
-                { collection: "Precious Peach", number: 1780, price: 1197 },
-                { collection: "Precious Peach", number: 1348, price: 3.702 },
-                { collection: "Precious Peach", number: 663, price: 1047 },
-                { collection: "Precious Peach", number: 777, price: 2400 },
-                { collection: "Precious Peach", number: 888, price: 2100 },
-                { collection: "Precious Peach", number: 999, price: 2800 },
-                { collection: "Precious Peach", number: 111, price: 1500 },
-                { collection: "Precious Peach", number: 222, price: 1800 },
-                { collection: "Precious Peach", number: 333, price: 2100 },
-                { collection: "Precious Peach", number: 444, price: 1650 },
-                { collection: "Precious Peach", number: 555, price: 2250 },
-                { collection: "Precious Peach", number: 666, price: 1950 },
-                { collection: "Precious Peach", number: 1212, price: 1200 },
-                { collection: "Precious Peach", number: 1313, price: 1350 },
-                { collection: "Precious Peach", number: 1414, price: 1500 },
-                { collection: "Precious Peach", number: 1515, price: 1650 },
-                { collection: "Precious Peach", number: 1616, price: 1800 },
-                { collection: "Precious Peach", number: 1717, price: 1950 },
-                { collection: "Precious Peach", number: 1818, price: 2100 },
-                { collection: "Precious Peach", number: 1919, price: 2250 },
-                { collection: "Precious Peach", number: 2020, price: 2400 },
+                { collection: "Nail Bracelet", number: 2655, price: 2.655 },
+                { collection: "Nail Bracelet", number: 3517, price: 700 },
+                { collection: "Nail Bracelet", number: 891, price: 320 },
+                { collection: "Nail Bracelet", number: 1861, price: 285 },
+                { collection: "Nail Bracelet", number: 2859, price: 180 },
+                { collection: "Nail Bracelet", number: 160, price: 200 },
+                { collection: "Hex Pot", number: 10348, price: 12.5 },
+                { collection: "Hex Pot", number: 10349, price: 18.7 },
+                { collection: "Hex Pot", number: 10350, price: 22.3 },
+                { collection: "Hex Pot", number: 10351, price: 16.9 },
+                { collection: "Hex Pot", number: 10352, price: 28.1 },
+                { collection: "Hex Pot", number: 10353, price: 14.2 },
+                { collection: "Astral Shard", number: 2047, price: 8.2 },
+                { collection: "Astral Shard", number: 2048, price: 25.4 },
+                { collection: "Astral Shard", number: 2049, price: 6.1 },
+                { collection: "Astral Shard", number: 2050, price: 12.8 },
+                { collection: "Bonded Ring", number: 1123, price: 45.2 },
+                { collection: "Bonded Ring", number: 1124, price: 68.9 },
+                { collection: "Bonded Ring", number: 1125, price: 52.7 },
+                { collection: "Bonded Ring", number: 1126, price: 78.3 },
+                { collection: "Bonded Ring", number: 1127, price: 61.4 },
+                { collection: "Bonded Ring", number: 1128, price: 55.9 },
+                { collection: "Bonded Ring", number: 1129, price: 92.1 },
+                { collection: "Bonded Ring", number: 1130, price: 47.8 },
+                { collection: "Bonded Ring", number: 1131, price: 83.6 },
+                { collection: "Bonded Ring", number: 1132, price: 59.2 },
+                { collection: "Bonded Ring", number: 1133, price: 71.5 },
+                { collection: "Bonded Ring", number: 1134, price: 64.7 },
+                { collection: "Bonded Ring", number: 1135, price: 88.4 },
+                { collection: "Bonded Ring", number: 1136, price: 50.3 },
+                { collection: "Bonded Ring", number: 1137, price: 76.8 },
+                { collection: "Durov's Cap", number: 420, price: 89.7 },
+                { collection: "Durov's Cap", number: 421, price: 156.3 },
+                { collection: "Durov's Cap", number: 422, price: 112.8 },
+                { collection: "Durov's Cap", number: 423, price: 134.5 },
+                { collection: "Durov's Cap", number: 424, price: 201.7 },
+                { collection: "Durov's Cap", number: 425, price: 178.2 },
+                { collection: "Durov's Cap", number: 426, price: 95.4 },
+                { collection: "Durov's Cap", number: 427, price: 223.1 },
+                { collection: "Durov's Cap", number: 428, price: 167.9 },
+                { collection: "Durov's Cap", number: 429, price: 145.6 },
+                { collection: "Diamond Ring", number: 5512, price: 67.3 },
+                { collection: "Diamond Ring", number: 5513, price: 124.8 },
+                { collection: "Diamond Ring", number: 5514, price: 89.5 },
+                { collection: "Diamond Ring", number: 5515, price: 156.7 },
+                { collection: "Diamond Ring", number: 5516, price: 78.9 },
+                { collection: "Diamond Ring", number: 5517, price: 198.2 },
+                { collection: "Diamond Ring", number: 5518, price: 112.4 },
+                { collection: "Diamond Ring", number: 5519, price: 234.5 },
+                { collection: "Diamond Ring", number: 5520, price: 143.8 },
+                { collection: "Diamond Ring", number: 5521, price: 87.6 },
+                { collection: "Evil Eye", number: 2231, price: 4.5 },
+                { collection: "Evil Eye", number: 2232, price: 9.7 },
+                { collection: "Evil Eye", number: 2233, price: 7.2 },
+                { collection: "Evil Eye", number: 2234, price: 12.3 },
+                { collection: "Evil Eye", number: 2235, price: 5.8 },
+                { collection: "Evil Eye", number: 2236, price: 8.9 },
+                { collection: "Evil Eye", number: 2237, price: 14.1 },
+                { collection: "Evil Eye", number: 2238, price: 6.4 },
+                { collection: "Evil Eye", number: 2239, price: 11.7 },
+                { collection: "Evil Eye", number: 2240, price: 9.2 },
+                { collection: "Evil Eye", number: 2241, price: 7.8 },
+                { collection: "Evil Eye", number: 2242, price: 13.5 },
+                { collection: "Evil Eye", number: 2243, price: 5.5 },
+                { collection: "Evil Eye", number: 2244, price: 10.9 },
+                { collection: "Evil Eye", number: 2245, price: 8.4 },
+                { collection: "Eternal Rose", number: 7781, price: 34.8 },
+                { collection: "Eternal Rose", number: 7782, price: 52.3 },
+                { collection: "Eternal Rose", number: 7783, price: 41.6 },
+                { collection: "Eternal Rose", number: 7784, price: 28.9 },
+                { collection: "Eternal Rose", number: 7785, price: 63.7 },
+                { collection: "Eternal Rose", number: 7786, price: 47.2 },
+                { collection: "Eternal Rose", number: 7787, price: 55.8 },
+                { collection: "Eternal Rose", number: 7788, price: 38.4 },
+                { collection: "Eternal Rose", number: 7789, price: 71.5 },
+                { collection: "Eternal Rose", number: 7790, price: 44.9 },
+                { collection: "Eternal Rose", number: 7791, price: 59.3 },
+                { collection: "Eternal Rose", number: 7792, price: 32.7 },
+                { collection: "Eternal Rose", number: 7793, price: 67.8 },
+                { collection: "Eternal Rose", number: 7794, price: 50.4 },
+                { collection: "Eternal Rose", number: 7795, price: 43.1 },
+                { collection: "Ion Gem", number: 3381, price: 56.4 },
+                { collection: "Ion Gem", number: 3382, price: 78.9 },
+                { collection: "Ion Gem", number: 3383, price: 63.2 },
+                { collection: "Ion Gem", number: 3384, price: 45.7 },
+                { collection: "Ion Gem", number: 3385, price: 92.3 },
+                { collection: "Ion Gem", number: 3386, price: 71.8 },
+                { collection: "Ion Gem", number: 3387, price: 84.5 },
+                { collection: "Ion Gem", number: 3388, price: 52.9 },
+                { collection: "Ion Gem", number: 3389, price: 68.4 },
+                { collection: "Ion Gem", number: 3390, price: 37.6 },
+                { collection: "Kissed Frog", number: 4562, price: 9.6 },
+                { collection: "Kissed Frog", number: 4563, price: 14.8 },
+                { collection: "Kissed Frog", number: 4564, price: 11.2 },
+                { collection: "Kissed Frog", number: 4565, price: 7.5 },
+                { collection: "Kissed Frog", number: 4566, price: 18.3 },
+                { collection: "Kissed Frog", number: 4567, price: 13.7 },
+                { collection: "Kissed Frog", number: 4568, price: 8.9 },
+                { collection: "Kissed Frog", number: 4569, price: 16.4 },
+                { collection: "Kissed Frog", number: 4570, price: 10.5 },
+                { collection: "Kissed Frog", number: 4571, price: 12.1 },
+                { collection: "Scared Cat", number: 6651, price: 18.9 },
+                { collection: "Scared Cat", number: 6652, price: 25.6 },
+                { collection: "Scared Cat", number: 6653, price: 21.4 },
+                { collection: "Scared Cat", number: 6654, price: 14.7 },
+                { collection: "Scared Cat", number: 6655, price: 32.8 },
+                { collection: "Scared Cat", number: 6656, price: 27.3 },
+                { collection: "Scared Cat", number: 6657, price: 19.5 },
+                { collection: "Scared Cat", number: 6658, price: 23.1 },
+                { collection: "Scared Cat", number: 6659, price: 16.2 },
+                { collection: "Scared Cat", number: 6660, price: 29.4 },
+                { collection: "Vintage Cigar", number: 4000, price: 35.7 },
+                { collection: "Vintage Cigar", number: 4001, price: 42.1 },
+                { collection: "Vintage Cigar", number: 4002, price: 38.4 },
+                { collection: "Vintage Cigar", number: 4003, price: 49.8 },
+                { collection: "Vintage Cigar", number: 4004, price: 29.5 },
+                { collection: "Vintage Cigar", number: 4005, price: 56.3 },
+                { collection: "Vintage Cigar", number: 4006, price: 44.7 },
+                { collection: "Vintage Cigar", number: 4007, price: 32.9 },
+                { collection: "Vintage Cigar", number: 4008, price: 61.2 },
+                { collection: "Vintage Cigar", number: 4009, price: 39.6 },
+                { collection: "Vintage Cigar", number: 4010, price: 47.5 },
+                { collection: "Vintage Cigar", number: 4011, price: 27.8 },
+                { collection: "Vintage Cigar", number: 4012, price: 53.4 },
+                { collection: "Vintage Cigar", number: 4013, price: 36.9 },
+                { collection: "Vintage Cigar", number: 4014, price: 43.2 },
+                { collection: "Precious Peach", number: 2153, price: 11.111 },
+                { collection: "Precious Peach", number: 11, price: 1.999 },
+                { collection: "Precious Peach", number: 1080, price: 3.250 },
+                { collection: "Precious Peach", number: 1508, price: 600 },
+                { collection: "Precious Peach", number: 1780, price: 399 },
+                { collection: "Precious Peach", number: 1348, price: 1.234 },
+                { collection: "Precious Peach", number: 663, price: 349 }
             ];
-
-            // Модели для каждой коллекции (расширенные)
             const models = {
-                "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal", "Shadow", "Obsidian", "Sapphire",
-                    "Ruby", "Amber", "Jade", "Onyx"
-                ],
-                "Astral Shard": ["Nebula", "Supernova", "Galaxy", "Pulsar", "Quasar", "Comet", "Asteroid", "Nova"],
-                "Plush Pepe": ["Classic", "Rare", "Legendary", "Golden", "Rainbow", "Dark", "Mythic", "Exclusive", "Epic",
-                    "Shadow", "Crystal"
-                ],
-                "Bonded Ring": ["Silver", "Gold", "Platinum", "Rose", "Titanium", "Iridium", "Rhodium", "Osmium"],
-                "Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Exclusive", "Founder", "Genesis", "Pioneer"],
-                "Diamond Ring": ["Classic", "Royal", "Imperial", "Crown", "Eternal", "Infinity", "Majestic"],
-                "Evil Eye": ["Classic", "Dark", "Ancient", "Cursed", "Ward", "Talisman", "Amulet", "Charm"],
-                "Eternal Rose": ["Red", "Blue", "Golden", "Silver", "Crystal", "Shadow", "Velvet", "Crimson"],
-                "Ion Gem": ["Blue", "Red", "Rainbow", "Crystal", "Shadow", "Prism", "Aurora", "Spectrum"],
-                "Kissed Frog": ["Prince", "Princess", "King", "Queen", "Jester", "Sorcerer", "Wizard"],
-                "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby", "Sapphire", "Emerald"],
-                "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith", "Spectre", "Poltergeist"],
-                "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban", "Dominican"],
-                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe", "Premium", "Luxury"]
+                "Hex Pot": ["Violet Veil", "Blood Moon", "Emerald", "Golden", "Crystal", "Shadow"],
+                "Astral Shard": ["Nebula", "Supernova", "Galaxy", "Pulsar"],
+                "Plush Pepe": ["Classic", "Rare", "Legendary", "Golden", "Rainbow", "Dark"],
+                "Bonded Ring": ["Silver", "Gold", "Platinum", "Rose", "Titanium", "Iridium"],
+                "Durov's Cap": ["Classic", "Limited", "Ultra Rare", "Exclusive", "Founder"],
+                "Diamond Ring": ["Classic", "Royal", "Imperial", "Crown", "Eternal"],
+                "Evil Eye": ["Classic", "Dark", "Ancient", "Cursed", "Ward", "Talisman"],
+                "Eternal Rose": ["Red", "Blue", "Golden", "Silver", "Crystal", "Shadow"],
+                "Ion Gem": ["Blue", "Red", "Rainbow", "Crystal", "Shadow"],
+                "Kissed Frog": ["Prince", "Princess", "King", "Queen", "Jester"],
+                "Nail Bracelet": ["Silver", "Gold", "Rose", "Diamond", "Pearl", "Ruby"],
+                "Scared Cat": ["Shadow", "Ghost", "Spirit", "Phantom", "Wraith"],
+                "Vintage Cigar": ["Classic", "Maduro", "Rosado", "Connecticut", "Habano", "Cuban"],
+                "Precious Peach": ["Golden", "Royal", "Sweet", "Juicy", "Ripe", "Fresh", "Deluxe"]
             };
-
             const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow", "Aurora",
-                "Galaxy", "Nebula", "Twilight", "Dawn", "Dusk", "Zenith"
+                "Galaxy"
             ];
-            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown", "Skull", "Dragon",
-                "Phoenix", "Wolf", "Eagle", "Lion", "Serpent"
-            ];
+            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown", "Skull", "Dragon"];
             const ownerAddresses = [
                 "UQC0hzwcQrtP58TS6ugiYVQ8owyMRw5mdyy8sBoQwnuH2vVV",
                 "UQDPxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxX",
-                "UQAxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxY",
-                "UQDyHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxZ"
+                "UQAxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxY"
             ];
-
             realNFTs.forEach((item, index) => {
                 const col = item.collection;
                 const num = item.number;
@@ -2001,18 +1584,6 @@
         let currentFilter = 'all';
 
         const lottieCache = new Map();
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const container = entry.target;
-                    const url = container.dataset.lottieUrl;
-                    if (url && !container.dataset.loaded) {
-                        loadLottie(container, url);
-                        container.dataset.loaded = 'true';
-                    }
-                }
-            });
-        }, { rootMargin: '50px' });
 
         // ============================================================
         // 3. STORAGE
@@ -2060,21 +1631,14 @@
             }, 0);
         }
 
-        function getCartStars() {
-            return getCartTotal() * GRAM_TO_STARS;
-        }
-
         function isInCart(nftName) { return cart.includes(nftName); }
 
         function updateCartUI() {
             const count = cart.length;
             const total = getCartTotal();
-            const stars = getCartStars();
             document.getElementById('cartCount').textContent = count;
             document.getElementById('cartTotal').textContent = total.toFixed(2);
-            document.getElementById('cartStarsTotal').textContent = `⭐ ${stars.toFixed(0)}`;
             document.getElementById('modalCartTotal').textContent = total.toFixed(2);
-            document.getElementById('modalCartStars').textContent = stars.toFixed(0);
             document.getElementById('checkoutBtn').disabled = count === 0;
             renderCartItems();
         }
@@ -2083,19 +1647,18 @@
             const container = document.getElementById('cartItems');
             if (cart.length === 0) {
                 container.innerHTML =
-                    `<div class="empty-cart"><div style="font-size:40px;margin-bottom:8px;">🛒</div><p>Корзина пуста</p><p style="font-size:13px;margin-top:4px;color:#6e6e80;">Добавьте NFT для покупки</p></div>`;
+                    `<div class="empty-cart"><div class="icon">🛒</div><p>Корзина пуста</p><p style="font-size:13px;margin-top:4px;color:#6e6e80;">Добавьте NFT для покупки</p></div>`;
                 return;
             }
             let html = '';
             cart.forEach(name => {
                 const nft = NFT_DATA.find(n => n.name === name);
                 if (!nft) return;
-                const stars = nft.price * GRAM_TO_STARS;
                 html += `
                     <div class="cart-item">
                         <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
                         <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
-                        <div class="item-price">${nft.price.toFixed(3)} GRAM <span class="item-stars">⭐ ${stars.toFixed(0)}</span></div>
+                        <div class="item-price">${nft.price.toFixed(3)} GRAM</div>
                         <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
                     </div>
                 `;
@@ -2133,7 +1696,6 @@
         function updateBalanceUI() {
             document.getElementById('headerBalance').textContent = userBalance.toFixed(2);
             document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
-            document.getElementById('profileStars').textContent = (userBalance * GRAM_TO_STARS).toFixed(0);
         }
 
         function updateAvatarUI(user) {
@@ -2260,7 +1822,7 @@
                 localStorage.setItem(balanceKey, String(userBalance));
                 updateBalanceUI();
                 successEl.textContent =
-                    `Заявка на вывод ${amount.toFixed(2)} GRAM (⭐ ${(amount * GRAM_TO_STARS).toFixed(0)}) на ${wallet.substring(0,6)}...${wallet.substring(wallet.length-4)} отправлена!`;
+                    `Заявка на вывод ${amount.toFixed(2)} GRAM на ${wallet.substring(0,6)}...${wallet.substring(wallet.length-4)} отправлена!`;
                 successEl.classList.add('show');
                 document.getElementById('walletInput').value = '';
                 document.getElementById('amountInput').value = '';
@@ -2306,7 +1868,7 @@
         }
 
         // ============================================================
-        // 6. FILTER
+        // 6. FILTER (без эмодзи)
         // ============================================================
         function initFilter() {
             const container = document.getElementById('filterOptionsContainer');
@@ -2383,7 +1945,7 @@
         }
 
         // ============================================================
-        // 7. RENDER GRID
+        // 7. RENDER GRID (сразу показывает подарки)
         // ============================================================
         function loadLottie(container, url) {
             if (lottieCache.has(url)) {
@@ -2419,30 +1981,24 @@
 
             if (filtered.length === 0) {
                 document.getElementById('nftGrid').innerHTML =
-                    `<div style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;text-align:center;">Нет подарков в этой коллекции</div>`;
+                    `<div style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;text-align:center;">Нет подарков</div>`;
                 return;
             }
-
             let html = '';
-            filtered.forEach((nft, index) => {
+            filtered.forEach((nft) => {
                 const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
                 const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${num}`;
                 const statusEmoji = { 'sold': '🔴', 'for-sale': '🟢', 'on-auction': '🟡' } [nft.status] || '⚪';
                 const statusLabel = { 'sold': 'Продано', 'for-sale': 'В продаже', 'on-auction': 'На аукционе' } [nft
-                    .status
-                ] || '';
+                    .status] || '';
                 const statusClass = { 'sold': 'sold', 'for-sale': 'for-sale', 'on-auction': 'on-auction' } [nft
-                    .status
-                ] || '';
-                const delay = (index % 20) * 40;
-                const stars = nft.price * GRAM_TO_STARS;
+                    .status] || '';
                 html += `
-                    <div class="nft-card" onclick="openDetail('${nft.name}')" style="animation-delay:${delay}ms">
+                    <div class="nft-card" onclick="openDetail('${nft.name}')">
                         <div class="nft-card-inner">
                             <div class="lottie-wrapper">
-                                <div class="lottie-container" id="${lottieId}" data-lottie-url="${nft.lottie}"></div>
-                                <div class="lottie-placeholder" id="placeholder-${lottieId}">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
+                                <div class="lottie-container" id="${lottieId}"></div>
                                 ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
                             </div>
                             <div class="nft-info-compact">
@@ -2451,28 +2007,21 @@
                                 <div class="nft-price-compact">
                                     <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
                                     ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
-                                    <span style="font-size:9px;color:#ffc832;font-weight:400;margin-left:auto;">⭐ ${stars.toFixed(0)}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
             });
-
             document.getElementById('nftGrid').innerHTML = html;
-
             setTimeout(() => {
-                document.querySelectorAll('.lottie-container').forEach(container => {
-                    const placeholder = document.getElementById(`placeholder-${container.id}`);
-                    if (placeholder) {
-                        container.addEventListener('animationstart', () => {
-                            if (placeholder) placeholder.style.display = 'none';
-                        });
-                    }
-                    observer.observe(container);
+                filtered.forEach((nft) => {
+                    const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
+                    const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${num}`);
+                    if (container && nft.lottie) loadLottie(container, nft.lottie);
                 });
                 updateCartUI();
-            }, 100);
+            }, 150);
         }
 
         // ============================================================
@@ -2498,38 +2047,28 @@
             document.getElementById('detailIssued').textContent = nft.issued || `${num} of 1973`;
             const statusMap = { 'for-sale': '🟢 В продаже', 'on-auction': '🟡 На аукционе', 'sold': '🔴 Продано' };
             document.getElementById('detailStatus').textContent = statusMap[nft.status] || nft.status;
-
-            const stars = nft.price * GRAM_TO_STARS;
             if (nft.price > 0) {
                 document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(3)} GRAM`;
                 document.getElementById('detailPriceUsd').textContent = `≈ $${(nft.price * 5.2).toFixed(2)}`;
-                document.getElementById('detailPriceStars').textContent = `⭐ ${stars.toFixed(0)}`;
                 document.getElementById('detailPrice').style.display = 'flex';
             } else { document.getElementById('detailPrice').style.display = 'none'; }
 
             const container = document.getElementById('detailLottie');
             container.innerHTML = '';
-            container.innerHTML =
-                `<div style="color:#2a2a2f;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`;
-
             if (lottieCache.has(nft.lottie)) {
-                try {
-                    container.innerHTML = '';
-                    lottie.loadAnimation({ container, animationData: lottieCache.get(nft.lottie), renderer: 'svg',
-                        loop: true, autoplay: true });
-                } catch (e) { container.innerHTML =
-                        `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
+                try { lottie.loadAnimation({ container, animationData: lottieCache.get(nft.lottie), renderer: 'svg',
+                        loop: true, autoplay: true }); } catch (e) { container.innerHTML =
+                        `<div style="color:#6e6e80;font-size:48px;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
             } else {
                 fetch(nft.lottie).then(r => r.json()).then(data => {
                     lottieCache.set(nft.lottie, data);
                     container.innerHTML = '';
                     try { lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
                             autoplay: true }); } catch (e) { container.innerHTML =
-                            `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
+                            `<div style="color:#6e6e80;font-size:48px;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
                 }).catch(() => { container.innerHTML =
-                        `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; });
+                        `<div style="color:#6e6e80;font-size:48px;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; });
             }
-
             updateDetailButtons();
             detailOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -2559,19 +2098,16 @@
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             const total = getCartTotal();
-            const stars = getCartStars();
             if (total > userBalance) {
-                alert(
-                    `Недостаточно средств! Баланс: ${userBalance.toFixed(3)} GRAM (⭐ ${(userBalance * GRAM_TO_STARS).toFixed(0)}), сумма: ${total.toFixed(3)} GRAM (⭐ ${stars.toFixed(0)})`
-                    );
+                alert(`Недостаточно средств! Баланс: ${userBalance.toFixed(3)} GRAM, сумма: ${total.toFixed(3)} GRAM`);
                 return;
             }
-            if (confirm(`Купить ${cart.length} NFT за ${total.toFixed(3)} GRAM (⭐ ${stars.toFixed(0)})?`)) {
+            if (confirm(`Купить ${cart.length} NFT за ${total.toFixed(3)} GRAM?`)) {
                 userBalance = parseFloat((userBalance - total).toFixed(2));
                 const balanceKey = getStorageKey('balance');
                 localStorage.setItem(balanceKey, String(userBalance));
                 updateBalanceUI();
-                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM (⭐ ${stars.toFixed(0)})`);
+                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM`);
                 cart = [];
                 saveCart();
                 cartModal.classList.remove('open');
@@ -2581,7 +2117,7 @@
         });
 
         // ============================================================
-        // 10. BOTTOM NAV
+        // 10. BOTTOM NAV (переключение разделов)
         // ============================================================
         document.querySelectorAll('.nav-item').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2624,6 +2160,7 @@
 
             initProfile();
             initFilter();
+            // Показываем маркет по умолчанию
             document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
             document.getElementById('nftGrid').classList.remove('hidden-section');
             document.getElementById('myGiftsSection').classList.add('hidden-section');
@@ -2632,6 +2169,7 @@
             loadMyGifts();
         });
 
+        // глобальный доступ
         window.openDetail = openDetail;
         window.removeFromCart = removeFromCart;
         window.addToCart = addToCart;
