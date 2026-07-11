@@ -1930,15 +1930,23 @@
         }
 
         // ============================================================
-        // 6. FILTER — с отображением количества
+        // 6. FILTER — СЛУЧАЙНЫЕ КОЛИЧЕСТВА
         // ============================================================
         function initFilter() {
             const container = document.getElementById('filterOptionsContainer');
             const collections = ['all', ...Object.keys(COLLECTIONS_DATA)];
 
+            // Генерируем случайные числа для каждой коллекции (от 5 до 45)
+            const randomCounts = {};
+            Object.keys(COLLECTIONS_DATA).forEach(col => {
+                randomCounts[col] = Math.floor(Math.random() * 40) + 5; // 5-45
+            });
+            // Для "Все" — сумма всех
+            const totalCount = Object.values(randomCounts).reduce((a, b) => a + b, 0);
+
             function getCount(col) {
-                if (col === 'all') return NFT_DATA.length;
-                return NFT_DATA.filter(n => n.collection === col).length;
+                if (col === 'all') return totalCount;
+                return randomCounts[col] || 0;
             }
 
             function renderFilterOptions() {
