@@ -61,7 +61,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
@@ -314,7 +314,7 @@
             align-items: center;
             gap: 2px;
             color: #6e6e80;
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 600;
             letter-spacing: 0.3px;
             cursor: pointer;
@@ -322,7 +322,7 @@
             background: none;
             border: none;
             font-family: 'Inter', sans-serif;
-            padding: 6px 20px;
+            padding: 6px 16px;
             border-radius: 12px;
             position: relative;
         }
@@ -339,6 +339,9 @@
             height: 3px;
             border-radius: 4px;
             background: #4a8af4;
+        }
+        .bottom-nav .nav-item .nav-icon {
+            font-size: 18px;
         }
 
         .nft-grid {
@@ -515,7 +518,7 @@
         .detail-layout {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             height: 100%;
             padding-top: 6px;
         }
@@ -531,25 +534,33 @@
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.04);
             flex-shrink: 0;
-            max-height: 50%;
+            max-height: 55%;
         }
         .detail-lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .detail-lottie-wrapper .lottie-container svg {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain;
         }
         .detail-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: #ffffff;
             margin-top: 2px;
         }
         .detail-number {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: #4a8af4;
         }
         .detail-description {
-            font-size: 11px;
+            font-size: 10px;
             color: #8e8ea0;
             line-height: 1.3;
             display: -webkit-box;
@@ -574,12 +585,12 @@
             grid-column: 1 / -1;
         }
         .detail-stat .label {
-            font-size: 10px;
+            font-size: 9px;
             color: #6e6e80;
             font-weight: 500;
         }
         .detail-stat .value {
-            font-size: 10px;
+            font-size: 9px;
             color: #ffffff;
             font-weight: 600;
             text-align: right;
@@ -592,32 +603,32 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             color: #ffffff;
-            padding: 6px 12px;
+            padding: 4px 10px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             margin: 2px 0;
         }
         .detail-price .gram-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
         .detail-price .usd {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 400;
             color: #6e6e80;
         }
         .detail-buy-btn {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
@@ -640,6 +651,7 @@
             color: #4bc88a;
         }
 
+        /* Новая корзина внизу */
         .cart-floating {
             position: fixed;
             bottom: 76px;
@@ -1175,6 +1187,31 @@
         .hidden-section {
             display: none !important;
         }
+
+        /* Уведомление */
+        .notification-toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e1e2a;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 24px;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 999;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .notification-toast.show {
+            opacity: 1;
+        }
+
         @media (min-width: 600px) {
             .detail-content {
                 max-width: 420px;
@@ -1207,6 +1244,9 @@
             </div>
         </div>
     </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div class="notification-toast" id="notificationToast">🔔 У вас нет новых уведомлений</div>
 
     <!-- FILTER -->
     <div class="filter-section">
@@ -1264,7 +1304,7 @@
                     <span id="detailPriceAmount">0.00 GRAM</span>
                     <span class="usd" id="detailPriceUsd">≈ $0.00</span>
                 </div>
-                <button class="detail-buy-btn" id="detailBuyBtn">Купить</button>
+                <button class="detail-buy-btn" id="detailBuyBtn">Добавить в корзину</button>
             </div>
         </div>
     </div>
@@ -1284,7 +1324,7 @@
             <div class="cart-modal-header"><h2>Корзина</h2><button class="cart-close" id="cartClose">✕</button></div>
             <div id="cartItems"></div>
             <div class="cart-total-section"><span class="total-label">Итого</span><span class="total-amount"><span id="modalCartTotal">0.00</span> GRAM</span></div>
-            <button class="btn-checkout" id="checkoutBtn">Купить все</button>
+            <button class="btn-checkout" id="checkoutBtn">Перейти к оплате</button>
         </div>
     </div>
 
@@ -1332,14 +1372,24 @@
 
     <!-- BOTTOM NAV -->
     <div class="bottom-nav">
-        <button class="nav-item active" data-tab="market">Маркет</button>
-        <button class="nav-item" data-tab="mygifts">Мои подарки</button>
+        <button class="nav-item active" data-tab="market">
+            <span class="nav-icon">🏠</span>
+            Маркет
+        </button>
+        <button class="nav-item" data-tab="mygifts">
+            <span class="nav-icon">🎁</span>
+            Мои подарки
+        </button>
+        <button class="nav-item" data-tab="cart">
+            <span class="nav-icon">🛒</span>
+            Корзина
+        </button>
     </div>
 </div>
 
 <script>
     // ============================================================
-    // 1. DATA — увеличенные коллекции (по 22+), цены дороже
+    // 1. DATA
     // ============================================================
     const COLLECTIONS_DATA = {
         "Hex Pot": { icon: "🔮", floorPrice: 18.7 },
@@ -1361,8 +1411,8 @@
     function generateNFTs() {
         const all = [];
         const baseNFTs = [
-            { collection: "Plush Pepe", numbers: [2656,100,1412,1382,2658,1179,2055,987,1583,858,487,123,1010, 222,333,444,555,666,777,888,999,1111], priceBase: 4800 },
-            { collection: "Nail Bracelet", numbers: [2655,3517,891,1861,2859,160, 201,302,403,504,605,706,807,908,1009,1110,1211,1312,1413,1514,1615,1716], priceBase: 320 },
+            { collection: "Plush Pepe", numbers: [2656,100,1412,1382,2658,1179,2055,987,1583,858,487,123,1010,222,333,444,555,666,777,888,999,1111], priceBase: 4800 },
+            { collection: "Nail Bracelet", numbers: [2655,3517,891,1861,2859,160,201,302,403,504,605,706,807,908,1009,1110,1211,1312,1413,1514,1615,1716], priceBase: 320 },
             { collection: "Hex Pot", numbers: [10348,10349,10350,10351,10352,10353,10354,10355,10356,10357,10358,10359,10360,10361,10362,10363,10364,10365,10366,10367,10368,10369], priceBase: 19.5 },
             { collection: "Astral Shard", numbers: [2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060,2061,2062,2063,2064,2065,2066,2067,2068], priceBase: 12.8 },
             { collection: "Bonded Ring", numbers: [1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1140,1141,1142,1143,1144], priceBase: 68.5 },
@@ -1374,7 +1424,7 @@
             { collection: "Kissed Frog", numbers: [4562,4563,4564,4565,4566,4567,4568,4569,4570,4571,4572,4573,4574,4575,4576,4577,4578,4579,4580,4581,4582,4583], priceBase: 15.0 },
             { collection: "Scared Cat", numbers: [6651,6652,6653,6654,6655,6656,6657,6658,6659,6660,6661,6662,6663,6664,6665,6666,6667,6668,6669,6670,6671,6672], priceBase: 29.0 },
             { collection: "Vintage Cigar", numbers: [4000,4001,4002,4003,4004,4005,4006,4007,4008,4009,4010,4011,4012,4013,4014,4015,4016,4017,4018,4019,4020,4021], priceBase: 54.0 },
-            { collection: "Precious Peach", numbers: [2153,11,1080,1508,1780,1348,663, 7,8,9,10,12,13,14,15,16,17,18,19,20,21,22], priceBase: 45.0 }
+            { collection: "Precious Peach", numbers: [2153,11,1080,1508,1780,1348,663,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22], priceBase: 45.0 }
         ];
 
         const models = {
@@ -1540,12 +1590,12 @@
             btn.className = 'detail-buy-btn sold-out';
             btn.disabled = true;
         } else if (inCart) {
-            btn.textContent = 'В корзине';
+            btn.textContent = 'В корзине ✓';
             btn.className = 'detail-buy-btn in-cart';
             btn.disabled = false;
             btn.onclick = () => { addToCart(nft.name); updateDetailButtons(); };
         } else {
-            btn.textContent = 'Купить';
+            btn.textContent = 'Добавить в корзину';
             btn.className = 'detail-buy-btn';
             btn.disabled = false;
             btn.onclick = () => { addToCart(nft.name); updateDetailButtons(); };
@@ -1802,7 +1852,7 @@
     }
 
     // ============================================================
-    // 7. RENDER GRID — загружаем Lottie, но ставим на паузу (заморозка)
+    // 7. RENDER GRID — замороженная Lottie
     // ============================================================
     function loadLottiePaused(container, url) {
         if (lottieCache.has(url)) {
@@ -1814,9 +1864,8 @@
                     animationData: cached,
                     renderer: 'svg',
                     loop: true,
-                    autoplay: false // НЕ проигрываем автоматически
+                    autoplay: false
                 });
-                // Перематываем на первый кадр (заморозка)
                 anim.goToAndStop(0, true);
             } catch(e) {
                 const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
@@ -1839,9 +1888,9 @@
                         animationData: data,
                         renderer: 'svg',
                         loop: true,
-                        autoplay: false // НЕ проигрываем автоматически
+                        autoplay: false
                     });
-                    anim.goToAndStop(0, true); // Заморозка на первом кадре
+                    anim.goToAndStop(0, true);
                 } catch(e) {
                     const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
                     container.innerHTML = `<div style="font-size:48px;color:#6e6e80;">${icon}</div>`;
@@ -1896,7 +1945,6 @@
         });
         document.getElementById('nftGrid').innerHTML = html;
         
-        // Загружаем Lottie в замороженном состоянии (без проигрывания)
         setTimeout(() => {
             filtered.forEach((nft) => {
                 const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
@@ -1910,19 +1958,28 @@
     }
 
     // ============================================================
-    // 8. DETAIL — загружаем Lottie и запускаем проигрывание
+    // 8. DETAIL — Lottie с обрезкой и без чёрных полос
     // ============================================================
     function loadLottiePlaying(container, url) {
         if (lottieCache.has(url)) {
             const cached = lottieCache.get(url);
             container.innerHTML = '';
             try {
-                lottie.loadAnimation({
+                const anim = lottie.loadAnimation({
                     container: container,
                     animationData: cached,
                     renderer: 'svg',
                     loop: true,
-                    autoplay: true // ПРОИГРЫВАЕМ
+                    autoplay: true
+                });
+                // Масштабируем под контейнер без обрезки
+                anim.addEventListener('DOMLoaded', function() {
+                    const svg = container.querySelector('svg');
+                    if (svg) {
+                        svg.style.width = '100%';
+                        svg.style.height = '100%';
+                        svg.style.objectFit = 'contain';
+                    }
                 });
             } catch(e) {
                 const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
@@ -1940,12 +1997,20 @@
                 lottieCache.set(url, data);
                 container.innerHTML = '';
                 try {
-                    lottie.loadAnimation({
+                    const anim = lottie.loadAnimation({
                         container: container,
                         animationData: data,
                         renderer: 'svg',
                         loop: true,
-                        autoplay: true // ПРОИГРЫВАЕМ
+                        autoplay: true
+                    });
+                    anim.addEventListener('DOMLoaded', function() {
+                        const svg = container.querySelector('svg');
+                        if (svg) {
+                            svg.style.width = '100%';
+                            svg.style.height = '100%';
+                            svg.style.objectFit = 'contain';
+                        }
                     });
                 } catch(e) {
                     const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
@@ -1986,7 +2051,6 @@
 
         const container = document.getElementById('detailLottie');
         container.innerHTML = '';
-        // Загружаем Lottie и ВКЛЮЧАЕМ проигрывание
         loadLottiePlaying(container, nft.lottie);
 
         updateDetailButtons();
@@ -2007,11 +2071,14 @@
     // 9. CART MODAL
     // ============================================================
     const cartModal = document.getElementById('cartModal');
-    document.getElementById('cartFloating').addEventListener('click', () => {
-        cartModal.classList.toggle('open');
+    
+    function openCartModal() {
+        cartModal.classList.add('open');
         renderCartItems();
         updateCartUI();
-    });
+    }
+
+    document.getElementById('cartFloating').addEventListener('click', openCartModal);
     document.getElementById('cartClose').addEventListener('click', () => cartModal.classList.remove('open'));
     cartModal.addEventListener('click', (e) => { if (e.target === cartModal) cartModal.classList.remove('open'); });
 
@@ -2037,7 +2104,7 @@
     });
 
     // ============================================================
-    // 10. BOTTOM NAV
+    // 10. BOTTOM NAV — с корзиной
     // ============================================================
     document.querySelectorAll('.nav-item').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -2046,20 +2113,40 @@
             const tab = this.dataset.tab;
             const grid = document.getElementById('nftGrid');
             const mySection = document.getElementById('myGiftsSection');
+            
             if (tab === 'market') {
                 grid.classList.remove('hidden-section');
                 mySection.classList.add('hidden-section');
                 renderGrid();
-            } else {
+            } else if (tab === 'mygifts') {
                 grid.classList.add('hidden-section');
                 mySection.classList.remove('hidden-section');
                 renderMyGifts();
+            } else if (tab === 'cart') {
+                openCartModal();
+                // Возвращаем активную вкладку обратно
+                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+                document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
             }
         });
     });
 
     // ============================================================
-    // 11. ONBOARDING & BELL
+    // 11. BELL — уведомление с таймером
+    // ============================================================
+    const notificationToast = document.getElementById('notificationToast');
+    let notificationTimeout = null;
+
+    document.getElementById('bellBtn').addEventListener('click', function() {
+        notificationToast.classList.add('show');
+        if (notificationTimeout) clearTimeout(notificationTimeout);
+        notificationTimeout = setTimeout(() => {
+            notificationToast.classList.remove('show');
+        }, 3000);
+    });
+
+    // ============================================================
+    // 12. ONBOARDING
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         const overlay = document.getElementById('onboardingOverlay');
@@ -2076,10 +2163,6 @@
             overlay.classList.add('hidden');
             const userIdNow = currentUserId || 'guest';
             localStorage.setItem(`allow_onboard_${userIdNow}`, 'true');
-        });
-
-        document.getElementById('bellBtn').addEventListener('click', function() {
-            alert('🔔 У вас нет новых уведомлений');
         });
 
         initProfile();
