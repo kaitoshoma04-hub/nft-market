@@ -650,55 +650,8 @@
             color: #4bc88a;
         }
 
-        .cart-floating {
-            position: fixed;
-            bottom: 76px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #181820;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 16px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(16px);
-            z-index: 200;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .cart-floating:active {
-            transform: translateX(-50%) scale(0.96);
-        }
-        .cart-floating .cart-icon {
-            font-size: 16px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #8e8ea0;
-        }
-        .cart-floating .cart-count {
-            position: absolute;
-            top: -6px;
-            right: -8px;
-            background: #4a8af4;
-            color: #ffffff;
-            font-size: 8px;
-            font-weight: 700;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .cart-floating .cart-total {
-            font-size: 12px;
-            font-weight: 600;
-            color: #ffffff;
-        }
+        /* Нет плавающей корзины — убрана! */
+
         .cart-modal {
             position: fixed;
             top: 0;
@@ -1224,6 +1177,24 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Бейдж корзины в навигации */
+        .nav-cart-badge {
+            position: absolute;
+            top: -2px;
+            right: 6px;
+            background: #4a8af4;
+            color: #ffffff;
+            font-size: 7px;
+            font-weight: 700;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid #0a0a0f;
+        }
+
         @media (min-width: 600px) {
             .detail-content {
                 max-width: 400px;
@@ -1324,14 +1295,7 @@
         </div>
     </div>
 
-    <!-- CART FLOATING -->
-    <div class="cart-floating" id="cartFloating">
-        <div class="cart-icon">
-            🛒
-            <span class="cart-count" id="cartCount">0</span>
-        </div>
-        <div class="cart-total"><span id="cartTotal">0.00</span> GRAM</div>
-    </div>
+    <!-- НЕТ ПЛАВАЮЩЕЙ КОРЗИНЫ -->
 
     <!-- CART MODAL -->
     <div class="cart-modal" id="cartModal">
@@ -1403,7 +1367,7 @@
                 </svg>
             </span>
         </button>
-        <button class="nav-item" data-tab="cart">
+        <button class="nav-item" data-tab="cart" style="position:relative;">
             <span class="nav-icon">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="9" cy="21" r="1"/>
@@ -1411,6 +1375,7 @@
                     <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
                 </svg>
             </span>
+            <span class="nav-cart-badge" id="navCartBadge">0</span>
         </button>
     </div>
 </div>
@@ -1529,6 +1494,9 @@
     let currentFilter = 'all';
     const lottieCache = new Map();
     let notificationTimeout = null;
+    let gridRendered = false;
+    let cachedGridHTML = '';
+    let cachedFilteredData = [];
 
     // ============================================================
     // 3. STORAGE
@@ -1556,8 +1524,8 @@
         if (idx > -1) cart.splice(idx, 1);
         else cart.push(nftName);
         saveCart();
-        renderGrid();
         updateDetailButtons();
+        updateNavCartBadge();
     }
 
     function removeFromCart(nftName) {
@@ -1566,6 +1534,7 @@
         renderCartItems();
         updateCartUI();
         updateDetailButtons();
+        updateNavCartBadge();
     }
 
     function getCartTotal() {
@@ -1577,13 +1546,16 @@
 
     function isInCart(nftName) { return cart.includes(nftName); }
 
+    function updateNavCartBadge() {
+        document.getElementById('navCartBadge').textContent = cart.length;
+    }
+
     function updateCartUI() {
         const count = cart.length;
         const total = getCartTotal();
-        document.getElementById('cartCount').textContent = count;
-        document.getElementById('cartTotal').textContent = total.toFixed(2);
         document.getElementById('modalCartTotal').textContent = total.toFixed(2);
         document.getElementById('checkoutBtn').disabled = count === 0;
+        updateNavCartBadge();
         renderCartItems();
     }
 
@@ -1859,6 +1831,9 @@
                 if (arr.length === 0) { currentFilter = 'all'; } else { currentFilter = arr; }
             }
             closeDetail();
+            // Сбрасываем кеш при применении фильтра
+            gridRendered = false;
+            cachedGridHTML = '';
             renderGrid();
             document.getElementById('filterOverlay').classList.remove('open');
         });
@@ -1881,7 +1856,7 @@
     }
 
     // ============================================================
-    // 7. RENDER GRID — замороженная Lottie (всегда загружается)
+    // 7. RENDER GRID — с кешированием
     // ============================================================
     function loadLottiePaused(container, url) {
         if (lottieCache.has(url)) {
@@ -1931,7 +1906,7 @@
             });
     }
 
-    function renderGrid() {
+    function renderGrid(force = false) {
         let filtered;
         if (currentFilter === 'all') {
             filtered = NFT_DATA;
@@ -1941,10 +1916,23 @@
             filtered = NFT_DATA.filter(item => item.collection === currentFilter);
         }
 
+        // Если данные не изменились и сетка уже отрендерена — просто показываем кеш
+        if (gridRendered && !force && cachedFilteredData === filtered) {
+            // Проверяем, что контейнер не пустой
+            const grid = document.getElementById('nftGrid');
+            if (grid.innerHTML && grid.innerHTML.length > 100) {
+                return;
+            }
+        }
+
+        cachedFilteredData = filtered;
+
         if (filtered.length === 0) {
             document.getElementById('nftGrid').innerHTML = `<div style="grid-column:1/-1;padding:30px 20px;color:#6e6e80;text-align:center;font-size:13px;">Нет подарков</div>`;
+            gridRendered = true;
             return;
         }
+
         let html = '';
         filtered.forEach((nft) => {
             const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
@@ -1968,9 +1956,13 @@
                 </div>
             `;
         });
-        document.getElementById('nftGrid').innerHTML = html;
         
-        // Всегда загружаем Lottie для всех карточек
+        const grid = document.getElementById('nftGrid');
+        grid.innerHTML = html;
+        gridRendered = true;
+        cachedGridHTML = html;
+        
+        // Загружаем Lottie для всех карточек из кеша
         setTimeout(() => {
             filtered.forEach((nft) => {
                 const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
@@ -1984,7 +1976,7 @@
     }
 
     // ============================================================
-    // 8. DETAIL — Lottie с проигрыванием и без чёрных полос
+    // 8. DETAIL — Lottie с проигрыванием
     // ============================================================
     function loadLottiePlaying(container, url) {
         if (lottieCache.has(url)) {
@@ -1998,7 +1990,6 @@
                     loop: true,
                     autoplay: true
                 });
-                // Масштабируем без обрезки
                 setTimeout(() => {
                     const svg = container.querySelector('svg');
                     if (svg) {
@@ -2104,7 +2095,6 @@
         updateCartUI();
     }
 
-    document.getElementById('cartFloating').addEventListener('click', openCartModal);
     document.getElementById('cartClose').addEventListener('click', () => cartModal.classList.remove('open'));
     cartModal.addEventListener('click', (e) => { if (e.target === cartModal) cartModal.classList.remove('open'); });
 
@@ -2125,7 +2115,7 @@
             saveCart();
             cartModal.classList.remove('open');
             closeDetail();
-            renderGrid();
+            updateNavCartBadge();
         }
     });
 
@@ -2143,7 +2133,12 @@
             if (tab === 'market') {
                 grid.classList.remove('hidden-section');
                 mySection.classList.add('hidden-section');
-                renderGrid();
+                // Показываем закешированную сетку без перезагрузки
+                if (gridRendered && cachedGridHTML) {
+                    // уже отрендерено
+                } else {
+                    renderGrid();
+                }
             } else if (tab === 'mygifts') {
                 grid.classList.add('hidden-section');
                 mySection.classList.remove('hidden-section');
@@ -2157,7 +2152,7 @@
     });
 
     // ============================================================
-    // 11. BELL — уведомление с таймером
+    // 11. BELL — уведомление
     // ============================================================
     const notificationToast = document.getElementById('notificationToast');
 
@@ -2198,6 +2193,7 @@
         renderGrid();
         updateCartUI();
         loadMyGifts();
+        updateNavCartBadge();
     });
 
     window.openDetail = openDetail;
