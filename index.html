@@ -31,7 +31,6 @@
             padding-bottom: 80px;
             position: relative;
         }
-        /* ——— HEADER ——— */
         .header {
             display: flex;
             justify-content: space-between;
@@ -155,7 +154,6 @@
             color: #ffffff;
         }
 
-        /* ——— FILTER ——— */
         .filter-section {
             padding: 10px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -302,7 +300,6 @@
             transform: scale(0.97);
         }
 
-        /* ——— BOTTOM NAV ——— */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -373,7 +370,6 @@
             background: #4a8af4;
         }
 
-        /* ——— NFT GRID ——— */
         .nft-grid {
             padding: 12px 12px;
             display: grid;
@@ -414,32 +410,6 @@
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
-        }
-        .status-badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            padding: 2px 8px;
-            border-radius: 8px;
-            font-size: 7px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .status-badge.sold {
-            background: rgba(255, 107, 107, 0.2);
-            color: #ff6b6b;
-            border: 1px solid rgba(255, 107, 107, 0.15);
-        }
-        .status-badge.for-sale {
-            background: rgba(75, 200, 138, 0.12);
-            color: #4bc88a;
-            border: 1px solid rgba(75, 200, 138, 0.12);
-        }
-        .status-badge.on-auction {
-            background: rgba(255, 200, 50, 0.12);
-            color: #ffc832;
-            border: 1px solid rgba(255, 200, 50, 0.12);
         }
         .nft-info-compact {
             display: flex;
@@ -488,7 +458,6 @@
             border-radius: 50%;
         }
 
-        /* ——— DETAIL ——— */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -516,7 +485,6 @@
             border-radius: 20px;
             max-width: 380px;
             width: 100%;
-            aspect-ratio: 1/1;
             padding: 16px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
@@ -654,12 +622,12 @@
         }
         .detail-buy-btn {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 10px;
             color: #ffffff;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
@@ -682,7 +650,6 @@
             color: #4bc88a;
         }
 
-        /* ——— CART ——— */
         .cart-floating {
             position: fixed;
             bottom: 76px;
@@ -872,7 +839,6 @@
             margin-bottom: 8px;
         }
 
-        /* ——— PROFILE ——— */
         .profile-modal {
             position: fixed;
             top: 0;
@@ -1110,7 +1076,6 @@
             display: block;
         }
 
-        /* ——— ONBOARDING ——— */
         .onboarding-overlay {
             position: fixed;
             top: 0;
@@ -1175,7 +1140,6 @@
             transform: scale(0.97);
         }
 
-        /* ——— MY GIFTS ——— */
         .my-gifts-section {
             padding: 12px 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -1235,7 +1199,6 @@
             display: none !important;
         }
 
-        /* ——— NOTIFICATION TOAST ——— */
         .notification-toast {
             position: fixed;
             top: 74px;
@@ -1422,7 +1385,7 @@
         </div>
     </div>
 
-    <!-- BOTTOM NAV с иконками-символами -->
+    <!-- BOTTOM NAV -->
     <div class="bottom-nav">
         <button class="nav-item active" data-tab="market">
             <span class="nav-icon">
@@ -1566,7 +1529,6 @@
     let currentFilter = 'all';
     const lottieCache = new Map();
     let notificationTimeout = null;
-    let isInitialRender = true;
 
     // ============================================================
     // 3. STORAGE
@@ -1988,15 +1950,11 @@
             const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
             const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
             const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${num}`;
-            const statusEmoji = { 'sold': '🔴', 'for-sale': '🟢', 'on-auction': '🟡' } [nft.status] || '⚪';
-            const statusLabel = { 'sold': 'Продано', 'for-sale': 'В продаже', 'on-auction': 'На аукционе' } [nft.status] || '';
-            const statusClass = { 'sold': 'sold', 'for-sale': 'for-sale', 'on-auction': 'on-auction' } [nft.status] || '';
             html += `
                 <div class="nft-card" onclick="openDetail('${nft.name}')">
                     <div class="nft-card-inner">
                         <div class="lottie-wrapper">
                             <div class="lottie-container" id="${lottieId}"></div>
-                            ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
                         </div>
                         <div class="nft-info-compact">
                             <div class="nft-name-compact">${nft.name}</div>
@@ -2026,7 +1984,7 @@
     }
 
     // ============================================================
-    // 8. DETAIL — Lottie с обрезкой и проигрыванием
+    // 8. DETAIL — Lottie с проигрыванием и без чёрных полос
     // ============================================================
     function loadLottiePlaying(container, url) {
         if (lottieCache.has(url)) {
@@ -2040,14 +1998,15 @@
                     loop: true,
                     autoplay: true
                 });
-                anim.addEventListener('DOMLoaded', function() {
+                // Масштабируем без обрезки
+                setTimeout(() => {
                     const svg = container.querySelector('svg');
                     if (svg) {
                         svg.style.width = '100%';
                         svg.style.height = '100%';
                         svg.style.objectFit = 'contain';
                     }
-                });
+                }, 50);
             } catch(e) {
                 const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
                 container.innerHTML = `<div style="font-size:56px;color:#6e6e80;">${icon}</div>`;
@@ -2071,14 +2030,14 @@
                         loop: true,
                         autoplay: true
                     });
-                    anim.addEventListener('DOMLoaded', function() {
+                    setTimeout(() => {
                         const svg = container.querySelector('svg');
                         if (svg) {
                             svg.style.width = '100%';
                             svg.style.height = '100%';
                             svg.style.objectFit = 'contain';
                         }
-                    });
+                    }, 50);
                 } catch(e) {
                     const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
                     container.innerHTML = `<div style="font-size:56px;color:#6e6e80;">${icon}</div>`;
@@ -2108,7 +2067,7 @@
         document.getElementById('detailBackdrop').textContent = backdrop || '—';
         document.getElementById('detailSymbol').textContent = symbol || '—';
         document.getElementById('detailIssued').textContent = nft.issued || `${num} of 1973`;
-        const statusMap = { 'for-sale': '🟢 В продаже', 'on-auction': '🟡 На аукционе', 'sold': '🔴 Продано' };
+        const statusMap = { 'for-sale': 'В продаже', 'on-auction': 'На аукционе', 'sold': 'Продано' };
         document.getElementById('detailStatus').textContent = statusMap[nft.status] || nft.status;
         if (nft.price > 0) {
             document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(3)} GRAM`;
@@ -2198,7 +2157,7 @@
     });
 
     // ============================================================
-    // 11. BELL — уведомление с таймером (исправлено)
+    // 11. BELL — уведомление с таймером
     // ============================================================
     const notificationToast = document.getElementById('notificationToast');
 
