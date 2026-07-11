@@ -1597,7 +1597,7 @@
         const NFT_DATA = generateNFTs();
 
         // ============================================================
-        // 2. STATE — привязано к пользователю
+        // 2. STATE
         // ============================================================
         let currentUserId = null;
         let userBalance = 0;
@@ -1610,10 +1610,11 @@
         let gridRendered = false;
         let cachedGridHTML = '';
         let cachedFilteredData = [];
-
-        // --- КОРЗИНА ПРИВЯЗАНА К ПОЛЬЗОВАТЕЛЮ ---
         let userCart = [];
 
+        // ============================================================
+        // 3. CART
+        // ============================================================
         function getCartKey() {
             if (!currentUserId) return 'allow_cart_guest';
             return `allow_cart_${currentUserId}`;
@@ -1685,7 +1686,7 @@
             const container = document.getElementById('cartItems');
             if (userCart.length === 0) {
                 container.innerHTML =
-                `<div class="empty-cart"><div>🛒</div><p>Корзина пуста</p><p style="font-size:12px;color:#6e6e80;">Добавьте NFT для покупки</p></div>`;
+                    `<div class="empty-cart"><div>🛒</div><p>Корзина пуста</p><p style="font-size:12px;color:#6e6e80;">Добавьте NFT для покупки</p></div>`;
                 return;
             }
             let html = '';
@@ -1693,13 +1694,13 @@
                 const nft = NFT_DATA.find(n => n.name === name);
                 if (!nft) return;
                 html += `
-                        <div class="cart-item">
-                            <div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:16px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
-                            <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
-                            <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
-                            <button class="item-remove" onclick="window.removeFromCart('${nft.name}')">✕</button>
-                        </div>
-                    `;
+                            <div class="cart-item">
+                                <div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:16px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
+                                <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
+                                <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
+                                <button class="item-remove" onclick="window.removeFromCart('${nft.name}')">✕</button>
+                            </div>
+                        `;
             });
             container.innerHTML = html;
         }
@@ -1772,7 +1773,6 @@
                     const saved = localStorage.getItem(balanceKey);
                     userBalance = saved !== null ? parseFloat(saved) : 0;
                     if (saved === null) localStorage.setItem(balanceKey, '0');
-                    // Загружаем корзину пользователя
                     getUserCart();
                     updateCartUI();
                     updateBalanceUI();
@@ -1815,7 +1815,7 @@
                 e.stopPropagation();
                 if (window.Telegram?.WebApp) {
                     try { const user = window.Telegram.WebApp.initDataUnsafe?.user; if (user) updateProfileUI(user); } catch (
-                    e) {}
+                        e) {}
                 }
                 document.getElementById('profileModal').classList.add('open');
                 document.getElementById('withdrawSection').classList.remove('open');
@@ -1890,25 +1890,25 @@
             const grid = document.getElementById('myGiftsGrid');
             if (!myGifts.length) {
                 grid.innerHTML = `
-                        <div class="my-gifts-empty">
-                            <div class="empty-icon">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                    <path d="M2 17l10 5 10-5"/>
-                                    <path d="M2 12l10 5 10-5"/>
-                                </svg>
+                            <div class="my-gifts-empty">
+                                <div class="empty-icon">
+                                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                        <path d="M2 17l10 5 10-5"/>
+                                        <path d="M2 12l10 5 10-5"/>
+                                    </svg>
+                                </div>
+                                <div class="empty-title">У вас пока нет подарков</div>
+                                <div class="empty-desc">Добавьте свой первый подарок</div>
+                                <button class="empty-add-btn" id="emptyAddGiftBtn2">+ Добавить подарок</button>
                             </div>
-                            <div class="empty-title">У вас пока нет подарков</div>
-                            <div class="empty-desc">Добавьте свой первый подарок</div>
-                            <button class="empty-add-btn" id="emptyAddGiftBtn2">+ Добавить подарок</button>
-                        </div>
-                    `;
+                        `;
                 const btn = document.getElementById('emptyAddGiftBtn2');
                 if (btn) {
                     btn.addEventListener('click', function() {
                         if (window.Telegram?.WebApp) {
                             try { window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts'); } catch (
-                            e) { alert('Передайте подарок боту @AllowMarketGifts'); }
+                                e) { alert('Передайте подарок боту @AllowMarketGifts'); }
                         } else { alert('Передайте подарок боту @AllowMarketGifts'); }
                     });
                 }
@@ -1919,36 +1919,41 @@
                 const col = gift.collection || 'Unknown';
                 const icon = COLLECTIONS_DATA[col]?.icon || '🎁';
                 html += `
-                        <div class="my-gift-card">
-                            <div class="mini-lottie-box">${icon}</div>
-                            <div class="gift-name">${gift.name || 'Подарок'}</div>
-                            <div class="gift-collection">${col}</div>
-                        </div>
-                    `;
+                            <div class="my-gift-card">
+                                <div class="mini-lottie-box">${icon}</div>
+                                <div class="gift-name">${gift.name || 'Подарок'}</div>
+                                <div class="gift-collection">${col}</div>
+                            </div>
+                        `;
             });
             grid.innerHTML = html;
         }
 
         // ============================================================
-        // 6. FILTER
+        // 6. FILTER — с отображением количества
         // ============================================================
         function initFilter() {
             const container = document.getElementById('filterOptionsContainer');
             const collections = ['all', ...Object.keys(COLLECTIONS_DATA)];
 
+            function getCount(col) {
+                if (col === 'all') return NFT_DATA.length;
+                return NFT_DATA.filter(n => n.collection === col).length;
+            }
+
             function renderFilterOptions() {
                 let html = '';
                 collections.forEach(col => {
-                    const count = col === 'all' ? NFT_DATA.length : NFT_DATA.filter(n => n.collection === col)
-                    .length;
+                    const count = getCount(col);
                     const active = selectedCollections.has(col) ? 'active' : '';
                     const checkMark = active ? '✓' : '';
+                    const displayName = col === 'all' ? 'Все' : col;
                     html += `
-                            <div class="filter-option-big ${active}" data-collection="${col}">
-                                <span>${col === 'all' ? 'Все' : col} <span class="count">(${count})</span></span>
-                                <span class="check">${checkMark}</span>
-                            </div>
-                        `;
+                                <div class="filter-option-big ${active}" data-collection="${col}">
+                                    <span>${displayName} <span class="count">(${count})</span></span>
+                                    <span class="check">${checkMark}</span>
+                                </div>
+                            `;
                 });
                 container.innerHTML = html;
 
@@ -2005,7 +2010,7 @@
             });
             document.getElementById('filterOverlay').addEventListener('click', (e) => {
                 if (e.target === e.currentTarget) document.getElementById('filterOverlay').classList.remove(
-                'open');
+                    'open');
             });
         }
 
@@ -2092,22 +2097,22 @@
                 const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${num}`;
                 html += `
-                        <div class="nft-card" onclick="openDetail('${nft.name}')">
-                            <div class="nft-card-inner">
-                                <div class="lottie-wrapper">
-                                    <div class="lottie-container" id="${lottieId}"></div>
-                                </div>
-                                <div class="nft-info-compact">
-                                    <div class="nft-name-compact">${nft.name}</div>
-                                    <div class="nft-model-compact">${model}</div>
-                                    <div class="nft-price-compact">
-                                        <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
-                                        ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
+                            <div class="nft-card" onclick="openDetail('${nft.name}')">
+                                <div class="nft-card-inner">
+                                    <div class="lottie-wrapper">
+                                        <div class="lottie-container" id="${lottieId}"></div>
+                                    </div>
+                                    <div class="nft-info-compact">
+                                        <div class="nft-name-compact">${nft.name}</div>
+                                        <div class="nft-model-compact">${model}</div>
+                                        <div class="nft-price-compact">
+                                            <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
+                                            ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
+                        `;
             });
 
             const grid = document.getElementById('nftGrid');
@@ -2377,7 +2382,6 @@
             updateNavCartBadge();
         });
 
-        // Глобальный доступ для onclick
         window.openDetail = openDetail;
         window.removeFromCart = removeFromCart;
         window.addToCart = addToCart;
