@@ -32,7 +32,6 @@
             padding-bottom: 80px;
             position: relative;
         }
-        /* ——— HEADER ——— */
         .header {
             display: flex;
             justify-content: space-between;
@@ -652,7 +651,6 @@
             color: #4bc88a;
         }
 
-        /* ——— CART MODAL ——— */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -793,7 +791,6 @@
             margin-bottom: 8px;
         }
 
-        /* ——— PROFILE ——— */
         .profile-modal {
             position: fixed;
             top: 0;
@@ -1031,7 +1028,6 @@
             display: block;
         }
 
-        /* ——— ONBOARDING ——— */
         .onboarding-overlay {
             position: fixed;
             top: 0;
@@ -1113,22 +1109,6 @@
             font-weight: 700;
             color: #ffffff;
         }
-        .my-gifts-section .my-add-gift-btn {
-            padding: 8px 18px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            border: none;
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .my-gifts-section .my-add-gift-btn:active {
-            transform: scale(0.97);
-        }
         .my-gifts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1172,13 +1152,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
         }
         .my-gifts-empty .empty-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-            opacity: 0.6;
+            width: 56px;
+            height: 56px;
+            stroke: #4a8af4;
+            fill: none;
+            stroke-width: 1.5;
+            margin-bottom: 16px;
+        }
+        .my-gifts-empty .empty-icon svg {
+            width: 56px;
+            height: 56px;
+            stroke: #4a8af4;
+            fill: none;
+            stroke-width: 1.5;
         }
         .my-gifts-empty .empty-title {
             font-size: 20px;
@@ -1189,9 +1179,9 @@
         .my-gifts-empty .empty-desc {
             font-size: 14px;
             color: #6e6e80;
+            margin-bottom: 18px;
         }
         .my-gifts-empty .empty-add-btn {
-            margin-top: 16px;
             padding: 12px 32px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
@@ -1210,7 +1200,6 @@
             display: none !important;
         }
 
-        /* ——— NOTIFICATION TOAST ——— */
         .notification-toast {
             position: fixed;
             top: 74px;
@@ -1324,11 +1313,16 @@
     <div class="my-gifts-section hidden-section" id="myGiftsSection">
         <div class="my-gifts-header">
             <h3>Мои подарки</h3>
-            <button class="my-add-gift-btn" id="myAddGiftBtn">+ Добавить</button>
         </div>
         <div class="my-gifts-grid" id="myGiftsGrid">
             <div class="my-gifts-empty">
-                <div class="empty-icon">🎁</div>
+                <div class="empty-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
                 <div class="empty-title">У вас пока нет подарков</div>
                 <div class="empty-desc">Добавьте свой первый подарок</div>
                 <button class="empty-add-btn" id="emptyAddGiftBtn">+ Добавить подарок</button>
@@ -1829,7 +1823,13 @@
         if (!myGifts.length) {
             grid.innerHTML = `
                 <div class="my-gifts-empty">
-                    <div class="empty-icon">🎁</div>
+                    <div class="empty-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
                     <div class="empty-title">У вас пока нет подарков</div>
                     <div class="empty-desc">Добавьте свой первый подарок</div>
                     <button class="empty-add-btn" id="emptyAddGiftBtn2">+ Добавить подарок</button>
@@ -2237,7 +2237,6 @@
         e.stopPropagation();
         
         if (isToastVisible) {
-            // Если уже видно — скрываем
             notificationToast.classList.remove('show');
             notificationToast.classList.add('hidden-toast');
             isToastVisible = false;
@@ -2246,7 +2245,6 @@
                 notificationTimeout = null;
             }
         } else {
-            // Показываем
             notificationToast.classList.remove('hidden-toast');
             notificationToast.classList.add('show');
             isToastVisible = true;
@@ -2256,7 +2254,6 @@
                 notificationTimeout = null;
             }
             
-            // Автоматически скрываем через 3 секунды
             notificationTimeout = setTimeout(() => {
                 notificationToast.classList.remove('show');
                 notificationToast.classList.add('hidden-toast');
@@ -2267,14 +2264,8 @@
     });
 
     // ============================================================
-    // 12. MY GIFTS ADD BUTTONS
+    // 12. MY GIFTS ADD BUTTON
     // ============================================================
-    document.getElementById('myAddGiftBtn').addEventListener('click', function() {
-        if (window.Telegram?.WebApp) {
-            try { window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts'); } catch(e) { alert('Передайте подарок боту @AllowMarketGifts'); }
-        } else { alert('Передайте подарок боту @AllowMarketGifts'); }
-    });
-
     document.getElementById('emptyAddGiftBtn').addEventListener('click', function() {
         if (window.Telegram?.WebApp) {
             try { window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts'); } catch(e) { alert('Передайте подарок боту @AllowMarketGifts'); }
