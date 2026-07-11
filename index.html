@@ -4,25 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Allow Market</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+    </script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a0f;
             color: #ffffff;
             min-height: 100vh;
-            padding: 0;
             display: flex;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
         }
+
         .app {
             max-width: 430px;
             width: 100%;
@@ -31,36 +34,43 @@
             padding-bottom: 80px;
             position: relative;
         }
+
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 16px 16px 12px 16px;
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(10, 10, 15, 0.85);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(20px);
         }
+
         .header h1 {
             font-size: 22px;
-            font-weight: 800;
-            color: #ffffff;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 30%, #8e8ea0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
         }
-        .header .profile {
+
+        .profile {
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
             transition: opacity 0.2s;
-            -webkit-tap-highlight-color: transparent;
         }
-        .header .profile:active {
+
+        .profile:active {
             opacity: 0.7;
         }
-        .header .profile .avatar {
+
+        .avatar {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -72,22 +82,25 @@
             flex-shrink: 0;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
         }
-        .header .profile .avatar img {
+
+        .avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .header .profile .avatar .avatar-placeholder {
-            font-size: 14px;
+
+        .avatar .avatar-placeholder {
+            font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
-            display: none;
+            color: #fff;
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 100%;
         }
-        .header .profile .balance-wrap {
+
+        .balance-wrap {
             display: flex;
             align-items: center;
             gap: 4px;
@@ -96,50 +109,58 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .header .profile .balance-wrap .mini-gram {
+
+        .mini-gram {
             width: 16px;
             height: 16px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
         }
-        .header .profile .balance-wrap .mini-gram img {
+
+        .mini-gram img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .header .profile .balance-wrap .balance-text {
+
+        .balance-text {
             font-size: 12px;
             font-weight: 600;
             color: #ffffff;
         }
+
+        /* Filter */
         .filter-section {
             padding: 12px 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             gap: 10px;
             align-items: center;
-            flex-wrap: wrap;
         }
+
         .filter-toggle-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             color: #8e8ea0;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
+
         .filter-toggle-btn:hover {
             background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
+            color: #fff;
         }
+
+        /* Filter Overlay */
         .filter-overlay {
             position: fixed;
             top: 0;
@@ -154,10 +175,12 @@
             animation: fadeIn 0.25s ease;
             overflow-y: auto;
         }
+
         .filter-overlay.open {
             display: flex;
         }
-        .filter-overlay .filter-header {
+
+        .filter-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -165,11 +188,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             margin-bottom: 20px;
         }
-        .filter-overlay .filter-header h2 {
+
+        .filter-header h2 {
             font-size: 20px;
             font-weight: 700;
         }
-        .filter-overlay .filter-close {
+
+        .filter-close {
             background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
@@ -180,11 +205,13 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .filter-overlay .filter-close:hover {
+
+        .filter-close:hover {
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
         }
-        .filter-overlay .filter-option-big {
+
+        .filter-option-big {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -199,10 +226,12 @@
             font-weight: 500;
             color: #ffffff;
         }
-        .filter-overlay .filter-option-big:active {
+
+        .filter-option-big:active {
             transform: scale(0.97);
         }
-        .filter-overlay .filter-option-big .check {
+
+        .filter-option-big .check {
             margin-left: auto;
             width: 22px;
             height: 22px;
@@ -215,25 +244,29 @@
             font-size: 12px;
             transition: all 0.2s;
         }
-        .filter-overlay .filter-option-big.active .check {
+
+        .filter-option-big.active .check {
             background: #4a8af4;
             border-color: #4a8af4;
             color: #fff;
         }
-        .filter-overlay .filter-option-big .count {
+
+        .filter-option-big .count {
             color: #6e6e80;
             font-size: 13px;
             font-weight: 400;
             margin-left: 4px;
         }
-        .filter-overlay .filter-actions {
+
+        .filter-actions {
             display: flex;
             gap: 10px;
             margin-top: 16px;
             padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .filter-overlay .filter-actions button {
+
+        .filter-actions button {
             flex: 1;
             padding: 12px;
             border-radius: 14px;
@@ -244,17 +277,22 @@
             cursor: pointer;
             transition: 0.2s;
         }
-        .filter-overlay .filter-actions .apply-filter {
+
+        .filter-actions .apply-filter {
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             color: #fff;
         }
-        .filter-overlay .filter-actions .reset-filter {
+
+        .filter-actions .reset-filter {
             background: rgba(255, 255, 255, 0.04);
             color: #8e8ea0;
         }
-        .filter-overlay .filter-actions button:active {
+
+        .filter-actions button:active {
             transform: scale(0.97);
         }
+
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -270,6 +308,7 @@
             padding: 12px 0 14px 0;
             z-index: 200;
         }
+
         .bottom-nav .nav-item {
             display: flex;
             flex-direction: column;
@@ -288,9 +327,11 @@
             border-radius: 12px;
             position: relative;
         }
+
         .bottom-nav .nav-item.active {
             color: #4a8af4;
         }
+
         .bottom-nav .nav-item.active::after {
             content: '';
             position: absolute;
@@ -302,86 +343,130 @@
             border-radius: 4px;
             background: #4a8af4;
         }
+
+        /* NFT Grid */
         .nft-grid {
-            padding: 12px 12px;
+            padding: 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
+
         .nft-card {
-            background: #1a1a1f;
+            background: #121216;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            position: relative;
+            animation: cardAppear 0.4s ease forwards;
+            opacity: 0;
+            transform: translateY(15px);
         }
+
         .nft-card:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .nft-card-inner {
             display: flex;
             flex-direction: column;
             padding: 10px;
             gap: 8px;
-            background: #1a1a1f;
         }
+
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 12px;
             overflow: hidden;
-            background: #121216;
+            background: #0a0a0f;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            min-height: 120px;
         }
+
         .lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
+
+        .lottie-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #2a2a2f;
+            font-size: 32px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
         .status-badge {
             position: absolute;
-            top: 4px;
-            right: 4px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 7px;
+            top: 6px;
+            right: 6px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 8px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
+            backdrop-filter: blur(4px);
         }
+
         .status-badge.sold {
-            background: rgba(255, 107, 107, 0.2);
+            background: rgba(255, 107, 107, 0.25);
             color: #ff6b6b;
             border: 1px solid rgba(255, 107, 107, 0.2);
         }
+
         .status-badge.for-sale {
-            background: rgba(75, 200, 138, 0.15);
+            background: rgba(75, 200, 138, 0.2);
             color: #4bc88a;
             border: 1px solid rgba(75, 200, 138, 0.15);
         }
+
         .status-badge.on-auction {
-            background: rgba(255, 200, 50, 0.15);
+            background: rgba(255, 200, 50, 0.2);
             color: #ffc832;
             border: 1px solid rgba(255, 200, 50, 0.15);
         }
+
         .nft-info-compact {
             display: flex;
             flex-direction: column;
             gap: 2px;
         }
+
         .nft-name-compact {
             font-size: 12px;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .nft-model-compact {
             font-size: 10px;
             color: #8e8ea0;
@@ -390,31 +475,32 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .nft-price-compact {
             display: flex;
             align-items: center;
             gap: 4px;
             font-size: 13px;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             margin-top: 4px;
         }
+
         .gram-icon {
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             flex-shrink: 0;
             overflow: hidden;
         }
+
         .gram-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
         }
+
+        /* Detail Overlay */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -427,40 +513,43 @@
             display: none;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             animation: fadeIn 0.25s ease;
         }
+
         .detail-overlay.open {
             display: flex;
         }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: scale(0.96);
             }
             to {
                 opacity: 1;
                 transform: scale(1);
             }
         }
+
         .detail-content {
-            background: #1a1a1f;
-            border-radius: 20px;
+            background: #14141e;
+            border-radius: 24px;
             max-width: 400px;
             width: 100%;
-            max-height: 85vh;
-            padding: 16px;
+            max-height: 90vh;
+            padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
             overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
+
         .detail-content::-webkit-scrollbar {
             width: 0;
         }
+
         .detail-close {
-            position: sticky;
             float: right;
-            top: 0;
             background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
@@ -469,78 +558,86 @@
             border-radius: 50%;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 10;
+            transition: all 0.2s;
             margin-bottom: 8px;
         }
+
         .detail-close:hover {
             background: rgba(255, 255, 255, 0.08);
-            color: #ffffff;
+            color: #fff;
         }
+
         .detail-layout {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
+
         .detail-lottie-wrapper {
             width: 100%;
-            max-height: 200px;
             aspect-ratio: 1/1;
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
-            background: #121216;
+            background: #0a0a0f;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
+
         .detail-lottie-wrapper .lottie-container {
             width: 100%;
             height: 100%;
         }
+
         .detail-title {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 1px;
+            color: #fff;
         }
+
         .detail-number {
             font-size: 14px;
             font-weight: 700;
             color: #4a8af4;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
+
         .detail-description {
             font-size: 12px;
             color: #8e8ea0;
-            line-height: 1.4;
-            margin-bottom: 10px;
+            line-height: 1.5;
+            margin-bottom: 8px;
         }
+
         .detail-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4px 16px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
+
         .detail-stat {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 3px 0;
+            padding: 4px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
+
         .detail-stat.full-width {
             grid-column: 1 / -1;
         }
+
         .detail-stat .label {
             font-size: 11px;
             color: #6e6e80;
             font-weight: 500;
         }
+
         .detail-stat .value {
             font-size: 11px;
-            color: #ffffff;
+            color: #fff;
             font-weight: 600;
             text-align: right;
             max-width: 65%;
@@ -548,41 +645,57 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
         .detail-price {
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 16px;
             font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 10px;
+            color: #fff;
             padding: 10px 14px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
+            flex-wrap: wrap;
         }
+
         .detail-price .gram-icon {
             width: 22px;
             height: 22px;
         }
+
         .detail-price .usd {
             font-size: 12px;
             font-weight: 400;
             color: #6e6e80;
         }
+
+        .detail-price .stars {
+            font-size: 12px;
+            font-weight: 400;
+            color: #ffc832;
+            margin-left: auto;
+            background: rgba(255, 200, 50, 0.08);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 200, 50, 0.08);
+        }
+
         .detail-buy-btn {
             width: 100%;
             padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 12px;
-            color: #ffffff;
+            color: #fff;
             font-size: 15px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
+
         .detail-buy-btn:active {
             transform: scale(0.97);
         }
@@ -598,6 +711,8 @@
             background: rgba(75, 200, 138, 0.2);
             color: #4bc88a;
         }
+
+        /* Cart Floating */
         .cart-floating {
             position: fixed;
             bottom: 76px;
@@ -605,7 +720,7 @@
             transform: translateX(-50%);
             background: linear-gradient(145deg, #1a1a2e, #14141e);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 30px;
             display: flex;
             align-items: center;
@@ -614,35 +729,48 @@
             backdrop-filter: blur(20px);
             z-index: 200;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
+
         .cart-floating:active {
             transform: translateX(-50%) scale(0.95);
         }
-        .cart-floating .cart-icon {
+
+        .cart-icon {
             font-size: 18px;
             position: relative;
         }
-        .cart-floating .cart-count {
+
+        .cart-count {
             position: absolute;
             top: -6px;
             right: -6px;
             background: #4a8af4;
-            color: #ffffff;
+            color: #fff;
             font-size: 9px;
             font-weight: 700;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .cart-floating .cart-total {
+
+        .cart-total {
             font-size: 13px;
             font-weight: 600;
-            color: #ffffff;
+            color: #fff;
         }
+
+        .cart-total .stars-total {
+            font-size: 10px;
+            color: #ffc832;
+            font-weight: 400;
+            margin-left: 4px;
+        }
+
+        /* Cart Modal */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -657,9 +785,11 @@
             align-items: flex-end;
             animation: fadeUp 0.3s ease;
         }
+
         .cart-modal.open {
             display: flex;
         }
+
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -670,6 +800,7 @@
                 transform: translateY(0);
             }
         }
+
         .cart-modal-content {
             background: #14141e;
             border-radius: 24px 24px 0 0;
@@ -679,6 +810,7 @@
             padding: 20px 16px 30px 16px;
             overflow-y: auto;
         }
+
         .cart-modal-header {
             display: flex;
             justify-content: space-between;
@@ -687,10 +819,12 @@
             padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
+
         .cart-modal-header h2 {
             font-size: 20px;
             font-weight: 700;
         }
+
         .cart-close {
             background: rgba(255, 255, 255, 0.04);
             border: none;
@@ -701,6 +835,7 @@
             font-size: 18px;
             cursor: pointer;
         }
+
         .cart-item {
             display: flex;
             align-items: center;
@@ -708,6 +843,7 @@
             padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
+
         .cart-item .item-info {
             flex: 1;
         }
@@ -724,6 +860,12 @@
             color: #4a8af4;
             font-weight: 600;
         }
+        .cart-item .item-stars {
+            font-size: 11px;
+            color: #ffc832;
+            font-weight: 500;
+            margin-left: 4px;
+        }
         .cart-item .item-remove {
             background: rgba(255, 107, 107, 0.1);
             border: none;
@@ -734,6 +876,7 @@
             font-size: 14px;
             cursor: pointer;
         }
+
         .cart-total-section {
             display: flex;
             justify-content: space-between;
@@ -741,31 +884,45 @@
             padding: 16px 0 8px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             margin-top: 8px;
+            flex-wrap: wrap;
         }
+
         .cart-total-section .total-label {
             font-size: 16px;
             font-weight: 600;
             color: #8e8ea0;
         }
+
         .cart-total-section .total-amount {
             font-size: 20px;
             font-weight: 800;
-            color: #ffffff;
+            color: #fff;
         }
+
+        .cart-total-section .total-stars {
+            font-size: 14px;
+            color: #ffc832;
+            font-weight: 600;
+            width: 100%;
+            text-align: right;
+            margin-top: 4px;
+        }
+
         .btn-checkout {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 16px;
-            color: #ffffff;
+            color: #fff;
             font-size: 16px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             margin-top: 12px;
         }
+
         .btn-checkout:active {
             transform: scale(0.97);
         }
@@ -773,11 +930,14 @@
             opacity: 0.3;
             cursor: not-allowed;
         }
+
         .empty-cart {
             text-align: center;
             padding: 40px 20px;
             color: #6e6e80;
         }
+
+        /* Profile Modal */
         .profile-modal {
             position: fixed;
             top: 0;
@@ -796,9 +956,10 @@
         .profile-modal.open {
             display: flex;
         }
+
         .profile-modal-content {
-            background: #1a1a1f;
-            border-radius: 20px;
+            background: #14141e;
+            border-radius: 24px;
             max-width: 380px;
             width: 100%;
             padding: 24px 20px 30px;
@@ -808,6 +969,7 @@
             max-height: 90vh;
             overflow-y: auto;
         }
+
         .profile-modal-close {
             position: absolute;
             top: 12px;
@@ -821,7 +983,8 @@
             font-size: 16px;
             cursor: pointer;
         }
-        .profile-modal .big-avatar {
+
+        .big-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -833,92 +996,110 @@
             align-items: center;
             justify-content: center;
         }
-        .profile-modal .big-avatar img {
+
+        .big-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .profile-modal .big-avatar .big-placeholder {
+
+        .big-avatar .big-placeholder {
             font-size: 32px;
-            color: #ffffff;
-            display: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
-        .profile-modal .profile-name {
+
+        .profile-name {
             font-size: 20px;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             margin-bottom: 2px;
         }
-        .profile-modal .profile-id {
+        .profile-id {
             font-size: 14px;
             color: #8e8ea0;
             margin-bottom: 14px;
             font-weight: 500;
         }
-        .profile-modal .profile-balance {
+
+        .profile-balance {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             padding: 12px 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 14px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
         }
-        .profile-modal .profile-balance .mini-gram {
+
+        .profile-balance .mini-gram {
             width: 24px;
             height: 24px;
-            border-radius: 50%;
-            overflow: hidden;
         }
-        .profile-modal .profile-balance .mini-gram img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+
+        .profile-stars {
+            font-size: 14px;
+            color: #ffc832;
+            background: rgba(255, 200, 50, 0.06);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 200, 50, 0.06);
         }
-        .profile-modal .profile-divider {
+
+        .profile-divider {
             height: 1px;
             background: rgba(255, 255, 255, 0.04);
             margin: 12px 0 14px 0;
         }
-        .profile-modal .btn-row {
+
+        .btn-row {
             display: flex;
             gap: 10px;
             margin-bottom: 10px;
         }
-        .profile-modal .btn-row .add-gift-btn {
+
+        .add-gift-btn {
             flex: 1;
             padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 12px;
-            color: #ffffff;
+            color: #fff;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
-        .profile-modal .btn-row .add-gift-btn:active {
+
+        .add-gift-btn:active {
             transform: scale(0.97);
         }
-        .profile-modal .btn-row .withdraw-btn {
+
+        .withdraw-btn {
             flex: 1;
             padding: 12px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
-            color: #ffffff;
+            color: #fff;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
+
         .withdraw-section {
             display: none;
             margin-top: 12px;
@@ -927,91 +1108,89 @@
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
+
         .withdraw-section.open {
             display: block;
         }
-        .withdraw-section .withdraw-label {
+
+        .withdraw-label {
             font-size: 13px;
             font-weight: 600;
             color: #8e8ea0;
             text-align: left;
             margin-bottom: 6px;
         }
-        .withdraw-section .withdraw-input {
+
+        .withdraw-input,
+        .withdraw-amount {
             width: 100%;
             padding: 10px 14px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 10px;
-            color: #ffffff;
+            color: #fff;
             font-size: 14px;
             font-family: 'Inter', sans-serif;
             outline: none;
             margin-bottom: 10px;
         }
-        .withdraw-section .withdraw-input:focus {
+
+        .withdraw-input:focus,
+        .withdraw-amount:focus {
             border-color: #4a8af4;
         }
-        .withdraw-section .withdraw-input::placeholder {
+        .withdraw-input::placeholder,
+        .withdraw-amount::placeholder {
             color: #6e6e80;
         }
-        .withdraw-section .withdraw-row {
+
+        .withdraw-row {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        .withdraw-section .withdraw-row .withdraw-amount {
-            width: 100%;
-            padding: 10px 14px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-        }
-        .withdraw-section .withdraw-row .withdraw-amount:focus {
-            border-color: #4a8af4;
-        }
-        .withdraw-section .withdraw-row .withdraw-submit {
+
+        .withdraw-submit {
             width: 100%;
             padding: 10px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
             border-radius: 10px;
-            color: #ffffff;
+            color: #fff;
             font-size: 14px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 4px;
+            transition: all 0.2s;
         }
-        .withdraw-section .withdraw-row .withdraw-submit:active {
+
+        .withdraw-submit:active {
             transform: scale(0.97);
         }
-        .withdraw-section .withdraw-error {
+
+        .withdraw-error {
             color: #ff6b6b;
             font-size: 12px;
             font-weight: 500;
             margin-top: 8px;
             display: none;
         }
-        .withdraw-section .withdraw-error.show {
+        .withdraw-error.show {
             display: block;
         }
-        .withdraw-section .withdraw-success {
+
+        .withdraw-success {
             color: #4bc88a;
             font-size: 12px;
             font-weight: 500;
             margin-top: 8px;
             display: none;
         }
-        .withdraw-section .withdraw-success.show {
+        .withdraw-success.show {
             display: block;
         }
-        /* ONBOARDING — выдвигается снизу */
+
+        /* Onboarding */
         .onboarding-overlay {
             position: fixed;
             top: 0;
@@ -1024,12 +1203,12 @@
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            padding: 0;
             animation: slideUp 0.35s ease;
         }
         .onboarding-overlay.hidden {
             display: none;
         }
+
         @keyframes slideUp {
             from {
                 transform: translateY(100%);
@@ -1040,21 +1219,22 @@
                 opacity: 1;
             }
         }
+
         .onboarding-card {
-            background: #1a1a1f;
+            background: #14141e;
             border-radius: 28px 28px 0 0;
             max-width: 430px;
             width: 100%;
             padding: 32px 24px 36px;
-            border: none;
             text-align: center;
             box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.6);
         }
+
         .onboarding-card h2 {
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #ffffff;
+            color: #fff;
         }
         .onboarding-card p {
             font-size: 15px;
@@ -1065,7 +1245,8 @@
         .onboarding-card p strong {
             color: #4a8af4;
         }
-        .onboarding-card .btn-primary {
+
+        .btn-primary {
             width: 100%;
             padding: 16px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
@@ -1075,60 +1256,69 @@
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        .onboarding-card .btn-primary:active {
+        .btn-primary:active {
             transform: scale(0.97);
         }
+
+        /* My Gifts */
         .my-gifts-section {
             padding: 12px 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
             margin-top: 8px;
         }
+
         .my-gifts-section h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #ffffff;
+            margin-bottom: 12px;
+            color: #fff;
         }
+
         .my-gifts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
+
         .my-gift-card {
             background: #121216;
             border-radius: 14px;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            transition: transform 0.2s;
         }
+
+        .my-gift-card:active {
+            transform: scale(0.96);
+        }
+
         .my-gift-card .mini-lottie-box {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 10px;
             background: #0a0a0f;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
         }
+
         .my-gift-card .gift-name {
             font-size: 11px;
             font-weight: 600;
-            color: #ffffff;
-            margin-top: 4px;
+            color: #fff;
             text-align: center;
         }
         .my-gift-card .gift-collection {
             font-size: 10px;
             color: #6e6e80;
         }
+
         .my-gifts-empty {
             color: #6e6e80;
             font-size: 13px;
@@ -1136,16 +1326,19 @@
             text-align: center;
             grid-column: 1 / -1;
         }
+
         .hidden-section {
             display: none !important;
         }
+
         @media (min-width: 600px) {
             .detail-content {
                 max-width: 480px;
-                padding: 20px;
+                padding: 24px;
             }
             .detail-layout {
                 flex-direction: row;
+                gap: 20px;
                 align-items: flex-start;
             }
             .detail-lottie-wrapper {
@@ -1179,7 +1372,7 @@
             </div>
         </div>
 
-        <!-- FILTER SECTION -->
+        <!-- FILTER -->
         <div class="filter-section">
             <button class="filter-toggle-btn" id="filterToggle">
                 <span>Фильтр</span>
@@ -1187,7 +1380,7 @@
             </button>
         </div>
 
-        <!-- FULLSCREEN FILTER OVERLAY -->
+        <!-- FILTER OVERLAY -->
         <div class="filter-overlay" id="filterOverlay">
             <div class="filter-header">
                 <h2>Коллекции</h2>
@@ -1200,10 +1393,10 @@
             </div>
         </div>
 
-        <!-- NFT GRID (Маркет) -->
+        <!-- NFT GRID -->
         <div class="nft-grid" id="nftGrid"></div>
 
-        <!-- MY GIFTS SECTION (отдельный раздел) -->
+        <!-- MY GIFTS -->
         <div class="my-gifts-section hidden-section" id="myGiftsSection">
             <h3>Мои подарки</h3>
             <div class="my-gifts-grid" id="myGiftsGrid">
@@ -1255,6 +1448,7 @@
                             </span>
                             <span id="detailPriceAmount">0.00 GRAM</span>
                             <span class="usd" id="detailPriceUsd">≈ $0.00</span>
+                            <span class="stars" id="detailPriceStars">⭐ 0</span>
                         </div>
                         <button class="detail-buy-btn" id="detailBuyBtn">Купить</button>
                     </div>
@@ -1269,7 +1463,8 @@
                 <span class="cart-count" id="cartCount">0</span>
             </div>
             <div class="cart-total">
-                <span id="cartTotal">0.00</span> <span class="ton">GRAM</span>
+                <span id="cartTotal">0.00</span> GRAM
+                <span class="stars-total" id="cartStarsTotal">⭐ 0</span>
             </div>
         </div>
 
@@ -1283,7 +1478,8 @@
                 <div id="cartItems"></div>
                 <div class="cart-total-section">
                     <span class="total-label">Итого</span>
-                    <span class="total-amount"><span id="modalCartTotal">0.00</span> <span class="ton">GRAM</span></span>
+                    <span class="total-amount"><span id="modalCartTotal">0.00</span> GRAM</span>
+                    <span class="total-stars">⭐ <span id="modalCartStars">0</span></span>
                 </div>
                 <button class="btn-checkout" id="checkoutBtn">Купить все</button>
             </div>
@@ -1304,6 +1500,7 @@
                         <img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM">
                     </span>
                     <span id="profileBalance">0.00</span> GRAM
+                    <span class="profile-stars">⭐ <span id="profileStars">0</span></span>
                 </div>
                 <div class="profile-divider"></div>
                 <div class="btn-row">
@@ -1324,7 +1521,7 @@
             </div>
         </div>
 
-        <!-- ONBOARDING OVERLAY -->
+        <!-- ONBOARDING -->
         <div class="onboarding-overlay" id="onboardingOverlay">
             <div class="onboarding-card">
                 <h2>Добро пожаловать!</h2>
@@ -1333,7 +1530,7 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAV (увеличенный шрифт) -->
+        <!-- BOTTOM NAV -->
         <div class="bottom-nav">
             <button class="nav-item active" data-tab="market">Маркет</button>
             <button class="nav-item" data-tab="mygifts">Мои подарки</button>
@@ -1360,6 +1557,8 @@
             "Vintage Cigar": { icon: "🚬", floorPrice: 35.7 },
             "Precious Peach": { icon: "🍑", floorPrice: 29.9 }
         };
+
+        const GRAM_TO_STARS = 1.2;
 
         function generateNFTs() {
             const all = [];
@@ -1584,6 +1783,18 @@
         let currentFilter = 'all';
 
         const lottieCache = new Map();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const container = entry.target;
+                    const url = container.dataset.lottieUrl;
+                    if (url && !container.dataset.loaded) {
+                        loadLottie(container, url);
+                        container.dataset.loaded = 'true';
+                    }
+                }
+            });
+        }, { rootMargin: '50px' });
 
         // ============================================================
         // 3. STORAGE
@@ -1631,14 +1842,21 @@
             }, 0);
         }
 
+        function getCartStars() {
+            return getCartTotal() * GRAM_TO_STARS;
+        }
+
         function isInCart(nftName) { return cart.includes(nftName); }
 
         function updateCartUI() {
             const count = cart.length;
             const total = getCartTotal();
+            const stars = getCartStars();
             document.getElementById('cartCount').textContent = count;
             document.getElementById('cartTotal').textContent = total.toFixed(2);
+            document.getElementById('cartStarsTotal').textContent = `⭐ ${stars.toFixed(0)}`;
             document.getElementById('modalCartTotal').textContent = total.toFixed(2);
+            document.getElementById('modalCartStars').textContent = stars.toFixed(0);
             document.getElementById('checkoutBtn').disabled = count === 0;
             renderCartItems();
         }
@@ -1647,18 +1865,19 @@
             const container = document.getElementById('cartItems');
             if (cart.length === 0) {
                 container.innerHTML =
-                    `<div class="empty-cart"><div class="icon">🛒</div><p>Корзина пуста</p><p style="font-size:13px;margin-top:4px;color:#6e6e80;">Добавьте NFT для покупки</p></div>`;
+                    `<div class="empty-cart"><div style="font-size:40px;margin-bottom:8px;">🛒</div><p>Корзина пуста</p><p style="font-size:13px;margin-top:4px;color:#6e6e80;">Добавьте NFT для покупки</p></div>`;
                 return;
             }
             let html = '';
             cart.forEach(name => {
                 const nft = NFT_DATA.find(n => n.name === name);
                 if (!nft) return;
+                const stars = nft.price * GRAM_TO_STARS;
                 html += `
                     <div class="cart-item">
                         <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
                         <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
-                        <div class="item-price">${nft.price.toFixed(3)} GRAM</div>
+                        <div class="item-price">${nft.price.toFixed(3)} GRAM <span class="item-stars">⭐ ${stars.toFixed(0)}</span></div>
                         <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
                     </div>
                 `;
@@ -1696,6 +1915,7 @@
         function updateBalanceUI() {
             document.getElementById('headerBalance').textContent = userBalance.toFixed(2);
             document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+            document.getElementById('profileStars').textContent = (userBalance * GRAM_TO_STARS).toFixed(0);
         }
 
         function updateAvatarUI(user) {
@@ -1822,7 +2042,7 @@
                 localStorage.setItem(balanceKey, String(userBalance));
                 updateBalanceUI();
                 successEl.textContent =
-                    `Заявка на вывод ${amount.toFixed(2)} GRAM на ${wallet.substring(0,6)}...${wallet.substring(wallet.length-4)} отправлена!`;
+                    `Заявка на вывод ${amount.toFixed(2)} GRAM (⭐ ${(amount * GRAM_TO_STARS).toFixed(0)}) на ${wallet.substring(0,6)}...${wallet.substring(wallet.length-4)} отправлена!`;
                 successEl.classList.add('show');
                 document.getElementById('walletInput').value = '';
                 document.getElementById('amountInput').value = '';
@@ -1868,7 +2088,7 @@
         }
 
         // ============================================================
-        // 6. FILTER (без эмодзи)
+        // 6. FILTER
         // ============================================================
         function initFilter() {
             const container = document.getElementById('filterOptionsContainer');
@@ -1945,7 +2165,7 @@
         }
 
         // ============================================================
-        // 7. RENDER GRID (сразу показывает подарки)
+        // 7. RENDER GRID (оптимизированный)
         // ============================================================
         function loadLottie(container, url) {
             if (lottieCache.has(url)) {
@@ -1981,24 +2201,29 @@
 
             if (filtered.length === 0) {
                 document.getElementById('nftGrid').innerHTML =
-                    `<div style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;text-align:center;">Нет подарков</div>`;
+                    `<div style="grid-column:1/-1;padding:40px 20px;color:#6e6e80;text-align:center;">Нет подарков в этой коллекции</div>`;
                 return;
             }
+
             let html = '';
-            filtered.forEach((nft) => {
+            filtered.forEach((nft, index) => {
                 const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
                 const model = nft.attributes.find(a => a.trait_type === 'Model')?.value || '';
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${num}`;
                 const statusEmoji = { 'sold': '🔴', 'for-sale': '🟢', 'on-auction': '🟡' } [nft.status] || '⚪';
                 const statusLabel = { 'sold': 'Продано', 'for-sale': 'В продаже', 'on-auction': 'На аукционе' } [nft
-                    .status] || '';
+                    .status
+                ] || '';
                 const statusClass = { 'sold': 'sold', 'for-sale': 'for-sale', 'on-auction': 'on-auction' } [nft
-                    .status] || '';
+                    .status
+                ] || '';
+                const delay = (index % 20) * 40;
                 html += `
-                    <div class="nft-card" onclick="openDetail('${nft.name}')">
+                    <div class="nft-card" onclick="openDetail('${nft.name}')" style="animation-delay:${delay}ms">
                         <div class="nft-card-inner">
                             <div class="lottie-wrapper">
-                                <div class="lottie-container" id="${lottieId}"></div>
+                                <div class="lottie-container" id="${lottieId}" data-lottie-url="${nft.lottie}"></div>
+                                <div class="lottie-placeholder" id="placeholder-${lottieId}">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
                                 ${nft.status !== 'for-sale' ? `<div class="status-badge ${statusClass}">${statusEmoji} ${statusLabel}</div>` : ''}
                             </div>
                             <div class="nft-info-compact">
@@ -2007,21 +2232,30 @@
                                 <div class="nft-price-compact">
                                     <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
                                     ${nft.price > 0 ? `${nft.price.toFixed(1)}` : '—'}
+                                    <span style="font-size:9px;color:#ffc832;font-weight:400;margin-left:auto;">⭐ ${(nft.price * GRAM_TO_STARS).toFixed(0)}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
             });
+
             document.getElementById('nftGrid').innerHTML = html;
+
+            // Настраиваем IntersectionObserver для ленивой загрузки
             setTimeout(() => {
-                filtered.forEach((nft) => {
-                    const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
-                    const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${num}`);
-                    if (container && nft.lottie) loadLottie(container, nft.lottie);
+                document.querySelectorAll('.lottie-container').forEach(container => {
+                    const placeholder = document.getElementById(`placeholder-${container.id}`);
+                    if (placeholder) {
+                        // Скрываем плейсхолдер, когда анимация загрузится
+                        container.addEventListener('animationstart', () => {
+                            if (placeholder) placeholder.style.display = 'none';
+                        });
+                    }
+                    observer.observe(container);
                 });
                 updateCartUI();
-            }, 150);
+            }, 100);
         }
 
         // ============================================================
@@ -2047,28 +2281,38 @@
             document.getElementById('detailIssued').textContent = nft.issued || `${num} of 1973`;
             const statusMap = { 'for-sale': '🟢 В продаже', 'on-auction': '🟡 На аукционе', 'sold': '🔴 Продано' };
             document.getElementById('detailStatus').textContent = statusMap[nft.status] || nft.status;
+
+            const stars = nft.price * GRAM_TO_STARS;
             if (nft.price > 0) {
                 document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(3)} GRAM`;
                 document.getElementById('detailPriceUsd').textContent = `≈ $${(nft.price * 5.2).toFixed(2)}`;
+                document.getElementById('detailPriceStars').textContent = `⭐ ${stars.toFixed(0)}`;
                 document.getElementById('detailPrice').style.display = 'flex';
             } else { document.getElementById('detailPrice').style.display = 'none'; }
 
             const container = document.getElementById('detailLottie');
             container.innerHTML = '';
+            container.innerHTML =
+                `<div style="color:#2a2a2f;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`;
+
             if (lottieCache.has(nft.lottie)) {
-                try { lottie.loadAnimation({ container, animationData: lottieCache.get(nft.lottie), renderer: 'svg',
-                        loop: true, autoplay: true }); } catch (e) { container.innerHTML =
-                        `<div style="color:#6e6e80;font-size:48px;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
+                try {
+                    container.innerHTML = '';
+                    lottie.loadAnimation({ container, animationData: lottieCache.get(nft.lottie), renderer: 'svg',
+                        loop: true, autoplay: true });
+                } catch (e) { container.innerHTML =
+                        `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
             } else {
                 fetch(nft.lottie).then(r => r.json()).then(data => {
                     lottieCache.set(nft.lottie, data);
                     container.innerHTML = '';
                     try { lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
                             autoplay: true }); } catch (e) { container.innerHTML =
-                            `<div style="color:#6e6e80;font-size:48px;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
+                            `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; }
                 }).catch(() => { container.innerHTML =
-                        `<div style="color:#6e6e80;font-size:48px;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; });
+                        `<div style="color:#6e6e80;font-size:48px;display:flex;align-items:center;justify-content:center;height:100%;">${COLLECTIONS_DATA[nft.collection]?.icon||'🎁'}</div>`; });
             }
+
             updateDetailButtons();
             detailOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -2098,16 +2342,19 @@
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             const total = getCartTotal();
+            const stars = getCartStars();
             if (total > userBalance) {
-                alert(`Недостаточно средств! Баланс: ${userBalance.toFixed(3)} GRAM, сумма: ${total.toFixed(3)} GRAM`);
+                alert(
+                    `Недостаточно средств! Баланс: ${userBalance.toFixed(3)} GRAM (⭐ ${(userBalance * GRAM_TO_STARS).toFixed(0)}), сумма: ${total.toFixed(3)} GRAM (⭐ ${stars.toFixed(0)})`
+                    );
                 return;
             }
-            if (confirm(`Купить ${cart.length} NFT за ${total.toFixed(3)} GRAM?`)) {
+            if (confirm(`Купить ${cart.length} NFT за ${total.toFixed(3)} GRAM (⭐ ${stars.toFixed(0)})?`)) {
                 userBalance = parseFloat((userBalance - total).toFixed(2));
                 const balanceKey = getStorageKey('balance');
                 localStorage.setItem(balanceKey, String(userBalance));
                 updateBalanceUI();
-                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM`);
+                alert(`Покупка оформлена!\nКуплено: ${cart.length} NFT\nСумма: ${total.toFixed(3)} GRAM (⭐ ${stars.toFixed(0)})`);
                 cart = [];
                 saveCart();
                 cartModal.classList.remove('open');
@@ -2117,7 +2364,7 @@
         });
 
         // ============================================================
-        // 10. BOTTOM NAV (переключение разделов)
+        // 10. BOTTOM NAV
         // ============================================================
         document.querySelectorAll('.nav-item').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2160,7 +2407,6 @@
 
             initProfile();
             initFilter();
-            // Показываем маркет по умолчанию
             document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
             document.getElementById('nftGrid').classList.remove('hidden-section');
             document.getElementById('myGiftsSection').classList.add('hidden-section');
