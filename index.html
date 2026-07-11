@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Allow Market</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -22,6 +22,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
+            -webkit-font-smoothing: antialiased;
         }
         .app {
             max-width: 430px;
@@ -31,6 +32,7 @@
             padding-bottom: 80px;
             position: relative;
         }
+        /* ——— HEADER ——— */
         .header {
             display: flex;
             justify-content: space-between;
@@ -650,8 +652,7 @@
             color: #4bc88a;
         }
 
-        /* Нет плавающей корзины — убрана! */
-
+        /* ——— CART MODAL ——— */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -792,6 +793,7 @@
             margin-bottom: 8px;
         }
 
+        /* ——— PROFILE ——— */
         .profile-modal {
             position: fixed;
             top: 0;
@@ -1029,6 +1031,7 @@
             display: block;
         }
 
+        /* ——— ONBOARDING ——— */
         .onboarding-overlay {
             position: fixed;
             top: 0;
@@ -1093,16 +1096,38 @@
             transform: scale(0.97);
         }
 
+        /* ——— MY GIFTS ——— */
         .my-gifts-section {
-            padding: 12px 16px;
+            padding: 16px 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             margin-top: 8px;
         }
+        .my-gifts-section .my-gifts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
         .my-gifts-section h3 {
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 10px;
             color: #ffffff;
+        }
+        .my-gifts-section .my-add-gift-btn {
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .my-gifts-section .my-add-gift-btn:active {
+            transform: scale(0.97);
         }
         .my-gifts-grid {
             display: grid;
@@ -1128,7 +1153,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
         }
         .my-gift-card .gift-name {
             font-size: 10px;
@@ -1142,21 +1167,55 @@
             color: #6e6e80;
         }
         .my-gifts-empty {
-            color: #6e6e80;
-            font-size: 12px;
-            padding: 16px 0;
-            text-align: center;
             grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .my-gifts-empty .empty-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+        .my-gifts-empty .empty-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .my-gifts-empty .empty-desc {
+            font-size: 14px;
+            color: #6e6e80;
+        }
+        .my-gifts-empty .empty-add-btn {
+            margin-top: 16px;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .my-gifts-empty .empty-add-btn:active {
+            transform: scale(0.97);
         }
         .hidden-section {
             display: none !important;
         }
 
+        /* ——— NOTIFICATION TOAST ——— */
         .notification-toast {
             position: fixed;
             top: 74px;
             left: 50%;
-            transform: translateX(-50%) translateY(-10px);
+            transform: translateX(-50%) translateY(-10px) scale(0.95);
             background: #181820;
             border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 10px 20px;
@@ -1168,16 +1227,19 @@
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(16px);
             opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.25s ease, transform 0.25s ease;
             pointer-events: none;
             white-space: nowrap;
         }
         .notification-toast.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+        .notification-toast.hidden-toast {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-10px) scale(0.95);
         }
 
-        /* Бейдж корзины в навигации */
         .nav-cart-badge {
             position: absolute;
             top: -2px;
@@ -1260,9 +1322,17 @@
 
     <!-- MY GIFTS -->
     <div class="my-gifts-section hidden-section" id="myGiftsSection">
-        <h3>Мои подарки</h3>
+        <div class="my-gifts-header">
+            <h3>Мои подарки</h3>
+            <button class="my-add-gift-btn" id="myAddGiftBtn">+ Добавить</button>
+        </div>
         <div class="my-gifts-grid" id="myGiftsGrid">
-            <div class="my-gifts-empty">У вас пока нет подарков</div>
+            <div class="my-gifts-empty">
+                <div class="empty-icon">🎁</div>
+                <div class="empty-title">У вас пока нет подарков</div>
+                <div class="empty-desc">Добавьте свой первый подарок</div>
+                <button class="empty-add-btn" id="emptyAddGiftBtn">+ Добавить подарок</button>
+            </div>
         </div>
     </div>
 
@@ -1294,8 +1364,6 @@
             </div>
         </div>
     </div>
-
-    <!-- НЕТ ПЛАВАЮЩЕЙ КОРЗИНЫ -->
 
     <!-- CART MODAL -->
     <div class="cart-modal" id="cartModal">
@@ -1494,6 +1562,7 @@
     let currentFilter = 'all';
     const lottieCache = new Map();
     let notificationTimeout = null;
+    let isToastVisible = false;
     let gridRendered = false;
     let cachedGridHTML = '';
     let cachedFilteredData = [];
@@ -1758,7 +1827,22 @@
     function renderMyGifts() {
         const grid = document.getElementById('myGiftsGrid');
         if (!myGifts.length) {
-            grid.innerHTML = `<div class="my-gifts-empty">У вас пока нет подарков</div>`;
+            grid.innerHTML = `
+                <div class="my-gifts-empty">
+                    <div class="empty-icon">🎁</div>
+                    <div class="empty-title">У вас пока нет подарков</div>
+                    <div class="empty-desc">Добавьте свой первый подарок</div>
+                    <button class="empty-add-btn" id="emptyAddGiftBtn2">+ Добавить подарок</button>
+                </div>
+            `;
+            const btn = document.getElementById('emptyAddGiftBtn2');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    if (window.Telegram?.WebApp) {
+                        try { window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts'); } catch(e) { alert('Передайте подарок боту @AllowMarketGifts'); }
+                    } else { alert('Передайте подарок боту @AllowMarketGifts'); }
+                });
+            }
             return;
         }
         let html = '';
@@ -1831,7 +1915,6 @@
                 if (arr.length === 0) { currentFilter = 'all'; } else { currentFilter = arr; }
             }
             closeDetail();
-            // Сбрасываем кеш при применении фильтра
             gridRendered = false;
             cachedGridHTML = '';
             renderGrid();
@@ -1916,9 +1999,7 @@
             filtered = NFT_DATA.filter(item => item.collection === currentFilter);
         }
 
-        // Если данные не изменились и сетка уже отрендерена — просто показываем кеш
         if (gridRendered && !force && cachedFilteredData === filtered) {
-            // Проверяем, что контейнер не пустой
             const grid = document.getElementById('nftGrid');
             if (grid.innerHTML && grid.innerHTML.length > 100) {
                 return;
@@ -1962,8 +2043,7 @@
         gridRendered = true;
         cachedGridHTML = html;
         
-        // Загружаем Lottie для всех карточек из кеша
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             filtered.forEach((nft) => {
                 const num = nft.number || nft.name.match(/#(\d+)/)?.[1] || '0000';
                 const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${num}`);
@@ -1972,7 +2052,7 @@
                 }
             });
             updateCartUI();
-        }, 100);
+        });
     }
 
     // ============================================================
@@ -1990,14 +2070,14 @@
                     loop: true,
                     autoplay: true
                 });
-                setTimeout(() => {
+                requestAnimationFrame(() => {
                     const svg = container.querySelector('svg');
                     if (svg) {
                         svg.style.width = '100%';
                         svg.style.height = '100%';
                         svg.style.objectFit = 'contain';
                     }
-                }, 50);
+                });
             } catch(e) {
                 const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
                 container.innerHTML = `<div style="font-size:56px;color:#6e6e80;">${icon}</div>`;
@@ -2021,14 +2101,14 @@
                         loop: true,
                         autoplay: true
                     });
-                    setTimeout(() => {
+                    requestAnimationFrame(() => {
                         const svg = container.querySelector('svg');
                         if (svg) {
                             svg.style.width = '100%';
                             svg.style.height = '100%';
                             svg.style.objectFit = 'contain';
                         }
-                    }, 50);
+                    });
                 } catch(e) {
                     const icon = COLLECTIONS_DATA[window._currentDetailNft?.collection]?.icon || '🎁';
                     container.innerHTML = `<div style="font-size:56px;color:#6e6e80;">${icon}</div>`;
@@ -2133,10 +2213,7 @@
             if (tab === 'market') {
                 grid.classList.remove('hidden-section');
                 mySection.classList.add('hidden-section');
-                // Показываем закешированную сетку без перезагрузки
-                if (gridRendered && cachedGridHTML) {
-                    // уже отрендерено
-                } else {
+                if (!gridRendered || !cachedGridHTML) {
                     renderGrid();
                 }
             } else if (tab === 'mygifts') {
@@ -2152,21 +2229,60 @@
     });
 
     // ============================================================
-    // 11. BELL — уведомление
+    // 11. BELL — уведомление с toggle
     // ============================================================
     const notificationToast = document.getElementById('notificationToast');
 
     document.getElementById('bellBtn').addEventListener('click', function(e) {
         e.stopPropagation();
-        notificationToast.classList.add('show');
-        if (notificationTimeout) clearTimeout(notificationTimeout);
-        notificationTimeout = setTimeout(() => {
+        
+        if (isToastVisible) {
+            // Если уже видно — скрываем
             notificationToast.classList.remove('show');
-        }, 3000);
+            notificationToast.classList.add('hidden-toast');
+            isToastVisible = false;
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+                notificationTimeout = null;
+            }
+        } else {
+            // Показываем
+            notificationToast.classList.remove('hidden-toast');
+            notificationToast.classList.add('show');
+            isToastVisible = true;
+            
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+                notificationTimeout = null;
+            }
+            
+            // Автоматически скрываем через 3 секунды
+            notificationTimeout = setTimeout(() => {
+                notificationToast.classList.remove('show');
+                notificationToast.classList.add('hidden-toast');
+                isToastVisible = false;
+                notificationTimeout = null;
+            }, 3000);
+        }
     });
 
     // ============================================================
-    // 12. ONBOARDING
+    // 12. MY GIFTS ADD BUTTONS
+    // ============================================================
+    document.getElementById('myAddGiftBtn').addEventListener('click', function() {
+        if (window.Telegram?.WebApp) {
+            try { window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts'); } catch(e) { alert('Передайте подарок боту @AllowMarketGifts'); }
+        } else { alert('Передайте подарок боту @AllowMarketGifts'); }
+    });
+
+    document.getElementById('emptyAddGiftBtn').addEventListener('click', function() {
+        if (window.Telegram?.WebApp) {
+            try { window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts'); } catch(e) { alert('Передайте подарок боту @AllowMarketGifts'); }
+        } else { alert('Передайте подарок боту @AllowMarketGifts'); }
+    });
+
+    // ============================================================
+    // 13. ONBOARDING
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         const overlay = document.getElementById('onboardingOverlay');
