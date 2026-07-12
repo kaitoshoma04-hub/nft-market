@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>NFT Маркет — GRAM</title>
+  <title>NFT Маркет</title>
   <style>
     * {
       margin: 0;
@@ -12,109 +12,75 @@
       font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
     body {
-      background: #0b0b0e;
+      background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 12px;
+      padding: 10px;
     }
     .phone {
-      max-width: 390px;
+      max-width: 375px;
       width: 100%;
-      background: #111114;
-      border-radius: 36px;
-      padding: 16px 12px 80px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
-      border: 1px solid #2a2a2e;
+      background: #0d0d10;
+      border-radius: 32px;
+      padding: 14px 12px 70px;
+      border: 1px solid #222;
       position: relative;
     }
-    /* общие */
-    .flex { display: flex; align-items: center; gap: 6px; }
-    .between { display: flex; justify-content: space-between; align-items: center; }
-    .gap-2 { gap: 8px; }
-    .mt-2 { margin-top: 10px; }
-    .mb-2 { margin-bottom: 10px; }
-    .text-muted { color: #888; }
-    .badge-sm {
-      background: #24242a;
-      border-radius: 30px;
-      padding: 4px 14px;
-      font-size: 12px;
-      color: #bbb;
-    }
-    .badge-mint {
-      background: #6c6cff;
-      border-radius: 30px;
-      padding: 2px 16px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #fff;
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid #3a3a40;
-      border-radius: 40px;
-      padding: 6px 18px;
-      font-size: 13px;
-      color: #ccc;
-    }
-    .btn-primary {
-      background: #6c6cff;
-      border: none;
-      border-radius: 40px;
-      padding: 8px 24px;
-      font-weight: 600;
-      color: #fff;
-      font-size: 14px;
-    }
-    .divider {
-      border-top: 1px solid #1e1e22;
-      margin: 12px 0 16px;
-    }
-    /* header */
+
+    /* Хедер */
     .header {
-      padding: 6px 0 14px;
-      border-bottom: 1px solid #222;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0 14px;
+      border-bottom: 1px solid #1a1a1e;
     }
     .header h1 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
-      color: #f0f0f0;
+      color: #fff;
     }
-    .header .close-btn {
-      font-size: 22px;
-      color: #aaa;
+    .header .close {
+      font-size: 20px;
+      color: #888;
     }
-    /* поиск */
-    .search-row {
-      background: #1c1c20;
+
+    /* Поиск */
+    .search {
+      background: #18181c;
       border-radius: 30px;
       padding: 10px 16px;
       display: flex;
       align-items: center;
       gap: 8px;
       margin: 14px 0 16px;
-      border: 1px solid #2a2a2e;
+      border: 1px solid #28282c;
     }
-    .search-row input {
+    .search input {
       background: transparent;
       border: none;
       color: #ddd;
-      font-size: 15px;
+      font-size: 14px;
       flex: 1;
       outline: none;
     }
-    .search-row input::placeholder { color: #555; }
-    .search-row .icon { color: #666; font-size: 18px; }
+    .search input::placeholder {
+      color: #555;
+    }
+    .search .icon {
+      color: #666;
+      font-size: 16px;
+    }
 
-    /* вкладки */
+    /* Вкладки */
     .tabs {
       display: flex;
-      gap: 12px;
-      font-size: 14px;
-      color: #777;
-      border-bottom: 1px solid #1e1e22;
+      gap: 14px;
+      font-size: 13px;
+      color: #666;
+      border-bottom: 1px solid #1a1a1e;
       padding-bottom: 12px;
       margin-bottom: 14px;
     }
@@ -125,208 +91,358 @@
       padding-bottom: 10px;
     }
 
-    /* фильтры */
-    .filter-row {
+    /* Фильтры */
+    .filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      font-size: 13px;
-      color: #999;
-      margin-bottom: 16px;
+      gap: 6px;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 14px;
     }
-    .filter-row span {
-      background: #1a1a1e;
-      padding: 4px 14px;
+    .filters span {
+      background: #18181c;
+      padding: 4px 12px;
       border-radius: 30px;
-      border: 1px solid #2a2a2e;
+      border: 1px solid #28282c;
     }
-    .filter-row .active-filter {
+    .filters .active {
       border-color: #6c6cff;
       color: #fff;
     }
 
-    /* строки предметов */
-    .item-row {
+    /* Строка предмета */
+    .item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 12px 10px 16px;
-      background: #17171b;
-      border-radius: 16px;
-      border: 1px solid #242428;
+      background: #141418;
+      border-radius: 14px;
+      border: 1px solid #222226;
       margin-bottom: 6px;
     }
-    .item-row .name { font-weight: 500; font-size: 15px; }
-    .item-row .fire { color: #ff7b2b; margin-right: 4px; }
-    .item-row .price { font-weight: 600; font-size: 15px; }
-    .item-row .price small { font-weight: 300; color: #888; margin-left: 6px; }
-    .item-row .red { color: #ff5e6b; }
-    .item-row .blue { color: #6b9aff; }
-    .item-row .green { color: #5fcb7a; }
-    .item-row .heart { color: #ff5e8a; margin-right: 3px; }
-
-    .section-title {
-      font-size: 16px;
+    .item .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #eee;
+    }
+    .item .name .fire {
+      color: #ff6b2b;
+      margin-right: 4px;
+    }
+    .item .price {
+      font-size: 14px;
       font-weight: 600;
-      margin: 18px 0 12px;
+    }
+    .item .price .small {
+      font-weight: 300;
+      color: #777;
+      margin-left: 4px;
+      font-size: 12px;
+    }
+    .item .red {
+      color: #ff4757;
+    }
+    .item .blue {
+      color: #4a7dff;
+    }
+    .item .green {
+      color: #4cd964;
+    }
+
+    /* Кнопки очистить/показать */
+    .actions-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      font-size: 13px;
+      color: #6c6cff;
+      padding: 4px 0 12px;
+    }
+
+    /* Заголовок секции */
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #eee;
+      margin: 16px 0 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .section-title a { color: #6c6cff; font-weight: 400; font-size: 14px; text-decoration: none; }
+    .section-title a {
+      color: #6c6cff;
+      font-weight: 400;
+      font-size: 13px;
+      text-decoration: none;
+    }
 
-    /* ордер */
-    .order-item {
-      background: #17171b;
-      border-radius: 16px;
+    /* Ордер */
+    .order {
+      background: #141418;
+      border-radius: 14px;
       padding: 12px 16px;
-      margin-bottom: 8px;
-      border: 1px solid #242428;
+      margin-bottom: 6px;
+      border: 1px solid #222226;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .order-item .left .name { font-weight: 500; font-size: 15px; }
-    .order-item .left .qty { font-size: 13px; color: #888; }
-    .order-item .price-val { font-weight: 600; font-size: 16px; display: flex; align-items: center; gap: 4px; }
-    .order-item .price-val .heart { color: #ff5e8a; }
-    .order-item .actions { display: flex; gap: 14px; color: #6c6cff; font-size: 13px; }
+    .order .info .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #eee;
+    }
+    .order .info .qty {
+      font-size: 12px;
+      color: #777;
+    }
+    .order .price {
+      font-size: 15px;
+      font-weight: 600;
+      color: #eee;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .order .price .heart {
+      color: #ff4d7a;
+    }
+    .order .btns {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: #6c6cff;
+    }
 
-    /* create order */
+    /* Создать ордер */
     .create-order {
-      background: #1a1a20;
+      background: #18181c;
       border-radius: 30px;
-      padding: 12px 20px;
+      padding: 10px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 18px 0 12px;
-      border: 1px solid #2a2a30;
+      margin: 14px 0 10px;
+      border: 1px solid #28282c;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .create-order .label {
+      color: #888;
+      font-size: 13px;
+    }
+    .create-order .value {
+      color: #ddd;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* Баннер */
+    .banner {
+      background: #181820;
+      border-radius: 18px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      border: 1px solid #282830;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
       gap: 6px;
     }
-    .create-order .label { color: #aaa; font-weight: 400; }
-    .create-order .value { font-weight: 500; color: #ddd; }
-
-    /* нижняя навигация */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #0e0e12;
-      border-top: 1px solid #222;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0 8px;
-      max-width: 390px;
-      margin: 0 auto;
-      border-radius: 0 0 36px 36px;
+    .banner .big {
+      font-size: 15px;
+      font-weight: 600;
+      color: #eee;
     }
-    .bottom-nav .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #666;
+    .banner .small {
+      font-size: 12px;
+      color: #888;
+    }
+    .banner .btn {
+      background: #6c6cff;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* Minted чип */
+    .minted {
+      background: #6c6cff;
+      border-radius: 30px;
+      padding: 2px 14px;
       font-size: 11px;
-      gap: 2px;
+      font-weight: 500;
+      color: #fff;
+      display: inline-block;
     }
-    .bottom-nav .nav-item.active { color: #6c6cff; }
-    .bottom-nav .nav-item span { font-size: 20px; }
-
-    /* карточки NFT */
-    .nft-card {
-      background: #17171b;
-      border-radius: 16px;
-      padding: 12px 12px 14px;
-      border: 1px solid #242428;
+    .chip {
+      background: #222226;
+      border-radius: 30px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: #aaa;
+      display: inline-block;
     }
-    .nft-card .title { font-weight: 500; font-size: 14px; }
-    .nft-card .sub { color: #888; font-size: 12px; margin: 4px 0; }
-    .nft-card .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
-    .nft-card .price-row .val { font-weight: 600; font-size: 15px; }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-    .banner {
-      background: #1a1a24;
-      border-radius: 20px;
-      padding: 14px 16px;
-      margin: 16px 0;
-      border: 1px solid #2c2c34;
+    /* Карточка Precious Peach */
+    .peach {
+      background: #141418;
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid #222226;
+      margin-top: 16px;
+    }
+    .peach .top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+    .peach .top .title {
+      font-size: 14px;
+      color: #888;
+    }
+    .peach .top .num {
+      font-size: 14px;
+      font-weight: 500;
+      color: #eee;
+    }
+    .peach .attrs {
+      display: flex;
+      gap: 12px;
       flex-wrap: wrap;
+      margin: 10px 0;
+      font-size: 13px;
+      color: #888;
     }
-    .banner .big { font-weight: 600; font-size: 16px; }
-    .banner .small { color: #aaa; font-size: 13px; }
-
-    .precious-card {
-      background: #17171b;
-      border-radius: 20px;
-      padding: 16px;
-      border: 1px solid #2a2a2e;
-      margin-top: 20px;
+    .peach .attrs b {
+      color: #eee;
+      font-weight: 500;
     }
-    .precious-card .row { display: flex; gap: 16px; flex-wrap: wrap; margin: 10px 0; }
-    .precious-card .row span { color: #aaa; }
-    .precious-card .row span b { color: #eee; font-weight: 500; }
-    .offer-block {
+    .peach .flor {
+      background: #0d0d10;
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #888;
+    }
+    .peach .flor span {
+      color: #eee;
+    }
+    .peach .offer {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 14px;
     }
-    .offer-block .offer-price { font-size: 22px; font-weight: 600; }
-    .offer-block .offer-price .heart { color: #ff5e8a; }
-
-    .minted-chip {
+    .peach .offer .price {
+      font-size: 20px;
+      font-weight: 600;
+      color: #eee;
+    }
+    .peach .offer .price .heart {
+      color: #ff4d7a;
+    }
+    .peach .offer .add {
       background: #6c6cff;
-      border-radius: 30px;
-      padding: 2px 16px;
-      font-size: 12px;
+      padding: 8px 30px;
+      border-radius: 40px;
       font-weight: 500;
       color: #fff;
-      display: inline-block;
+      font-size: 14px;
     }
-    .chip-dark {
-      background: #24242a;
-      border-radius: 30px;
-      padding: 4px 16px;
-      font-size: 12px;
-      color: #bbb;
-      display: inline-block;
+
+    /* Сетка NFT */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0;
     }
+    .nft-card {
+      background: #141418;
+      border-radius: 14px;
+      padding: 10px 12px 12px;
+      border: 1px solid #222226;
+    }
+    .nft-card .name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #eee;
+    }
+    .nft-card .price {
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+
+    /* Чип-группа */
     .chip-group {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       margin: 4px 0;
     }
-    .mt-3 { margin-top: 16px; }
-    .mb-3 { margin-bottom: 16px; }
-    .w-100 { width: 100%; }
+
+    /* Нижняя навигация */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0a0a0e;
+      border-top: 1px solid #1a1a1e;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 6px;
+      max-width: 375px;
+      margin: 0 auto;
+      border-radius: 0 0 32px 32px;
+    }
+    .bottom-nav .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #555;
+      font-size: 10px;
+      gap: 1px;
+    }
+    .bottom-nav .nav-item.active {
+      color: #6c6cff;
+    }
+    .bottom-nav .nav-item span {
+      font-size: 18px;
+    }
+
+    .mt-2 { margin-top: 8px; }
+    .mb-2 { margin-bottom: 8px; }
     .text-center { text-align: center; }
   </style>
 </head>
 <body>
 <div class="phone">
 
-  <!-- HEADER -->
-  <div class="header between">
+  <!-- ===== HEADER ===== -->
+  <div class="header">
     <h1>Закрыть</h1>
-    <span class="close-btn">✕</span>
+    <span class="close">✕</span>
   </div>
 
-  <!-- SEARCH -->
-  <div class="search-row">
+  <!-- ===== SEARCH ===== -->
+  <div class="search">
     <span class="icon">🔍</span>
     <input placeholder="Поиск" value="Genie Lamp">
     <span class="icon">⌘</span>
   </div>
 
-  <!-- TABS -->
+  <!-- ===== TABS ===== -->
   <div class="tabs">
     <span class="active">Подарки</span>
     <span>Стикеры</span>
@@ -334,9 +450,9 @@
     <span>Каналы</span>
   </div>
 
-  <!-- FILTERS -->
-  <div class="filter-row">
-    <span class="active-filter">NFT ▼</span>
+  <!-- ===== FILTERS ===== -->
+  <div class="filters">
+    <span class="active">NFT ▼</span>
     <span>Модель ▼</span>
     <span>Фон ▼</span>
     <span>Символ ▼</span>
@@ -344,72 +460,229 @@
     <span>Хранилище (0)</span>
   </div>
 
-  <!-- СПИСОК 1 (фото 6) -->
-  <div class="item-list">
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Genie Lamp</span><span class="price red">29.7 ↓ <small>🔴 1 489.14</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Ginger Cookie</span><span class="price red">2.89 ↓ <small>🔴 740.67</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Hanging Star</span><span class="price red">6.43 ↓ <small>🔴 465.27</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Heart Locket</span><span class="price blue">959 ↓ <small>🔵 8 851.81</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Heroic Helmet</span><span class="price red">176.79 ↓ <small>🔴 1 752.6</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Hex Pot</span><span class="price red">3.11 ↓ <small>🔴 697.08</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Holiday Drink</span><span class="price blue">2.55 ↓ <small>🔵 280.27</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Homemade ...</span><span class="price blue">3.82 ↓ <small>🔵 351.08</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Hypno Lollip...</span><span class="price blue">2.87 ↓ <small>🔵 250.81</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Ion Gem</span><span class="price blue">56.5 ↓ <small>🔵 3 028.43</small></span></div>
-    <div class="item-row"><span class="name"><span class="fire">🔥</span> Jack-in-the-B...</span><span class="price blue">3.1 ↓ <small>🔵 325.87</small></span></div>
+  <!-- ===== СПИСОК 1 ===== -->
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Genie Lamp</span>
+    <span class="price red">29.7 ↓ <span class="small">🔴 1 489.14</span></span>
   </div>
-  <div class="between" style="padding: 4px 0 12px; font-size:14px; color:#6c6cff;">
-    <span></span><span>Очистить все</span><span>Показать результаты</span>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Ginger Cookie</span>
+    <span class="price red">2.89 ↓ <span class="small">🔴 740.67</span></span>
   </div>
-
-  <!-- СЕКЦИЯ "Как быть" (фото 5) -->
-  <div class="section-title"><span>Как быть</span> <a>Поиск</a></div>
-  <div class="item-list">
-    <div class="item-row"><span class="name">Candy Cane <span style="color:#5fcb7a;">🔺</span> 2.55 ↑</span><span class="price green">720.86</span></div>
-    <div class="item-row"><span class="name">Cookie Heart <span style="color:#5fcb7a;">🔺</span> 3.57 ↓</span><span class="price green">517.13</span></div>
-    <div class="item-row"><span class="name">Crystal Ball <span style="color:#5fcb7a;">🔺</span> 8.92 ↓</span><span class="price green">991.98</span></div>
-    <div class="item-row"><span class="name">Desk Calendar <span style="color:#5fcb7a;">🔺</span> 3.79 ↓</span><span class="price green">1 145.46</span></div>
-    <div class="item-row"><span class="name">Diamond Ring <span style="color:#5fcb7a;">🔺</span> 25.7 ↓</span><span class="price green">2 838.63</span></div>
-    <div class="item-row"><span class="name">Durov's Cap <span style="color:#5fcb7a;">🔺</span> 395.24 ↑</span><span class="price green">12 944.1</span></div>
-    <div class="item-row"><span class="name">Easter Egg <span style="color:#5fcb7a;">🔺</span> 2.83 ↓</span><span class="price green">579.95</span></div>
-    <div class="item-row"><span class="name">Electric Skull <span style="color:#5fcb7a;">🔺</span> 21.58 ↓</span><span class="price green">1 172.62</span></div>
-    <div class="item-row"><span class="name">Eternal Can... <span style="color:#5fcb7a;">🔺</span> 3.97 ↓</span><span class="price green">457.08</span></div>
-    <div class="item-row"><span class="name">Eternal Rose <span style="color:#5fcb7a;">🔺</span> 20.7 ↑</span><span class="price green">1 742.77</span></div>
-    <div class="item-row"><span class="name">Evil Eye <span style="color:#5fcb7a;">🔺</span> 5.78 ↓</span><span class="price green">805.93</span></div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Hanging Star</span>
+    <span class="price red">6.43 ↓ <span class="small">🔴 465.27</span></span>
   </div>
-  <div class="between" style="padding: 4px 0 12px; font-size:14px; color:#6c6cff;">
-    <span></span><span>Очистить все</span><span>Показать результаты</span>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Heart Locket</span>
+    <span class="price blue">959 ↓ <span class="small">🔵 8 851.81</span></span>
   </div>
-
-  <!-- СЕКЦИЯ "Закрыть / Выбрать все" (фото 4) -->
-  <div class="section-title"><span>Закрыть</span> <a>Выбрать все</a></div>
-  <div class="item-list">
-    <div class="item-row"><span class="name">Surge Board <span style="color:#888;font-size:13px;">23 июн.</span> <span style="color:#aaa;">Флора: ♥ 5.95</span></span><span class="price">♥ 3 172.71</span></div>
-    <div class="item-row"><span class="name">Liberty Figure <span style="color:#888;font-size:13px;">04 июн.</span> <span style="color:#aaa;">Флора: ♥ 3.35</span></span><span class="price">♥ 14 354.62</span></div>
-    <div class="item-row"><span class="name">Astral Shard <span class="heart">♥</span> 112.95 ↓</span><span class="price">♥ 4 433.58</span></div>
-    <div class="item-row"><span class="name">B-Day Candle <span class="heart">♥</span> 4.71 ↑</span><span class="price">♥ 1 870.24</span></div>
-    <div class="item-row"><span class="name">Berry Box <span class="heart">♥</span> 6.49 ↓</span><span class="price">♥ 455.98</span></div>
-    <div class="item-row"><span class="name">Big Year <span class="heart">♥</span> 2.58 ↓</span><span class="price">♥ 449.97</span></div>
-    <div class="item-row"><span class="name">Bonded Ring <span class="heart">♥</span> 35.04 ↓</span><span class="price">♥ 2 023.82</span></div>
-    <div class="item-row"><span class="name">Bow Tie <span class="heart">♥</span> 3.8 ↓</span><span class="price">♥ 416.51</span></div>
-    <div class="item-row"><span class="name">Bunny Muffin <span class="heart">♥</span> 6.03 ↓</span><span class="price">♥ 614.01</span></div>
-    <div class="item-row"><span class="name">Candy Cane <span class="heart">♥</span> 2.55 ↑</span><span class="price">♥ 720.86</span></div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Heroic Helmet</span>
+    <span class="price red">176.79 ↓ <span class="small">🔴 1 752.6</span></span>
   </div>
-  <div class="between" style="padding: 4px 0 12px; font-size:14px; color:#6c6cff;">
-    <span></span><span>Очистить все</span><span>Показать результаты</span>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Hex Pot</span>
+    <span class="price red">3.11 ↓ <span class="small">🔴 697.08</span></span>
+  </div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Holiday Drink</span>
+    <span class="price blue">2.55 ↓ <span class="small">🔵 280.27</span></span>
+  </div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Homemade ...</span>
+    <span class="price blue">3.82 ↓ <span class="small">🔵 351.08</span></span>
+  </div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Hypno Lollip...</span>
+    <span class="price blue">2.87 ↓ <span class="small">🔵 250.81</span></span>
+  </div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Ion Gem</span>
+    <span class="price blue">56.5 ↓ <span class="small">🔵 3 028.43</span></span>
+  </div>
+  <div class="item">
+    <span class="name"><span class="fire">🔥</span> Jack-in-the-B...</span>
+    <span class="price blue">3.1 ↓ <span class="small">🔵 325.87</span></span>
   </div>
 
-  <!-- ОРДЕРЫ (фото 3) -->
-  <div class="section-title"><span>Ордеры</span> <a>Мои ордеры</a></div>
-  <div class="order-item"><div class="left"><span class="name">Gravestone</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 39.11</div><div class="actions"><span>Детали</span><span>Продать</span></div></div>
-  <div class="order-item"><div class="left"><span class="name">Mask</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 5.73</div><div class="actions"><span>Детали</span><span>Продать</span></div></div>
-  <div class="order-item"><div class="left"><span class="name">Coffin</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 18.21</div><div class="actions"><span>Детали</span><span>Продать</span></div></div>
-  <div class="order-item"><div class="left"><span class="name">Airplane</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 4 000</div><div class="actions"><span>Детали</span><span>Продать</span></div></div>
-  <div class="order-item"><div class="left"><span class="name">Khabib's Papakha</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 50.5</div><div class="actions"><span>Детали</span><span>Продать</span></div></div>
-  <div class="order-item"><div class="left"><span class="name">UFC box</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 31</div><div class="actions"><span>Детали</span><span>Продать</span></div></div>
-  <div class="order-item"><div class="left"><span class="name">Trojan Horse</span><span class="qty">Количество: 1</span></div><div class="price-val"><span class="heart">💜</span> 31</div><div class="actions"><span>Деталы</span><span>Продать</span></div></div>
+  <div class="actions-row">
+    <span>Очистить все</span>
+    <span>Показать результаты</span>
+  </div>
 
-  <!-- CREATE ORDER -->
+  <!-- ===== СЕКЦИЯ "Как быть" ===== -->
+  <div class="section-title">
+    <span>Как быть</span>
+    <a>Поиск</a>
+  </div>
+
+  <div class="item">
+    <span class="name">Candy Cane <span style="color:#4cd964;">🔺</span> 2.55 ↑</span>
+    <span class="price green">720.86</span>
+  </div>
+  <div class="item">
+    <span class="name">Cookie Heart <span style="color:#4cd964;">🔺</span> 3.57 ↓</span>
+    <span class="price green">517.13</span>
+  </div>
+  <div class="item">
+    <span class="name">Crystal Ball <span style="color:#4cd964;">🔺</span> 8.92 ↓</span>
+    <span class="price green">991.98</span>
+  </div>
+  <div class="item">
+    <span class="name">Desk Calendar <span style="color:#4cd964;">🔺</span> 3.79 ↓</span>
+    <span class="price green">1 145.46</span>
+  </div>
+  <div class="item">
+    <span class="name">Diamond Ring <span style="color:#4cd964;">🔺</span> 25.7 ↓</span>
+    <span class="price green">2 838.63</span>
+  </div>
+  <div class="item">
+    <span class="name">Durov's Cap <span style="color:#4cd964;">🔺</span> 395.24 ↑</span>
+    <span class="price green">12 944.1</span>
+  </div>
+  <div class="item">
+    <span class="name">Easter Egg <span style="color:#4cd964;">🔺</span> 2.83 ↓</span>
+    <span class="price green">579.95</span>
+  </div>
+  <div class="item">
+    <span class="name">Electric Skull <span style="color:#4cd964;">🔺</span> 21.58 ↓</span>
+    <span class="price green">1 172.62</span>
+  </div>
+  <div class="item">
+    <span class="name">Eternal Can... <span style="color:#4cd964;">🔺</span> 3.97 ↓</span>
+    <span class="price green">457.08</span>
+  </div>
+  <div class="item">
+    <span class="name">Eternal Rose <span style="color:#4cd964;">🔺</span> 20.7 ↑</span>
+    <span class="price green">1 742.77</span>
+  </div>
+  <div class="item">
+    <span class="name">Evil Eye <span style="color:#4cd964;">🔺</span> 5.78 ↓</span>
+    <span class="price green">805.93</span>
+  </div>
+
+  <div class="actions-row">
+    <span>Очистить все</span>
+    <span>Показать результаты</span>
+  </div>
+
+  <!-- ===== СЕКЦИЯ "Закрыть / Выбрать все" ===== -->
+  <div class="section-title">
+    <span>Закрыть</span>
+    <a>Выбрать все</a>
+  </div>
+
+  <div class="item">
+    <span class="name">Surge Board <span style="color:#888;font-size:12px;">23 июн.</span> <span style="color:#777;">Флора: ♥ 5.95</span></span>
+    <span class="price">♥ 3 172.71</span>
+  </div>
+  <div class="item">
+    <span class="name">Liberty Figure <span style="color:#888;font-size:12px;">04 июн.</span> <span style="color:#777;">Флора: ♥ 3.35</span></span>
+    <span class="price">♥ 14 354.62</span>
+  </div>
+  <div class="item">
+    <span class="name">Astral Shard <span style="color:#ff4d7a;">♥</span> 112.95 ↓</span>
+    <span class="price">♥ 4 433.58</span>
+  </div>
+  <div class="item">
+    <span class="name">B-Day Candle <span style="color:#ff4d7a;">♥</span> 4.71 ↑</span>
+    <span class="price">♥ 1 870.24</span>
+  </div>
+  <div class="item">
+    <span class="name">Berry Box <span style="color:#ff4d7a;">♥</span> 6.49 ↓</span>
+    <span class="price">♥ 455.98</span>
+  </div>
+  <div class="item">
+    <span class="name">Big Year <span style="color:#ff4d7a;">♥</span> 2.58 ↓</span>
+    <span class="price">♥ 449.97</span>
+  </div>
+  <div class="item">
+    <span class="name">Bonded Ring <span style="color:#ff4d7a;">♥</span> 35.04 ↓</span>
+    <span class="price">♥ 2 023.82</span>
+  </div>
+  <div class="item">
+    <span class="name">Bow Tie <span style="color:#ff4d7a;">♥</span> 3.8 ↓</span>
+    <span class="price">♥ 416.51</span>
+  </div>
+  <div class="item">
+    <span class="name">Bunny Muffin <span style="color:#ff4d7a;">♥</span> 6.03 ↓</span>
+    <span class="price">♥ 614.01</span>
+  </div>
+  <div class="item">
+    <span class="name">Candy Cane <span style="color:#ff4d7a;">♥</span> 2.55 ↑</span>
+    <span class="price">♥ 720.86</span>
+  </div>
+
+  <div class="actions-row">
+    <span>Очистить все</span>
+    <span>Показать результаты</span>
+  </div>
+
+  <!-- ===== ОРДЕРЫ ===== -->
+  <div class="section-title">
+    <span>Ордеры</span>
+    <a>Мои ордеры</a>
+  </div>
+
+  <div class="order">
+    <div class="info">
+      <div class="name">Gravestone</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 39.11</div>
+    <div class="btns"><span>Детали</span><span>Продать</span></div>
+  </div>
+  <div class="order">
+    <div class="info">
+      <div class="name">Mask</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 5.73</div>
+    <div class="btns"><span>Детали</span><span>Продать</span></div>
+  </div>
+  <div class="order">
+    <div class="info">
+      <div class="name">Coffin</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 18.21</div>
+    <div class="btns"><span>Детали</span><span>Продать</span></div>
+  </div>
+  <div class="order">
+    <div class="info">
+      <div class="name">Airplane</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 4 000</div>
+    <div class="btns"><span>Детали</span><span>Продать</span></div>
+  </div>
+  <div class="order">
+    <div class="info">
+      <div class="name">Khabib's Papakha</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 50.5</div>
+    <div class="btns"><span>Детали</span><span>Продать</span></div>
+  </div>
+  <div class="order">
+    <div class="info">
+      <div class="name">UFC box</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 31</div>
+    <div class="btns"><span>Детали</span><span>Продать</span></div>
+  </div>
+  <div class="order">
+    <div class="info">
+      <div class="name">Trojan Horse</div>
+      <div class="qty">Количество: 1</div>
+    </div>
+    <div class="price"><span class="heart">💜</span> 31</div>
+    <div class="btns"><span>Деталы</span><span>Продать</span></div>
+  </div>
+
+  <!-- ===== СОЗДАТЬ ОРДЕР ===== -->
   <div class="create-order">
     <span class="label">Создать ордер</span>
     <span class="value">Маркет</span>
@@ -419,119 +692,148 @@
     <span class="value">Хранилище</span>
   </div>
 
-  <!-- БЛОК "X Закрыто: 1512" (фото 2) -->
+  <!-- ===== X ЗАКРЫТО: 1512 ===== -->
   <div class="banner">
     <div><span class="big">X Закрыто: 1512</span></div>
     <div class="chip-group">
-      <span class="chip-dark">Подарки</span>
-      <span class="chip-dark">Стикеры</span>
-      <span class="chip-dark">Коллекции</span>
-      <span class="chip-dark">Каналы</span>
+      <span class="chip">Подарки</span>
+      <span class="chip">Стикеры</span>
+      <span class="chip">Коллекции</span>
+      <span class="chip">Каналы</span>
     </div>
   </div>
 
-  <div class="search-row">
+  <!-- ===== ПОИСК NFT ===== -->
+  <div class="search">
     <span class="icon">🔍</span>
     <input placeholder="Поиск по названию NFT / номеру">
     <span class="icon">Feed</span>
   </div>
-  <div class="filter-row">
-    <span>NFT ▼</span><span>Модель ▼</span><span>Фон ▼</span><span>Символ ▼</span>
-    <span>На продаже (0)</span><span>Хранилище (0)</span>
+
+  <div class="filters">
+    <span>NFT ▼</span>
+    <span>Модель ▼</span>
+    <span>Фон ▼</span>
+    <span>Символ ▼</span>
+    <span>На продаже (0)</span>
+    <span>Хранилище (0)</span>
   </div>
-  <div style="background:#16161c; border-radius:20px; padding:30px 20px; text-align:center; color:#666; border:1px solid #2a2a2e; margin:12px 0;">
+
+  <div style="background:#141418; border-radius:18px; padding:28px 16px; text-align:center; color:#555; border:1px solid #222226; margin:10px 0;">
     Нет подарков на продаже
   </div>
 
-  <!-- PRECIOUS PEACH (фото 1) -->
-  <div class="precious-card">
-    <div class="between"><span style="font-weight:600;">Закрыть</span><span style="color:#bbb;">Precious Peach #2156</span></div>
-    <div class="row">
-      <span><span style="color:#888;">Модель</span> <b>Sunset 1.5%</b></span>
-      <span><span style="color:#888;">Фон</span> <b>Roman Silver 2%</b></span>
-      <span><span style="color:#888;">Символ</span> <b>Passion Latte</b></span>
+  <!-- ===== PRECIOUS PEACH ===== -->
+  <div class="peach">
+    <div class="top">
+      <span class="title">Закрыть</span>
+      <span class="num">Precious Peach #2156</span>
     </div>
-    <div style="background:#121214; border-radius:16px; padding:12px; display:flex; justify-content:space-between; flex-wrap:wrap;">
-      <span><span style="color:#888;">Precious Peach</span> Флор: ♥ 250.99</span>
-      <span><span style="color:#888;">Sunset</span> Флор: ♥ 285.6</span>
+    <div class="attrs">
+      <span>Модель <b>Sunset 1.5%</b></span>
+      <span>Фон <b>Roman Silver 2%</b></span>
+      <span>Символ <b>Passion Latte</b></span>
     </div>
-    <div class="offer-block">
-      <span class="offer-price"><span class="heart">♥</span> 566.1</span>
-      <span class="btn-primary" style="padding: 8px 28px;">Добавить</span>
+    <div class="flor">
+      <span>Precious Peach Флор: ♥ 250.99</span>
+      <span>Sunset Флор: ♥ 285.6</span>
     </div>
-  </div>
-
-  <!-- БЛОК SNOOP CIGAR + MINTED (фото 6 нижняя часть) -->
-  <div style="background:#17171b; border-radius:20px; padding:16px; border:1px solid #2a2a2e; margin-top:20px;">
-    <div class="chip-group">
-      <span class="chip-dark">Snoop Cigar 16:47</span>
-      <span class="chip-dark">10.61 3 акры</span>
-    </div>
-    <div class="chip-group">
-      <span class="chip-dark">Jester Hat 117 2.89</span>
-      <span class="minted-chip">Minted</span>
-    </div>
-    <div class="chip-group">
-      <span class="chip-dark">Easter Egg #45412 20.63</span>
-      <span class="chip-dark">Spring Basket #32254 9.2</span>
-      <span class="minted-chip">Minted</span>
-    </div>
-    <div class="chip-group">
-      <span class="chip-dark">Precious Peach #2156 566.1</span>
-      <span class="chip-dark">Pretty Posy #27312 19.91</span>
-      <span class="minted-chip">Minted</span>
-    </div>
-    <div class="chip-group">
-      <span class="chip-dark">Sweep</span>
-      <span class="chip-dark">Свежие Дни</span>
-      <span class="chip-dark">Тем Сделать</span>
+    <div class="offer">
+      <span class="price"><span class="heart">♥</span> 566.1</span>
+      <span class="add">Добавить</span>
     </div>
   </div>
 
-  <!-- БЛОК MINTED GRID (фото 7) -->
-  <div style="background:#17171b; border-radius:20px; padding:16px; border:1px solid #2a2a2e; margin-top:20px;">
-    <div class="between">
-      <span>Закрыть</span>
-      <span class="minted-chip">Minted</span>
+  <!-- ===== SNOOP CIGAR БЛОК ===== -->
+  <div style="background:#141418; border-radius:18px; padding:14px; border:1px solid #222226; margin-top:16px;">
+    <div class="chip-group">
+      <span class="chip">Snoop Cigar 16:47</span>
+      <span class="chip">10.61 3 акры</span>
     </div>
-    <div class="grid-2" style="margin-top:12px;">
-      <div class="nft-card"><div class="title">Spring Basket #97299</div><div class="sub">25.52</div></div>
-      <div class="nft-card"><div class="title">Mousse Cake #79997</div><div class="sub">3.99</div></div>
-      <div class="nft-card"><div class="title">Mood Pack #38888</div><div class="sub">9.8</div></div>
-      <div class="nft-card"><div class="title">Joyful Bundle #15477</div><div class="sub">6.11</div></div>
-      <div class="nft-card"><div class="title">Easter Egg #142849</div><div class="sub">20.63</div></div>
-      <div class="nft-card"><div class="title">Surge Board #7923</div><div class="sub">9.18</div></div>
+    <div class="chip-group">
+      <span class="chip">Jester Hat 117 2.89</span>
+      <span class="minted">Minted</span>
     </div>
-    <div class="chip-group" style="margin-top:12px;">
-      <span class="chip-dark">Sweep</span>
+    <div class="chip-group">
+      <span class="chip">Easter Egg #45412 20.63</span>
+      <span class="chip">Spring Basket #32254 9.2</span>
+      <span class="minted">Minted</span>
+    </div>
+    <div class="chip-group">
+      <span class="chip">Precious Peach #2156 566.1</span>
+      <span class="chip">Pretty Posy #27312 19.91</span>
+      <span class="minted">Minted</span>
+    </div>
+    <div class="chip-group">
+      <span class="chip">Sweep</span>
+      <span class="chip">Свежие Дни</span>
+      <span class="chip">Тем Сделать</span>
     </div>
   </div>
 
-  <!-- БАННЕР WEB Лидерборд (фото 2 низ) -->
-  <div class="banner" style="margin-top:20px; background:#1a1a26;">
-    <div><span class="big">Закрыто: 1,512</span><br><span class="small">WEB Лидерборд и задания</span></div>
-    <div><span class="btn-primary" style="padding: 6px 20px; font-size:14px;">$50,000 призовой фонд</span></div>
+  <!-- ===== MINTED GRID ===== -->
+  <div style="background:#141418; border-radius:18px; padding:14px; border:1px solid #222226; margin-top:16px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <span style="color:#eee; font-size:14px; font-weight:500;">Закрыть</span>
+      <span class="minted">Minted</span>
+    </div>
+    <div class="grid">
+      <div class="nft-card"><div class="name">Spring Basket #97299</div><div class="price">25.52</div></div>
+      <div class="nft-card"><div class="name">Mousse Cake #79997</div><div class="price">3.99</div></div>
+      <div class="nft-card"><div class="name">Mood Pack #38888</div><div class="price">9.8</div></div>
+      <div class="nft-card"><div class="name">Joyful Bundle #15477</div><div class="price">6.11</div></div>
+      <div class="nft-card"><div class="name">Easter Egg #142849</div><div class="price">20.63</div></div>
+      <div class="nft-card"><div class="name">Surge Board #7923</div><div class="price">9.18</div></div>
+    </div>
+    <div class="chip-group" style="margin-top:8px;">
+      <span class="chip">Sweep</span>
+    </div>
   </div>
+
+  <!-- ===== WEB ЛИДЕРБОРД ===== -->
+  <div class="banner" style="background:#181824;">
+    <div>
+      <span class="big">Закрыто: 1,512</span><br>
+      <span class="small">WEB Лидерборд и задания</span>
+    </div>
+    <div><span class="btn">$50,000 призовой фонд</span></div>
+  </div>
+
   <div class="chip-group">
-    <span class="chip-dark">Подарки</span>
-    <span class="chip-dark">Звезды и Прем</span>
-    <span class="chip-dark">Коллекции</span>
+    <span class="chip">Подарки</span>
+    <span class="chip">Звезды и Прем</span>
+    <span class="chip">Коллекции</span>
   </div>
-  <div class="search-row">
+
+  <div class="search">
     <span class="icon">🔍</span>
     <input placeholder="Поиск по названию NFT / номеру">
     <span class="icon">Feed</span>
   </div>
-  <div class="filter-row">
-    <span>NFT ▼</span><span>Модель ▼</span><span>Фон ▼</span><span>Символ ▼</span>
-  </div>
-  <div class="grid-2" style="margin-top:12px;">
-    <div class="nft-card"><div class="title">Liberty Figure #234020</div><div class="sub">4.9</div></div>
-    <div class="nft-card"><div class="title">Jack-in-the-Box #38228</div><div class="sub">3.39 <span class="minted-chip" style="font-size:10px; margin-left:4px;">Minted</span></div></div>
-    <div class="nft-card"><div class="title">Spy Agaric #9576</div><div class="sub">61.22</div></div>
+
+  <div class="filters">
+    <span>NFT ▼</span>
+    <span>Модель ▼</span>
+    <span>Фон ▼</span>
+    <span>Символ ▼</span>
   </div>
 
-  <!-- BOTTOM NAV -->
+  <div class="grid" style="margin-top:8px;">
+    <div class="nft-card">
+      <div class="name">Liberty Figure #234020</div>
+      <div class="price">4.9</div>
+    </div>
+    <div class="nft-card">
+      <div class="name">Jack-in-the-Box #38228</div>
+      <div class="price">3.39 <span class="minted" style="font-size:10px; margin-left:4px;">Minted</span></div>
+    </div>
+    <div class="nft-card">
+      <div class="name">Spy Agaric #9576</div>
+      <div class="price">61.22</div>
+    </div>
+  </div>
+
+  <!-- ===== НИЖНЯЯ НАВИГАЦИЯ ===== -->
   <div class="bottom-nav">
     <div class="nav-item active"><span>🏠</span>Маркет</div>
     <div class="nav-item"><span>📋</span>Ордеры</div>
