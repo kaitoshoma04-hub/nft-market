@@ -74,7 +74,6 @@
         }
         .icon-btn:active {
             transform: scale(0.92);
-            background: rgba(255, 255, 255, 0.08);
         }
         .icon-btn svg {
             width: 20px;
@@ -93,6 +92,9 @@
             flex-shrink: 0;
             background: #2a2a2a;
             transition: 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .avatar-btn:active {
             transform: scale(0.92);
@@ -101,13 +103,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         .avatar-btn .placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 18px;
             color: #fff;
             font-weight: 600;
@@ -122,9 +120,7 @@
             scrollbar-width: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-        .gift-tabs::-webkit-scrollbar {
-            display: none;
-        }
+        .gift-tabs::-webkit-scrollbar { display: none; }
         .gift-tab {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -139,9 +135,7 @@
             transition: 0.15s;
             letter-spacing: 0.2px;
         }
-        .gift-tab:active {
-            transform: scale(0.94);
-        }
+        .gift-tab:active { transform: scale(0.94); }
         .gift-tab.active {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.12);
@@ -190,8 +184,22 @@
             color: #6e6e80;
             font-weight: 400;
         }
+        .chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #8e8ea0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.15s;
+            flex-shrink: 0;
+        }
+        .chip:active { transform: scale(0.94); }
 
-        /* FILTER ROW — как на фото: NFT, Модель, Фон, Символ лентой, без галочек */
+        /* FILTER ROW — как на фото: NFT, Модель, Фон, Символ лентой, с галочками */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -201,9 +209,7 @@
             scrollbar-width: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-        .filter-row::-webkit-scrollbar {
-            display: none;
-        }
+        .filter-row::-webkit-scrollbar { display: none; }
         .filter-row .filter-chip {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -218,9 +224,7 @@
             flex-shrink: 0;
             white-space: nowrap;
         }
-        .filter-row .filter-chip:active {
-            transform: scale(0.94);
-        }
+        .filter-row .filter-chip:active { transform: scale(0.94); }
         .filter-row .filter-chip.active-filter {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.12);
@@ -266,9 +270,7 @@
             cursor: pointer;
             transition: 0.15s;
         }
-        .nft-card:active {
-            transform: scale(0.96);
-        }
+        .nft-card:active { transform: scale(0.96); }
         .nft-card-inner {
             padding: 10px;
             display: flex;
@@ -286,10 +288,7 @@
             align-items: center;
             justify-content: center;
         }
-        .lottie-wrapper .lottie-container {
-            width: 100%;
-            height: 100%;
-        }
+        .lottie-wrapper .lottie-container { width: 100%; height: 100%; }
         .nft-name {
             font-size: 12px;
             font-weight: 700;
@@ -298,11 +297,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .nft-model {
-            font-size: 9px;
-            color: #6e6e80;
-            font-weight: 500;
-        }
+        .nft-model { font-size: 9px; color: #6e6e80; font-weight: 500; }
         .nft-price {
             display: flex;
             align-items: center;
@@ -319,11 +314,7 @@
             overflow: hidden;
             flex-shrink: 0;
         }
-        .gram-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .gram-icon img { width: 100%; height: 100%; object-fit: cover; }
         .status-badge {
             font-size: 8px;
             font-weight: 600;
@@ -332,27 +323,15 @@
             display: inline-block;
             align-self: flex-start;
         }
-        .status-badge.sale {
-            color: #4bc88a;
-            background: rgba(75, 200, 138, 0.10);
-        }
-        .status-badge.sold {
-            color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.10);
-        }
-        .status-badge.auction {
-            color: #ffd966;
-            background: rgba(255, 215, 0, 0.10);
-        }
+        .status-badge.sale { color: #4bc88a; background: rgba(75,200,138,0.10); }
+        .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.10); }
+        .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.10); }
 
         /* DETAIL */
         .detail-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.92);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.92);
             backdrop-filter: blur(20px);
             z-index: 300;
             display: none;
@@ -360,27 +339,23 @@
             align-items: center;
             padding: 16px;
         }
-        .detail-overlay.open {
-            display: flex;
-        }
+        .detail-overlay.open { display: flex; }
         .detail-content {
             background: #222222;
             border-radius: 20px;
             max-width: 380px;
             width: 100%;
             padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             position: relative;
         }
         .detail-close {
             position: absolute;
-            top: 8px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.04);
+            top: 8px; right: 10px;
+            background: rgba(255,255,255,0.04);
             border: none;
             color: #8e8ea0;
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 50%;
             font-size: 16px;
             cursor: pointer;
@@ -388,27 +363,17 @@
             align-items: center;
             justify-content: center;
         }
-        .detail-close:active {
-            transform: scale(0.92);
-        }
+        .detail-close:active { transform: scale(0.92); }
         .detail-lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 14px;
             overflow: hidden;
             background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
         }
-        .detail-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-        .detail-number {
-            font-size: 12px;
-            color: #f5c842;
-            font-weight: 600;
-        }
+        .detail-title { font-size: 16px; font-weight: 700; margin-top: 8px; }
+        .detail-number { font-size: 12px; color: #f5c842; font-weight: 600; }
         .detail-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -419,12 +384,10 @@
         .detail-stats .stat {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
             padding: 3px 0;
         }
-        .detail-stats .stat .label {
-            color: #6e6e80;
-        }
+        .detail-stats .stat .label { color: #6e6e80; }
         .detail-stats .stat .value {
             color: #fff;
             font-weight: 500;
@@ -440,9 +403,9 @@
             font-size: 14px;
             font-weight: 700;
             padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255,255,255,0.02);
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             margin: 4px 0;
         }
         .detail-buy-btn {
@@ -459,66 +422,44 @@
             transition: 0.15s;
             margin-top: 6px;
         }
-        .detail-buy-btn:active {
-            transform: scale(0.96);
-        }
-        .detail-buy-btn.sold {
-            background: rgba(255, 255, 255, 0.04);
-            color: #6e6e80;
-        }
+        .detail-buy-btn:active { transform: scale(0.96); }
+        .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
         /* ORDERS */
         .orders-section {
             padding: 10px 14px 16px 14px;
             display: none;
         }
-        .orders-section.active {
-            display: block;
-        }
+        .orders-section.active { display: block; }
         .orders-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
         }
-        .orders-header h2 {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        .orders-header h2 { font-size: 18px; font-weight: 700; }
         .order-item {
             background: #222222;
             border-radius: 14px;
             padding: 10px 14px;
             margin-bottom: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             display: flex;
             align-items: center;
             gap: 12px;
         }
         .order-item .order-lottie {
-            width: 48px;
-            height: 48px;
+            width: 48px; height: 48px;
             border-radius: 10px;
             overflow: hidden;
             background: #1a1a1a;
             flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
         }
-        .order-item .order-lottie .lottie-container {
-            width: 100%;
-            height: 100%;
-        }
-        .order-item .order-info {
-            flex: 1;
-        }
-        .order-item .order-name {
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .order-item .order-qty {
-            font-size: 10px;
-            color: #6e6e80;
-        }
+        .order-item .order-lottie .lottie-container { width: 100%; height: 100%; }
+        .order-item .order-info { flex: 1; }
+        .order-item .order-name { font-size: 13px; font-weight: 600; }
+        .order-item .order-qty { font-size: 10px; color: #6e6e80; }
         .order-item .order-price {
             font-size: 13px;
             font-weight: 700;
@@ -528,22 +469,14 @@
             gap: 4px;
         }
         .order-item .order-price .mini-gram {
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             overflow: hidden;
         }
-        .order-item .order-price .mini-gram img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .order-item .order-actions {
-            display: flex;
-            gap: 6px;
-        }
+        .order-item .order-price .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
+        .order-item .order-actions { display: flex; gap: 6px; }
         .order-item .order-actions button {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             border: none;
             padding: 5px 12px;
             border-radius: 18px;
@@ -554,28 +487,19 @@
             font-family: 'Inter', sans-serif;
             transition: 0.15s;
         }
-        .order-item .order-actions button:active {
-            transform: scale(0.94);
-        }
-        .order-item .order-actions .sell-btn {
-            color: #f5c842;
-            background: rgba(245, 200, 66, 0.08);
-        }
+        .order-item .order-actions button:active { transform: scale(0.94); }
+        .order-item .order-actions .sell-btn { color: #f5c842; background: rgba(245,200,66,0.08); }
         .create-order {
             margin-top: 18px;
             background: #222222;
             border-radius: 16px;
             padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
         }
-        .create-order h3 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
+        .create-order h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
         .create-order input {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 10px;
             padding: 10px 14px;
             color: #fff;
@@ -585,16 +509,9 @@
             width: 100%;
             margin-bottom: 6px;
         }
-        .create-order input::placeholder {
-            color: #6e6e80;
-        }
-        .create-order .row {
-            display: flex;
-            gap: 8px;
-        }
-        .create-order .row input {
-            flex: 1;
-        }
+        .create-order input::placeholder { color: #6e6e80; }
+        .create-order .row { display: flex; gap: 8px; }
+        .create-order .row input { flex: 1; }
         .create-order .row button {
             background: #f5c842;
             border: none;
@@ -607,39 +524,27 @@
             font-family: 'Inter', sans-serif;
             transition: 0.15s;
         }
-        .create-order .row button:active {
-            transform: scale(0.94);
-        }
+        .create-order .row button:active { transform: scale(0.94); }
 
-        /* GAME HUB — полноэкранный кейс */
+        /* GAME HUB */
         .game-hub {
             padding: 6px 8px 12px 8px;
             display: none;
         }
-        .game-hub.active {
-            display: block;
-        }
+        .game-hub.active { display: block; }
         .game-hub .hub-header {
             background: #222222;
             border-radius: 14px;
             padding: 10px 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             margin-bottom: 10px;
             text-align: center;
         }
-        .game-hub .hub-header h2 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #f5c842;
-        }
-        .game-hub .hub-header p {
-            font-size: 10px;
-            color: #8e8ea0;
-            margin-top: 1px;
-        }
+        .game-hub .hub-header h2 { font-size: 15px; font-weight: 700; color: #f5c842; }
+        .game-hub .hub-header p { font-size: 10px; color: #8e8ea0; margin-top: 1px; }
         .game-hub .reward-banner {
-            background: rgba(245, 200, 66, 0.06);
-            border: 1px solid rgba(245, 200, 66, 0.08);
+            background: rgba(245,200,66,0.06);
+            border: 1px solid rgba(245,200,66,0.08);
             border-radius: 10px;
             padding: 6px;
             text-align: center;
@@ -651,7 +556,7 @@
         .case-container {
             background: #222222;
             border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             padding: 12px 8px 14px 8px;
             overflow: hidden;
             position: relative;
@@ -666,49 +571,28 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
-        .case-track::-webkit-scrollbar {
-            display: none;
-        }
+        .case-track::-webkit-scrollbar { display: none; }
         .case-item {
             min-width: 130px;
             background: #1a1a1a;
             border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             padding: 10px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 90px;
-            height: 90px;
+            width: 90px; height: 90px;
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
             background: #1a1a1a;
         }
-        .case-item .case-lottie .lottie-container {
-            width: 100%;
-            height: 100%;
-        }
-        .case-item .case-name {
-            font-size: 9px;
-            color: #8e8ea0;
-            margin-top: 6px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .case-item .case-price {
-            font-size: 10px;
-            font-weight: 600;
-            color: #f5c842;
-        }
-        .case-item.highlight {
-            border-color: #f5c842;
-            box-shadow: 0 0 30px rgba(245, 200, 66, 0.15);
-            transform: scale(1.06);
-        }
+        .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
+        .case-item .case-name { font-size: 9px; color: #8e8ea0; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-item .case-price { font-size: 10px; font-weight: 600; color: #f5c842; }
+        .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 30px rgba(245,200,66,0.15); transform: scale(1.06); }
         .spin-btn {
             width: 100%;
             padding: 14px;
@@ -723,13 +607,8 @@
             margin-top: 12px;
             transition: 0.15s;
         }
-        .spin-btn:active {
-            transform: scale(0.96);
-        }
-        .spin-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
+        .spin-btn:active { transform: scale(0.96); }
+        .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
         /* BOTTOM NAV */
         .bottom-nav {
@@ -739,9 +618,9 @@
             right: 0;
             max-width: 430px;
             margin: 0 auto;
-            background: rgba(26, 26, 26, 0.95);
+            background: rgba(26,26,26,0.95);
             backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 1px solid rgba(255,255,255,0.04);
             display: flex;
             justify-content: space-around;
             padding: 6px 0 12px 0;
@@ -764,30 +643,22 @@
             transition: 0.15s;
             min-width: 60px;
         }
-        .bottom-nav .nav-item:active {
-            transform: scale(0.92);
-        }
+        .bottom-nav .nav-item:active { transform: scale(0.92); }
         .bottom-nav .nav-item .nav-icon {
-            width: 26px;
-            height: 26px;
+            width: 26px; height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .bottom-nav .nav-item .nav-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 22px; height: 22px;
             stroke: #6e6e80;
             fill: none;
             stroke-width: 1.8;
             transition: 0.15s;
         }
-        .bottom-nav .nav-item.active {
-            color: #f5c842;
-        }
-        .bottom-nav .nav-item.active .nav-icon svg {
-            stroke: #f5c842;
-        }
+        .bottom-nav .nav-item.active { color: #f5c842; }
+        .bottom-nav .nav-item.active .nav-icon svg { stroke: #f5c842; }
         .bottom-nav .nav-item.active::after {
             content: '';
             position: absolute;
@@ -816,14 +687,13 @@
             border: 1.5px solid #1a1a1a;
         }
 
-        /* TOAST */
         .toast {
             position: fixed;
             top: 74px;
             left: 50%;
             transform: translateX(-50%);
             background: #222222;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.06);
             padding: 8px 20px;
             border-radius: 14px;
             color: #fff;
@@ -836,18 +706,12 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        .toast.show {
-            opacity: 1;
-        }
+        .toast.show { opacity: 1; }
 
-        /* PROFILE MODAL */
         .profile-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
             backdrop-filter: blur(20px);
             z-index: 400;
             display: none;
@@ -855,16 +719,14 @@
             align-items: center;
             padding: 20px;
         }
-        .profile-modal.open {
-            display: flex;
-        }
+        .profile-modal.open { display: flex; }
         .profile-modal-content {
             background: #222222;
             border-radius: 20px;
             max-width: 340px;
             width: 100%;
             padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             text-align: center;
         }
         .profile-modal-close {
@@ -876,40 +738,22 @@
             cursor: pointer;
             padding: 4px;
         }
-        .profile-modal-close:active {
-            transform: scale(0.92);
-        }
+        .profile-modal-close:active { transform: scale(0.92); }
         .profile-avatar {
-            width: 64px;
-            height: 64px;
+            width: 64px; height: 64px;
             border-radius: 50%;
             margin: 4px auto 8px;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255,255,255,0.06);
             background: #2a2a2a;
-        }
-        .profile-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .profile-avatar .placeholder {
-            width: 100%;
-            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            color: #fff;
         }
-        .profile-name {
-            font-size: 17px;
-            font-weight: 700;
-        }
-        .profile-id {
-            font-size: 11px;
-            color: #6e6e80;
-        }
+        .profile-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .profile-avatar .placeholder { font-size: 28px; color: #fff; }
+        .profile-name { font-size: 17px; font-weight: 700; }
+        .profile-id { font-size: 11px; color: #6e6e80; }
         .profile-balance {
             display: flex;
             align-items: center;
@@ -918,27 +762,18 @@
             font-size: 15px;
             font-weight: 700;
             padding: 10px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255,255,255,0.02);
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             margin: 8px 0;
         }
         .profile-balance .mini-gram {
-            width: 18px;
-            height: 18px;
+            width: 18px; height: 18px;
             border-radius: 50%;
             overflow: hidden;
         }
-        .profile-balance .mini-gram img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .btn-row {
-            display: flex;
-            gap: 8px;
-            margin: 8px 0;
-        }
+        .profile-balance .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
+        .btn-row { display: flex; gap: 8px; margin: 8px 0; }
         .btn-row button {
             flex: 1;
             padding: 10px;
@@ -950,35 +785,21 @@
             cursor: pointer;
             transition: 0.15s;
         }
-        .btn-row button:active {
-            transform: scale(0.94);
-        }
-        .btn-primary {
-            background: #f5c842;
-            color: #1a1a1a;
-        }
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.04);
-            color: #8e8ea0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
+        .btn-row button:active { transform: scale(0.94); }
+        .btn-primary { background: #f5c842; color: #1a1a1a; }
+        .btn-secondary { background: rgba(255,255,255,0.04); color: #8e8ea0; border: 1px solid rgba(255,255,255,0.04); }
 
         .cart-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(20px);
             z-index: 200;
             display: none;
             justify-content: center;
             align-items: flex-end;
         }
-        .cart-modal.open {
-            display: flex;
-        }
+        .cart-modal.open { display: flex; }
         .cart-modal-content {
             background: #222222;
             border-radius: 20px 20px 0 0;
@@ -992,20 +813,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             padding-bottom: 10px;
             margin-bottom: 10px;
         }
-        .cart-modal-header h2 {
-            font-size: 17px;
-            font-weight: 700;
-        }
+        .cart-modal-header h2 { font-size: 17px; font-weight: 700; }
         .cart-close {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             border: none;
             color: #8e8ea0;
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 50%;
             font-size: 18px;
             cursor: pointer;
@@ -1013,38 +830,23 @@
             align-items: center;
             justify-content: center;
         }
-        .cart-close:active {
-            transform: scale(0.92);
-        }
+        .cart-close:active { transform: scale(0.92); }
         .cart-item {
             display: flex;
             align-items: center;
             gap: 10px;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
-        .cart-item .item-info {
-            flex: 1;
-        }
-        .cart-item .item-name {
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .cart-item .item-collection {
-            font-size: 9px;
-            color: #6e6e80;
-        }
-        .cart-item .item-price {
-            font-size: 11px;
-            color: #f5c842;
-            font-weight: 600;
-        }
+        .cart-item .item-info { flex: 1; }
+        .cart-item .item-name { font-size: 12px; font-weight: 600; }
+        .cart-item .item-collection { font-size: 9px; color: #6e6e80; }
+        .cart-item .item-price { font-size: 11px; color: #f5c842; font-weight: 600; }
         .cart-item .item-remove {
-            background: rgba(255, 107, 107, 0.08);
+            background: rgba(255,107,107,0.08);
             border: none;
             color: #ff6b6b;
-            width: 26px;
-            height: 26px;
+            width: 26px; height: 26px;
             border-radius: 50%;
             font-size: 13px;
             cursor: pointer;
@@ -1052,14 +854,12 @@
             align-items: center;
             justify-content: center;
         }
-        .cart-item .item-remove:active {
-            transform: scale(0.92);
-        }
+        .cart-item .item-remove:active { transform: scale(0.92); }
         .cart-total {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 1px solid rgba(255,255,255,0.04);
             margin-top: 6px;
             font-weight: 700;
             font-size: 14px;
@@ -1078,37 +878,24 @@
             margin-top: 6px;
             transition: 0.15s;
         }
-        .btn-checkout:active {
-            transform: scale(0.96);
-        }
-        .btn-checkout:disabled {
-            opacity: 0.3;
-        }
-        .empty-cart {
-            text-align: center;
-            padding: 20px;
-            color: #6e6e80;
-            font-size: 12px;
-        }
-        .hidden {
-            display: none !important;
-        }
+        .btn-checkout:active { transform: scale(0.96); }
+        .btn-checkout:disabled { opacity: 0.3; }
+        .empty-cart { text-align: center; padding: 20px; color: #6e6e80; font-size: 12px; }
+        .hidden { display: none !important; }
 
         .withdraw-section {
             display: none;
             margin-top: 8px;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255,255,255,0.02);
             border-radius: 12px;
         }
-        .withdraw-section.open {
-            display: block;
-        }
+        .withdraw-section.open { display: block; }
         .withdraw-section input {
             width: 100%;
             padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 8px;
             color: #fff;
             font-size: 11px;
@@ -1116,9 +903,7 @@
             outline: none;
             margin-bottom: 6px;
         }
-        .withdraw-section input::placeholder {
-            color: #6e6e80;
-        }
+        .withdraw-section input::placeholder { color: #6e6e80; }
         .withdraw-section .withdraw-submit {
             width: 100%;
             padding: 8px;
@@ -1131,30 +916,14 @@
             cursor: pointer;
             transition: 0.15s;
         }
-        .withdraw-section .withdraw-submit:active {
-            transform: scale(0.94);
-        }
-        .withdraw-section .error {
-            font-size: 10px;
-            color: #ff6b6b;
-            display: none;
-            margin-top: 4px;
-        }
-        .withdraw-section .success {
-            font-size: 10px;
-            color: #4bc88a;
-            display: none;
-            margin-top: 4px;
-        }
+        .withdraw-section .withdraw-submit:active { transform: scale(0.94); }
+        .withdraw-section .error { font-size: 10px; color: #ff6b6b; display: none; margin-top: 4px; }
+        .withdraw-section .success { font-size: 10px; color: #4bc88a; display: none; margin-top: 4px; }
 
-        /* FILTER OVERLAY — как на фото */
         .filter-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
             backdrop-filter: blur(20px);
             z-index: 500;
             display: none;
@@ -1163,38 +932,22 @@
             animation: fadeIn 0.25s ease;
             overflow-y: auto;
         }
-        .filter-overlay.open {
-            display: flex;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+        .filter-overlay.open { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
         .filter-overlay .filter-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 8px 0 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             margin-bottom: 20px;
         }
-        .filter-overlay .filter-header h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-        }
+        .filter-overlay .filter-header h2 { font-size: 20px; font-weight: 700; color: #fff; }
         .filter-overlay .filter-close {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             border: none;
             color: #8e8ea0;
-            width: 36px;
-            height: 36px;
+            width: 36px; height: 36px;
             border-radius: 50%;
             font-size: 18px;
             cursor: pointer;
@@ -1202,15 +955,13 @@
             align-items: center;
             justify-content: center;
         }
-        .filter-overlay .filter-close:active {
-            transform: scale(0.92);
-        }
+        .filter-overlay .filter-close:active { transform: scale(0.92); }
         .filter-overlay .filter-option {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 12px 14px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255,255,255,0.02);
             border-radius: 12px;
             border: 1px solid transparent;
             margin-bottom: 4px;
@@ -1220,15 +971,12 @@
             font-weight: 500;
             color: #ffffff;
         }
-        .filter-overlay .filter-option:active {
-            transform: scale(0.97);
-        }
+        .filter-overlay .filter-option:active { transform: scale(0.97); }
         .filter-overlay .filter-option .check {
             margin-left: auto;
-            width: 22px;
-            height: 22px;
+            width: 22px; height: 22px;
             border-radius: 50%;
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1242,18 +990,12 @@
             border-color: #f5c842;
             color: #1a1a1a;
         }
-        .filter-overlay .filter-option .count {
-            color: #6e6e80;
-            font-size: 12px;
-            font-weight: 400;
-            margin-left: 4px;
-        }
         .filter-overlay .filter-actions {
             display: flex;
             gap: 10px;
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
         .filter-overlay .filter-actions button {
             flex: 1;
@@ -1266,35 +1008,15 @@
             cursor: pointer;
             transition: 0.15s;
         }
-        .filter-overlay .filter-actions button:active {
-            transform: scale(0.96);
-        }
-        .filter-overlay .filter-actions .apply-filter {
-            background: #f5c842;
-            color: #1a1a1a;
-        }
-        .filter-overlay .filter-actions .reset-filter {
-            background: rgba(255, 255, 255, 0.04);
-            color: #8e8ea0;
-        }
+        .filter-overlay .filter-actions button:active { transform: scale(0.96); }
+        .filter-overlay .filter-actions .apply-filter { background: #f5c842; color: #1a1a1a; }
+        .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item {
-                min-width: 110px;
-            }
-            .case-item .case-lottie {
-                width: 72px;
-                height: 72px;
-            }
-            .bottom-nav .nav-item {
-                padding: 4px 8px;
-                min-width: 50px;
-                font-size: 8px;
-            }
-            .gift-tab {
-                font-size: 11px;
-                padding: 6px 14px;
-            }
+            .case-item { min-width: 110px; }
+            .case-item .case-lottie { width: 72px; height: 72px; }
+            .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
+            .gift-tab { font-size: 11px; padding: 6px 14px; }
         }
     </style>
 </head>
@@ -1310,36 +1032,37 @@
                     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                 </button>
                 <div class="avatar-btn" id="profileBtn">
-                    <div class="placeholder" id="avatarPlaceholder">👤</div>
+                    <span class="placeholder" id="avatarPlaceholder">👤</span>
                     <img id="avatarImg" style="display:none;" alt="avatar">
                 </div>
             </div>
         </div>
 
-        <!-- TABS — Подарки, Звезды и Прем, Коллекции -->
+        <!-- TABS -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- SEARCH — как на фото -->
+        <!-- SEARCH -->
         <div class="search-row" id="mainSearchRow">
             <div class="search-box">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
             </div>
+            <span class="chip" id="feedChip">Feed</span>
         </div>
 
-        <!-- FILTER ROW — NFT, Модель, Фон, Символ лентой, без галочек -->
+        <!-- FILTER ROW — как на фото -->
         <div class="filter-row" id="mainFilterRow">
-            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
-            <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
-            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон</span>
-            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ</span>
+            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT ✔</span>
+            <span class="filter-chip" data-filter="model" id="filterModel">Модель ✔</span>
+            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">ФОН ✔</span>
+            <span class="filter-chip" data-filter="symbol" id="filterSymbol">СИМВОЛ ✔</span>
         </div>
 
-        <!-- STATUS — как на фото -->
+        <!-- STATUS -->
         <div class="status-row" id="mainStatusRow">
             <span class="chip active-status">На продаже (0)</span>
             <span class="chip">Хранилище (0)</span>
@@ -1365,14 +1088,13 @@
             </div>
         </div>
 
-        <!-- GAME HUB — полноэкранный кейс -->
+        <!-- GAME HUB -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
                 <p>Гонка за 100K GRAM началась!</p>
             </div>
             <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
-
             <div class="case-container">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:0 4px;">
                     <span style="font-size:13px;font-weight:700;">Кейс с NFT</span>
@@ -1419,7 +1141,7 @@
             <div class="profile-modal-content">
                 <button class="profile-modal-close" id="profileModalClose">✕</button>
                 <div class="profile-avatar" id="profileAvatar">
-                    <div class="placeholder" id="profilePlaceholder">👤</div>
+                    <span class="placeholder" id="profilePlaceholder">👤</span>
                     <img id="profileImg" style="display:none;" alt="avatar">
                 </div>
                 <div class="profile-name" id="profileName">Пользователь</div>
@@ -1478,121 +1200,82 @@
         // 1. DATA
         // ============================================================
         const COLLECTIONS_DATA = {
-            "Plush Pepe": { icon: "🐸" },
-            "Nail Bracelet": { icon: "📿" },
-            "Hex Pot": { icon: "🔮" },
-            "Astral Shard": { icon: "💎" },
-            "Bonded Ring": { icon: "💍" },
-            "Durov's Cap": { icon: "🎩" },
-            "Diamond Ring": { icon: "💎" },
-            "Evil Eye": { icon: "👁️" },
-            "Eternal Rose": { icon: "🌹" },
-            "Ion Gem": { icon: "⚡" },
-            "Kissed Frog": { icon: "🐸" },
-            "Scared Cat": { icon: "🐱" },
-            "Vintage Cigar": { icon: "🚬" },
-            "Precious Peach": { icon: "🍑" },
-            "Snoop Cigar": { icon: "🚬" },
-            "Jester Hat": { icon: "🎭" },
-            "Easter Egg": { icon: "🥚" },
-            "Spring Basket": { icon: "🧺" },
-            "Pretty Posy": { icon: "🌸" },
-            "Mousse Cake": { icon: "🍰" },
-            "Mood Pack": { icon: "🎒" },
-            "Joyful Bundle": { icon: "🎁" },
-            "Surge Board": { icon: "🏄" },
-            "Liberty Figure": { icon: "🗽" },
-            "Jack-in-the-Box": { icon: "🎭" },
-            "Spy Agaric": { icon: "🍄" },
-            "B-Day Candle": { icon: "🕯️" },
-            "Berry Box": { icon: "🍓" },
-            "Big Year": { icon: "📅" },
-            "Bow Tie": { icon: "🎀" },
-            "Bunny Muffin": { icon: "🧁" },
-            "Candy Cane": { icon: "🍭" }
+            "Plush Pepe": { icon: "🐸" }, "Nail Bracelet": { icon: "📿" }, "Hex Pot": { icon: "🔮" },
+            "Astral Shard": { icon: "💎" }, "Bonded Ring": { icon: "💍" }, "Durov's Cap": { icon: "🎩" },
+            "Diamond Ring": { icon: "💎" }, "Evil Eye": { icon: "👁️" }, "Eternal Rose": { icon: "🌹" },
+            "Ion Gem": { icon: "⚡" }, "Kissed Frog": { icon: "🐸" }, "Scared Cat": { icon: "🐱" },
+            "Vintage Cigar": { icon: "🚬" }, "Precious Peach": { icon: "🍑" }, "Snoop Cigar": { icon: "🚬" },
+            "Jester Hat": { icon: "🎭" }, "Easter Egg": { icon: "🥚" }, "Spring Basket": { icon: "🧺" },
+            "Pretty Posy": { icon: "🌸" }, "Mousse Cake": { icon: "🍰" }, "Mood Pack": { icon: "🎒" },
+            "Joyful Bundle": { icon: "🎁" }, "Surge Board": { icon: "🏄" }, "Liberty Figure": { icon: "🗽" },
+            "Jack-in-the-Box": { icon: "🎭" }, "Spy Agaric": { icon: "🍄" }, "B-Day Candle": { icon: "🕯️" },
+            "Berry Box": { icon: "🍓" }, "Big Year": { icon: "📅" }, "Bow Tie": { icon: "🎀" },
+            "Bunny Muffin": { icon: "🧁" }, "Candy Cane": { icon: "🍭" }
         };
 
         const REAL_NUMBERS = {
-            "Plush Pepe": [2656, 100, 1412, 1382, 2658, 1179, 2055, 987, 1583, 858, 487, 123, 1010, 222, 333, 444, 555, 666],
-            "Nail Bracelet": [2655, 3517, 891, 1861, 2859, 160, 201, 302, 403, 504, 605, 706, 807, 908, 1009, 1110, 1211, 1312],
-            "Hex Pot": [10348, 10349, 10350, 10351, 10352, 10353, 10354, 10355, 10356, 10357, 10358, 10359, 10360, 10361,
-                10362
-            ],
-            "Astral Shard": [2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062],
-            "Bonded Ring": [1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138],
-            "Durov's Cap": [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437],
-            "Diamond Ring": [5512, 5513, 5514, 5515, 5516, 5517, 5518, 5519, 5520, 5521, 5522, 5523, 5524, 5525, 5526, 5527],
-            "Evil Eye": [2231, 2232, 2233, 2234, 2235, 2236, 2237, 2238, 2239, 2240, 2241, 2242, 2243, 2244, 2245, 2246],
-            "Eternal Rose": [7781, 7782, 7783, 7784, 7785, 7786, 7787, 7788, 7789, 7790, 7791, 7792, 7793, 7794, 7795, 7796],
-            "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394, 3395, 3396],
-            "Kissed Frog": [4562, 4563, 4564, 4565, 4566, 4567, 4568, 4569, 4570, 4571, 4572, 4573, 4574, 4575, 4576, 4577],
-            "Scared Cat": [6651, 6652, 6653, 6654, 6655, 6656, 6657, 6658, 6659, 6660, 6661, 6662, 6663, 6664, 6665, 6666],
-            "Vintage Cigar": [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015],
-            "Precious Peach": [2153, 11, 1080, 1508, 1780, 1348, 663, 7, 8, 9, 10, 12, 13, 14, 15, 16],
-            "Snoop Cigar": [5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010],
-            "Jester Hat": [6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010],
-            "Easter Egg": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010],
-            "Spring Basket": [8001, 8002, 8003, 8004, 8005, 8006, 8007, 8008, 8009, 8010],
-            "Pretty Posy": [9001, 9002, 9003, 9004, 9005, 9006, 9007, 9008, 9009, 9010],
-            "Mousse Cake": [10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010],
-            "Mood Pack": [11001, 11002, 11003, 11004, 11005, 11006, 11007, 11008, 11009, 11010],
-            "Joyful Bundle": [12001, 12002, 12003, 12004, 12005, 12006, 12007, 12008, 12009, 12010],
-            "Surge Board": [13001, 13002, 13003, 13004, 13005, 13006, 13007, 13008, 13009, 13010],
-            "Liberty Figure": [234020, 234021, 234022, 234023, 234024],
-            "Jack-in-the-Box": [38228, 38229, 38230, 38231, 38232],
-            "Spy Agaric": [9576, 9577, 9578, 9579, 9580],
-            "B-Day Candle": [14001, 14002, 14003, 14004, 14005],
-            "Berry Box": [15001, 15002, 15003, 15004, 15005],
-            "Big Year": [16001, 16002, 16003, 16004, 16005],
-            "Bow Tie": [17001, 17002, 17003, 17004, 17005],
-            "Bunny Muffin": [18001, 18002, 18003, 18004, 18005],
-            "Candy Cane": [19001, 19002, 19003, 19004, 19005]
+            "Plush Pepe": [2656,100,1412,1382,2658,1179,2055,987,1583,858,487,123,1010,222,333,444,555,666],
+            "Nail Bracelet": [2655,3517,891,1861,2859,160,201,302,403,504,605,706,807,908,1009,1110,1211,1312],
+            "Hex Pot": [10348,10349,10350,10351,10352,10353,10354,10355,10356,10357,10358,10359,10360,10361,10362],
+            "Astral Shard": [2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060,2061,2062],
+            "Bonded Ring": [1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138],
+            "Durov's Cap": [420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437],
+            "Diamond Ring": [5512,5513,5514,5515,5516,5517,5518,5519,5520,5521,5522,5523,5524,5525,5526,5527],
+            "Evil Eye": [2231,2232,2233,2234,2235,2236,2237,2238,2239,2240,2241,2242,2243,2244,2245,2246],
+            "Eternal Rose": [7781,7782,7783,7784,7785,7786,7787,7788,7789,7790,7791,7792,7793,7794,7795,7796],
+            "Ion Gem": [3381,3382,3383,3384,3385,3386,3387,3388,3389,3390,3391,3392,3393,3394,3395,3396],
+            "Kissed Frog": [4562,4563,4564,4565,4566,4567,4568,4569,4570,4571,4572,4573,4574,4575,4576,4577],
+            "Scared Cat": [6651,6652,6653,6654,6655,6656,6657,6658,6659,6660,6661,6662,6663,6664,6665,6666],
+            "Vintage Cigar": [4000,4001,4002,4003,4004,4005,4006,4007,4008,4009,4010,4011,4012,4013,4014,4015],
+            "Precious Peach": [2153,11,1080,1508,1780,1348,663,7,8,9,10,12,13,14,15,16],
+            "Snoop Cigar": [5001,5002,5003,5004,5005,5006,5007,5008,5009,5010],
+            "Jester Hat": [6001,6002,6003,6004,6005,6006,6007,6008,6009,6010],
+            "Easter Egg": [7001,7002,7003,7004,7005,7006,7007,7008,7009,7010],
+            "Spring Basket": [8001,8002,8003,8004,8005,8006,8007,8008,8009,8010],
+            "Pretty Posy": [9001,9002,9003,9004,9005,9006,9007,9008,9009,9010],
+            "Mousse Cake": [10001,10002,10003,10004,10005,10006,10007,10008,10009,10010],
+            "Mood Pack": [11001,11002,11003,11004,11005,11006,11007,11008,11009,11010],
+            "Joyful Bundle": [12001,12002,12003,12004,12005,12006,12007,12008,12009,12010],
+            "Surge Board": [13001,13002,13003,13004,13005,13006,13007,13008,13009,13010],
+            "Liberty Figure": [234020,234021,234022,234023,234024],
+            "Jack-in-the-Box": [38228,38229,38230,38231,38232],
+            "Spy Agaric": [9576,9577,9578,9579,9580],
+            "B-Day Candle": [14001,14002,14003,14004,14005],
+            "Berry Box": [15001,15002,15003,15004,15005],
+            "Big Year": [16001,16002,16003,16004,16005],
+            "Bow Tie": [17001,17002,17003,17004,17005],
+            "Bunny Muffin": [18001,18002,18003,18004,18005],
+            "Candy Cane": [19001,19002,19003,19004,19005]
         };
 
         function generateNFTs() {
             const result = [];
-            const models = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
-            const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
-            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
+            const models = ["Classic","Rare","Legendary","Golden","Shadow","Crystal","Neon","Aurora"];
+            const backdrops = ["Starlight","Midnight","Cosmic","Void","Crystal","Flame","Neon","Shadow"];
+            const symbols = ["Crescent","Pentagram","Baphomet","Tree","Sun","Moon","Star","Crown"];
 
             Object.keys(REAL_NUMBERS).forEach(col => {
                 const numbers = REAL_NUMBERS[col];
                 numbers.forEach((num, idx) => {
                     let price;
-                    if (col === "Plush Pepe") {
-                        price = 4700 + Math.random() * 7300;
-                        price = Math.round(price / 10) * 10;
-                    } else if (col === "Nail Bracelet") {
-                        price = 300 + Math.random() * 400;
-                    } else if (col === "Hex Pot") {
-                        price = 18 + Math.random() * 45;
-                    } else if (col === "Astral Shard") {
-                        price = 10 + Math.random() * 30;
-                    } else if (col === "Bonded Ring") {
-                        price = 60 + Math.random() * 150;
-                    } else if (col === "Durov's Cap") {
-                        price = 120 + Math.random() * 300;
-                    } else if (col === "Diamond Ring") {
-                        price = 90 + Math.random() * 200;
-                    } else if (col === "Evil Eye") {
-                        price = 5 + Math.random() * 20;
-                    } else if (col === "Eternal Rose") {
-                        price = 45 + Math.random() * 100;
-                    } else if (col === "Ion Gem") {
-                        price = 75 + Math.random() * 150;
-                    } else if (col === "Kissed Frog") {
-                        price = 12 + Math.random() * 40;
-                    } else if (col === "Scared Cat") {
-                        price = 25 + Math.random() * 60;
-                    } else if (col === "Vintage Cigar") {
-                        price = 45 + Math.random() * 100;
-                    } else {
-                        price = 10 + Math.random() * 100;
-                    }
+                    if (col === "Plush Pepe") { price = 4700 + Math.random() * 7300; price = Math.round(price/10)*10; }
+                    else if (col === "Nail Bracelet") { price = 300 + Math.random() * 400; }
+                    else if (col === "Hex Pot") { price = 18 + Math.random() * 45; }
+                    else if (col === "Astral Shard") { price = 10 + Math.random() * 30; }
+                    else if (col === "Bonded Ring") { price = 60 + Math.random() * 150; }
+                    else if (col === "Durov's Cap") { price = 120 + Math.random() * 300; }
+                    else if (col === "Diamond Ring") { price = 90 + Math.random() * 200; }
+                    else if (col === "Evil Eye") { price = 5 + Math.random() * 20; }
+                    else if (col === "Eternal Rose") { price = 45 + Math.random() * 100; }
+                    else if (col === "Ion Gem") { price = 75 + Math.random() * 150; }
+                    else if (col === "Kissed Frog") { price = 12 + Math.random() * 40; }
+                    else if (col === "Scared Cat") { price = 25 + Math.random() * 60; }
+                    else if (col === "Vintage Cigar") { price = 45 + Math.random() * 100; }
+                    else { price = 10 + Math.random() * 100; }
                     price = Math.round(price * 100) / 100;
-                    const statuses = ["for-sale", "for-sale", "for-sale", "on-auction", "sold"];
+                    const statuses = ["for-sale","for-sale","for-sale","on-auction","sold"];
                     const status = statuses[idx % statuses.length];
-                    const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
+                    const slug = col.toLowerCase().replace(/\s/g,'').replace(/[^a-z0-9]/gi,'');
                     result.push({
                         name: `${col} #${num}`,
                         collection: col,
@@ -1612,9 +1295,10 @@
         }
 
         // ============================================================
-        // 2. STATE
+        // 2. STATE — привязан к пользователю
         // ============================================================
-        let userBalance = 500.00;
+        let currentUserId = null;
+        let userBalance = 0;
         let userCart = [];
         let detailNft = null;
         const lottieCache = new Map();
@@ -1625,50 +1309,92 @@
         let isAutoScrolling = false;
 
         // ============================================================
-        // 3. CART
+        // 3. РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ (привязка по ID)
         // ============================================================
-        function loadCart() {
+        function getUserData(userId) {
+            const key = `allow_user_${userId}`;
             try {
-                const saved = localStorage.getItem('allow_cart_guest');
-                if (saved) userCart = JSON.parse(saved);
-                else userCart = [];
-            } catch (e) { userCart = []; }
-            updateCartUI();
+                const saved = localStorage.getItem(key);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    return data;
+                }
+            } catch(e) {}
+            return { balance: 0, cart: [] };
         }
 
-        function saveCart() {
-            try {
-                localStorage.setItem('allow_cart_guest', JSON.stringify(userCart));
-            } catch (e) {}
-            updateCartUI();
+        function saveUserData(userId, data) {
+            const key = `allow_user_${userId}`;
+            localStorage.setItem(key, JSON.stringify(data));
         }
 
-        function addToCart(name) {
-            if (userCart.includes(name)) userCart = userCart.filter(n => n !== name);
-            else userCart.push(name);
-            saveCart();
+        function getBalance(userId) {
+            const data = getUserData(userId);
+            return data.balance || 0;
+        }
+
+        function setBalance(userId, amount) {
+            const data = getUserData(userId);
+            data.balance = Math.max(0, parseFloat(amount) || 0);
+            saveUserData(userId, data);
+            return data.balance;
+        }
+
+        function getCart(userId) {
+            const data = getUserData(userId);
+            return data.cart || [];
+        }
+
+        function saveCart(userId, cart) {
+            const data = getUserData(userId);
+            data.cart = cart || [];
+            saveUserData(userId, data);
+        }
+
+        function addToCart(userId, name) {
+            let cart = getCart(userId);
+            if (cart.includes(name)) {
+                cart = cart.filter(n => n !== name);
+            } else {
+                cart.push(name);
+            }
+            saveCart(userId, cart);
+            userCart = cart;
+            updateCartUI();
             updateDetailButtons();
-            showToast(userCart.includes(name) ? 'Добавлено в корзину' : 'Удалено из корзины');
+            showToast(cart.includes(name) ? 'Добавлено в корзину' : 'Удалено из корзины');
         }
 
-        function removeFromCart(name) {
-            userCart = userCart.filter(n => n !== name);
-            saveCart();
+        function removeFromCart(userId, name) {
+            let cart = getCart(userId);
+            cart = cart.filter(n => n !== name);
+            saveCart(userId, cart);
+            userCart = cart;
             renderCartItems();
+            updateCartUI();
             updateDetailButtons();
         }
 
-        function isInCart(name) { return userCart.includes(name); }
+        function isInCart(userId, name) {
+            const cart = getCart(userId);
+            return cart.includes(name);
+        }
 
-        function getCartTotal() {
-            return userCart.reduce((sum, name) => {
+        function getCartTotal(userId) {
+            const cart = getCart(userId);
+            return cart.reduce((sum, name) => {
                 const n = allNFTs.find(item => item.name === name);
                 return sum + (n ? n.price : 0);
             }, 0);
         }
 
+        // ============================================================
+        // 4. UI ОБНОВЛЕНИЯ
+        // ============================================================
         function updateCartUI() {
-            document.getElementById('modalCartTotal').textContent = getCartTotal().toFixed(2);
+            if (!currentUserId) return;
+            const total = getCartTotal(currentUserId);
+            document.getElementById('modalCartTotal').textContent = total.toFixed(2);
             document.getElementById('navCartBadge').textContent = userCart.length;
             document.getElementById('checkoutBtn').disabled = userCart.length === 0;
             renderCartItems();
@@ -1676,7 +1402,7 @@
 
         function renderCartItems() {
             const container = document.getElementById('cartItems');
-            if (userCart.length === 0) {
+            if (!userCart || userCart.length === 0) {
                 container.innerHTML = `<div class="empty-cart">Корзина пуста</div>`;
                 return;
             }
@@ -1687,13 +1413,40 @@
                 html += `<div class="cart-item"><div style="font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
                     <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
                     <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
-                    <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button></div>`;
+                    <button class="item-remove" onclick="window.removeFromCart('${nft.name}')">✕</button></div>`;
             });
             container.innerHTML = html;
         }
 
+        function updateBalanceUI() {
+            if (!currentUserId) return;
+            userBalance = getBalance(currentUserId);
+            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+        }
+
+        function updateAvatar(user) {
+            const avatarImg = document.getElementById('avatarImg');
+            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+            const profileImg = document.getElementById('profileImg');
+            const profilePlaceholder = document.getElementById('profilePlaceholder');
+
+            if (user && user.photo_url) {
+                avatarImg.src = user.photo_url;
+                avatarImg.style.display = 'block';
+                avatarPlaceholder.style.display = 'none';
+                profileImg.src = user.photo_url;
+                profileImg.style.display = 'block';
+                profilePlaceholder.style.display = 'none';
+            } else {
+                avatarImg.style.display = 'none';
+                avatarPlaceholder.style.display = 'block';
+                profileImg.style.display = 'none';
+                profilePlaceholder.style.display = 'block';
+            }
+        }
+
         // ============================================================
-        // 4. LOTTIE
+        // 5. LOTTIE
         // ============================================================
         const lottieLoadQueue = [];
         let isProcessingQueue = false;
@@ -1704,19 +1457,10 @@
             if (lottieCache.has(url)) {
                 try {
                     const data = lottieCache.get(url);
-                    const anim = lottie.loadAnimation({
-                        container,
-                        animationData: data,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: autoplay
-                    });
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: autoplay });
                     if (!autoplay) anim.goToAndStop(0, true);
                     return;
-                } catch (e) {
-                    container.textContent = '🎁';
-                    return;
-                }
+                } catch(e) { container.textContent = '🎁'; return; }
             }
             lottieLoadQueue.push({ container, url, autoplay });
             processLottieQueue();
@@ -1728,36 +1472,25 @@
             const item = lottieLoadQueue.shift();
             const { container, url, autoplay } = item;
 
-            fetch(url)
-                .then(r => {
-                    if (!r.ok) throw new Error();
-                    return r.json();
-                })
-                .then(data => {
-                    lottieCache.set(url, data);
-                    container.innerHTML = '';
-                    try {
-                        const anim = lottie.loadAnimation({
-                            container,
-                            animationData: data,
-                            renderer: 'svg',
-                            loop: true,
-                            autoplay: autoplay
-                        });
-                        if (!autoplay) anim.goToAndStop(0, true);
-                    } catch (e) { container.textContent = '🎁'; }
-                })
-                .catch(() => { container.textContent = '🎁'; })
-                .finally(() => {
-                    isProcessingQueue = false;
-                    if (lottieLoadQueue.length > 0) {
-                        setTimeout(processLottieQueue, 30);
-                    }
-                });
+            fetch(url).then(r => {
+                if (!r.ok) throw new Error();
+                return r.json();
+            }).then(data => {
+                lottieCache.set(url, data);
+                container.innerHTML = '';
+                try {
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: autoplay });
+                    if (!autoplay) anim.goToAndStop(0, true);
+                } catch(e) { container.textContent = '🎁'; }
+            }).catch(() => { container.textContent = '🎁'; })
+            .finally(() => {
+                isProcessingQueue = false;
+                if (lottieLoadQueue.length > 0) setTimeout(processLottieQueue, 30);
+            });
         }
 
         // ============================================================
-        // 5. RENDER GRID
+        // 6. RENDER GRID
         // ============================================================
         function renderGrid(filter = '') {
             const grid = document.getElementById('nftGrid');
@@ -1774,8 +1507,7 @@
             }
 
             if (filteredNFTs.length === 0) {
-                grid.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
+                grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
                 return;
             }
 
@@ -1783,8 +1515,7 @@
             filteredNFTs.forEach(nft => {
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
                 const statusClass = nft.status === 'sold' ? 'sold' : nft.status === 'on-auction' ? 'auction' : 'sale';
-                const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' :
-                    'В продаже';
+                const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
                 html += `<div class="nft-card" onclick="openDetail('${nft.name}')">
                     <div class="nft-card-inner">
                         <div class="lottie-wrapper"><div class="lottie-container" id="${lottieId}"></div></div>
@@ -1804,7 +1535,7 @@
         }
 
         // ============================================================
-        // 6. DETAIL
+        // 7. DETAIL
         // ============================================================
         function openDetail(name) {
             const nft = allNFTs.find(item => item.name === name);
@@ -1817,8 +1548,7 @@
             document.getElementById('detailSymbol').textContent = nft.symbol || '—';
             document.getElementById('detailOwner').textContent = nft.owner || '—';
             document.getElementById('detailIssued').textContent = nft.issued || '—';
-            document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status ===
-                'on-auction' ? 'На аукционе' : 'В продаже';
+            document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
             document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(2)} GRAM`;
             const container = document.getElementById('detailLottie');
             container.innerHTML = '';
@@ -1833,31 +1563,28 @@
         }
 
         function updateDetailButtons() {
-            if (!detailNft) return;
+            if (!detailNft || !currentUserId) return;
             const btn = document.getElementById('detailBuyBtn');
             if (detailNft.status === 'sold') {
                 btn.textContent = 'Продано';
                 btn.className = 'detail-buy-btn sold';
                 btn.disabled = true;
-            } else if (isInCart(detailNft.name)) {
+            } else if (isInCart(currentUserId, detailNft.name)) {
                 btn.textContent = 'В корзине';
                 btn.className = 'detail-buy-btn';
-                btn.onclick = () => { addToCart(detailNft.name);
-                    updateDetailButtons(); };
+                btn.onclick = () => { addToCart(currentUserId, detailNft.name); updateDetailButtons(); };
             } else {
                 btn.textContent = 'Добавить';
                 btn.className = 'detail-buy-btn';
-                btn.onclick = () => { addToCart(detailNft.name);
-                    updateDetailButtons(); };
+                btn.onclick = () => { addToCart(currentUserId, detailNft.name); updateDetailButtons(); };
             }
         }
 
         document.getElementById('detailClose').addEventListener('click', closeDetail);
-        document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget)
-                closeDetail(); });
+        document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeDetail(); });
 
         // ============================================================
-        // 7. ORDERS
+        // 8. ORDERS
         // ============================================================
         const ORDERS_DATA = [
             { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
@@ -1874,7 +1601,7 @@
             let html = '';
             ORDERS_DATA.forEach(order => {
                 const col = order.collection || order.name;
-                const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
+                const slug = col.toLowerCase().replace(/\s/g,'').replace(/[^a-z0-9]/gi,'');
                 const num = Math.floor(Math.random() * 9000 + 1000);
                 const lottieId = `order-lottie-${order.name.replace(/\s/g,'')}`;
                 html += `<div class="order-item">
@@ -1897,7 +1624,7 @@
 
             ORDERS_DATA.forEach(order => {
                 const col = order.collection || order.name;
-                const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
+                const slug = col.toLowerCase().replace(/\s/g,'').replace(/[^a-z0-9]/gi,'');
                 const num = Math.floor(Math.random() * 9000 + 1000);
                 const url = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
                 const container = document.getElementById(`order-lottie-${order.name.replace(/\s/g,'')}`);
@@ -1917,7 +1644,7 @@
         });
 
         // ============================================================
-        // 8. GAME HUB — полноэкранный кейс
+        // 9. GAME HUB
         // ============================================================
         let caseItems = [];
 
@@ -1947,12 +1674,10 @@
             if (autoScrollInterval) clearInterval(autoScrollInterval);
             const track = document.getElementById('caseTrack');
             if (!track || caseItems.length === 0) return;
-
             isAutoScrolling = true;
             let scrollPos = 0;
             const step = 1.0;
             const maxScroll = track.scrollWidth - track.clientWidth;
-
             autoScrollInterval = setInterval(() => {
                 if (!isAutoScrolling) return;
                 scrollPos += step;
@@ -1971,6 +1696,7 @@
 
         document.getElementById('spinBtn').addEventListener('click', function() {
             if (isSpinning) return;
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
             if (userBalance < 200) { showToast('Недостаточно GRAM! Нужно 200'); return; }
 
             isSpinning = true;
@@ -1978,9 +1704,9 @@
             this.disabled = true;
             this.textContent = 'Крутим...';
 
-            userBalance -= 200;
-            localStorage.setItem('allow_balance_guest', String(userBalance));
-            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+            const newBalance = setBalance(currentUserId, userBalance - 200);
+            userBalance = newBalance;
+            updateBalanceUI();
 
             const track = document.getElementById('caseTrack');
             const items = track.querySelectorAll('.case-item');
@@ -2001,14 +1727,12 @@
                         items.forEach(el => el.classList.remove('highlight'));
                         if (items[randomIdx]) {
                             items[randomIdx].classList.add('highlight');
-                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent ||
-                            'NFT';
-                            document.getElementById('spinResult').textContent =
-                                `Вы выиграли: ${nftName}!`;
+                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent || 'NFT';
+                            document.getElementById('spinResult').textContent = `Вы выиграли: ${nftName}!`;
                             showToast(`Вы выиграли: ${nftName}`);
                             const nft = allNFTs.find(n => n.name === nftName);
-                            if (nft && !isInCart(nft.name)) {
-                                addToCart(nft.name);
+                            if (nft && currentUserId && !isInCart(currentUserId, nft.name)) {
+                                addToCart(currentUserId, nft.name);
                             }
                         }
                         isSpinning = false;
@@ -2026,7 +1750,7 @@
         });
 
         // ============================================================
-        // 9. NAVIGATION — скрываем поиск и фильтры в других разделах
+        // 10. NAVIGATION
         // ============================================================
         function switchTab(tab) {
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
@@ -2087,7 +1811,7 @@
         });
 
         // ============================================================
-        // 10. FILTER OVERLAY — по клику на любой фильтр
+        // 11. FILTER OVERLAY
         // ============================================================
         document.querySelectorAll('.filter-chip').forEach(chip => {
             chip.addEventListener('click', function() {
@@ -2106,11 +1830,7 @@
             opt.addEventListener('click', function() {
                 this.classList.toggle('active');
                 const check = this.querySelector('.check');
-                if (this.classList.contains('active')) {
-                    check.textContent = '✓';
-                } else {
-                    check.textContent = '';
-                }
+                check.textContent = this.classList.contains('active') ? '✓' : '';
             });
         });
 
@@ -2130,7 +1850,7 @@
         });
 
         // ============================================================
-        // 11. PROFILE, BELL, TOAST
+        // 12. PROFILE, BELL, TOAST
         // ============================================================
         const toast = document.getElementById('toast');
 
@@ -2143,35 +1863,14 @@
 
         document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
 
-        function updateAvatar(user) {
-            const avatarImg = document.getElementById('avatarImg');
-            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
-            const profileImg = document.getElementById('profileImg');
-            const profilePlaceholder = document.getElementById('profilePlaceholder');
-
-            if (user && user.photo_url) {
-                avatarImg.src = user.photo_url;
-                avatarImg.style.display = 'block';
-                avatarPlaceholder.style.display = 'none';
-                profileImg.src = user.photo_url;
-                profileImg.style.display = 'block';
-                profilePlaceholder.style.display = 'none';
-            } else {
-                avatarImg.style.display = 'none';
-                avatarPlaceholder.style.display = 'flex';
-                profileImg.style.display = 'none';
-                profilePlaceholder.style.display = 'flex';
-            }
-        }
-
-        document.getElementById('profileBtn').addEventListener('click', () => {
+        document.getElementById('profileBtn').addEventListener('click', function() {
             document.getElementById('profileModal').classList.add('open');
-            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+            updateBalanceUI();
         });
-        document.getElementById('profileModalClose').addEventListener('click', () => document.getElementById('profileModal')
-            .classList.remove('open'));
-        document.getElementById('profileModal').addEventListener('click', (e) => { if (e.target === e.currentTarget)
-                document.getElementById('profileModal').classList.remove('open'); });
+        document.getElementById('profileModalClose').addEventListener('click', () => document.getElementById('profileModal').classList.remove('open'));
+        document.getElementById('profileModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('profileModal').classList.remove('open');
+        });
 
         document.getElementById('addGiftBtn').addEventListener('click', () => {
             try {
@@ -2180,23 +1879,21 @@
                 } else {
                     window.open('https://t.me/AllowMarketGifts', '_blank');
                 }
-            } catch (e) {
-                window.open('https://t.me/AllowMarketGifts', '_blank');
-            }
+            } catch(e) { window.open('https://t.me/AllowMarketGifts', '_blank'); }
         });
 
         document.getElementById('withdrawToggleBtn').addEventListener('click', () => {
             document.getElementById('withdrawSection').classList.toggle('open');
         });
-        document.getElementById('withdrawSubmitBtn').addEventListener('click', () => {
+        document.getElementById('withdrawSubmitBtn').addEventListener('click', function() {
             const amount = parseFloat(document.getElementById('amountInput').value);
             if (!amount || amount > userBalance) {
                 document.getElementById('withdrawError').style.display = 'block';
                 return;
             }
-            userBalance -= amount;
-            localStorage.setItem('allow_balance_guest', String(userBalance));
-            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+            const newBalance = setBalance(currentUserId, userBalance - amount);
+            userBalance = newBalance;
+            updateBalanceUI();
             document.getElementById('withdrawSuccess').style.display = 'block';
             setTimeout(() => {
                 document.getElementById('withdrawSuccess').style.display = 'none';
@@ -2206,83 +1903,127 @@
         });
 
         // ============================================================
-        // 12. CART MODAL
+        // 13. CART MODAL
         // ============================================================
-        document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList
-            .remove('open'));
-        document.getElementById('cartModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) document
-                .getElementById('cartModal').classList.remove('open'); });
-        document.getElementById('checkoutBtn').addEventListener('click', () => {
+        document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList.remove('open'));
+        document.getElementById('cartModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('cartModal').classList.remove('open');
+        });
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
             if (userCart.length === 0) return;
-            const total = getCartTotal();
+            const total = getCartTotal(currentUserId);
             if (total > userBalance) { showToast('Недостаточно средств!'); return; }
-            userBalance = parseFloat((userBalance - total).toFixed(2));
-            localStorage.setItem('allow_balance_guest', String(userBalance));
+            const newBalance = setBalance(currentUserId, userBalance - total);
+            userBalance = newBalance;
+            updateBalanceUI();
             showToast(`Куплено ${userCart.length} NFT за ${total.toFixed(2)} GRAM`);
+            saveCart(currentUserId, []);
             userCart = [];
-            saveCart();
+            updateCartUI();
             document.getElementById('cartModal').classList.remove('open');
             closeDetail();
-            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
         });
 
         // ============================================================
-        // 13. SEARCH
+        // 14. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             renderGrid(this.value);
         });
 
         // ============================================================
-        // 14. INIT
+        // 15. FEED CHIP
+        // ============================================================
+        document.getElementById('feedChip').addEventListener('click', function() {
+            this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed';
+        });
+
+        // ============================================================
+        // 16. INIT — привязка к пользователю Telegram
         // ============================================================
         (function init() {
             try {
                 allNFTs = generateNFTs();
 
-                const saved = localStorage.getItem('allow_balance_guest');
-                if (saved) userBalance = parseFloat(saved);
-                else localStorage.setItem('allow_balance_guest', '500.00');
+                // Получаем пользователя Telegram
+                let tgUser = null;
+                try {
+                    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+                        tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+                    }
+                } catch(e) {}
 
-                loadCart();
+                if (tgUser && tgUser.id) {
+                    currentUserId = String(tgUser.id);
+                    document.getElementById('profileName').textContent = tgUser.first_name || 'Пользователь';
+                    document.getElementById('profileId').textContent = `ID: ${currentUserId}`;
+
+                    // Аватарка
+                    if (tgUser.photo_url) {
+                        updateAvatar(tgUser);
+                    } else {
+                        // пробуем получить через Telegram.WebApp
+                        try {
+                            if (window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url) {
+                                updateAvatar(window.Telegram.WebApp.initDataUnsafe.user);
+                            }
+                        } catch(e) {}
+                    }
+
+                    // Загружаем данные пользователя
+                    const userData = getUserData(currentUserId);
+                    userBalance = userData.balance || 0;
+                    userCart = userData.cart || [];
+                    updateBalanceUI();
+                    updateCartUI();
+                } else {
+                    // Гость — показываем плейсхолдер
+                    currentUserId = null;
+                    userBalance = 0;
+                    userCart = [];
+                    document.getElementById('profileName').textContent = 'Гость';
+                    document.getElementById('profileId').textContent = 'ID: —';
+                    updateBalanceUI();
+                    updateCartUI();
+                    showToast('Войдите в Telegram для полного доступа');
+                }
+
                 renderGrid('');
-                document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
                 document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
                 document.getElementById('ordersSection').classList.remove('active');
                 document.getElementById('gameHub').classList.remove('active');
                 document.getElementById('nftGrid').style.display = 'grid';
 
-                try {
-                    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-                        const user = window.Telegram.WebApp.initDataUnsafe.user;
-                        document.getElementById('profileName').textContent = user.first_name || 'Пользователь';
-                        document.getElementById('profileId').textContent = `ID: ${user.id}`;
-                        if (user.photo_url) {
-                            updateAvatar(user);
-                        }
-                    }
-                } catch (e) {}
-                updateAvatar(null);
+                // Если аватарка не загрузилась — показываем плейсхолдер
+                if (!document.getElementById('avatarImg').src) {
+                    updateAvatar(null);
+                }
 
                 window.addEventListener('error', function(e) {
                     console.warn('WebView error caught:', e.message);
                     return true;
                 });
 
-            } catch (e) {
+            } catch(e) {
                 console.warn('Init error:', e);
                 setTimeout(() => {
                     try {
                         allNFTs = generateNFTs();
                         renderGrid('');
-                    } catch (e2) {}
+                    } catch(e2) {}
                 }, 500);
             }
         })();
 
+        // Экспортируем для onclick
         window.openDetail = openDetail;
-        window.removeFromCart = removeFromCart;
-        window.addToCart = addToCart;
+        window.removeFromCart = function(name) {
+            if (currentUserId) removeFromCart(currentUserId, name);
+        };
+        window.addToCart = function(name) {
+            if (currentUserId) addToCart(currentUserId, name);
+        };
     </script>
 </body>
 </html>
