@@ -36,9 +36,10 @@
             position: relative;
             overflow-x: hidden;
         }
+        /* HEADER — без названия */
         .header {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 12px 16px 8px 16px;
             background: rgba(26,26,26,0.95);
@@ -47,12 +48,6 @@
             top: 0;
             z-index: 50;
             backdrop-filter: blur(8px);
-        }
-        .header-left h1 {
-            font-size: 22px;
-            font-weight: 800;
-            color: #f5c842;
-            letter-spacing: -0.5px;
         }
         .header-right {
             display: flex;
@@ -91,7 +86,7 @@
         .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .avatar-btn .placeholder { font-size: 18px; color: #fff; font-weight: 600; }
 
-        /* TABS — как на фото */
+        /* TABS */
         .gift-tabs {
             display: flex;
             gap: 12px;
@@ -122,7 +117,7 @@
             border-bottom-color: #f5c842;
         }
 
-        /* SEARCH — с лупой как на фото */
+        /* SEARCH */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
@@ -164,7 +159,7 @@
         }
         .search-box input::placeholder { color: #6e6e80; font-weight: 400; }
 
-        /* FILTER ROW — с символом ˅ как на фото */
+        /* FILTER ROW — без стрелок */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -199,14 +194,6 @@
             border-color: rgba(255,255,255,0.12);
             color: #ffffff;
         }
-        .filter-row .filter-chip .arrow-down {
-            font-size: 10px;
-            margin-left: 2px;
-            color: #6e6e80;
-        }
-        .filter-row .filter-chip.active-filter .arrow-down {
-            color: #ffffff;
-        }
         .filter-row .filter-chip.filter-toggle {
             padding: 8px 14px;
             background: rgba(255,255,255,0.04);
@@ -215,10 +202,6 @@
             display: flex;
             align-items: center;
             gap: 4px;
-        }
-        .filter-row .filter-chip.filter-toggle .arrow-down {
-            font-size: 12px;
-            color: #6e6e80;
         }
 
         .status-row {
@@ -257,6 +240,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: 0.15s;
+            position: relative;
         }
         .nft-card:active { transform: scale(0.96); }
         .nft-card-inner { padding: 10px; display: flex; flex-direction: column; gap: 4px; background: #222222; }
@@ -280,6 +264,28 @@
         .status-badge.sale { color: #4bc88a; background: rgba(75,200,138,0.10); }
         .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.10); }
         .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.10); }
+        /* Кнопка корзины на карточке */
+        .cart-add-btn {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: #f5c842;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.15s;
+            color: #1a1a1a;
+            font-size: 14px;
+            font-weight: 700;
+            z-index: 2;
+        }
+        .cart-add-btn:active { transform: scale(0.88); }
+        .cart-add-btn.in-cart { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
         .detail-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -334,42 +340,7 @@
         .detail-buy-btn:active { transform: scale(0.96); }
         .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        .orders-section { padding: 10px 14px 16px 14px; display: none; }
-        .orders-section.active { display: block; }
-        .orders-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .orders-header h2 { font-size: 18px; font-weight: 700; }
-        .order-item {
-            background: #222222;
-            border-radius: 14px;
-            padding: 10px 14px;
-            margin-bottom: 8px;
-            border: 1px solid rgba(255,255,255,0.04);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .order-item .order-lottie { width: 48px; height: 48px; border-radius: 10px; overflow: hidden; background: #1a1a1a; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.04); }
-        .order-item .order-lottie .lottie-container { width: 100%; height: 100%; }
-        .order-item .order-info { flex: 1; }
-        .order-item .order-name { font-size: 13px; font-weight: 600; }
-        .order-item .order-qty { font-size: 10px; color: #6e6e80; }
-        .order-item .order-price { font-size: 13px; font-weight: 700; color: #f5c842; display: flex; align-items: center; gap: 4px; }
-        .order-item .order-price .mini-gram { width: 16px; height: 16px; border-radius: 50%; overflow: hidden; }
-        .order-item .order-price .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
-        .order-item .order-actions { display: flex; gap: 6px; }
-        .order-item .order-actions button { background: rgba(255,255,255,0.04); border: none; padding: 5px 12px; border-radius: 18px; font-size: 10px; font-weight: 600; color: #8e8ea0; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
-        .order-item .order-actions button:active { transform: scale(0.94); }
-        .order-item .order-actions .sell-btn { color: #f5c842; background: rgba(245,200,66,0.08); }
-        .create-order { margin-top: 18px; background: #222222; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
-        .create-order h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-        .create-order input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px 14px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; outline: none; width: 100%; margin-bottom: 6px; }
-        .create-order input::placeholder { color: #6e6e80; }
-        .create-order .row { display: flex; gap: 8px; }
-        .create-order .row input { flex: 1; }
-        .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
-        .create-order .row button:active { transform: scale(0.94); }
-
-        /* GAME HUB — нормальный размер без ползунка */
+        /* GAME HUB — сжатый формат */
         .game-hub {
             padding: 0;
             display: none;
@@ -379,19 +350,19 @@
         .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            padding: 8px 14px 6px 14px;
+            padding: 6px 14px 4px 14px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
             flex-shrink: 0;
         }
-        .game-hub .hub-header h2 { font-size: 15px; font-weight: 700; color: #f5c842; }
-        .game-hub .hub-header p { font-size: 10px; color: #8e8ea0; margin-top: 1px; }
+        .game-hub .hub-header h2 { font-size: 13px; font-weight: 700; color: #f5c842; }
+        .game-hub .hub-header p { font-size: 9px; color: #8e8ea0; margin-top: 0px; }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
             border-bottom: 1px solid rgba(245,200,66,0.08);
-            padding: 5px;
+            padding: 4px;
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: #f5c842;
             flex-shrink: 0;
@@ -401,14 +372,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 6px 4px 4px 4px;
+            padding: 4px 4px 2px 4px;
             overflow: hidden;
             min-height: 0;
         }
         .case-track {
             display: flex;
-            gap: 12px;
-            padding: 4px 4px 8px 4px;
+            gap: 8px;
+            padding: 4px 4px 6px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -418,47 +389,47 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 120px;
+            min-width: 90px;
             background: #222222;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 80px; height: 80px;
+            width: 60px; height: 60px;
             margin: 0 auto;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
-        .case-item .case-name { font-size: 8px; color: #8e8ea0; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .case-item .case-price { font-size: 9px; font-weight: 600; color: #f5c842; }
-        .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 20px rgba(245,200,66,0.12); transform: scale(1.04); }
+        .case-item .case-name { font-size: 7px; color: #8e8ea0; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-item .case-price { font-size: 8px; font-weight: 600; color: #f5c842; }
+        .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 16px rgba(245,200,66,0.10); transform: scale(1.04); }
         #spinResult {
             text-align: center;
-            padding: 3px;
-            font-size: 9px;
+            padding: 2px;
+            font-size: 8px;
             color: #6e6e80;
             flex-shrink: 0;
             background: #1a1a1a;
-            min-height: 20px;
+            min-height: 16px;
         }
         .spin-btn {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: #f5c842;
             border: none;
             border-radius: 0;
             color: #1a1a1a;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 2px;
+            margin-top: 0px;
             transition: 0.15s;
             flex-shrink: 0;
         }
@@ -475,11 +446,6 @@
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 16px;
-        }
-        .stars-premium-section .subtitle {
-            font-size: 14px;
-            color: #8e8ea0;
-            margin-bottom: 12px;
         }
         .stars-premium-section .selector {
             display: flex;
@@ -504,9 +470,7 @@
             color: #f5c842;
         }
         .stars-premium-section .selector .option:active { transform: scale(0.94); }
-        .stars-premium-section .receiver {
-            margin: 12px 0;
-        }
+        .stars-premium-section .receiver { margin: 12px 0; }
         .stars-premium-section .receiver label {
             font-size: 13px;
             font-weight: 600;
@@ -568,7 +532,7 @@
             line-height: 1.4;
         }
 
-        /* МОИ ПОДАРКИ */
+        /* МОИ ПОДАРКИ — без эмодзи, с символом */
         .my-gifts-section {
             padding: 20px 16px;
             display: none;
@@ -580,7 +544,7 @@
         }
         .my-gifts-section.active { display: flex; }
         .my-gifts-section .empty-icon {
-            font-size: 48px;
+            font-size: 42px;
             color: #6e6e80;
             margin-bottom: 16px;
         }
@@ -608,28 +572,41 @@
             transition: 0.15s;
         }
         .my-gifts-section .add-gift-btn:active { transform: scale(0.94); }
-        .my-gifts-section .my-gifts-list {
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .my-gifts-section .my-gift-item {
+
+        .orders-section { padding: 10px 14px 16px 14px; display: none; }
+        .orders-section.active { display: block; }
+        .orders-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .orders-header h2 { font-size: 18px; font-weight: 700; }
+        .order-item {
             background: #222222;
-            border-radius: 12px;
-            padding: 10px;
+            border-radius: 14px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
             border: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .my-gifts-section .my-gift-item .gift-icon {
-            font-size: 32px;
-            margin-bottom: 4px;
-        }
-        .my-gifts-section .my-gift-item .gift-name {
-            font-size: 10px;
-            color: #8e8ea0;
-        }
+        .order-item .order-lottie { width: 48px; height: 48px; border-radius: 10px; overflow: hidden; background: #1a1a1a; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.04); }
+        .order-item .order-lottie .lottie-container { width: 100%; height: 100%; }
+        .order-item .order-info { flex: 1; }
+        .order-item .order-name { font-size: 13px; font-weight: 600; }
+        .order-item .order-qty { font-size: 10px; color: #6e6e80; }
+        .order-item .order-price { font-size: 13px; font-weight: 700; color: #f5c842; display: flex; align-items: center; gap: 4px; }
+        .order-item .order-price .mini-gram { width: 16px; height: 16px; border-radius: 50%; overflow: hidden; }
+        .order-item .order-price .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
+        .order-item .order-actions { display: flex; gap: 6px; }
+        .order-item .order-actions button { background: rgba(255,255,255,0.04); border: none; padding: 5px 12px; border-radius: 18px; font-size: 10px; font-weight: 600; color: #8e8ea0; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
+        .order-item .order-actions button:active { transform: scale(0.94); }
+        .order-item .order-actions .sell-btn { color: #f5c842; background: rgba(245,200,66,0.08); }
+        .create-order { margin-top: 18px; background: #222222; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
+        .create-order h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+        .create-order input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px 14px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; outline: none; width: 100%; margin-bottom: 6px; }
+        .create-order input::placeholder { color: #6e6e80; }
+        .create-order .row { display: flex; gap: 8px; }
+        .create-order .row input { flex: 1; }
+        .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
+        .create-order .row button:active { transform: scale(0.94); }
 
         .bottom-nav {
             position: fixed;
@@ -854,8 +831,8 @@
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 100px; }
-            .case-item .case-lottie { width: 68px; height: 68px; }
+            .case-item { min-width: 75px; }
+            .case-item .case-lottie { width: 50px; height: 50px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
         }
@@ -863,9 +840,8 @@
 </head>
 <body>
     <div class="app">
-        <!-- HEADER -->
+        <!-- HEADER — без названия -->
         <div class="header">
-            <div class="header-left"><h1>Allow Market</h1></div>
             <div class="header-right">
                 <button class="icon-btn" id="bellBtn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
                 <div class="avatar-btn" id="profileBtn">
@@ -890,13 +866,13 @@
             </div>
         </div>
 
-        <!-- FILTER ROW — с символом ˅ и кнопкой фильтров -->
+        <!-- FILTER ROW — без стрелок -->
         <div class="filter-row" id="mainFilterRow">
-            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT <span class="arrow-down">˅</span></span>
-            <span class="filter-chip" data-filter="model" id="filterModel">Модель <span class="arrow-down">˅</span></span>
-            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон <span class="arrow-down">˅</span></span>
-            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ <span class="arrow-down">˅</span></span>
-            <span class="filter-chip filter-toggle" id="filterToggleBtn"><span style="font-size:14px;">⚙</span> <span class="arrow-down">˅</span></span>
+            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
+            <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
+            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон</span>
+            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ</span>
+            <span class="filter-chip filter-toggle" id="filterToggleBtn"><span style="font-size:14px;">⚙</span></span>
         </div>
 
         <!-- STATUS -->
@@ -925,15 +901,15 @@
             <div class="terms">Покупая Звезды или Премиум, вы соглашаетесь с нашими Условиями использования, и подтверждаете, что вы не резидент США</div>
         </div>
 
-        <!-- МОИ ПОДАРКИ -->
+        <!-- МОИ ПОДАРКИ — без эмодзи -->
         <div class="my-gifts-section" id="myGiftsSection">
-            <div class="empty-icon">🎁</div>
+            <div class="empty-icon">📦</div>
             <div class="empty-title">У вас пока нет подарков</div>
             <div class="empty-desc">Добавьте свой первый подарок</div>
             <button class="add-gift-btn" id="myGiftsAddBtn">+ Добавить подарок</button>
         </div>
 
-        <!-- ORDERS (скрыт, но оставлен для совместимости) -->
+        <!-- ORDERS -->
         <div class="orders-section" id="ordersSection">
             <div class="orders-header"><h2>Ордеры</h2><span style="font-size:12px;color:#f5c842;font-weight:600;cursor:pointer;">Мои ордеры</span></div>
             <div id="ordersList"></div>
@@ -947,7 +923,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB -->
+        <!-- GAME HUB — сжатый -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1213,6 +1189,7 @@
             userCart = cart;
             updateCartUI();
             updateDetailButtons();
+            renderGrid(document.getElementById('searchInput').value);
             showToast(cart.includes(name) ? 'Добавлено в корзину' : 'Удалено из корзины');
         }
 
@@ -1224,6 +1201,7 @@
             renderCartItems();
             updateCartUI();
             updateDetailButtons();
+            renderGrid(document.getElementById('searchInput').value);
         }
 
         function isInCart(userId, name) {
@@ -1341,7 +1319,7 @@
         }
 
         // ============================================================
-        // 6. RENDER GRID
+        // 6. RENDER GRID — с кнопкой корзины
         // ============================================================
         function renderGrid(filter = '') {
             const grid = document.getElementById('nftGrid');
@@ -1349,7 +1327,6 @@
 
             let data = allNFTs;
 
-            // Фильтр по поиску
             if (searchTerm) {
                 data = data.filter(n =>
                     n.name.toLowerCase().includes(searchTerm) ||
@@ -1358,7 +1335,6 @@
                 );
             }
 
-            // Фильтры по модели, фону, символу
             if (activeFilters.model) {
                 data = data.filter(n => n.model.toLowerCase().includes(activeFilters.model.toLowerCase()));
             }
@@ -1381,6 +1357,7 @@
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
                 const statusClass = nft.status === 'sold' ? 'sold' : nft.status === 'on-auction' ? 'auction' : 'sale';
                 const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
+                const inCart = currentUserId && isInCart(currentUserId, nft.name);
                 html += `<div class="nft-card" onclick="openDetail('${nft.name}')">
                     <div class="nft-card-inner">
                         <div class="lottie-wrapper"><div class="lottie-container" id="${lottieId}"></div></div>
@@ -1389,6 +1366,9 @@
                         <div class="nft-price"><span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span> ${nft.price.toFixed(2)}</div>
                         <span class="status-badge ${statusClass}">${statusLabel}</span>
                     </div>
+                    <button class="cart-add-btn ${inCart ? 'in-cart' : ''}" onclick="event.stopPropagation(); window.toggleCart('${nft.name}')">
+                        ${inCart ? '✓' : '🛒'}
+                    </button>
                 </div>`;
             });
             grid.innerHTML = html;
@@ -1449,7 +1429,7 @@
         document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeDetail(); });
 
         // ============================================================
-        // 8. GAME HUB — с таймером для сообщения о недостатке GRAM
+        // 8. GAME HUB
         // ============================================================
         let caseItems = [];
         let spinToastTimer = null;
@@ -1482,7 +1462,7 @@
             if (!track || caseItems.length === 0) return;
             isAutoScrolling = true;
             let scrollPos = 0;
-            const step = 1.2;
+            const step = 1.0;
             const maxScroll = track.scrollWidth - track.clientWidth;
             autoScrollInterval = setInterval(() => {
                 if (!isAutoScrolling) return;
@@ -1504,7 +1484,6 @@
             if (isSpinning) return;
             if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
             if (userBalance < 200) {
-                // Показываем сообщение с таймером 4 секунды
                 showToast('Недостаточно GRAM для прокрутки! Нужно 200 GRAM');
                 clearTimeout(spinToastTimer);
                 spinToastTimer = setTimeout(() => {
@@ -1531,7 +1510,7 @@
 
             let extraScrolls = 0;
             const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 100);
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 80);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
             const extraInterval = setInterval(() => {
@@ -1558,7 +1537,7 @@
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 100);
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 80);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
             }, 120);
         });
@@ -1580,14 +1559,12 @@
             const mainFilter = document.getElementById('mainFilterRow');
             const mainStatus = document.getElementById('mainStatusRow');
 
-            // Скрываем всё
             grid.style.display = 'none';
             orders.classList.remove('active');
             game.classList.remove('active');
             stars.classList.remove('active');
             myGifts.classList.remove('active');
 
-            // Вкладки в хедере
             document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
 
             if (tab === 'market' || tab === 'gifts') {
@@ -1671,7 +1648,7 @@
         });
 
         // ============================================================
-        // 10. ФИЛЬТРЫ: Модель, Фон, Символ с символом ˅
+        // 10. ФИЛЬТРЫ — без поиска
         // ============================================================
         document.getElementById('filterModel').addEventListener('click', function() {
             const val = prompt('Введите модель для фильтрации (например: Classic, Rare, Golden):');
@@ -1712,12 +1689,10 @@
             }
         });
 
-        // Кнопка фильтров
         document.getElementById('filterToggleBtn').addEventListener('click', function() {
             document.getElementById('filterOverlay').classList.add('open');
         });
 
-        // NFT — сброс всех фильтров
         document.getElementById('filterNft').addEventListener('click', function() {
             activeFilters.model = false;
             activeFilters.backdrop = false;
@@ -1730,7 +1705,18 @@
         });
 
         // ============================================================
-        // 11. ЗВЕЗДЫ И ПРЕМ
+        // 11. TOGGLE CART
+        // ============================================================
+        window.toggleCart = function(name) {
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            const nft = allNFTs.find(n => n.name === name);
+            if (!nft) return;
+            if (nft.status === 'sold') { showToast('Продано'); return; }
+            addToCart(currentUserId, name);
+        };
+
+        // ============================================================
+        // 12. ЗВЕЗДЫ И ПРЕМ
         // ============================================================
         document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
             opt.addEventListener('click', function() {
@@ -1765,7 +1751,7 @@
         });
 
         // ============================================================
-        // 12. МОИ ПОДАРКИ
+        // 13. МОИ ПОДАРКИ
         // ============================================================
         document.getElementById('myGiftsAddBtn').addEventListener('click', function() {
             try {
@@ -1778,7 +1764,7 @@
         });
 
         // ============================================================
-        // 13. ORDERS (для совместимости)
+        // 14. ORDERS
         // ============================================================
         const ORDERS_DATA = [
             { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
@@ -1838,7 +1824,7 @@
         });
 
         // ============================================================
-        // 14. FILTER OVERLAY
+        // 15. FILTER OVERLAY
         // ============================================================
         document.getElementById('filterClose').addEventListener('click', function() {
             document.getElementById('filterOverlay').classList.remove('open');
@@ -1871,7 +1857,7 @@
         });
 
         // ============================================================
-        // 15. PROFILE, BELL, TOAST
+        // 16. PROFILE, BELL, TOAST
         // ============================================================
         const toast = document.getElementById('toast');
 
@@ -1924,7 +1910,7 @@
         });
 
         // ============================================================
-        // 16. CART MODAL
+        // 17. CART MODAL
         // ============================================================
         document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList.remove('open'));
         document.getElementById('cartModal').addEventListener('click', (e) => {
@@ -1947,7 +1933,7 @@
         });
 
         // ============================================================
-        // 17. SEARCH
+        // 18. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
@@ -1958,7 +1944,7 @@
         });
 
         // ============================================================
-        // 18. INIT
+        // 19. INIT
         // ============================================================
         (function init() {
             try {
@@ -2042,6 +2028,13 @@
         };
         window.addToCart = function(name) {
             if (currentUserId) addToCart(currentUserId, name);
+        };
+        window.toggleCart = function(name) {
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            const nft = allNFTs.find(n => n.name === name);
+            if (!nft) return;
+            if (nft.status === 'sold') { showToast('Продано'); return; }
+            addToCart(currentUserId, name);
         };
     </script>
 </body>
