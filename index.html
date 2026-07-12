@@ -91,21 +91,21 @@
         .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .avatar-btn .placeholder { font-size: 18px; color: #fff; font-weight: 600; }
 
+        /* TABS — как на фото: без круглешков */
         .gift-tabs {
             display: flex;
-            gap: 8px;
-            padding: 12px 16px 10px 16px;
+            gap: 12px;
+            padding: 14px 16px 12px 16px;
             overflow-x: auto;
             scrollbar-width: none;
             border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .gift-tabs::-webkit-scrollbar { display: none; }
         .gift-tab {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 13px;
+            background: transparent;
+            border: none;
+            padding: 4px 0;
+            font-size: 15px;
             font-weight: 600;
             color: #8e8ea0;
             cursor: pointer;
@@ -113,12 +113,12 @@
             font-family: 'Inter', sans-serif;
             transition: 0.15s;
             letter-spacing: 0.2px;
+            border-bottom: 2px solid transparent;
         }
         .gift-tab:active { transform: scale(0.94); }
         .gift-tab.active {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.12);
             color: #ffffff;
+            border-bottom-color: #f5c842;
         }
 
         .search-row {
@@ -334,29 +334,29 @@
         .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
         .create-order .row button:active { transform: scale(0.94); }
 
-        /* GAME HUB — уменьшенный формат для телефона */
+        /* GAME HUB — полноэкранный кейс с нормальным размером */
         .game-hub {
             padding: 0;
             display: none;
             height: 100%;
-            min-height: calc(100vh - 120px);
+            min-height: calc(100vh - 72px);
         }
         .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            padding: 8px 14px;
+            padding: 10px 14px 8px 14px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
             flex-shrink: 0;
         }
-        .game-hub .hub-header h2 { font-size: 14px; font-weight: 700; color: #f5c842; }
-        .game-hub .hub-header p { font-size: 9px; color: #8e8ea0; margin-top: 1px; }
+        .game-hub .hub-header h2 { font-size: 16px; font-weight: 700; color: #f5c842; }
+        .game-hub .hub-header p { font-size: 11px; color: #8e8ea0; margin-top: 1px; }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
             border-bottom: 1px solid rgba(245,200,66,0.08);
-            padding: 4px;
+            padding: 6px;
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: #f5c842;
             flex-shrink: 0;
@@ -366,14 +366,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 6px 6px 10px 6px;
+            padding: 8px 6px 6px 6px;
             overflow: hidden;
             min-height: 0;
         }
         .case-track {
             display: flex;
-            gap: 10px;
-            padding: 4px 4px 8px 4px;
+            gap: 14px;
+            padding: 6px 6px 10px 6px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -383,26 +383,34 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 100px;
+            min-width: 130px;
             background: #222222;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 8px;
+            padding: 10px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 70px; height: 70px;
+            width: 90px; height: 90px;
             margin: 0 auto;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
-        .case-item .case-name { font-size: 8px; color: #8e8ea0; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .case-item .case-price { font-size: 9px; font-weight: 600; color: #f5c842; }
+        .case-item .case-name { font-size: 9px; color: #8e8ea0; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-item .case-price { font-size: 10px; font-weight: 600; color: #f5c842; }
         .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 20px rgba(245,200,66,0.12); transform: scale(1.04); }
+        #spinResult {
+            text-align: center;
+            padding: 4px;
+            font-size: 10px;
+            color: #6e6e80;
+            flex-shrink: 0;
+            background: #1a1a1a;
+        }
         .spin-btn {
             width: 100%;
             padding: 14px;
@@ -414,19 +422,114 @@
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: auto;
+            margin-top: 4px;
             transition: 0.15s;
             flex-shrink: 0;
         }
         .spin-btn:active { transform: scale(0.97); }
         .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-        #spinResult {
+
+        /* ЗВЕЗДЫ И ПРЕМ — как на фото */
+        .stars-premium-section {
+            padding: 16px 16px 20px 16px;
+            display: none;
+        }
+        .stars-premium-section.active { display: block; }
+        .stars-premium-section .title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .stars-premium-section .subtitle {
+            font-size: 14px;
+            color: #8e8ea0;
+            margin-bottom: 12px;
+        }
+        .stars-premium-section .selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .stars-premium-section .selector .option {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
             text-align: center;
-            padding: 4px;
-            font-size: 9px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-weight: 600;
+            color: #8e8ea0;
+        }
+        .stars-premium-section .selector .option.active {
+            background: rgba(245,200,66,0.08);
+            border-color: #f5c842;
+            color: #f5c842;
+        }
+        .stars-premium-section .selector .option:active { transform: scale(0.94); }
+        .stars-premium-section .receiver {
+            margin: 12px 0;
+        }
+        .stars-premium-section .receiver label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8ea0;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .stars-premium-section .receiver input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+        .stars-premium-section .receiver input::placeholder { color: #6e6e80; }
+        .stars-premium-section .send-self {
+            display: inline-block;
+            background: #f5c842;
+            color: #1a1a1a;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.15s;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            margin: 4px 0 12px 0;
+        }
+        .stars-premium-section .send-self:active { transform: scale(0.94); }
+        .stars-premium-section .fee {
+            font-size: 12px;
             color: #6e6e80;
-            flex-shrink: 0;
-            background: #1a1a1a;
+            margin: 6px 0 12px 0;
+        }
+        .stars-premium-section .buy-btn {
+            width: 100%;
+            padding: 14px;
+            background: #f5c842;
+            border: none;
+            border-radius: 12px;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .stars-premium-section .buy-btn:active { transform: scale(0.96); }
+        .stars-premium-section .terms {
+            font-size: 10px;
+            color: #6e6e80;
+            margin-top: 12px;
+            text-align: center;
+            line-height: 1.4;
         }
 
         .bottom-nav {
@@ -652,10 +755,10 @@
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 85px; }
-            .case-item .case-lottie { width: 60px; height: 60px; }
+            .case-item { min-width: 110px; }
+            .case-item .case-lottie { width: 74px; height: 74px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
-            .gift-tab { font-size: 11px; padding: 6px 14px; }
+            .gift-tab { font-size: 13px; }
         }
     </style>
 </head>
@@ -673,7 +776,7 @@
             </div>
         </div>
 
-        <!-- TABS -->
+        <!-- TABS — как на фото, без круглешков -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
@@ -704,6 +807,23 @@
 
         <!-- NFT GRID -->
         <div class="nft-grid" id="nftGrid"></div>
+
+        <!-- ЗВЕЗДЫ И ПРЕМ — как на фото -->
+        <div class="stars-premium-section" id="starsPremiumSection">
+            <div class="title">Что вы хотите купить?</div>
+            <div class="selector">
+                <div class="option active" data-option="stars">Телеграм звезды</div>
+                <div class="option" data-option="premium">Телеграм премиум</div>
+            </div>
+            <div class="receiver">
+                <label>Получатель</label>
+                <input type="text" placeholder="Введите Телеграм юзернейм" id="receiverInput">
+            </div>
+            <button class="send-self" id="sendSelfBtn">Отправить себе</button>
+            <div class="fee">Комиссия маркетплейса: -</div>
+            <button class="buy-btn" id="buyStarsBtn">Купить</button>
+            <div class="terms">Покупая Звезды или Премиум, вы соглашаетесь с нашими Условиями использования, и подтверждаете, что вы не резидент США</div>
+        </div>
 
         <!-- ORDERS -->
         <div class="orders-section" id="ordersSection">
@@ -1298,7 +1418,7 @@
             if (!track || caseItems.length === 0) return;
             isAutoScrolling = true;
             let scrollPos = 0;
-            const step = 1.0;
+            const step = 1.2;
             const maxScroll = track.scrollWidth - track.clientWidth;
             autoScrollInterval = setInterval(() => {
                 if (!isAutoScrolling) return;
@@ -1339,7 +1459,7 @@
 
             let extraScrolls = 0;
             const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 90);
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 100);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
             const extraInterval = setInterval(() => {
@@ -1366,7 +1486,7 @@
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 90);
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 100);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
             }, 120);
         });
@@ -1381,6 +1501,7 @@
             const grid = document.getElementById('nftGrid');
             const orders = document.getElementById('ordersSection');
             const game = document.getElementById('gameHub');
+            const stars = document.getElementById('starsPremiumSection');
 
             const mainSearch = document.getElementById('mainSearchRow');
             const mainFilter = document.getElementById('mainFilterRow');
@@ -1389,13 +1510,25 @@
             grid.style.display = 'none';
             orders.classList.remove('active');
             game.classList.remove('active');
+            stars.classList.remove('active');
 
-            if (tab === 'market') {
+            // Вкладки в хедере
+            document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            const tabMap = { 'gifts': 'gifts', 'stars': 'stars', 'collections': 'collections' };
+            const tabName = tabMap[tab] || 'gifts';
+            document.querySelector(`.gift-tab[data-tab="${tabName}"]`)?.classList.add('active');
+
+            if (tab === 'market' || tab === 'gifts') {
                 grid.style.display = 'grid';
                 mainSearch.style.display = 'flex';
                 mainFilter.style.display = 'flex';
                 mainStatus.style.display = 'flex';
                 renderGrid(document.getElementById('searchInput').value);
+            } else if (tab === 'stars' || tab === 'starsTab') {
+                stars.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
             } else if (tab === 'orders') {
                 orders.classList.add('active');
                 mainSearch.style.display = 'none';
@@ -1426,6 +1559,20 @@
             }
         }
 
+        // Обработчики для вкладок в хедере
+        document.querySelectorAll('.gift-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const t = this.dataset.tab;
+                if (t === 'stars') {
+                    switchTab('starsTab');
+                } else if (t === 'gifts') {
+                    switchTab('market');
+                } else {
+                    switchTab('market');
+                }
+            });
+        });
+
         document.querySelectorAll('.nav-item').forEach(btn => {
             btn.addEventListener('click', function() {
                 switchTab(this.dataset.tab);
@@ -1433,7 +1580,42 @@
         });
 
         // ============================================================
-        // 11. FILTER OVERLAY
+        // 11. ЗВЕЗДЫ И ПРЕМ
+        // ============================================================
+        document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.getElementById('sendSelfBtn').addEventListener('click', function() {
+            try {
+                if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+                    const user = window.Telegram.WebApp.initDataUnsafe.user;
+                    document.getElementById('receiverInput').value = '@' + (user.username || 'username');
+                } else {
+                    document.getElementById('receiverInput').value = '@username';
+                }
+            } catch(e) {
+                document.getElementById('receiverInput').value = '@username';
+            }
+            showToast('Юзернейм вставлен');
+        });
+
+        document.getElementById('buyStarsBtn').addEventListener('click', function() {
+            const receiver = document.getElementById('receiverInput').value.trim();
+            const option = document.querySelector('.stars-premium-section .selector .option.active');
+            const type = option ? option.textContent : 'Телеграм звезды';
+            if (!receiver) {
+                showToast('Введите получателя');
+                return;
+            }
+            showToast(`Покупка ${type} для ${receiver} — функция в разработке`);
+        });
+
+        // ============================================================
+        // 12. FILTER OVERLAY
         // ============================================================
         document.querySelectorAll('.filter-chip').forEach(chip => {
             chip.addEventListener('click', function() {
@@ -1472,7 +1654,7 @@
         });
 
         // ============================================================
-        // 12. PROFILE, BELL, TOAST
+        // 13. PROFILE, BELL, TOAST
         // ============================================================
         const toast = document.getElementById('toast');
 
@@ -1525,7 +1707,7 @@
         });
 
         // ============================================================
-        // 13. CART MODAL
+        // 14. CART MODAL
         // ============================================================
         document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList.remove('open'));
         document.getElementById('cartModal').addEventListener('click', (e) => {
@@ -1548,7 +1730,7 @@
         });
 
         // ============================================================
-        // 14. SEARCH
+        // 15. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
@@ -1559,17 +1741,15 @@
         });
 
         // ============================================================
-        // 15. INIT — ПОЛНАЯ ИНТЕГРАЦИЯ С TELEGRAM
+        // 16. INIT
         // ============================================================
         (function init() {
             try {
                 allNFTs = generateNFTs();
 
-                // Инициализация Telegram WebApp
                 let tgUser = null;
                 try {
                     if (window.Telegram?.WebApp) {
-                        // Расширяем мини-приложение на весь экран
                         window.Telegram.WebApp.expand();
                         const user = window.Telegram.WebApp.initDataUnsafe?.user;
                         if (user && user.id) {
@@ -1585,30 +1765,25 @@
                     document.getElementById('profileName').textContent = tgUser.first_name || 'Пользователь';
                     document.getElementById('profileId').textContent = `ID: ${currentUserId}`;
 
-                    // Установка аватарки
                     if (tgUser.photo_url) {
                         updateAvatar(tgUser);
                     } else {
-                        // пробуем получить фото через WebApp
                         try {
                             if (window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url) {
                                 updateAvatar(window.Telegram.WebApp.initDataUnsafe.user);
                             }
                         } catch(e) {}
-                        // если фото нет, показываем инициалы
                         if (!document.getElementById('avatarImg').src) {
                             updateAvatar(null);
                         }
                     }
 
-                    // Загрузка данных пользователя
                     const userData = getUserData(currentUserId);
                     userBalance = userData.balance || 0;
                     userCart = userData.cart || [];
                     updateBalanceUI();
                     updateCartUI();
                 } else {
-                    // Гость
                     currentUserId = null;
                     userBalance = 0;
                     userCart = [];
@@ -1621,8 +1796,10 @@
 
                 renderGrid('');
                 document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
+                document.querySelector('.gift-tab[data-tab="gifts"]').classList.add('active');
                 document.getElementById('ordersSection').classList.remove('active');
                 document.getElementById('gameHub').classList.remove('active');
+                document.getElementById('starsPremiumSection').classList.remove('active');
                 document.getElementById('nftGrid').style.display = 'grid';
 
                 window.addEventListener('error', function(e) {
