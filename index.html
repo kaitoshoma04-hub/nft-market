@@ -30,7 +30,6 @@
       position: relative;
     }
 
-    /* Хедер с закрыто */
     .header {
       display: flex;
       justify-content: space-between;
@@ -50,9 +49,10 @@
     .header .close {
       font-size: 20px;
       color: #888;
+      cursor: pointer;
+      padding: 4px 8px;
     }
 
-    /* Баннер WEB */
     .web-banner {
       background: linear-gradient(135deg, #1a1a2e, #16213e);
       border-radius: 18px;
@@ -88,14 +88,21 @@
       font-weight: 500;
       color: #fff;
       white-space: nowrap;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .web-banner .right .prize:hover {
+      opacity: 0.8;
     }
     .web-banner .right .more {
       font-size: 12px;
       color: #6c6cff;
-      cursor: default;
+      cursor: pointer;
+    }
+    .web-banner .right .more:hover {
+      text-decoration: underline;
     }
 
-    /* Вкладки подарки */
     .gift-tabs {
       display: flex;
       gap: 12px;
@@ -105,14 +112,16 @@
       border-bottom: 1px solid #1a1a1e;
       margin-bottom: 14px;
     }
+    .gift-tabs span {
+      cursor: pointer;
+      padding-bottom: 8px;
+    }
     .gift-tabs .active {
       color: #fff;
       font-weight: 500;
       border-bottom: 2px solid #6c6cff;
-      padding-bottom: 10px;
     }
 
-    /* Поиск */
     .search {
       background: #18181c;
       border-radius: 30px;
@@ -137,9 +146,20 @@
     .search .icon {
       color: #666;
       font-size: 16px;
+      cursor: pointer;
+    }
+    .search .feed {
+      color: #6c6cff;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .search .feed:hover {
+      background: #2a2a3e;
     }
 
-    /* Фильтры */
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -153,13 +173,18 @@
       padding: 4px 12px;
       border-radius: 30px;
       border: 1px solid #28282c;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filters span:hover {
+      border-color: #6c6cff;
+      color: #fff;
     }
     .filters .active {
       border-color: #6c6cff;
       color: #fff;
     }
 
-    /* NFT карточки */
     .nft-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -173,6 +198,12 @@
       border: 1px solid #222226;
       text-align: left;
       position: relative;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nft-card:hover {
+      border-color: #6c6cff;
+      transform: scale(1.02);
     }
     .nft-card .lottie-gift {
       width: 40px;
@@ -205,9 +236,9 @@
       color: #fff;
       display: inline-block;
       margin-top: 4px;
+      cursor: default;
     }
 
-    /* Нижняя навигация */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -221,6 +252,7 @@
       max-width: 375px;
       margin: 0 auto;
       border-radius: 0 0 32px 32px;
+      z-index: 100;
     }
     .bottom-nav .nav-item {
       display: flex;
@@ -229,7 +261,14 @@
       color: #555;
       font-size: 10px;
       gap: 1px;
-      cursor: default;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 2px 8px;
+      border-radius: 12px;
+      position: relative;
+    }
+    .bottom-nav .nav-item:hover {
+      color: #888;
     }
     .bottom-nav .nav-item.active {
       color: #6c6cff;
@@ -240,59 +279,113 @@
     }
     .bottom-nav .nav-item span {
       font-size: 10px;
+      user-select: none;
+    }
+    .bottom-nav .nav-item .badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: #ff4757;
+      color: #fff;
+      font-size: 8px;
+      padding: 1px 5px;
+      border-radius: 10px;
+      min-width: 16px;
+      text-align: center;
     }
 
     .mt-2 { margin-top: 8px; }
     .mb-2 { margin-bottom: 8px; }
+    .text-center { text-align: center; }
+
+    /* Анимация при клике */
+    .clicked {
+      animation: clickAnim 0.3s ease;
+    }
+    @keyframes clickAnim {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    /* Уведомление */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2a2a3e;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      border: 1px solid #6c6cff;
+      display: none;
+      z-index: 200;
+      max-width: 320px;
+      text-align: center;
+    }
+    .toast.show {
+      display: block;
+      animation: toastIn 0.3s ease;
+    }
+    @keyframes toastIn {
+      0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
   </style>
 </head>
 <body>
+
+<!-- Уведомление -->
+<div class="toast" id="toast"></div>
+
 <div class="phone">
 
-  <!-- ===== HEADER ===== -->
+  <!-- HEADER -->
   <div class="header">
     <div class="closed">Закрыто: <span>1512</span></div>
-    <span class="close">✕</span>
+    <span class="close" onclick="showToast('✕ Закрыть')">✕</span>
   </div>
 
-  <!-- ===== WEB БАННЕР ===== -->
+  <!-- WEB БАННЕР -->
   <div class="web-banner">
     <div class="left">
       <div class="big">WEB Лидерборд и задания</div>
       <div class="small">$50,000 призовой фонд</div>
     </div>
     <div class="right">
-      <span class="prize">$50,000 призовой фонд</span>
-      <span class="more">Узнать больше →</span>
+      <span class="prize" onclick="showToast('🏆 $50,000 призовой фонд')">$50,000 призовой фонд</span>
+      <span class="more" onclick="showToast('📊 Узнать больше о лидерборде')">Узнать больше →</span>
     </div>
   </div>
 
-  <!-- ===== ВКЛАДКИ ПОДАРКИ ===== -->
+  <!-- ВКЛАДКИ ПОДАРКИ -->
   <div class="gift-tabs">
-    <span class="active">Подарки</span>
-    <span>Звезды и Прем</span>
-    <span>Коллекции</span>
+    <span class="active" onclick="switchTab(this)">Подарки</span>
+    <span onclick="switchTab(this)">Звезды и Прем</span>
+    <span onclick="switchTab(this)">Коллекции</span>
   </div>
 
-  <!-- ===== ПОИСК ===== -->
+  <!-- ПОИСК -->
   <div class="search">
-    <span class="icon">🔍</span>
-    <input placeholder="Поиск по названию NFT / номеру">
-    <span class="icon">Feed</span>
+    <span class="icon" onclick="showToast('🔍 Поиск')">🔍</span>
+    <input placeholder="Поиск по названию NFT / номеру" id="searchInput">
+    <span class="feed" onclick="showToast('📰 Feed')">Feed</span>
   </div>
 
-  <!-- ===== ФИЛЬТРЫ ===== -->
+  <!-- ФИЛЬТРЫ -->
   <div class="filters">
-    <span class="active">NFT ▼</span>
-    <span>Модель ▼</span>
-    <span>Фон ▼</span>
-    <span>Символ ▼</span>
+    <span class="active" onclick="filterClick(this)">NFT ▼</span>
+    <span onclick="filterClick(this)">Модель ▼</span>
+    <span onclick="filterClick(this)">Фон ▼</span>
+    <span onclick="filterClick(this)">Символ ▼</span>
   </div>
 
-  <!-- ===== NFT КАРТОЧКИ ===== -->
+  <!-- NFT КАРТОЧКИ -->
   <div class="nft-grid">
     <!-- Liberty Figure -->
-    <div class="nft-card">
+    <div class="nft-card" onclick="cardClick(this, 'Liberty Figure', '4.9')">
       <div class="lottie-gift" id="gift1"></div>
       <div class="name">Liberty Figure</div>
       <div class="hash">#234020</div>
@@ -300,7 +393,7 @@
     </div>
 
     <!-- Jack-in-the-Box -->
-    <div class="nft-card">
+    <div class="nft-card" onclick="cardClick(this, 'Jack-in-the-Box', '3.39')">
       <div class="lottie-gift" id="gift2"></div>
       <div class="name">Jack-in-the-Box</div>
       <div class="hash">#38228</div>
@@ -309,7 +402,7 @@
     </div>
 
     <!-- Spy Agaric -->
-    <div class="nft-card">
+    <div class="nft-card" onclick="cardClick(this, 'Spy Agaric', '61.22')">
       <div class="lottie-gift" id="gift3"></div>
       <div class="name">Spy Agaric</div>
       <div class="hash">#9576</div>
@@ -317,25 +410,26 @@
     </div>
   </div>
 
-  <!-- ===== НИЖНЯЯ НАВИГАЦИЯ ===== -->
+  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
   <div class="bottom-nav">
-    <div class="nav-item active">
+    <div class="nav-item active" onclick="navClick(this, 'Маркет')">
       <div class="lottie-icon" id="nav1"></div>
       <span>Маркет</span>
     </div>
-    <div class="nav-item">
+    <div class="nav-item" onclick="navClick(this, 'Ордеры')">
       <div class="lottie-icon" id="nav2"></div>
       <span>Ордеры</span>
+      <span class="badge">3</span>
     </div>
-    <div class="nav-item">
+    <div class="nav-item" onclick="navClick(this, 'Игровой хаб')">
       <div class="lottie-icon" id="nav3"></div>
       <span>Игровой хаб</span>
     </div>
-    <div class="nav-item">
+    <div class="nav-item" onclick="navClick(this, 'Задания')">
       <div class="lottie-icon" id="nav4"></div>
       <span>Задания</span>
     </div>
-    <div class="nav-item">
+    <div class="nav-item" onclick="navClick(this, 'Хранилище')">
       <div class="lottie-icon" id="nav5"></div>
       <span>Хранилище</span>
     </div>
@@ -344,75 +438,106 @@
 </div>
 
 <script>
-  // Анимации для подарков (подарочные коробки с эффектами)
+  // === ФУНКЦИИ КНОПОК ===
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 1500);
+  }
+
+  function switchTab(el) {
+    document.querySelectorAll('.gift-tabs span').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    showToast('📂 ' + el.textContent);
+  }
+
+  function filterClick(el) {
+    document.querySelectorAll('.filters span').forEach(f => f.classList.remove('active'));
+    el.classList.add('active');
+    showToast('🔽 Фильтр: ' + el.textContent);
+  }
+
+  function cardClick(el, name, price) {
+    el.classList.remove('clicked');
+    void el.offsetWidth;
+    el.classList.add('clicked');
+    showToast('🎁 ' + name + ' — ' + price + ' GRAM');
+  }
+
+  function navClick(el, name) {
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+    showToast('📍 ' + name);
+  }
+
+  // === LOTTIE АНИМАЦИИ ===
+
+  // Анимации для подарков
   const giftAnimations = [
-    {
-      id: 'gift1',
-      url: 'https://assets10.lottiefiles.com/packages/lf20_8p6z4i6m.json' // подарок с бантом
-    },
-    {
-      id: 'gift2',
-      url: 'https://assets4.lottiefiles.com/packages/lf20_9c8m4rqk.json' // подарок с конфетти
-    },
-    {
-      id: 'gift3',
-      url: 'https://assets1.lottiefiles.com/packages/lf20_6m8p9q4n.json' // подарок с блеском
-    }
+    { id: 'gift1', url: 'https://assets10.lottiefiles.com/packages/lf20_8p6z4i6m.json' },
+    { id: 'gift2', url: 'https://assets4.lottiefiles.com/packages/lf20_9c8m4rqk.json' },
+    { id: 'gift3', url: 'https://assets1.lottiefiles.com/packages/lf20_6m8p9q4n.json' }
   ];
 
-  // Анимации для иконок нижнего меню
+  // Анимации для навигации
   const navAnimations = [
-    {
-      id: 'nav1',
-      url: 'https://assets5.lottiefiles.com/packages/lf20_8p6z4i6m.json' // дом
-    },
-    {
-      id: 'nav2',
-      url: 'https://assets9.lottiefiles.com/packages/lf20_9c8m4rqk.json' // список
-    },
-    {
-      id: 'nav3',
-      url: 'https://assets6.lottiefiles.com/packages/lf20_6m8p9q4n.json' // игра
-    },
-    {
-      id: 'nav4',
-      url: 'https://assets7.lottiefiles.com/packages/lf20_5n7p4r8m.json' // задания
-    },
-    {
-      id: 'nav5',
-      url: 'https://assets8.lottiefiles.com/packages/lf20_4k6p9q2n.json' // хранилище
-    }
+    { id: 'nav1', url: 'https://assets5.lottiefiles.com/packages/lf20_8p6z4i6m.json' },
+    { id: 'nav2', url: 'https://assets9.lottiefiles.com/packages/lf20_9c8m4rqk.json' },
+    { id: 'nav3', url: 'https://assets6.lottiefiles.com/packages/lf20_6m8p9q4n.json' },
+    { id: 'nav4', url: 'https://assets7.lottiefiles.com/packages/lf20_5n7p4r8m.json' },
+    { id: 'nav5', url: 'https://assets8.lottiefiles.com/packages/lf20_4k6p9q2n.json' }
   ];
 
-  // Запускаем анимации подарков
+  // Запускаем подарки
   giftAnimations.forEach(anim => {
     const container = document.getElementById(anim.id);
     if (container) {
-      const animation = lottie.loadAnimation({
-        container: container,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: anim.url
-      });
+      try {
+        lottie.loadAnimation({
+          container: container,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: anim.url
+        });
+      } catch(e) {
+        container.innerHTML = '🎁';
+        container.style.fontSize = '28px';
+        container.style.textAlign = 'center';
+        container.style.lineHeight = '40px';
+      }
     }
   });
 
-  // Запускаем анимации навигации
+  // Запускаем навигацию
   navAnimations.forEach(anim => {
     const container = document.getElementById(anim.id);
     if (container) {
-      const animation = lottie.loadAnimation({
-        container: container,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: anim.url
-      });
+      try {
+        lottie.loadAnimation({
+          container: container,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: anim.url
+        });
+      } catch(e) {
+        const icons = ['🏠', '📋', '🎮', '📌', '📦'];
+        const idx = navAnimations.findIndex(a => a.id === anim.id);
+        container.innerHTML = icons[idx] || '•';
+        container.style.fontSize = '20px';
+        container.style.textAlign = 'center';
+        container.style.lineHeight = '24px';
+      }
     }
   });
 
-  // Если Lottie не загрузился, показываем эмодзи вместо анимаций
+  // Запасной вариант если Lottie не загрузился
   setTimeout(() => {
     document.querySelectorAll('.lottie-gift').forEach(el => {
       if (el.children.length === 0) {
@@ -425,7 +550,8 @@
     document.querySelectorAll('.lottie-icon').forEach(el => {
       if (el.children.length === 0) {
         const icons = ['🏠', '📋', '🎮', '📌', '📦'];
-        const idx = Array.from(el.parentElement.parentElement.children).indexOf(el.parentElement);
+        const parent = el.closest('.nav-item');
+        const idx = Array.from(parent.parentElement.children).indexOf(parent);
         el.innerHTML = icons[idx] || '•';
         el.style.fontSize = '20px';
         el.style.textAlign = 'center';
@@ -433,6 +559,13 @@
       }
     });
   }, 3000);
+
+  // Поиск по Enter
+  document.getElementById('searchInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      showToast('🔍 Поиск: ' + this.value);
+    }
+  });
 </script>
 
 </body>
