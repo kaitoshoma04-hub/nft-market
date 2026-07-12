@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
+    <script src="https://telegram.org/js/telegram-web-app.js">
+    </script>
     <style>
         * {
             margin: 0;
@@ -119,7 +121,6 @@
             color: #ffffff;
         }
 
-        /* SEARCH — прямоугольный */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
@@ -142,11 +143,7 @@
             border-color: rgba(255,255,255,0.12);
             background: rgba(255,255,255,0.06);
         }
-        .search-box svg {
-            width: 16px; height: 16px;
-            stroke: #6e6e80;
-            flex-shrink: 0;
-        }
+        .search-box svg { width: 16px; height: 16px; stroke: #6e6e80; flex-shrink: 0; }
         .search-box input {
             background: transparent;
             border: none;
@@ -157,22 +154,7 @@
             width: 100%;
         }
         .search-box input::placeholder { color: #6e6e80; font-weight: 400; }
-        .chip {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 30px;
-            padding: 8px 16px;
-            font-size: 11px;
-            font-weight: 500;
-            color: #8e8ea0;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.15s;
-            flex-shrink: 0;
-        }
-        .chip:active { transform: scale(0.94); }
 
-        /* FILTER ROW — как на фото, без галочек, с символами */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -264,7 +246,6 @@
         .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.10); }
         .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.10); }
 
-        /* DETAIL */
         .detail-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.92);
@@ -318,7 +299,6 @@
         .detail-buy-btn:active { transform: scale(0.96); }
         .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        /* ORDERS */
         .orders-section { padding: 10px 14px 16px 14px; display: none; }
         .orders-section.active { display: block; }
         .orders-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -354,7 +334,7 @@
         .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
         .create-order .row button:active { transform: scale(0.94); }
 
-        /* GAME HUB — полноэкранный кейс, кнопка снизу */
+        /* GAME HUB — уменьшенный формат для телефона */
         .game-hub {
             padding: 0;
             display: none;
@@ -364,20 +344,19 @@
         .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            border-radius: 0;
-            padding: 10px 14px;
+            padding: 8px 14px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
             flex-shrink: 0;
         }
-        .game-hub .hub-header h2 { font-size: 15px; font-weight: 700; color: #f5c842; }
-        .game-hub .hub-header p { font-size: 10px; color: #8e8ea0; margin-top: 1px; }
+        .game-hub .hub-header h2 { font-size: 14px; font-weight: 700; color: #f5c842; }
+        .game-hub .hub-header p { font-size: 9px; color: #8e8ea0; margin-top: 1px; }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
             border-bottom: 1px solid rgba(245,200,66,0.08);
-            padding: 6px;
+            padding: 4px;
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: #f5c842;
             flex-shrink: 0;
@@ -387,15 +366,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 8px 8px 12px 8px;
+            padding: 6px 6px 10px 6px;
             overflow: hidden;
-            position: relative;
             min-height: 0;
         }
         .case-track {
             display: flex;
-            gap: 12px;
-            padding: 6px 4px 12px 4px;
+            gap: 10px;
+            padding: 4px 4px 8px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -405,34 +383,34 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 140px;
+            min-width: 100px;
             background: #222222;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 12px;
+            padding: 8px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 100px; height: 100px;
+            width: 70px; height: 70px;
             margin: 0 auto;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
-        .case-item .case-name { font-size: 9px; color: #8e8ea0; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .case-item .case-price { font-size: 10px; font-weight: 600; color: #f5c842; }
-        .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 30px rgba(245,200,66,0.15); transform: scale(1.06); }
+        .case-item .case-name { font-size: 8px; color: #8e8ea0; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-item .case-price { font-size: 9px; font-weight: 600; color: #f5c842; }
+        .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 20px rgba(245,200,66,0.12); transform: scale(1.04); }
         .spin-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: #f5c842;
             border: none;
             border-radius: 0;
             color: #1a1a1a;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
@@ -444,14 +422,13 @@
         .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         #spinResult {
             text-align: center;
-            padding: 6px;
-            font-size: 10px;
+            padding: 4px;
+            font-size: 9px;
             color: #6e6e80;
             flex-shrink: 0;
             background: #1a1a1a;
         }
 
-        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -675,8 +652,8 @@
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 120px; }
-            .case-item .case-lottie { width: 80px; height: 80px; }
+            .case-item { min-width: 85px; }
+            .case-item .case-lottie { width: 60px; height: 60px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 11px; padding: 6px 14px; }
         }
@@ -703,7 +680,7 @@
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- SEARCH — прямоугольный, без Feed -->
+        <!-- SEARCH -->
         <div class="search-row" id="mainSearchRow">
             <div class="search-box">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -711,7 +688,7 @@
             </div>
         </div>
 
-        <!-- FILTER ROW — NFT, Модель, Фон, Символ как на фото -->
+        <!-- FILTER ROW -->
         <div class="filter-row" id="mainFilterRow">
             <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
             <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
@@ -742,7 +719,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB — полноэкранный кейс -->
+        <!-- GAME HUB -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -750,9 +727,6 @@
             </div>
             <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
             <div class="case-container">
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px 6px 4px;flex-shrink:0;">
-                    <span style="font-size:13px;font-weight:700;">Кейс с NFT</span>
-                </div>
                 <div class="case-track" id="caseTrack"></div>
                 <div id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
                 <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
@@ -945,7 +919,7 @@
         }
 
         // ============================================================
-        // 2. STATE — привязан к пользователю
+        // 2. STATE
         // ============================================================
         let currentUserId = null;
         let userBalance = 0;
@@ -1138,7 +1112,7 @@
         }
 
         // ============================================================
-        // 6. RENDER GRID — оптимизированный
+        // 6. RENDER GRID
         // ============================================================
         function renderGrid(filter = '') {
             const grid = document.getElementById('nftGrid');
@@ -1292,7 +1266,7 @@
         });
 
         // ============================================================
-        // 9. GAME HUB — полноэкранный кейс
+        // 9. GAME HUB
         // ============================================================
         let caseItems = [];
 
@@ -1365,7 +1339,7 @@
 
             let extraScrolls = 0;
             const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 110);
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 90);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
             const extraInterval = setInterval(() => {
@@ -1392,7 +1366,7 @@
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 110);
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 90);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
             }, 120);
         });
@@ -1574,7 +1548,7 @@
         });
 
         // ============================================================
-        // 14. SEARCH — с debounce для устранения лагов
+        // 14. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
@@ -1585,40 +1559,56 @@
         });
 
         // ============================================================
-        // 15. INIT
+        // 15. INIT — ПОЛНАЯ ИНТЕГРАЦИЯ С TELEGRAM
         // ============================================================
         (function init() {
             try {
                 allNFTs = generateNFTs();
 
+                // Инициализация Telegram WebApp
                 let tgUser = null;
                 try {
-                    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-                        tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+                    if (window.Telegram?.WebApp) {
+                        // Расширяем мини-приложение на весь экран
+                        window.Telegram.WebApp.expand();
+                        const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                        if (user && user.id) {
+                            tgUser = user;
+                        }
                     }
-                } catch(e) {}
+                } catch(e) {
+                    console.warn('Telegram init error:', e);
+                }
 
                 if (tgUser && tgUser.id) {
                     currentUserId = String(tgUser.id);
                     document.getElementById('profileName').textContent = tgUser.first_name || 'Пользователь';
                     document.getElementById('profileId').textContent = `ID: ${currentUserId}`;
 
+                    // Установка аватарки
                     if (tgUser.photo_url) {
                         updateAvatar(tgUser);
                     } else {
+                        // пробуем получить фото через WebApp
                         try {
                             if (window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url) {
                                 updateAvatar(window.Telegram.WebApp.initDataUnsafe.user);
                             }
                         } catch(e) {}
+                        // если фото нет, показываем инициалы
+                        if (!document.getElementById('avatarImg').src) {
+                            updateAvatar(null);
+                        }
                     }
 
+                    // Загрузка данных пользователя
                     const userData = getUserData(currentUserId);
                     userBalance = userData.balance || 0;
                     userCart = userData.cart || [];
                     updateBalanceUI();
                     updateCartUI();
                 } else {
+                    // Гость
                     currentUserId = null;
                     userBalance = 0;
                     userCart = [];
@@ -1626,6 +1616,7 @@
                     document.getElementById('profileId').textContent = 'ID: —';
                     updateBalanceUI();
                     updateCartUI();
+                    updateAvatar(null);
                 }
 
                 renderGrid('');
@@ -1633,10 +1624,6 @@
                 document.getElementById('ordersSection').classList.remove('active');
                 document.getElementById('gameHub').classList.remove('active');
                 document.getElementById('nftGrid').style.display = 'grid';
-
-                if (!document.getElementById('avatarImg').src) {
-                    updateAvatar(null);
-                }
 
                 window.addEventListener('error', function(e) {
                     console.warn('WebView error caught:', e.message);
