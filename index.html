@@ -16,7 +16,7 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0f;
+            background: #1a1a1a;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -29,7 +29,7 @@
             max-width: 430px;
             width: 100%;
             min-height: 100vh;
-            background: #0a0a0f;
+            background: #1a1a1a;
             padding-bottom: 72px;
             position: relative;
             overflow-x: hidden;
@@ -40,7 +40,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px 8px 16px;
-            background: rgba(10, 10, 15, 0.92);
+            background: rgba(26, 26, 26, 0.95);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
             top: 0;
@@ -50,7 +50,7 @@
         .header-left h1 {
             font-size: 22px;
             font-weight: 800;
-            color: #4a8af4;
+            color: #f5c842;
             letter-spacing: -0.5px;
         }
         .header-right {
@@ -59,7 +59,7 @@
             gap: 10px;
         }
         .icon-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
             width: 40px;
@@ -70,7 +70,7 @@
             justify-content: center;
             border-radius: 50%;
             transition: 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .icon-btn:active {
             transform: scale(0.92);
@@ -88,10 +88,10 @@
             height: 40px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.06);
             cursor: pointer;
             flex-shrink: 0;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            background: #2a2a2a;
             transition: 0.2s;
         }
         .avatar-btn:active {
@@ -113,20 +113,20 @@
             font-weight: 600;
         }
 
-        /* TABS — крупные как на фото */
+        /* TABS — серые однотонные как на фото */
         .gift-tabs {
             display: flex;
             gap: 10px;
             padding: 12px 16px 10px 16px;
             overflow-x: auto;
             scrollbar-width: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .gift-tabs::-webkit-scrollbar {
             display: none;
         }
         .gift-tab {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 10px 22px;
             border-radius: 30px;
@@ -143,22 +143,22 @@
             transform: scale(0.94);
         }
         .gift-tab.active {
-            background: rgba(74, 138, 244, 0.15);
-            border-color: rgba(74, 138, 244, 0.25);
-            color: #4a8af4;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
         }
 
-        /* SEARCH */
+        /* SEARCH — только на главном */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .search-box {
             flex: 1;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 30px;
             padding: 10px 16px;
@@ -168,8 +168,8 @@
             transition: 0.2s;
         }
         .search-box:focus-within {
-            border-color: rgba(74, 138, 244, 0.3);
-            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
         }
         .search-box svg {
             width: 16px;
@@ -210,18 +210,18 @@
             transform: scale(0.94);
         }
         .chip.active-filter {
-            background: rgba(74, 138, 244, 0.12);
-            border-color: rgba(74, 138, 244, 0.20);
-            color: #4a8af4;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
         }
 
-        /* FILTER ROW — крупные кнопки как на фото */
+        /* FILTER ROW — серые однотонные кнопки */
         .filter-row {
             display: flex;
             gap: 8px;
             padding: 8px 16px 14px 16px;
             flex-wrap: wrap;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .filter-row .chip {
             padding: 8px 18px;
@@ -233,9 +233,9 @@
             border-radius: 30px;
         }
         .filter-row .chip.active-filter {
-            background: rgba(74, 138, 244, 0.15);
-            border-color: rgba(74, 138, 244, 0.25);
-            color: #4a8af4;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
         }
         .filter-row .chip .check {
             font-size: 14px;
@@ -247,17 +247,20 @@
             display: flex;
             gap: 10px;
             padding: 6px 16px 12px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .status-row .chip {
             padding: 8px 18px;
             font-size: 12px;
             font-weight: 600;
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.06);
+            color: #8e8ea0;
         }
         .status-row .chip.active-status {
-            background: rgba(74, 138, 244, 0.12);
-            border-color: rgba(74, 138, 244, 0.20);
-            color: #4a8af4;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
         }
 
         /* NFT GRID */
@@ -268,7 +271,7 @@
             gap: 12px;
         }
         .nft-card {
-            background: #121216;
+            background: #222222;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
@@ -283,14 +286,14 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
-            background: #121216;
+            background: #222222;
         }
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 12px;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #1a1a1a;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -373,12 +376,12 @@
             display: flex;
         }
         .detail-content {
-            background: #14141e;
+            background: #222222;
             border-radius: 20px;
             max-width: 380px;
             width: 100%;
             padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             position: relative;
         }
         .detail-close {
@@ -405,7 +408,7 @@
             aspect-ratio: 1/1;
             border-radius: 14px;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #1a1a1a;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .detail-title {
@@ -415,7 +418,7 @@
         }
         .detail-number {
             font-size: 12px;
-            color: #4a8af4;
+            color: #f5c842;
             font-weight: 600;
         }
         .detail-stats {
@@ -457,10 +460,10 @@
         .detail-buy-btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            background: #f5c842;
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: #1a1a1a;
             font-size: 14px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
@@ -495,7 +498,7 @@
             font-weight: 700;
         }
         .order-item {
-            background: #121216;
+            background: #222222;
             border-radius: 14px;
             padding: 10px 14px;
             margin-bottom: 8px;
@@ -509,7 +512,7 @@
             height: 48px;
             border-radius: 10px;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #1a1a1a;
             flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
@@ -531,7 +534,7 @@
         .order-item .order-price {
             font-size: 13px;
             font-weight: 700;
-            color: #4a8af4;
+            color: #f5c842;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -567,12 +570,12 @@
             transform: scale(0.94);
         }
         .order-item .order-actions .sell-btn {
-            color: #4a8af4;
-            background: rgba(74, 138, 244, 0.08);
+            color: #f5c842;
+            background: rgba(245, 200, 66, 0.08);
         }
         .create-order {
             margin-top: 18px;
-            background: #121216;
+            background: #222222;
             border-radius: 16px;
             padding: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -605,11 +608,11 @@
             flex: 1;
         }
         .create-order .row button {
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            background: #f5c842;
             border: none;
             border-radius: 10px;
             padding: 10px 20px;
-            color: #fff;
+            color: #1a1a1a;
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
@@ -629,7 +632,7 @@
             display: block;
         }
         .game-hub .hub-header {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: #222222;
             border-radius: 16px;
             padding: 12px 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -639,9 +642,7 @@
         .game-hub .hub-header h2 {
             font-size: 16px;
             font-weight: 700;
-            background: linear-gradient(90deg, #ffd700, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #f5c842;
         }
         .game-hub .hub-header p {
             font-size: 11px;
@@ -649,18 +650,18 @@
             margin-top: 2px;
         }
         .game-hub .reward-banner {
-            background: rgba(255, 215, 0, 0.06);
-            border: 1px solid rgba(255, 215, 0, 0.10);
+            background: rgba(245, 200, 66, 0.06);
+            border: 1px solid rgba(245, 200, 66, 0.08);
             border-radius: 12px;
             padding: 8px;
             text-align: center;
             font-size: 13px;
             font-weight: 700;
-            color: #ffd966;
+            color: #f5c842;
             margin-bottom: 12px;
         }
         .case-container {
-            background: #121216;
+            background: #222222;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 16px;
@@ -681,7 +682,7 @@
         }
         .case-item {
             min-width: 120px;
-            background: #0a0a0f;
+            background: #1a1a1a;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 10px;
@@ -695,7 +696,7 @@
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
-            background: #0a0a0f;
+            background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container {
             width: 100%;
@@ -712,20 +713,20 @@
         .case-item .case-price {
             font-size: 10px;
             font-weight: 600;
-            color: #4a8af4;
+            color: #f5c842;
         }
         .case-item.highlight {
-            border-color: #ffd700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.20);
+            border-color: #f5c842;
+            box-shadow: 0 0 30px rgba(245, 200, 66, 0.15);
             transform: scale(1.06);
         }
         .spin-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #ffd700, #f7971e);
+            background: #f5c842;
             border: none;
             border-radius: 14px;
-            color: #0a0a0f;
+            color: #1a1a1a;
             font-size: 16px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
@@ -749,7 +750,7 @@
             right: 0;
             max-width: 430px;
             margin: 0 auto;
-            background: rgba(10, 10, 15, 0.94);
+            background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(16px);
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
@@ -793,10 +794,10 @@
             transition: 0.15s;
         }
         .bottom-nav .nav-item.active {
-            color: #4a8af4;
+            color: #f5c842;
         }
         .bottom-nav .nav-item.active .nav-icon svg {
-            stroke: #4a8af4;
+            stroke: #f5c842;
         }
         .bottom-nav .nav-item.active::after {
             content: '';
@@ -807,14 +808,14 @@
             width: 20px;
             height: 3px;
             border-radius: 3px;
-            background: #4a8af4;
+            background: #f5c842;
         }
         .bottom-nav .nav-item .badge {
             position: absolute;
             top: 2px;
             right: 4px;
-            background: #4a8af4;
-            color: #fff;
+            background: #f5c842;
+            color: #1a1a1a;
             font-size: 7px;
             font-weight: 700;
             width: 16px;
@@ -823,7 +824,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1.5px solid #0a0a0f;
+            border: 1.5px solid #1a1a1a;
         }
 
         /* TOAST */
@@ -832,7 +833,7 @@
             top: 74px;
             left: 50%;
             transform: translateX(-50%);
-            background: #181820;
+            background: #222222;
             border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 8px 20px;
             border-radius: 14px;
@@ -869,12 +870,12 @@
             display: flex;
         }
         .profile-modal-content {
-            background: #14141e;
+            background: #222222;
             border-radius: 20px;
             max-width: 340px;
             width: 100%;
             padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
         }
         .profile-modal-close {
@@ -895,8 +896,8 @@
             border-radius: 50%;
             margin: 4px auto 8px;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: #2a2a2a;
         }
         .profile-avatar img {
             width: 100%;
@@ -964,8 +965,8 @@
             transform: scale(0.94);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #ffd700, #f7971e);
-            color: #0a0a0f;
+            background: #f5c842;
+            color: #1a1a1a;
         }
         .btn-secondary {
             background: rgba(255, 255, 255, 0.04);
@@ -990,7 +991,7 @@
             display: flex;
         }
         .cart-modal-content {
-            background: #14141e;
+            background: #222222;
             border-radius: 20px 20px 0 0;
             max-width: 430px;
             width: 100%;
@@ -1046,7 +1047,7 @@
         }
         .cart-item .item-price {
             font-size: 11px;
-            color: #4a8af4;
+            color: #f5c842;
             font-weight: 600;
         }
         .cart-item .item-remove {
@@ -1077,10 +1078,10 @@
         .btn-checkout {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            background: #f5c842;
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: #1a1a1a;
             font-size: 14px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
@@ -1132,10 +1133,10 @@
         .withdraw-section .withdraw-submit {
             width: 100%;
             padding: 8px;
-            background: #4a8af4;
+            background: #f5c842;
             border: none;
             border-radius: 8px;
-            color: #fff;
+            color: #1a1a1a;
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
@@ -1247,9 +1248,9 @@
             transition: 0.2s;
         }
         .filter-overlay .filter-option.active .check {
-            background: #ffd700;
-            border-color: #ffd700;
-            color: #0a0a0f;
+            background: #f5c842;
+            border-color: #f5c842;
+            color: #1a1a1a;
         }
         .filter-overlay .filter-option .count {
             color: #6e6e80;
@@ -1279,8 +1280,8 @@
             transform: scale(0.96);
         }
         .filter-overlay .filter-actions .apply-filter {
-            background: linear-gradient(135deg, #ffd700, #f7971e);
-            color: #0a0a0f;
+            background: #f5c842;
+            color: #1a1a1a;
         }
         .filter-overlay .filter-actions .reset-filter {
             background: rgba(255, 255, 255, 0.04);
@@ -1325,15 +1326,15 @@
             </div>
         </div>
 
-        <!-- TABS — Подарки, Звезды и Прем, Коллекции -->
+        <!-- TABS — только Подарки, Звезды и Прем, Коллекции -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- SEARCH -->
-        <div class="search-row">
+        <!-- SEARCH — только на главном -->
+        <div class="search-row" id="mainSearchRow">
             <div class="search-box">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
@@ -1341,16 +1342,16 @@
             <span class="chip" id="feedChip">Feed ▼</span>
         </div>
 
-        <!-- FILTER ROW — крупные кнопки как на фото -->
-        <div class="filter-row">
+        <!-- FILTER ROW — только на главном -->
+        <div class="filter-row" id="mainFilterRow">
             <span class="chip active-filter" data-filter="nft" id="filterNft">NFT ✔</span>
             <span class="chip" data-filter="model" id="filterModel">Модель ✔</span>
-            <span class="chip" data-filter="backdrop" id="filterBackdrop">ФОН ✔</span>
-            <span class="chip" data-filter="symbol" id="filterSymbol">СИМВОЛ ✔</span>
+            <span class="chip" data-filter="backdrop" id="filterBackdrop">Фон ✔</span>
+            <span class="chip" data-filter="symbol" id="filterSymbol">Символ ✔</span>
         </div>
 
-        <!-- STATUS -->
-        <div class="status-row">
+        <!-- STATUS — только на главном -->
+        <div class="status-row" id="mainStatusRow">
             <span class="chip active-status">На продаже (0)</span>
             <span class="chip">Хранилище (0)</span>
         </div>
@@ -1362,7 +1363,7 @@
         <div class="orders-section" id="ordersSection">
             <div class="orders-header">
                 <h2>Ордеры</h2>
-                <span style="font-size:12px;color:#4a8af4;font-weight:600;cursor:pointer;">Мои ордеры</span>
+                <span style="font-size:12px;color:#f5c842;font-weight:600;cursor:pointer;">Мои ордеры</span>
             </div>
             <div id="ordersList"></div>
             <div class="create-order">
@@ -1386,7 +1387,7 @@
             <div class="case-container">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                     <span style="font-size:14px;font-weight:700;">Кейс с NFT</span>
-                    <span style="font-size:12px;color:#ffd966;font-weight:600;">200 GRAM за открытие</span>
+                    <span style="font-size:12px;color:#f5c842;font-weight:600;">200 GRAM за открытие</span>
                 </div>
                 <div class="case-track" id="caseTrack"></div>
                 <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
@@ -1703,7 +1704,7 @@
         }
 
         // ============================================================
-        // 4. LOTTIE
+        // 4. LOTTIE — с защитой от ошибок WebView
         // ============================================================
         const lottieLoadQueue = [];
         let isProcessingQueue = false;
@@ -2036,7 +2037,7 @@
         });
 
         // ============================================================
-        // 9. NAVIGATION
+        // 9. NAVIGATION — скрываем поиск и фильтры в других разделах
         // ============================================================
         function switchTab(tab) {
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
@@ -2046,27 +2047,47 @@
             const orders = document.getElementById('ordersSection');
             const game = document.getElementById('gameHub');
 
+            // Элементы только для главного маркета
+            const mainSearch = document.getElementById('mainSearchRow');
+            const mainFilter = document.getElementById('mainFilterRow');
+            const mainStatus = document.getElementById('mainStatusRow');
+
             grid.style.display = 'none';
             orders.classList.remove('active');
             game.classList.remove('active');
 
             if (tab === 'market') {
                 grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
                 renderGrid(document.getElementById('searchInput').value);
             } else if (tab === 'orders') {
                 orders.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
                 renderOrders();
             } else if (tab === 'game') {
                 game.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
                 renderCase();
             } else if (tab === 'vault') {
                 document.getElementById('cartModal').classList.add('open');
                 document.querySelector('.nav-item[data-tab="market"]')?.classList.add('active');
                 document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
                 grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
                 renderGrid(document.getElementById('searchInput').value);
             } else {
                 grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
                 renderGrid(document.getElementById('searchInput').value);
             }
         }
@@ -2239,7 +2260,7 @@
         });
 
         // ============================================================
-        // 15. INIT
+        // 15. INIT — с защитой от ошибок WebView
         // ============================================================
         (function init() {
             try {
