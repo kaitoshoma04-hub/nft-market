@@ -305,7 +305,7 @@
         .detail-buy-btn:active { transform: scale(0.96); }
         .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        /* GAME HUB — лента больше, кнопка выше */
+        /* GAME HUB — увеличенный кейс, кнопка выше */
         .game-hub {
             padding: 0;
             display: none;
@@ -903,7 +903,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB — увеличенный кейс, кнопка выше -->
+        <!-- GAME HUB -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1721,13 +1721,7 @@
         // 13. МОИ ПОДАРКИ
         // ============================================================
         document.getElementById('myGiftsAddBtn').addEventListener('click', function() {
-            try {
-                if (window.Telegram?.WebApp) {
-                    window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
-                } else {
-                    window.open('https://t.me/AllowMarketGifts', '_blank');
-                }
-            } catch(e) { window.open('https://t.me/AllowMarketGifts', '_blank'); }
+            openGiftBot();
         });
 
         // ============================================================
@@ -1835,6 +1829,18 @@
             toast._timer = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
+        function openGiftBot() {
+            try {
+                if (window.Telegram?.WebApp) {
+                    window.Telegram.WebApp.openLink('https://t.me/MrktToGifts');
+                } else {
+                    window.open('https://t.me/MrktToGifts', '_blank');
+                }
+            } catch(e) {
+                window.open('https://t.me/MrktToGifts', '_blank');
+            }
+        }
+
         document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
 
         document.getElementById('profileBtn').addEventListener('click', function() {
@@ -1846,15 +1852,7 @@
             if (e.target === e.currentTarget) document.getElementById('profileModal').classList.remove('open');
         });
 
-        document.getElementById('addGiftBtn').addEventListener('click', () => {
-            try {
-                if (window.Telegram?.WebApp) {
-                    window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
-                } else {
-                    window.open('https://t.me/AllowMarketGifts', '_blank');
-                }
-            } catch(e) { window.open('https://t.me/AllowMarketGifts', '_blank'); }
-        });
+        document.getElementById('addGiftBtn').addEventListener('click', openGiftBot);
 
         document.getElementById('withdrawToggleBtn').addEventListener('click', () => {
             document.getElementById('withdrawSection').classList.toggle('open');
