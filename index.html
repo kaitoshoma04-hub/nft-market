@@ -48,13 +48,10 @@
             backdrop-filter: blur(8px);
         }
         .header-left h1 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #4a8af4;
+            letter-spacing: -0.5px;
         }
         .header-right {
             display: flex;
@@ -65,30 +62,30 @@
             background: rgba(255, 255, 255, 0.05);
             border: none;
             color: #8e8ea0;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             transition: 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
         .icon-btn:active {
             transform: scale(0.92);
             background: rgba(255, 255, 255, 0.08);
         }
         .icon-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             stroke: #8e8ea0;
             fill: none;
             stroke-width: 1.8;
         }
         .avatar-btn {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid rgba(255, 255, 255, 0.08);
@@ -111,16 +108,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 18px;
             color: #fff;
             font-weight: 600;
         }
 
-        /* TABS — только Подарки и Коллекции */
+        /* TABS — крупные как на фото */
         .gift-tabs {
             display: flex;
-            gap: 8px;
-            padding: 10px 16px 8px 16px;
+            gap: 10px;
+            padding: 12px 16px 10px 16px;
             overflow-x: auto;
             scrollbar-width: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
@@ -131,15 +128,16 @@
         .gift-tab {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 20px;
+            padding: 10px 22px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             color: #8e8ea0;
             cursor: pointer;
             flex-shrink: 0;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
+            letter-spacing: 0.3px;
         }
         .gift-tab:active {
             transform: scale(0.94);
@@ -150,7 +148,7 @@
             color: #4a8af4;
         }
 
-        /* SEARCH — крупный и стильный */
+        /* SEARCH */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
@@ -217,17 +215,49 @@
             color: #4a8af4;
         }
 
-        /* FILTER ROW */
+        /* FILTER ROW — крупные кнопки как на фото */
         .filter-row {
             display: flex;
-            gap: 6px;
-            padding: 6px 16px 12px 16px;
+            gap: 8px;
+            padding: 8px 16px 14px 16px;
             flex-wrap: wrap;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
         }
         .filter-row .chip {
-            padding: 6px 14px;
-            font-size: 10px;
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.06);
+            color: #8e8ea0;
+            border-radius: 30px;
+        }
+        .filter-row .chip.active-filter {
+            background: rgba(74, 138, 244, 0.15);
+            border-color: rgba(74, 138, 244, 0.25);
+            color: #4a8af4;
+        }
+        .filter-row .chip .check {
+            font-size: 14px;
+            margin-left: 2px;
+        }
+
+        /* STATUS */
+        .status-row {
+            display: flex;
+            gap: 10px;
+            padding: 6px 16px 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .status-row .chip {
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-row .chip.active-status {
+            background: rgba(74, 138, 244, 0.12);
+            border-color: rgba(74, 138, 244, 0.20);
+            color: #4a8af4;
         }
 
         /* NFT GRID */
@@ -590,7 +620,7 @@
             transform: scale(0.94);
         }
 
-        /* GAME HUB — большой кейс */
+        /* GAME HUB */
         .game-hub {
             padding: 10px 12px 16px 12px;
             display: none;
@@ -711,7 +741,7 @@
             cursor: not-allowed;
         }
 
-        /* BOTTOM NAV — увеличенный */
+        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -934,8 +964,8 @@
             transform: scale(0.94);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            color: #fff;
+            background: linear-gradient(135deg, #ffd700, #f7971e);
+            color: #0a0a0f;
         }
         .btn-secondary {
             background: rgba(255, 255, 255, 0.04);
@@ -1127,6 +1157,136 @@
             margin-top: 4px;
         }
 
+        /* FILTER OVERLAY — жёлтая кнопка */
+        .filter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 500;
+            display: none;
+            flex-direction: column;
+            padding: 20px 16px;
+            animation: fadeIn 0.25s ease;
+            overflow-y: auto;
+        }
+        .filter-overlay.open {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .filter-overlay .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 20px;
+        }
+        .filter-overlay .filter-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .filter-overlay .filter-close {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #8e8ea0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .filter-overlay .filter-close:active {
+            transform: scale(0.92);
+        }
+        .filter-overlay .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid transparent;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        .filter-overlay .filter-option:active {
+            transform: scale(0.97);
+        }
+        .filter-overlay .filter-option .check {
+            margin-left: auto;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .filter-overlay .filter-option.active .check {
+            background: #ffd700;
+            border-color: #ffd700;
+            color: #0a0a0f;
+        }
+        .filter-overlay .filter-option .count {
+            color: #6e6e80;
+            font-size: 12px;
+            font-weight: 400;
+            margin-left: 4px;
+        }
+        .filter-overlay .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .filter-overlay .filter-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 14px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .filter-overlay .filter-actions button:active {
+            transform: scale(0.96);
+        }
+        .filter-overlay .filter-actions .apply-filter {
+            background: linear-gradient(135deg, #ffd700, #f7971e);
+            color: #0a0a0f;
+        }
+        .filter-overlay .filter-actions .reset-filter {
+            background: rgba(255, 255, 255, 0.04);
+            color: #8e8ea0;
+        }
+
         @media (max-width: 380px) {
             .case-item {
                 min-width: 100px;
@@ -1139,6 +1299,10 @@
                 padding: 4px 8px;
                 min-width: 50px;
                 font-size: 8px;
+            }
+            .gift-tab {
+                font-size: 12px;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -1161,9 +1325,10 @@
             </div>
         </div>
 
-        <!-- TABS — только Подарки и Коллекции -->
+        <!-- TABS — Подарки, Звезды и Прем, Коллекции -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
+            <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
@@ -1176,17 +1341,17 @@
             <span class="chip" id="feedChip">Feed ▼</span>
         </div>
 
-        <!-- FILTERS -->
+        <!-- FILTER ROW — крупные кнопки как на фото -->
         <div class="filter-row">
-            <span class="chip active-filter" data-filter="nft">NFT ▼</span>
-            <span class="chip" data-filter="model">Модель ▼</span>
-            <span class="chip" data-filter="backdrop">Фон ▼</span>
-            <span class="chip" data-filter="symbol">Символ ▼</span>
+            <span class="chip active-filter" data-filter="nft" id="filterNft">NFT ✔</span>
+            <span class="chip" data-filter="model" id="filterModel">Модель ✔</span>
+            <span class="chip" data-filter="backdrop" id="filterBackdrop">ФОН ✔</span>
+            <span class="chip" data-filter="symbol" id="filterSymbol">СИМВОЛ ✔</span>
         </div>
 
         <!-- STATUS -->
-        <div style="display:flex;gap:10px;padding:6px 16px 10px 16px;border-bottom:1px solid rgba(255,255,255,0.02);">
-            <span class="chip" style="background:rgba(74,138,244,0.10);border-color:rgba(74,138,244,0.15);color:#4a8af4;">На продаже (0)</span>
+        <div class="status-row">
+            <span class="chip active-status">На продаже (0)</span>
             <span class="chip">Хранилище (0)</span>
         </div>
 
@@ -1281,6 +1446,28 @@
                     <div class="error" id="withdrawError">Недостаточно средств</div>
                     <div class="success" id="withdrawSuccess">Заявка отправлена</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- FILTER OVERLAY -->
+        <div class="filter-overlay" id="filterOverlay">
+            <div class="filter-header">
+                <h2>Фильтры</h2>
+                <button class="filter-close" id="filterClose">✕</button>
+            </div>
+            <div id="filterOptionsContainer">
+                <div class="filter-option active"><span>Номер подарка #</span><span class="check">✓</span></div>
+                <div class="filter-option"><span>Сортировать по</span><span class="check"></span></div>
+                <div class="filter-option"><span>Цена</span><span class="check"></span></div>
+                <div class="filter-option"><span>Теги</span><span class="check"></span></div>
+                <div class="filter-option"><span>NFT</span><span class="check"></span></div>
+                <div class="filter-option"><span>Модель</span><span class="check"></span></div>
+                <div class="filter-option"><span>Фон</span><span class="check"></span></div>
+                <div class="filter-option"><span>Символ</span><span class="check"></span></div>
+            </div>
+            <div class="filter-actions">
+                <button class="apply-filter" id="applyFilter">Показать результаты</button>
+                <button class="reset-filter" id="resetFilter">Очистить все</button>
             </div>
         </div>
 
@@ -1516,7 +1703,7 @@
         }
 
         // ============================================================
-        // 4. LOTTIE — с защитой от ошибок WebView
+        // 4. LOTTIE
         // ============================================================
         const lottieLoadQueue = [];
         let isProcessingQueue = false;
@@ -1740,7 +1927,7 @@
         });
 
         // ============================================================
-        // 8. GAME HUB — КЕЙС с автопрокруткой и ценой 200 GRAM
+        // 8. GAME HUB
         // ============================================================
         let caseItems = [];
 
@@ -1812,7 +1999,6 @@
 
             items.forEach(el => el.classList.remove('highlight'));
 
-            // усиленная прокрутка с эффектом
             let extraScrolls = 0;
             const maxExtra = 6;
             const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 110);
@@ -1892,7 +2078,57 @@
         });
 
         // ============================================================
-        // 10. PROFILE, BELL, TOAST
+        // 10. FILTER OVERLAY
+        // ============================================================
+        document.getElementById('filterNft').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.add('open');
+        });
+        document.getElementById('filterModel').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.add('open');
+        });
+        document.getElementById('filterBackdrop').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.add('open');
+        });
+        document.getElementById('filterSymbol').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.add('open');
+        });
+
+        document.getElementById('filterClose').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.remove('open');
+        });
+        document.getElementById('filterOverlay').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('open');
+        });
+
+        document.querySelectorAll('.filter-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const check = this.querySelector('.check');
+                if (this.classList.contains('active')) {
+                    check.textContent = '✓';
+                } else {
+                    check.textContent = '';
+                }
+            });
+        });
+
+        document.getElementById('applyFilter').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.remove('open');
+            showToast('Фильтры применены');
+        });
+        document.getElementById('resetFilter').addEventListener('click', function() {
+            document.querySelectorAll('.filter-option').forEach(opt => {
+                opt.classList.remove('active');
+                opt.querySelector('.check').textContent = '';
+            });
+            document.querySelector('.filter-option:first-child').classList.add('active');
+            document.querySelector('.filter-option:first-child .check').textContent = '✓';
+            document.getElementById('filterOverlay').classList.remove('open');
+            showToast('Фильтры сброшены');
+        });
+
+        // ============================================================
+        // 11. PROFILE, BELL, TOAST
         // ============================================================
         const toast = document.getElementById('toast');
 
@@ -1968,7 +2204,7 @@
         });
 
         // ============================================================
-        // 11. CART MODAL
+        // 12. CART MODAL
         // ============================================================
         document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList
             .remove('open'));
@@ -1989,29 +2225,21 @@
         });
 
         // ============================================================
-        // 12. SEARCH
+        // 13. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             renderGrid(this.value);
         });
 
         // ============================================================
-        // 13. FILTER CHIPS
+        // 14. FEED CHIP
         // ============================================================
         document.getElementById('feedChip').addEventListener('click', function() {
             this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed ▼';
         });
-        document.querySelectorAll('.filter-row .chip').forEach(chip => {
-            chip.addEventListener('click', function() {
-                document.querySelectorAll('.filter-row .chip').forEach(c => c.classList.remove(
-                'active-filter'));
-                this.classList.add('active-filter');
-                showToast(`Фильтр: ${this.textContent}`);
-            });
-        });
 
         // ============================================================
-        // 14. INIT — с защитой от ошибок WebView
+        // 15. INIT
         // ============================================================
         (function init() {
             try {
@@ -2041,7 +2269,6 @@
                 } catch (e) {}
                 updateAvatar(null);
 
-                // обработка ошибок WebView
                 window.addEventListener('error', function(e) {
                     console.warn('WebView error caught:', e.message);
                     return true;
@@ -2049,7 +2276,6 @@
 
             } catch (e) {
                 console.warn('Init error:', e);
-                // повторная попытка через 500ms
                 setTimeout(() => {
                     try {
                         allNFTs = generateNFTs();
