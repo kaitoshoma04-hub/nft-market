@@ -305,7 +305,7 @@
         .detail-buy-btn:active { transform: scale(0.96); }
         .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        /* GAME HUB — лента больше, кнопка вплотную */
+        /* GAME HUB — лента больше, кнопка выше */
         .game-hub {
             padding: 0;
             display: none;
@@ -315,28 +315,28 @@
         .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            padding: 4px 14px 3px 14px;
+            padding: 6px 14px 4px 14px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
             flex-shrink: 0;
         }
         .game-hub .hub-header h2 {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
             color: #f5c842;
             letter-spacing: 0.3px;
         }
         .game-hub .hub-header p {
-            font-size: 8px;
+            font-size: 10px;
             color: #8e8ea0;
             margin-top: 0px;
         }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
             border-bottom: 1px solid rgba(245,200,66,0.08);
-            padding: 3px;
+            padding: 4px;
             text-align: center;
-            font-size: 9px;
+            font-size: 11px;
             font-weight: 700;
             color: #f5c842;
             flex-shrink: 0;
@@ -347,14 +347,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 4px 4px 0px 4px;
+            padding: 6px 4px 4px 4px;
             overflow: hidden;
             min-height: 0;
         }
         .case-track {
             display: flex;
-            gap: 10px;
-            padding: 4px 4px 4px 4px;
+            gap: 12px;
+            padding: 6px 4px 8px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -364,62 +364,62 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 130px;
+            min-width: 150px;
             background: #222222;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 84px; height: 84px;
+            width: 100px; height: 100px;
             margin: 0 auto;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
         .case-item .case-name {
-            font-size: 9px;
+            font-size: 10px;
             color: #8e8ea0;
-            margin-top: 4px;
+            margin-top: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .case-item .case-price {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 600;
             color: #f5c842;
         }
         .case-item.highlight {
             border-color: #f5c842;
-            box-shadow: 0 0 20px rgba(245,200,66,0.12);
+            box-shadow: 0 0 24px rgba(245,200,66,0.15);
             transform: scale(1.05);
         }
         #spinResult {
             text-align: center;
-            padding: 2px;
-            font-size: 9px;
+            padding: 4px;
+            font-size: 10px;
             color: #6e6e80;
             flex-shrink: 0;
             background: #1a1a1a;
-            min-height: 16px;
+            min-height: 20px;
         }
         .spin-btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: #f5c842;
             border: none;
             border-radius: 0;
             color: #1a1a1a;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 0px;
+            margin-top: 2px;
             transition: 0.15s;
             flex-shrink: 0;
         }
@@ -819,8 +819,8 @@
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 110px; }
-            .case-item .case-lottie { width: 70px; height: 70px; }
+            .case-item { min-width: 120px; }
+            .case-item .case-lottie { width: 80px; height: 80px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
         }
@@ -903,7 +903,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB — лента больше, кнопка вплотную -->
+        <!-- GAME HUB — увеличенный кейс, кнопка выше -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1480,7 +1480,7 @@
 
             let extraScrolls = 0;
             const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 100);
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 120);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
             const extraInterval = setInterval(() => {
@@ -1507,7 +1507,7 @@
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 100);
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 120);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
             }, 120);
         });
