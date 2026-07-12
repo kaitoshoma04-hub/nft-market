@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Allow Market — WEB Лидерборд</title>
+    <title>Allow Market — Ордеры и NFT</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
+    </script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a0f;
@@ -21,7 +22,6 @@
             justify-content: center;
             -webkit-font-smoothing: antialiased;
         }
-
         .app {
             max-width: 430px;
             width: 100%;
@@ -30,13 +30,12 @@
             padding-bottom: 72px;
             position: relative;
         }
-
-        /* хедер */
+        /* header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px 8px 16px;
+            padding: 10px 14px 6px 14px;
             background: rgba(10, 10, 15, 0.92);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
@@ -44,328 +43,151 @@
             z-index: 50;
             backdrop-filter: blur(8px);
         }
-
         .header-left {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
-        .brand-badge {
-            background: rgba(74, 138, 244, 0.12);
-            border: 1px solid rgba(74, 138, 244, 0.20);
-            border-radius: 20px;
-            padding: 2px 10px 2px 8px;
-            font-size: 9px;
+        .header-left h1 {
+            font-size: 17px;
             font-weight: 700;
-            color: #4a8af4;
-            letter-spacing: 0.3px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-        }
-
-        .brand-badge span {
-            font-size: 10px;
-        }
-
-        .header h1 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
+            color: #fff;
             letter-spacing: -0.3px;
         }
-
+        .close-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #8e8ea0;
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .close-btn:active { transform: scale(0.94); }
         .header-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
         }
-
-        .prize-btn {
-            background: rgba(255, 215, 0, 0.08);
-            border: 1px solid rgba(255, 215, 0, 0.15);
-            padding: 4px 12px 4px 8px;
+        .badge-icon {
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 9px;
-            font-weight: 700;
-            color: #ffd966;
-            cursor: pointer;
-            transition: 0.2s;
-            white-space: nowrap;
+            padding: 2px 10px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #8e8ea0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
-
-        .prize-btn svg {
-            width: 12px;
-            height: 12px;
-            fill: none;
-            stroke: #ffd966;
-            stroke-width: 2.2;
-        }
-
-        .prize-btn:active {
-            transform: scale(0.95);
-        }
-
         .icon-btn {
             background: transparent;
             border: none;
             color: #8e8ea0;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: 0.2s;
-            position: relative;
         }
+        .icon-btn:active { background: rgba(255,255,255,0.04); }
+        .icon-btn svg { width: 18px; height: 18px; stroke: #8e8ea0; fill: none; stroke-width: 1.8; }
 
-        .icon-btn:active {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .icon-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: #8e8ea0;
-            fill: none;
-            stroke-width: 1.8;
-        }
-
-        .icon-btn .dot {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            width: 6px;
-            height: 6px;
-            background: #4a8af4;
-            border-radius: 50%;
-            border: 1.5px solid #0a0a0f;
-        }
-
-        /* секция веб-лидерборд */
-        .leaderboard-banner {
-            background: linear-gradient(145deg, #14141e, #1a1a26);
-            margin: 10px 12px 6px 12px;
-            border-radius: 14px;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .leaderboard-banner .lb-left {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-        }
-
-        .leaderboard-banner .lb-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.2px;
-        }
-
-        .leaderboard-banner .lb-sub {
-            font-size: 9px;
-            color: #6e6e80;
-            font-weight: 500;
-        }
-
-        .leaderboard-banner .lb-prize {
-            background: rgba(74, 138, 244, 0.08);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            color: #4a8af4;
-            border: 1px solid rgba(74, 138, 244, 0.10);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .leaderboard-banner .lb-prize .arrow {
-            font-size: 12px;
-        }
-
-        /* категории-подарки */
+        /* tabs */
         .gift-tabs {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px 4px 12px;
+            gap: 6px;
+            padding: 8px 12px 4px 12px;
             overflow-x: auto;
             white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
-
-        .gift-tabs::-webkit-scrollbar {
-            display: none;
-        }
-
+        .gift-tabs::-webkit-scrollbar { display: none; }
         .gift-tab {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
             padding: 4px 14px;
             border-radius: 30px;
             font-size: 10px;
             font-weight: 600;
             color: #8e8ea0;
             cursor: pointer;
-            transition: all 0.2s;
             flex-shrink: 0;
             font-family: 'Inter', sans-serif;
+            transition: 0.2s;
         }
+        .gift-tab.active { background: rgba(74,138,244,0.12); border-color: rgba(74,138,244,0.20); color: #4a8af4; }
+        .gift-tab:active { transform: scale(0.95); }
 
-        .gift-tab.active {
-            background: rgba(74, 138, 244, 0.12);
-            border-color: rgba(74, 138, 244, 0.20);
-            color: #4a8af4;
-        }
-
-        .gift-tab:active {
-            transform: scale(0.95);
-        }
-
-        .gift-tab .count {
-            color: #6e6e80;
-            font-weight: 400;
-            font-size: 9px;
-        }
-
-        /* поиск */
+        /* search */
         .search-row {
-            padding: 6px 12px 10px 12px;
+            padding: 6px 12px 8px 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
-
         .search-box {
             flex: 1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: 30px;
-            padding: 6px 14px;
+            padding: 5px 12px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
-        .search-box svg {
-            width: 14px;
-            height: 14px;
-            stroke: #6e6e80;
-            fill: none;
-            stroke-width: 2;
-            flex-shrink: 0;
-        }
-
+        .search-box svg { width: 14px; height: 14px; stroke: #6e6e80; }
         .search-box input {
             background: transparent;
             border: none;
             outline: none;
-            color: #ffffff;
+            color: #fff;
             font-size: 11px;
             font-family: 'Inter', sans-serif;
             width: 100%;
         }
-
-        .search-box input::placeholder {
-            color: #6e6e80;
-            font-weight: 400;
-        }
-
-        .filter-chips {
-            display: flex;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
+        .search-box input::placeholder { color: #6e6e80; }
         .chip {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: 20px;
-            padding: 4px 10px;
+            padding: 3px 10px;
             font-size: 9px;
             font-weight: 500;
             color: #8e8ea0;
             cursor: pointer;
-            transition: 0.2s;
             font-family: 'Inter', sans-serif;
+        }
+        .chip:active { transform: scale(0.94); }
+        .filter-row {
             display: flex;
-            align-items: center;
-            gap: 3px;
+            gap: 4px;
+            padding: 4px 12px 8px 12px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
+        .filter-row .chip.active-filter { background: rgba(74,138,244,0.06); border-color: rgba(74,138,244,0.10); color: #4a8af4; }
 
-        .chip:active {
-            transform: scale(0.95);
-        }
-
-        .chip .arrow {
-            font-size: 8px;
-        }
-
-        /* feed */
-        .feed-label {
-            padding: 10px 12px 2px 12px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #6e6e80;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .feed-label .line {
-            flex: 1;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        /* NFT GRID — как на фото 1 в 1 */
+        /* grid */
         .nft-grid {
-            padding: 6px 12px 16px 12px;
+            padding: 8px 12px 12px 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
         .nft-card {
             background: #121216;
             border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             overflow: hidden;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            transition: 0.2s;
         }
-
-        .nft-card:active {
-            transform: scale(0.97);
-        }
-
-        .nft-card-inner {
-            display: flex;
-            flex-direction: column;
-            padding: 8px;
-            gap: 4px;
-            background: #121216;
-        }
-
+        .nft-card:active { transform: scale(0.96); }
+        .nft-card-inner { padding: 8px; display: flex; flex-direction: column; gap: 4px; background: #121216; }
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
@@ -375,179 +197,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
+        .lottie-wrapper .lottie-container { width: 100%; height: 100%; }
+        .nft-name { font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nft-model { font-size: 8px; color: #6e6e80; font-weight: 500; }
+        .nft-price { display: flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: #fff; margin-top: 1px; }
+        .gram-icon { width: 14px; height: 14px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+        .gram-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .status-badge { font-size: 7px; font-weight: 600; padding: 1px 6px; border-radius: 10px; display: inline-block; align-self: flex-start; }
+        .status-badge.sale { color: #4bc88a; background: rgba(75,200,138,0.08); }
+        .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.08); }
+        .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.08); }
 
-        .lottie-wrapper .lottie-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        .nft-info-compact {
-            display: flex;
-            flex-direction: column;
-            gap: 0px;
-        }
-
-        .nft-name-compact {
-            font-size: 11px;
-            font-weight: 700;
-            color: #ffffff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .nft-model-compact {
-            font-size: 8px;
-            color: #6e6e80;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .nft-price-compact {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-top: 1px;
-        }
-
-        .gram-icon {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .gram-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .nft-status-badge {
-            font-size: 7px;
-            font-weight: 600;
-            color: #4bc88a;
-            background: rgba(75, 200, 138, 0.08);
-            padding: 1px 6px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-top: 1px;
-            align-self: flex-start;
-            letter-spacing: 0.3px;
-        }
-
-        .nft-status-badge.sold {
-            color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.08);
-        }
-
-        /* нижняя навигация */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            max-width: 430px;
-            margin: 0 auto;
-            background: rgba(10, 10, 15, 0.94);
-            backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            display: flex;
-            justify-content: space-around;
-            padding: 6px 0 10px 0;
-            z-index: 100;
-        }
-
-        .bottom-nav .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            color: #6e6e80;
-            font-size: 9px;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            transition: color 0.2s;
-            background: none;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            padding: 4px 12px;
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .bottom-nav .nav-item .nav-icon {
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bottom-nav .nav-item .nav-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: #6e6e80;
-            fill: none;
-            stroke-width: 1.8;
-            transition: stroke 0.2s;
-        }
-
-        .bottom-nav .nav-item.active {
-            color: #4a8af4;
-        }
-
-        .bottom-nav .nav-item.active .nav-icon svg {
-            stroke: #4a8af4;
-        }
-
-        .bottom-nav .nav-item.active::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 2px;
-            border-radius: 2px;
-            background: #4a8af4;
-        }
-
-        .bottom-nav .nav-item .badge {
-            position: absolute;
-            top: 2px;
-            right: 4px;
-            background: #4a8af4;
-            color: #fff;
-            font-size: 6px;
-            font-weight: 700;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1.5px solid #0a0a0f;
-        }
-
-        /* детальная карточка */
+        /* detail */
         .detail-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.92);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.92);
             backdrop-filter: blur(20px);
             z-index: 300;
             display: none;
@@ -555,1029 +221,725 @@
             align-items: center;
             padding: 16px;
         }
-
-        .detail-overlay.open {
-            display: flex;
-        }
-
+        .detail-overlay.open { display: flex; }
         .detail-content {
             background: #14141e;
             border-radius: 20px;
             max-width: 380px;
             width: 100%;
             padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.06);
             position: relative;
         }
-
         .detail-close {
             position: absolute;
-            top: 8px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.04);
+            top: 8px; right: 10px;
+            background: rgba(255,255,255,0.04);
             border: none;
             color: #8e8ea0;
-            width: 28px;
-            height: 28px;
+            width: 28px; height: 28px;
             border-radius: 50%;
             font-size: 14px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
         .detail-lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 14px;
             overflow: hidden;
             background: #0a0a0f;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
         }
+        .detail-title { font-size: 14px; font-weight: 700; margin-top: 6px; }
+        .detail-number { font-size: 11px; color: #4a8af4; font-weight: 600; }
+        .detail-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; margin: 4px 0; font-size: 9px; }
+        .detail-stats .stat { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.02); padding: 2px 0; }
+        .detail-stats .stat .label { color: #6e6e80; }
+        .detail-stats .stat .value { color: #fff; font-weight: 500; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .detail-price { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 4px 10px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.04); margin: 4px 0; }
+        .detail-buy-btn { width: 100%; padding: 10px; background: linear-gradient(135deg,#4a8af4,#6c5ce7); border: none; border-radius: 10px; color: #fff; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: 0.2s; margin-top: 4px; }
+        .detail-buy-btn:active { transform: scale(0.97); }
+        .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        .detail-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-top: 6px;
-        }
-
-        .detail-number {
-            font-size: 11px;
-            color: #4a8af4;
-            font-weight: 600;
-        }
-
-        .detail-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px 8px;
-            margin: 4px 0;
-            font-size: 9px;
-        }
-
-        .detail-stats .stat {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-            padding: 2px 0;
-        }
-
-        .detail-stats .stat .label {
-            color: #6e6e80;
-        }
-
-        .detail-stats .stat .value {
-            color: #ffffff;
-            font-weight: 500;
-            max-width: 60%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .detail-price {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 4px 10px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin: 4px 0;
-        }
-
-        .detail-buy-btn {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 4px;
-        }
-
-        .detail-buy-btn:active {
-            transform: scale(0.97);
-        }
-
-        .detail-buy-btn.sold {
-            background: rgba(255, 255, 255, 0.04);
-            color: #6e6e80;
-        }
-
-        /* корзина */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            z-index: 200;
+        /* orders */
+        .orders-section {
+            padding: 8px 14px 16px 14px;
             display: none;
-            justify-content: center;
-            align-items: flex-end;
         }
-
-        .cart-modal.open {
-            display: flex;
-        }
-
-        .cart-modal-content {
-            background: #14141e;
-            border-radius: 20px 20px 0 0;
-            max-width: 430px;
-            width: 100%;
-            max-height: 70vh;
-            padding: 20px 16px 24px;
-            overflow-y: auto;
-        }
-
-        .cart-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            padding-bottom: 10px;
-            margin-bottom: 12px;
-        }
-
-        .cart-close {
-            background: rgba(255, 255, 255, 0.04);
-            border: none;
-            color: #8e8ea0;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-        }
-
-        .cart-item .item-info {
-            flex: 1;
-        }
-
-        .cart-item .item-name {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .cart-item .item-collection {
-            font-size: 9px;
-            color: #6e6e80;
-        }
-
-        .cart-item .item-price {
-            font-size: 11px;
-            color: #4a8af4;
-            font-weight: 600;
-        }
-
-        .cart-item .item-remove {
-            background: rgba(255, 107, 107, 0.08);
-            border: none;
-            color: #ff6b6b;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0 6px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            margin-top: 6px;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .btn-checkout {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            border: none;
+        .orders-section.active { display: block; }
+        .orders-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .orders-header h2 { font-size: 16px; font-weight: 700; }
+        .orders-header .my-orders { font-size: 11px; color: #4a8af4; font-weight: 600; cursor: pointer; }
+        .order-item {
+            background: #121216;
             border-radius: 12px;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            margin-top: 8px;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .order-item .order-info { display: flex; flex-direction: column; gap: 1px; }
+        .order-item .order-name { font-size: 12px; font-weight: 600; }
+        .order-item .order-qty { font-size: 9px; color: #6e6e80; }
+        .order-item .order-price { font-size: 12px; font-weight: 700; color: #4a8af4; }
+        .order-item .order-actions { display: flex; gap: 6px; }
+        .order-item .order-actions button { background: rgba(255,255,255,0.04); border: none; padding: 4px 10px; border-radius: 16px; font-size: 9px; font-weight: 600; color: #8e8ea0; cursor: pointer; font-family: 'Inter', sans-serif; }
+        .order-item .order-actions button:active { transform: scale(0.94); }
+        .order-item .order-actions .sell-btn { color: #4a8af4; background: rgba(74,138,244,0.08); }
 
-        .btn-checkout:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
+        .create-order {
+            margin-top: 18px;
+            background: #121216;
+            border-radius: 14px;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.04);
         }
+        .create-order h3 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
 
-        .empty-cart {
-            text-align: center;
-            padding: 20px;
+        /* bottom nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            max-width: 430px;
+            margin: 0 auto;
+            background: rgba(10,10,15,0.94);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            justify-content: space-around;
+            padding: 4px 0 10px 0;
+            z-index: 100;
+        }
+        .bottom-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
             color: #6e6e80;
-            font-size: 12px;
+            font-size: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            padding: 4px 10px;
+            position: relative;
         }
-
-        /* утилиты */
-        .hidden {
-            display: none !important;
-        }
+        .bottom-nav .nav-item .nav-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+        .bottom-nav .nav-item .nav-icon svg { width: 18px; height: 18px; stroke: #6e6e80; fill: none; stroke-width: 1.8; }
+        .bottom-nav .nav-item.active { color: #4a8af4; }
+        .bottom-nav .nav-item.active .nav-icon svg { stroke: #4a8af4; }
+        .bottom-nav .nav-item.active::after { content: ''; position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 16px; height: 2px; border-radius: 2px; background: #4a8af4; }
+        .bottom-nav .nav-item .badge { position: absolute; top: 0; right: 2px; background: #4a8af4; color: #fff; font-size: 6px; font-weight: 700; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid #0a0a0f; }
 
         .toast {
-            position: fixed;
-            top: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #181820;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 8px 18px;
-            border-radius: 12px;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 500;
-            z-index: 999;
-            backdrop-filter: blur(12px);
-            opacity: 0;
-            transition: 0.25s ease;
-            pointer-events: none;
-            white-space: nowrap;
+            position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+            background: #181820; border: 1px solid rgba(255,255,255,0.06);
+            padding: 6px 18px; border-radius: 12px;
+            color: #fff; font-size: 11px; font-weight: 500;
+            z-index: 999; backdrop-filter: blur(12px);
+            opacity: 0; transition: 0.25s; pointer-events: none;
         }
+        .toast.show { opacity: 1; }
 
-        .toast.show {
-            opacity: 1;
-        }
-
-        /* профиль */
+        /* profile modal */
         .profile-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(20px);
-            z-index: 400;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+            z-index: 400; display: none; justify-content: center; align-items: center; padding: 20px;
         }
-
-        .profile-modal.open {
-            display: flex;
-        }
-
+        .profile-modal.open { display: flex; }
         .profile-modal-content {
-            background: #14141e;
-            border-radius: 18px;
-            max-width: 340px;
-            width: 100%;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
+            background: #14141e; border-radius: 18px; max-width: 340px; width: 100%;
+            padding: 20px; border: 1px solid rgba(255,255,255,0.05); text-align: center;
         }
+        .profile-modal-close { float: right; background: transparent; border: none; color: #8e8ea0; font-size: 16px; cursor: pointer; }
+        .profile-avatar { width: 56px; height: 56px; border-radius: 50%; margin: 4px auto 6px; background: linear-gradient(135deg,#4a8af4,#6c5ce7); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; }
+        .profile-name { font-size: 15px; font-weight: 700; }
+        .profile-id { font-size: 10px; color: #6e6e80; }
+        .profile-balance { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 6px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); margin: 6px 0; }
+        .profile-balance .mini-gram { width: 16px; height: 16px; border-radius: 50%; overflow: hidden; }
+        .profile-balance .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
+        .btn-row { display: flex; gap: 6px; margin: 6px 0; }
+        .btn-row button { flex: 1; padding: 6px; border-radius: 10px; border: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 10px; cursor: pointer; transition: 0.2s; }
+        .btn-primary { background: linear-gradient(135deg,#4a8af4,#6c5ce7); color: #fff; }
+        .btn-secondary { background: rgba(255,255,255,0.04); color: #8e8ea0; border: 1px solid rgba(255,255,255,0.04); }
+        .btn-row button:active { transform: scale(0.96); }
 
-        .profile-modal-close {
-            float: right;
-            background: transparent;
-            border: none;
-            color: #8e8ea0;
-            font-size: 16px;
-            cursor: pointer;
+        .cart-modal {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+            z-index: 200; display: none; justify-content: center; align-items: flex-end;
         }
-
-        .profile-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin: 4px auto 6px;
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #fff;
+        .cart-modal.open { display: flex; }
+        .cart-modal-content {
+            background: #14141e; border-radius: 20px 20px 0 0;
+            max-width: 430px; width: 100%; max-height: 60vh;
+            padding: 16px; overflow-y: auto;
         }
-
-        .profile-name {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .profile-id {
-            font-size: 11px;
-            color: #6e6e80;
-        }
-
-        .profile-balance {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin: 8px 0;
-        }
-
-        .profile-balance .mini-gram {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .profile-balance .mini-gram img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 6px;
-            margin: 6px 0;
-        }
-
-        .btn-row button {
-            flex: 1;
-            padding: 8px;
-            border-radius: 10px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.04);
-            color: #8e8ea0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .btn-row button:active {
-            transform: scale(0.96);
-        }
-
-        .withdraw-section {
-            display: none;
-            margin-top: 8px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .withdraw-section.open {
-            display: block;
-        }
-
-        .withdraw-section input {
-            width: 100%;
-            padding: 6px 10px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 6px;
-            color: #fff;
-            font-size: 11px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            margin-bottom: 6px;
-        }
-
-        .withdraw-section input::placeholder {
-            color: #6e6e80;
-        }
-
-        .withdraw-section .withdraw-submit {
-            width: 100%;
-            padding: 6px;
-            background: #4a8af4;
-            border: none;
-            border-radius: 6px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-        }
+        .cart-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 8px; margin-bottom: 8px; }
+        .cart-close { background: rgba(255,255,255,0.04); border: none; color: #8e8ea0; width: 28px; height: 28px; border-radius: 50%; font-size: 16px; cursor: pointer; }
+        .cart-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .cart-item .item-info { flex: 1; }
+        .cart-item .item-name { font-size: 11px; font-weight: 600; }
+        .cart-item .item-collection { font-size: 8px; color: #6e6e80; }
+        .cart-item .item-price { font-size: 10px; color: #4a8af4; font-weight: 600; }
+        .cart-item .item-remove { background: rgba(255,107,107,0.08); border: none; color: #ff6b6b; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; cursor: pointer; }
+        .cart-total { display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 4px; font-weight: 700; font-size: 13px; }
+        .btn-checkout { width: 100%; padding: 8px; background: linear-gradient(135deg,#4a8af4,#6c5ce7); border: none; border-radius: 10px; color: #fff; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; margin-top: 4px; }
+        .btn-checkout:disabled { opacity: 0.3; }
+        .empty-cart { text-align: center; padding: 16px; color: #6e6e80; font-size: 11px; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="app" id="app">
-
-        <!-- HEADER -->
-        <div class="header">
-            <div class="header-left">
-                <h1>Allow Market</h1>
-                <div class="brand-badge"><span>⚡</span> WEB Лидерборд</div>
-            </div>
-            <div class="header-right">
-                <div class="prize-btn" id="prizeBtn">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                    $50,000
-                </div>
-                <button class="icon-btn" id="bellBtn">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                    <span class="dot"></span>
-                </button>
-                <div class="icon-btn" id="profileBtn" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4a8af4,#6c5ce7);color:#fff;font-size:12px;font-weight:700;">
-                    👤
-                </div>
-            </div>
+<div class="app">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <button class="close-btn" id="closeBtn">Закрыть</button>
+            <h1>Allow Market</h1>
         </div>
-
-        <!-- Баннер лидерборда -->
-        <div class="leaderboard-banner">
-            <div class="lb-left">
-                <div class="lb-title">WEB Лидерборд и задания</div>
-                <div class="lb-sub">$50,000 призовой фонд</div>
-            </div>
-            <div class="lb-prize">Узнать больше <span class="arrow">→</span></div>
-        </div>
-
-        <!-- Подарки / Звезды и Прем / Коллекции -->
-        <div class="gift-tabs">
-            <span class="gift-tab active">Подарки</span>
-            <span class="gift-tab">Звезды и Прем</span>
-            <span class="gift-tab">Коллекции</span>
-        </div>
-
-        <!-- Поиск -->
-        <div class="search-row">
-            <div class="search-box">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
-            </div>
-            <div class="filter-chips">
-                <span class="chip" id="filterChip">Feed <span class="arrow">▼</span></span>
-            </div>
-        </div>
-
-        <!-- Фильтры NFT ▼ Модель ▼ Фон ▼ Символ ▼ -->
-        <div style="display:flex;gap:4px;padding:0 12px 6px 12px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.02);">
-            <span class="chip" style="background:rgba(74,138,244,0.06);border-color:rgba(74,138,244,0.10);color:#4a8af4;">NFT ▼</span>
-            <span class="chip">Модель ▼</span>
-            <span class="chip">Фон ▼</span>
-            <span class="chip">Символ ▼</span>
-        </div>
-
-        <!-- Feed лейбл -->
-        <div class="feed-label">
-            <span>Feed</span>
-            <span class="line"></span>
-        </div>
-
-        <!-- NFT GRID -->
-        <div class="nft-grid" id="nftGrid"></div>
-
-        <!-- DETAIL OVERLAY -->
-        <div class="detail-overlay" id="detailOverlay">
-            <div class="detail-content">
-                <button class="detail-close" id="detailClose">✕</button>
-                <div class="detail-lottie-wrapper" id="detailLottieWrapper">
-                    <div id="detailLottie" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:#6e6e80;">🎁</div>
-                </div>
-                <div class="detail-title" id="detailTitle">Collection</div>
-                <div class="detail-number" id="detailNumber">#0000</div>
-                <div class="detail-stats" id="detailStats">
-                    <div class="stat"><span class="label">Owner</span><span class="value" id="detailOwner">—</span></div>
-                    <div class="stat"><span class="label">Model</span><span class="value" id="detailModel">—</span></div>
-                    <div class="stat"><span class="label">Backdrop</span><span class="value" id="detailBackdrop">—</span></div>
-                    <div class="stat"><span class="label">Symbol</span><span class="value" id="detailSymbol">—</span></div>
-                    <div class="stat"><span class="label">Issued</span><span class="value" id="detailIssued">—</span></div>
-                    <div class="stat"><span class="label">Status</span><span class="value" id="detailStatus">—</span></div>
-                </div>
-                <div class="detail-price" id="detailPrice">
-                    <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
-                    <span id="detailPriceAmount">0.00 GRAM</span>
-                </div>
-                <button class="detail-buy-btn" id="detailBuyBtn">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <!-- CART MODAL -->
-        <div class="cart-modal" id="cartModal">
-            <div class="cart-modal-content">
-                <div class="cart-modal-header">
-                    <h2 style="font-size:16px;">Корзина</h2>
-                    <button class="cart-close" id="cartClose">✕</button>
-                </div>
-                <div id="cartItems"></div>
-                <div class="cart-total">
-                    <span>Итого</span>
-                    <span><span id="modalCartTotal">0.00</span> GRAM</span>
-                </div>
-                <button class="btn-checkout" id="checkoutBtn">Перейти к оплате</button>
-            </div>
-        </div>
-
-        <!-- PROFILE MODAL -->
-        <div class="profile-modal" id="profileModal">
-            <div class="profile-modal-content">
-                <button class="profile-modal-close" id="profileModalClose">✕</button>
-                <div class="profile-avatar" id="profileAvatar">👤</div>
-                <div class="profile-name" id="profileName">Пользователь</div>
-                <div class="profile-id" id="profileId">ID: —</div>
-                <div class="profile-balance">
-                    <span class="mini-gram"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
-                    <span id="profileBalance">0.00</span> GRAM
-                </div>
-                <div class="btn-row">
-                    <button class="btn-primary" id="addGiftBtn">Добавить подарок</button>
-                    <button class="btn-secondary" id="withdrawToggleBtn">Вывести</button>
-                </div>
-                <div class="withdraw-section" id="withdrawSection">
-                    <input type="text" id="walletInput" placeholder="Адрес кошелька TON">
-                    <input type="number" id="amountInput" placeholder="Сумма (GRAM)" step="0.01" min="0.01">
-                    <button class="withdraw-submit" id="withdrawSubmitBtn">Вывести</button>
-                    <div style="font-size:10px;color:#ff6b6b;margin-top:4px;display:none;" id="withdrawError">Недостаточно средств</div>
-                    <div style="font-size:10px;color:#4bc88a;margin-top:4px;display:none;" id="withdrawSuccess">Заявка отправлена!</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TOAST -->
-        <div class="toast" id="toast">Нет новых уведомлений</div>
-
-        <!-- BOTTOM NAV -->
-        <div class="bottom-nav">
-            <button class="nav-item active" data-tab="market">
-                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
-                <span>Market</span>
+        <div class="header-right">
+            <span class="badge-icon">Закрыто: 1512</span>
+            <button class="icon-btn" id="bellBtn">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             </button>
-            <button class="nav-item" data-tab="orders">
-                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-                <span>Ордеры</span>
-            </button>
-            <button class="nav-item" data-tab="game">
-                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/><path d="M12 6v12"/><circle cx="12" cy="12" r="9"/></svg></span>
-                <span>Игровой хаб</span>
-            </button>
-            <button class="nav-item" data-tab="tasks">
-                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
-                <span>Задания</span>
-            </button>
-            <button class="nav-item" data-tab="vault">
-                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
-                <span>Хранилище</span>
-                <span class="badge" id="navCartBadge">0</span>
-            </button>
+            <div class="icon-btn" id="profileBtn" style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#4a8af4,#6c5ce7);color:#fff;font-size:12px;font-weight:700;">👤</div>
         </div>
     </div>
 
-    <script>
-        // ============================================================
-        // 1. DATA — точное соответствие с фото (номера, цены, коллекции)
-        // ============================================================
-        const COLLECTIONS_DATA = {
-            "Liberty Figure": { icon: "🗽" },
-            "Jack-in-the-Box": { icon: "🎭" },
-            "Spy Agaric": { icon: "🍄" }
-        };
+    <!-- TABS -->
+    <div class="gift-tabs">
+        <span class="gift-tab active" data-tab="gifts">Подарки</span>
+        <span class="gift-tab" data-tab="stickers">Стикеры</span>
+        <span class="gift-tab" data-tab="collections">Коллекции</span>
+        <span class="gift-tab" data-tab="channels">Каналы</span>
+    </div>
 
-        const NFT_DATA = [{
-            name: "Liberty Figure #234020",
-            collection: "Liberty Figure",
-            number: 234020,
-            price: 4.9,
-            status: "for-sale",
-            lottie: "https://nft.fragment.com/gift/libertyfigure-234020.lottie.json",
-            model: "Classic",
-            backdrop: "Starlight",
-            symbol: "Crescent",
-            owner: "UQC0hzwcQrtP58TS6ugiYVQ8owyMRw5mdyy8sBoQwnuH2vVV",
-            issued: "1 of 1973"
-        }, {
-            name: "Jack-in-the-Box #38228",
-            collection: "Jack-in-the-Box",
-            number: 38228,
-            price: 3.39,
-            status: "for-sale",
-            lottie: "https://nft.fragment.com/gift/jackinthebox-38228.lottie.json",
-            model: "Classic",
-            backdrop: "Midnight",
-            symbol: "Pentagram",
-            owner: "UQDPxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxX",
-            issued: "2 of 1973"
-        }, {
-            name: "Spy Agaric #9576",
-            collection: "Spy Agaric",
-            number: 9576,
-            price: 61.22,
-            status: "on-auction",
-            lottie: "https://nft.fragment.com/gift/spyagaric-9576.lottie.json",
-            model: "Rare",
-            backdrop: "Cosmic",
-            symbol: "Baphomet",
-            owner: "UQAxHk49EgqVXx2wRgPwGqxPzVzLnLxY9mQxqQyRnS7vXxY",
-            issued: "3 of 1973"
-        }];
+    <!-- SEARCH -->
+    <div class="search-row">
+        <div class="search-box">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
+        </div>
+        <span class="chip" id="feedChip">Feed ▼</span>
+    </div>
 
-        // ============================================================
-        // 2. STATE
-        // ============================================================
-        let userBalance = 12.50;
-        let userCart = [];
-        let currentUserId = 'guest';
-        let detailNft = null;
-        let toastTimer = null;
+    <!-- FILTERS -->
+    <div class="filter-row">
+        <span class="chip active-filter">NFT ▼</span>
+        <span class="chip">Модель ▼</span>
+        <span class="chip">Фон ▼</span>
+        <span class="chip">Символ ▼</span>
+    </div>
 
-        // ============================================================
-        // 3. CART
-        // ============================================================
-        function getCartKey() { return `allow_cart_${currentUserId}`; }
+    <!-- STATUS TABS -->
+    <div style="display:flex;gap:8px;padding:4px 12px 6px 12px;border-bottom:1px solid rgba(255,255,255,0.02);">
+        <span class="chip" style="background:rgba(74,138,244,0.06);border-color:rgba(74,138,244,0.10);color:#4a8af4;">На продаже (0)</span>
+        <span class="chip">Хранилище (0)</span>
+    </div>
 
-        function loadCart() {
-            const saved = localStorage.getItem(getCartKey());
-            if (saved) try { userCart = JSON.parse(saved); } catch (e) { userCart = []; }
-            else userCart = [];
-            updateCartUI();
-        }
+    <!-- NFT GRID -->
+    <div class="nft-grid" id="nftGrid"></div>
 
-        function saveCart() {
-            localStorage.setItem(getCartKey(), JSON.stringify(userCart));
-            updateCartUI();
-        }
+    <!-- ORDERS SECTION -->
+    <div class="orders-section" id="ordersSection">
+        <div class="orders-header">
+            <h2>Ордеры</h2>
+            <span class="my-orders" id="myOrdersToggle">Мои ордеры</span>
+        </div>
+        <div id="ordersList">
+            <!-- динамически -->
+        </div>
+        <div class="create-order">
+            <h3>Создать ордер</h3>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <input type="text" placeholder="Название NFT" style="flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:6px 10px;color:#fff;font-size:10px;font-family:'Inter',sans-serif;outline:none;">
+                <input type="number" placeholder="Цена" style="width:70px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:6px 10px;color:#fff;font-size:10px;font-family:'Inter',sans-serif;outline:none;">
+                <button style="background:linear-gradient(135deg,#4a8af4,#6c5ce7);border:none;border-radius:8px;padding:6px 16px;color:#fff;font-weight:600;font-size:10px;cursor:pointer;">Создать</button>
+            </div>
+        </div>
+    </div>
 
-        function addToCart(name) {
-            if (userCart.includes(name)) { userCart = userCart.filter(n => n !== name); } else { userCart.push(name); }
-            saveCart();
-            updateDetailButtons();
-        }
+    <!-- DETAIL -->
+    <div class="detail-overlay" id="detailOverlay">
+        <div class="detail-content">
+            <button class="detail-close" id="detailClose">✕</button>
+            <div class="detail-lottie-wrapper" id="detailLottieWrapper"><div id="detailLottie" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:#6e6e80;">🎁</div></div>
+            <div class="detail-title" id="detailTitle">Collection</div>
+            <div class="detail-number" id="detailNumber">#0000</div>
+            <div class="detail-stats" id="detailStats">
+                <div class="stat"><span class="label">Модель</span><span class="value" id="detailModel">—</span></div>
+                <div class="stat"><span class="label">Фон</span><span class="value" id="detailBackdrop">—</span></div>
+                <div class="stat"><span class="label">Символ</span><span class="value" id="detailSymbol">—</span></div>
+                <div class="stat"><span class="label">Владелец</span><span class="value" id="detailOwner">—</span></div>
+                <div class="stat"><span class="label">Выпуск</span><span class="value" id="detailIssued">—</span></div>
+                <div class="stat"><span class="label">Статус</span><span class="value" id="detailStatus">—</span></div>
+            </div>
+            <div class="detail-price"><span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span><span id="detailPriceAmount">0.00 GRAM</span></div>
+            <button class="detail-buy-btn" id="detailBuyBtn">Добавить</button>
+        </div>
+    </div>
 
-        function removeFromCart(name) {
-            userCart = userCart.filter(n => n !== name);
-            saveCart();
-            renderCartItems();
-            updateDetailButtons();
-        }
+    <!-- CART -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header"><h2 style="font-size:15px;">Корзина</h2><button class="cart-close" id="cartClose">✕</button></div>
+            <div id="cartItems"></div>
+            <div class="cart-total"><span>Итого</span><span><span id="modalCartTotal">0.00</span> GRAM</span></div>
+            <button class="btn-checkout" id="checkoutBtn">Перейти к оплате</button>
+        </div>
+    </div>
 
-        function isInCart(name) { return userCart.includes(name); }
+    <!-- PROFILE -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-modal-content">
+            <button class="profile-modal-close" id="profileModalClose">✕</button>
+            <div class="profile-avatar" id="profileAvatar">👤</div>
+            <div class="profile-name" id="profileName">Пользователь</div>
+            <div class="profile-id" id="profileId">ID: —</div>
+            <div class="profile-balance"><span class="mini-gram"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span><span id="profileBalance">0.00</span> GRAM</div>
+            <div class="btn-row"><button class="btn-primary" id="addGiftBtn">Добавить подарок</button><button class="btn-secondary" id="withdrawToggleBtn">Вывести</button></div>
+            <div class="withdraw-section" id="withdrawSection" style="display:none;margin-top:6px;padding:8px;background:rgba(255,255,255,0.02);border-radius:8px;">
+                <input type="text" id="walletInput" placeholder="Адрес TON" style="width:100%;padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.04);border-radius:6px;color:#fff;font-size:10px;font-family:'Inter',sans-serif;outline:none;margin-bottom:4px;">
+                <input type="number" id="amountInput" placeholder="Сумма" style="width:100%;padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.04);border-radius:6px;color:#fff;font-size:10px;font-family:'Inter',sans-serif;outline:none;margin-bottom:4px;">
+                <button class="withdraw-submit" id="withdrawSubmitBtn" style="width:100%;padding:4px;background:#4a8af4;border:none;border-radius:6px;color:#fff;font-weight:600;font-size:10px;cursor:pointer;">Вывести</button>
+                <div style="font-size:9px;color:#ff6b6b;display:none;" id="withdrawError">Ошибка</div>
+                <div style="font-size:9px;color:#4bc88a;display:none;" id="withdrawSuccess">Заявка отправлена</div>
+            </div>
+        </div>
+    </div>
 
-        function getCartTotal() {
-            return userCart.reduce((sum, name) => {
-                const n = NFT_DATA.find(item => item.name === name);
-                return sum + (n ? n.price : 0);
-            }, 0);
-        }
+    <div class="toast" id="toast">Уведомление</div>
 
-        function updateCartUI() {
-            const total = getCartTotal();
-            document.getElementById('modalCartTotal').textContent = total.toFixed(2);
-            document.getElementById('navCartBadge').textContent = userCart.length;
-            document.getElementById('checkoutBtn').disabled = userCart.length === 0;
-            renderCartItems();
-        }
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <button class="nav-item active" data-tab="market"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span><span>Маркет</span></button>
+        <button class="nav-item" data-tab="orders"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span>Ордеры</span></button>
+        <button class="nav-item" data-tab="game"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/><path d="M12 6v12"/><circle cx="12" cy="12" r="9"/></svg></span><span>Игровой хаб</span></button>
+        <button class="nav-item" data-tab="tasks"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span><span>Задания</span></button>
+        <button class="nav-item" data-tab="vault"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><span>Хранилище</span><span class="badge" id="navCartBadge">0</span></button>
+    </div>
+</div>
 
-        function renderCartItems() {
-            const container = document.getElementById('cartItems');
-            if (userCart.length === 0) {
-                container.innerHTML = `<div class="empty-cart">🛒 Корзина пуста</div>`;
-                return;
-            }
-            let html = '';
-            userCart.forEach(name => {
-                const nft = NFT_DATA.find(n => n.name === name);
-                if (!nft) return;
-                html += `
-                            <div class="cart-item">
-                                <div style="font-size:20px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
-                                <div class="item-info">
-                                    <div class="item-name">${nft.name}</div>
-                                    <div class="item-collection">${nft.collection}</div>
-                                </div>
-                                <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
-                                <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button>
-                            </div>
-                        `;
-            });
-            container.innerHTML = html;
-        }
+<script>
+    // ============================================================
+    // 1. DATA — МНОЖЕСТВО КОЛЛЕКЦИЙ (как в старом маркете)
+    // ============================================================
+    const COLLECTIONS_DATA = {
+        "Plush Pepe": { icon: "🐸" },
+        "Nail Bracelet": { icon: "📿" },
+        "Hex Pot": { icon: "🔮" },
+        "Astral Shard": { icon: "💎" },
+        "Bonded Ring": { icon: "💍" },
+        "Durov's Cap": { icon: "🎩" },
+        "Diamond Ring": { icon: "💎" },
+        "Evil Eye": { icon: "👁️" },
+        "Eternal Rose": { icon: "🌹" },
+        "Ion Gem": { icon: "⚡" },
+        "Kissed Frog": { icon: "🐸" },
+        "Scared Cat": { icon: "🐱" },
+        "Vintage Cigar": { icon: "🚬" },
+        "Precious Peach": { icon: "🍑" },
+        "Snoop Cigar": { icon: "🚬" },
+        "Jester Hat": { icon: "🎭" },
+        "Easter Egg": { icon: "🥚" },
+        "Spring Basket": { icon: "🧺" },
+        "Pretty Posy": { icon: "🌸" },
+        "Mousse Cake": { icon: "🍰" },
+        "Mood Pack": { icon: "🎒" },
+        "Joyful Bundle": { icon: "🎁" },
+        "Surge Board": { icon: "🏄" },
+        "Gravestone": { icon: "🪦" },
+        "Mask": { icon: "🎭" },
+        "Coffin": { icon: "⚰️" },
+        "Airplane": { icon: "✈️" },
+        "Khabib's Papakha": { icon: "🧢" },
+        "UFC box": { icon: "🥊" },
+        "Trojan Horse": { icon: "🐴" },
+        "Liberty Figure": { icon: "🗽" },
+        "Jack-in-the-Box": { icon: "🎭" },
+        "Spy Agaric": { icon: "🍄" },
+        "B-Day Candle": { icon: "🕯️" },
+        "Berry Box": { icon: "🍓" },
+        "Big Year": { icon: "📅" },
+        "Bow Tie": { icon: "🎀" },
+        "Bunny Muffin": { icon: "🧁" },
+        "Candy Cane": { icon: "🍭" }
+    };
 
-        // ============================================================
-        // 4. RENDER GRID
-        // ============================================================
-        function renderGrid() {
-            const grid = document.getElementById('nftGrid');
-            let html = '';
-            NFT_DATA.forEach(nft => {
-                const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
-                const statusClass = nft.status === 'sold' ? 'sold' : '';
-                const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' :
-                    'В продаже';
-                html += `
-                            <div class="nft-card" onclick="openDetail('${nft.name}')">
-                                <div class="nft-card-inner">
-                                    <div class="lottie-wrapper">
-                                        <div class="lottie-container" id="${lottieId}"></div>
-                                    </div>
-                                    <div class="nft-info-compact">
-                                        <div class="nft-name-compact">${nft.name}</div>
-                                        <div class="nft-model-compact">${nft.model || ''}</div>
-                                        <div class="nft-price-compact">
-                                            <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
-                                            ${nft.price.toFixed(2)}
-                                        </div>
-                                        <span class="nft-status-badge ${statusClass}">${statusLabel}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-            });
-            grid.innerHTML = html;
+    // Генерируем NFT с реальными номерами и ценами (как в старом коде)
+    function generateNFTs() {
+        const baseCollections = Object.keys(COLLECTIONS_DATA);
+        const result = [];
+        const models = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
+        const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
+        const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
 
-            // загрузка лотти
-            NFT_DATA.forEach(nft => {
-                const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`);
-                if (container && nft.lottie) {
-                    fetch(nft.lottie)
-                        .then(r => r.json())
-                        .then(data => {
-                            container.innerHTML = '';
-                            lottie.loadAnimation({
-                                container: container,
-                                animationData: data,
-                                renderer: 'svg',
-                                loop: true,
-                                autoplay: false
-                            }).goToAndStop(0, true);
-                        })
-                        .catch(() => {
-                            container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁';
-                            container.style.fontSize = '36px';
-                            container.style.display = 'flex';
-                            container.style.alignItems = 'center';
-                            container.style.justifyContent = 'center';
-                        });
-                }
-            });
-        }
-
-        // ============================================================
-        // 5. DETAIL
-        // ============================================================
-        function openDetail(name) {
-            const nft = NFT_DATA.find(item => item.name === name);
-            if (!nft) return;
-            detailNft = nft;
-            document.getElementById('detailTitle').textContent = nft.collection;
-            document.getElementById('detailNumber').textContent = `#${nft.number}`;
-            document.getElementById('detailOwner').textContent = nft.owner || '—';
-            document.getElementById('detailModel').textContent = nft.model || '—';
-            document.getElementById('detailBackdrop').textContent = nft.backdrop || '—';
-            document.getElementById('detailSymbol').textContent = nft.symbol || '—';
-            document.getElementById('detailIssued').textContent = nft.issued || '—';
-            document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status ===
-                'on-auction' ? 'На аукционе' : 'В продаже';
-            document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(2)} GRAM`;
-
-            const container = document.getElementById('detailLottie');
-            container.textContent = '';
-            fetch(nft.lottie)
-                .then(r => r.json())
-                .then(data => {
-                    container.innerHTML = '';
-                    lottie.loadAnimation({
-                        container: container,
-                        animationData: data,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true
-                    });
-                })
-                .catch(() => {
-                    container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁';
-                    container.style.fontSize = '56px';
+        baseCollections.forEach((col, idx) => {
+            const count = 5 + Math.floor(Math.random() * 12);
+            for (let i = 0; i < count; i++) {
+                const num = 1000 + idx * 200 + i * 7 + Math.floor(Math.random() * 50);
+                const price = (2 + Math.random() * 60 + (idx % 5) * 3);
+                const statuses = ["for-sale", "for-sale", "for-sale", "on-auction", "sold"];
+                const status = statuses[i % statuses.length];
+                result.push({
+                    name: `${col} #${num}`,
+                    collection: col,
+                    number: num,
+                    price: Math.round(price * 100) / 100,
+                    status: status,
+                    lottie: `https://nft.fragment.com/gift/${col.toLowerCase().replace(/\s/g,'')}-${num}.lottie.json`,
+                    model: models[i % models.length],
+                    backdrop: backdrops[i % backdrops.length],
+                    symbol: symbols[i % symbols.length],
+                    owner: `UQ${Math.random().toString(36).substring(2,10)}`,
+                    issued: `${i+1} of ${count}`
                 });
-
-            updateDetailButtons();
-            document.getElementById('detailOverlay').classList.add('open');
-        }
-
-        function closeDetail() {
-            document.getElementById('detailOverlay').classList.remove('open');
-            detailNft = null;
-        }
-
-        function updateDetailButtons() {
-            if (!detailNft) return;
-            const btn = document.getElementById('detailBuyBtn');
-            const inCart = isInCart(detailNft.name);
-            if (detailNft.status === 'sold') {
-                btn.textContent = 'Продано';
-                btn.className = 'detail-buy-btn sold';
-                btn.disabled = true;
-            } else if (inCart) {
-                btn.textContent = 'В корзине ✓';
-                btn.className = 'detail-buy-btn';
-                btn.onclick = () => { addToCart(detailNft.name);
-                    updateDetailButtons(); };
-            } else {
-                btn.textContent = 'Добавить в корзину';
-                btn.className = 'detail-buy-btn';
-                btn.onclick = () => { addToCart(detailNft.name);
-                    updateDetailButtons(); };
             }
-        }
-
-        document.getElementById('detailClose').addEventListener('click', closeDetail);
-        document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget)
-                closeDetail(); });
-
-        // ============================================================
-        // 6. CART MODAL
-        // ============================================================
-        document.getElementById('cartClose').addEventListener('click', () => {
-            document.getElementById('cartModal').classList.remove('open');
         });
-        document.getElementById('cartModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) document.getElementById('cartModal').classList.remove('open');
-        });
+        return result;
+    }
 
-        document.getElementById('checkoutBtn').addEventListener('click', () => {
-            if (userCart.length === 0) return;
-            const total = getCartTotal();
-            if (total > userBalance) {
-                alert(`Недостаточно средств! Баланс: ${userBalance.toFixed(2)} GRAM, сумма: ${total.toFixed(2)} GRAM`);
+    const NFT_DATA = generateNFTs();
+
+    // ============================================================
+    // 2. STATE
+    // ============================================================
+    let userBalance = 25.00;
+    let userCart = [];
+    let currentUserId = 'guest';
+    let detailNft = null;
+    let currentTab = 'market';
+    const lottieCache = new Map();
+
+    // ============================================================
+    // 3. CART
+    // ============================================================
+    function loadCart() {
+        const saved = localStorage.getItem('allow_cart_guest');
+        if (saved) try { userCart = JSON.parse(saved); } catch(e) { userCart = []; }
+        else userCart = [];
+        updateCartUI();
+    }
+    function saveCart() {
+        localStorage.setItem('allow_cart_guest', JSON.stringify(userCart));
+        updateCartUI();
+    }
+    function addToCart(name) {
+        if (userCart.includes(name)) userCart = userCart.filter(n => n !== name);
+        else userCart.push(name);
+        saveCart();
+        updateDetailButtons();
+    }
+    function removeFromCart(name) {
+        userCart = userCart.filter(n => n !== name);
+        saveCart();
+        renderCartItems();
+        updateDetailButtons();
+    }
+    function isInCart(name) { return userCart.includes(name); }
+    function getCartTotal() {
+        return userCart.reduce((sum, name) => {
+            const n = NFT_DATA.find(item => item.name === name);
+            return sum + (n ? n.price : 0);
+        }, 0);
+    }
+    function updateCartUI() {
+        document.getElementById('modalCartTotal').textContent = getCartTotal().toFixed(2);
+        document.getElementById('navCartBadge').textContent = userCart.length;
+        document.getElementById('checkoutBtn').disabled = userCart.length === 0;
+        renderCartItems();
+    }
+    function renderCartItems() {
+        const container = document.getElementById('cartItems');
+        if (userCart.length === 0) { container.innerHTML = `<div class="empty-cart">🛒 Корзина пуста</div>`; return; }
+        let html = '';
+        userCart.forEach(name => {
+            const nft = NFT_DATA.find(n => n.name === name);
+            if (!nft) return;
+            html += `<div class="cart-item"><div style="font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
+                <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
+                <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
+                <button class="item-remove" onclick="removeFromCart('${nft.name}')">✕</button></div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    // ============================================================
+    // 4. RENDER GRID с LOTTIE
+    // ============================================================
+    function renderGrid() {
+        const grid = document.getElementById('nftGrid');
+        let html = '';
+        NFT_DATA.forEach(nft => {
+            const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
+            const statusClass = nft.status === 'sold' ? 'sold' : nft.status === 'on-auction' ? 'auction' : 'sale';
+            const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
+            html += `<div class="nft-card" onclick="openDetail('${nft.name}')">
+                <div class="nft-card-inner">
+                    <div class="lottie-wrapper"><div class="lottie-container" id="${lottieId}"></div></div>
+                    <div class="nft-name">${nft.name}</div>
+                    <div class="nft-model">${nft.model}</div>
+                    <div class="nft-price"><span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span> ${nft.price.toFixed(2)}</div>
+                    <span class="status-badge ${statusClass}">${statusLabel}</span>
+                </div>
+            </div>`;
+        });
+        grid.innerHTML = html;
+
+        // Загрузка Lottie
+        NFT_DATA.forEach(nft => {
+            const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`);
+            if (!container) return;
+            const url = nft.lottie;
+            if (lottieCache.has(url)) {
+                const data = lottieCache.get(url);
+                container.innerHTML = '';
+                try {
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: false });
+                    anim.goToAndStop(0, true);
+                } catch(e) { container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁'; }
                 return;
             }
-            if (confirm(`Купить ${userCart.length} NFT за ${total.toFixed(2)} GRAM?`)) {
-                userBalance = parseFloat((userBalance - total).toFixed(2));
-                localStorage.setItem(`allow_balance_${currentUserId}`, String(userBalance));
-                updateProfileUI();
-                alert(`Покупка оформлена!\nКуплено: ${userCart.length} NFT`);
-                userCart = [];
-                saveCart();
-                document.getElementById('cartModal').classList.remove('open');
-                closeDetail();
-            }
+            fetch(url).then(r => r.json()).then(data => {
+                lottieCache.set(url, data);
+                container.innerHTML = '';
+                try {
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: false });
+                    anim.goToAndStop(0, true);
+                } catch(e) { container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁'; }
+            }).catch(() => { container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁'; });
         });
+    }
 
-        // ============================================================
-        // 7. PROFILE
-        // ============================================================
-        function updateProfileUI() {
-            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
-            const saved = localStorage.getItem(`allow_balance_${currentUserId}`);
-            if (saved !== null) userBalance = parseFloat(saved);
-            else localStorage.setItem(`allow_balance_${currentUserId}`, '0');
-        }
+    // ============================================================
+    // 5. DETAIL
+    // ============================================================
+    function openDetail(name) {
+        const nft = NFT_DATA.find(item => item.name === name);
+        if (!nft) return;
+        detailNft = nft;
+        document.getElementById('detailTitle').textContent = nft.collection;
+        document.getElementById('detailNumber').textContent = `#${nft.number}`;
+        document.getElementById('detailModel').textContent = nft.model || '—';
+        document.getElementById('detailBackdrop').textContent = nft.backdrop || '—';
+        document.getElementById('detailSymbol').textContent = nft.symbol || '—';
+        document.getElementById('detailOwner').textContent = nft.owner || '—';
+        document.getElementById('detailIssued').textContent = nft.issued || '—';
+        document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
+        document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(2)} GRAM`;
 
-        document.getElementById('profileBtn').addEventListener('click', () => {
-            document.getElementById('profileModal').classList.add('open');
-            document.getElementById('withdrawSection').classList.remove('open');
-            document.getElementById('withdrawError').style.display = 'none';
-            document.getElementById('withdrawSuccess').style.display = 'none';
-            updateProfileUI();
-        });
-        document.getElementById('profileModalClose').addEventListener('click', () => {
-            document.getElementById('profileModal').classList.remove('open');
-        });
-        document.getElementById('profileModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) document.getElementById('profileModal').classList.remove('open');
-        });
-
-        document.getElementById('addGiftBtn').addEventListener('click', () => {
-            if (window.Telegram?.WebApp) {
-                window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
-            } else {
-                alert('Передайте подарок боту @AllowMarketGifts');
-            }
-        });
-
-        document.getElementById('withdrawToggleBtn').addEventListener('click', () => {
-            document.getElementById('withdrawSection').classList.toggle('open');
-            document.getElementById('withdrawError').style.display = 'none';
-            document.getElementById('withdrawSuccess').style.display = 'none';
-        });
-
-        document.getElementById('withdrawSubmitBtn').addEventListener('click', () => {
-            const wallet = document.getElementById('walletInput').value.trim();
-            const amount = parseFloat(document.getElementById('amountInput').value);
-            const errorEl = document.getElementById('withdrawError');
-            const successEl = document.getElementById('withdrawSuccess');
-            errorEl.style.display = 'none';
-            successEl.style.display = 'none';
-            if (!wallet || wallet.length < 10) { alert('Введите корректный адрес TON'); return; }
-            if (!amount || amount <= 0) { alert('Введите сумму'); return; }
-            if (amount > userBalance) { errorEl.textContent = 'Недостаточно средств';
-                errorEl.style.display = 'block'; return; }
-            userBalance = parseFloat((userBalance - amount).toFixed(2));
-            localStorage.setItem(`allow_balance_${currentUserId}`, String(userBalance));
-            updateProfileUI();
-            successEl.textContent =
-                `Заявка на вывод ${amount.toFixed(2)} GRAM отправлена!`;
-            successEl.style.display = 'block';
-            document.getElementById('walletInput').value = '';
-            document.getElementById('amountInput').value = '';
-            setTimeout(() => successEl.style.display = 'none', 5000);
-        });
-
-        // ============================================================
-        // 8. BELL / TOAST
-        // ============================================================
-        const toast = document.getElementById('toast');
-        document.getElementById('bellBtn').addEventListener('click', () => {
-            toast.textContent = 'Нет новых уведомлений';
-            toast.classList.add('show');
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
-        });
-
-        // ============================================================
-        // 9. NAV
-        // ============================================================
-        document.querySelectorAll('.nav-item').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const tab = this.dataset.tab;
-                if (tab === 'vault') {
-                    document.getElementById('cartModal').classList.add('open');
-                    document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
-                    this.classList.remove('active');
-                }
-            });
-        });
-
-        // ============================================================
-        // 10. FILTER CHIP (mock)
-        // ============================================================
-        document.getElementById('filterChip').addEventListener('click', function() {
-            this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed ▼';
-        });
-
-        // ============================================================
-        // 11. INIT
-        // ============================================================
-        (function init() {
-            const savedBalance = localStorage.getItem(`allow_balance_${currentUserId}`);
-            if (savedBalance !== null) userBalance = parseFloat(savedBalance);
-            else localStorage.setItem(`allow_balance_${currentUserId}`, '12.50');
-
-            loadCart();
-            renderGrid();
-            updateProfileUI();
-
-            document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
-
-            // При клике на "Узнать больше"
-            document.querySelector('.lb-prize').addEventListener('click', () => {
-                toast.textContent = 'Лидерборд: $50,000 призовой фонд';
-                toast.classList.add('show');
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
-            });
-
-            // Имитация пользователя Telegram
+        const container = document.getElementById('detailLottie');
+        container.innerHTML = '';
+        const url = nft.lottie;
+        if (lottieCache.has(url)) {
+            const data = lottieCache.get(url);
             try {
-                if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-                    const user = window.Telegram.WebApp.initDataUnsafe.user;
-                    document.getElementById('profileName').textContent = user.first_name || 'Пользователь';
-                    document.getElementById('profileId').textContent = `ID: ${user.id}`;
-                    currentUserId = user.id;
-                    const balanceKey = `allow_balance_${user.id}`;
-                    const saved = localStorage.getItem(balanceKey);
-                    if (saved !== null) userBalance = parseFloat(saved);
-                    else localStorage.setItem(balanceKey, '12.50');
-                    loadCart();
-                    updateProfileUI();
-                }
-            } catch (e) {}
-        })();
+                const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: true });
+            } catch(e) { container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁'; }
+        } else {
+            fetch(url).then(r => r.json()).then(data => {
+                lottieCache.set(url, data);
+                container.innerHTML = '';
+                try {
+                    lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: true });
+                } catch(e) { container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁'; }
+            }).catch(() => { container.textContent = COLLECTIONS_DATA[nft.collection]?.icon || '🎁'; });
+        }
+        updateDetailButtons();
+        document.getElementById('detailOverlay').classList.add('open');
+    }
+    function closeDetail() {
+        document.getElementById('detailOverlay').classList.remove('open');
+        detailNft = null;
+    }
+    function updateDetailButtons() {
+        if (!detailNft) return;
+        const btn = document.getElementById('detailBuyBtn');
+        if (detailNft.status === 'sold') {
+            btn.textContent = 'Продано';
+            btn.className = 'detail-buy-btn sold';
+            btn.disabled = true;
+        } else if (isInCart(detailNft.name)) {
+            btn.textContent = 'В корзине ✓';
+            btn.className = 'detail-buy-btn';
+            btn.onclick = () => { addToCart(detailNft.name); updateDetailButtons(); };
+        } else {
+            btn.textContent = 'Добавить';
+            btn.className = 'detail-buy-btn';
+            btn.onclick = () => { addToCart(detailNft.name); updateDetailButtons(); };
+        }
+    }
+    document.getElementById('detailClose').addEventListener('click', closeDetail);
+    document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeDetail(); });
 
-        window.openDetail = openDetail;
-        window.removeFromCart = removeFromCart;
-        window.addToCart = addToCart;
-    </script>
+    // ============================================================
+    // 6. ORDERS (как на фото)
+    // ============================================================
+    const ORDERS_DATA = [
+        { name: "Gravestone", qty: 1, price: 39.11 },
+        { name: "Mask", qty: 1, price: 5.73 },
+        { name: "Coffin", qty: 1, price: 18.21 },
+        { name: "Airplane", qty: 1, price: 4000 },
+        { name: "Khabib's Papakha", qty: 1, price: 50.5 },
+        { name: "UFC box", qty: 1, price: 31 },
+        { name: "Trojan Horse", qty: 1, price: 31 }
+    ];
+
+    function renderOrders() {
+        const container = document.getElementById('ordersList');
+        let html = '';
+        ORDERS_DATA.forEach(order => {
+            html += `<div class="order-item">
+                <div class="order-info">
+                    <div class="order-name">${order.name}</div>
+                    <div class="order-qty">Количество: ${order.qty}</div>
+                </div>
+                <div class="order-price">💜 ${order.price.toFixed(2)}</div>
+                <div class="order-actions">
+                    <button>Детали</button>
+                    <button class="sell-btn">Продать</button>
+                </div>
+            </div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    // ============================================================
+    // 7. NAVIGATION
+    // ============================================================
+    function switchTab(tab) {
+        currentTab = tab;
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
+
+        const grid = document.getElementById('nftGrid');
+        const orders = document.getElementById('ordersSection');
+        if (tab === 'market') {
+            grid.style.display = 'grid';
+            orders.classList.remove('active');
+        } else if (tab === 'orders') {
+            grid.style.display = 'none';
+            orders.classList.add('active');
+            renderOrders();
+        } else if (tab === 'vault') {
+            document.getElementById('cartModal').classList.add('open');
+            document.querySelector('.nav-item[data-tab="market"]')?.classList.add('active');
+            document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
+        } else {
+            grid.style.display = 'grid';
+            orders.classList.remove('active');
+            // другие вкладки показывают маркет
+        }
+    }
+
+    document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tab = this.dataset.tab;
+            switchTab(tab);
+        });
+    });
+
+    // ============================================================
+    // 8. PROFILE, BELL, TOAST
+    // ============================================================
+    const toast = document.getElementById('toast');
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
+    document.getElementById('closeBtn').addEventListener('click', () => showToast('Закрыто'));
+
+    document.getElementById('profileBtn').addEventListener('click', () => {
+        document.getElementById('profileModal').classList.add('open');
+        document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+    });
+    document.getElementById('profileModalClose').addEventListener('click', () => document.getElementById('profileModal').classList.remove('open'));
+    document.getElementById('profileModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) document.getElementById('profileModal').classList.remove('open'); });
+
+    document.getElementById('addGiftBtn').addEventListener('click', () => {
+        if (window.Telegram?.WebApp) window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
+        else alert('Передайте подарок боту @AllowMarketGifts');
+    });
+
+    document.getElementById('withdrawToggleBtn').addEventListener('click', () => {
+        const sec = document.getElementById('withdrawSection');
+        sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+    });
+    document.getElementById('withdrawSubmitBtn').addEventListener('click', () => {
+        const amount = parseFloat(document.getElementById('amountInput').value);
+        if (!amount || amount > userBalance) {
+            document.getElementById('withdrawError').style.display = 'block';
+            return;
+        }
+        userBalance -= amount;
+        localStorage.setItem('allow_balance_guest', String(userBalance));
+        document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+        document.getElementById('withdrawSuccess').style.display = 'block';
+        setTimeout(() => document.getElementById('withdrawSuccess').style.display = 'none', 3000);
+        document.getElementById('amountInput').value = '';
+    });
+
+    // ============================================================
+    // 9. CART MODAL
+    // ============================================================
+    document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList.remove('open'));
+    document.getElementById('cartModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) document.getElementById('cartModal').classList.remove('open'); });
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+        if (userCart.length === 0) return;
+        const total = getCartTotal();
+        if (total > userBalance) { showToast('Недостаточно средств!'); return; }
+        userBalance = parseFloat((userBalance - total).toFixed(2));
+        localStorage.setItem('allow_balance_guest', String(userBalance));
+        showToast(`Куплено ${userCart.length} NFT за ${total.toFixed(2)} GRAM`);
+        userCart = [];
+        saveCart();
+        document.getElementById('cartModal').classList.remove('open');
+        closeDetail();
+        document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+    });
+
+    // ============================================================
+    // 10. FILTER CHIP (mock)
+    // ============================================================
+    document.getElementById('feedChip').addEventListener('click', function() {
+        this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed ▼';
+    });
+
+    // ============================================================
+    // 11. INIT
+    // ============================================================
+    (function init() {
+        const saved = localStorage.getItem('allow_balance_guest');
+        if (saved) userBalance = parseFloat(saved);
+        else localStorage.setItem('allow_balance_guest', '25.00');
+        loadCart();
+        renderGrid();
+        document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+        document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
+        document.getElementById('ordersSection').classList.remove('active');
+        switchTab('market');
+        // Телеграм имитация
+        try {
+            if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
+                document.getElementById('profileName').textContent = user.first_name || 'Пользователь';
+                document.getElementById('profileId').textContent = `ID: ${user.id}`;
+            }
+        } catch(e) {}
+    })();
+
+    window.openDetail = openDetail;
+    window.removeFromCart = removeFromCart;
+    window.addToCart = addToCart;
+</script>
 </body>
 </html>
