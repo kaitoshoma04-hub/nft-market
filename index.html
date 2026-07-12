@@ -69,7 +69,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: 0.2s;
+            transition: 0.15s;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .icon-btn:active {
@@ -92,7 +92,7 @@
             cursor: pointer;
             flex-shrink: 0;
             background: #2a2a2a;
-            transition: 0.2s;
+            transition: 0.15s;
         }
         .avatar-btn:active {
             transform: scale(0.92);
@@ -113,10 +113,10 @@
             font-weight: 600;
         }
 
-        /* TABS — серые однотонные как на фото */
+        /* TABS — как на фото */
         .gift-tabs {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             padding: 12px 16px 10px 16px;
             overflow-x: auto;
             scrollbar-width: none;
@@ -126,18 +126,18 @@
             display: none;
         }
         .gift-tab {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 22px;
+            padding: 8px 18px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #8e8ea0;
             cursor: pointer;
             flex-shrink: 0;
             font-family: 'Inter', sans-serif;
-            transition: 0.2s;
-            letter-spacing: 0.3px;
+            transition: 0.15s;
+            letter-spacing: 0.2px;
         }
         .gift-tab:active {
             transform: scale(0.94);
@@ -148,7 +148,7 @@
             color: #ffffff;
         }
 
-        /* SEARCH — только на главном */
+        /* SEARCH — как на фото */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
@@ -165,7 +165,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: 0.2s;
+            transition: 0.15s;
         }
         .search-box:focus-within {
             border-color: rgba(255, 255, 255, 0.12);
@@ -190,59 +190,44 @@
             color: #6e6e80;
             font-weight: 400;
         }
-        .chip {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 30px;
-            padding: 8px 16px;
-            font-size: 11px;
-            font-weight: 500;
-            color: #8e8ea0;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.2s;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .chip:active {
-            transform: scale(0.94);
-        }
-        .chip.active-filter {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-        }
 
-        /* FILTER ROW — серые однотонные кнопки */
+        /* FILTER ROW — как на фото: NFT, Модель, Фон, Символ лентой, без галочек */
         .filter-row {
             display: flex;
             gap: 8px;
             padding: 8px 16px 14px 16px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-        .filter-row .chip {
+        .filter-row::-webkit-scrollbar {
+            display: none;
+        }
+        .filter-row .filter-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
             padding: 8px 18px;
             font-size: 12px;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.06);
             color: #8e8ea0;
-            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.15s;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
-        .filter-row .chip.active-filter {
+        .filter-row .filter-chip:active {
+            transform: scale(0.94);
+        }
+        .filter-row .filter-chip.active-filter {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.12);
             color: #ffffff;
         }
-        .filter-row .chip .check {
-            font-size: 14px;
-            margin-left: 2px;
-        }
 
-        /* STATUS */
+        /* STATUS — как на фото */
         .status-row {
             display: flex;
             gap: 10px;
@@ -250,12 +235,15 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
         .status-row .chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
             padding: 8px 18px;
             font-size: 12px;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.06);
             color: #8e8ea0;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
         }
         .status-row .chip.active-status {
             background: rgba(255, 255, 255, 0.08);
@@ -623,9 +611,9 @@
             transform: scale(0.94);
         }
 
-        /* GAME HUB */
+        /* GAME HUB — полноэкранный кейс */
         .game-hub {
-            padding: 10px 12px 16px 12px;
+            padding: 6px 8px 12px 8px;
             display: none;
         }
         .game-hub.active {
@@ -633,45 +621,46 @@
         }
         .game-hub .hub-header {
             background: #222222;
-            border-radius: 16px;
-            padding: 12px 16px;
+            border-radius: 14px;
+            padding: 10px 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-align: center;
         }
         .game-hub .hub-header h2 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #f5c842;
         }
         .game-hub .hub-header p {
-            font-size: 11px;
+            font-size: 10px;
             color: #8e8ea0;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         .game-hub .reward-banner {
             background: rgba(245, 200, 66, 0.06);
             border: 1px solid rgba(245, 200, 66, 0.08);
-            border-radius: 12px;
-            padding: 8px;
+            border-radius: 10px;
+            padding: 6px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: #f5c842;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .case-container {
             background: #222222;
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 16px;
+            padding: 12px 8px 14px 8px;
             overflow: hidden;
             position: relative;
+            width: 100%;
         }
         .case-track {
             display: flex;
-            gap: 14px;
-            padding: 8px 4px 14px 4px;
+            gap: 12px;
+            padding: 6px 4px 12px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -681,7 +670,7 @@
             display: none;
         }
         .case-item {
-            min-width: 120px;
+            min-width: 130px;
             background: #1a1a1a;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -691,8 +680,8 @@
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
@@ -731,7 +720,7 @@
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 14px;
+            margin-top: 12px;
             transition: 0.15s;
         }
         .spin-btn:active {
@@ -1158,7 +1147,7 @@
             margin-top: 4px;
         }
 
-        /* FILTER OVERLAY — жёлтая кнопка */
+        /* FILTER OVERLAY — как на фото */
         .filter-overlay {
             position: fixed;
             top: 0;
@@ -1246,6 +1235,7 @@
             flex-shrink: 0;
             font-size: 12px;
             transition: 0.2s;
+            color: transparent;
         }
         .filter-overlay .filter-option.active .check {
             background: #f5c842;
@@ -1290,11 +1280,11 @@
 
         @media (max-width: 380px) {
             .case-item {
-                min-width: 100px;
+                min-width: 110px;
             }
             .case-item .case-lottie {
-                width: 64px;
-                height: 64px;
+                width: 72px;
+                height: 72px;
             }
             .bottom-nav .nav-item {
                 padding: 4px 8px;
@@ -1302,8 +1292,8 @@
                 font-size: 8px;
             }
             .gift-tab {
-                font-size: 12px;
-                padding: 8px 16px;
+                font-size: 11px;
+                padding: 6px 14px;
             }
         }
     </style>
@@ -1326,31 +1316,30 @@
             </div>
         </div>
 
-        <!-- TABS — только Подарки, Звезды и Прем, Коллекции -->
+        <!-- TABS — Подарки, Звезды и Прем, Коллекции -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- SEARCH — только на главном -->
+        <!-- SEARCH — как на фото -->
         <div class="search-row" id="mainSearchRow">
             <div class="search-box">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
             </div>
-            <span class="chip" id="feedChip">Feed ▼</span>
         </div>
 
-        <!-- FILTER ROW — только на главном -->
+        <!-- FILTER ROW — NFT, Модель, Фон, Символ лентой, без галочек -->
         <div class="filter-row" id="mainFilterRow">
-            <span class="chip active-filter" data-filter="nft" id="filterNft">NFT ✔</span>
-            <span class="chip" data-filter="model" id="filterModel">Модель ✔</span>
-            <span class="chip" data-filter="backdrop" id="filterBackdrop">Фон ✔</span>
-            <span class="chip" data-filter="symbol" id="filterSymbol">Символ ✔</span>
+            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
+            <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
+            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон</span>
+            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ</span>
         </div>
 
-        <!-- STATUS — только на главном -->
+        <!-- STATUS — как на фото -->
         <div class="status-row" id="mainStatusRow">
             <span class="chip active-status">На продаже (0)</span>
             <span class="chip">Хранилище (0)</span>
@@ -1376,7 +1365,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB -->
+        <!-- GAME HUB — полноэкранный кейс -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1385,13 +1374,13 @@
             <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
 
             <div class="case-container">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                    <span style="font-size:14px;font-weight:700;">Кейс с NFT</span>
-                    <span style="font-size:12px;color:#f5c842;font-weight:600;">200 GRAM за открытие</span>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:0 4px;">
+                    <span style="font-size:13px;font-weight:700;">Кейс с NFT</span>
+                    <span style="font-size:11px;color:#f5c842;font-weight:600;">200 GRAM за открытие</span>
                 </div>
                 <div class="case-track" id="caseTrack"></div>
                 <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
-                <div style="text-align:center;margin-top:8px;font-size:11px;color:#6e6e80;" id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
+                <div style="text-align:center;margin-top:6px;font-size:10px;color:#6e6e80;" id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
             </div>
         </div>
 
@@ -1704,7 +1693,7 @@
         }
 
         // ============================================================
-        // 4. LOTTIE — с защитой от ошибок WebView
+        // 4. LOTTIE
         // ============================================================
         const lottieLoadQueue = [];
         let isProcessingQueue = false;
@@ -1928,7 +1917,7 @@
         });
 
         // ============================================================
-        // 8. GAME HUB
+        // 8. GAME HUB — полноэкранный кейс
         // ============================================================
         let caseItems = [];
 
@@ -2047,7 +2036,6 @@
             const orders = document.getElementById('ordersSection');
             const game = document.getElementById('gameHub');
 
-            // Элементы только для главного маркета
             const mainSearch = document.getElementById('mainSearchRow');
             const mainFilter = document.getElementById('mainFilterRow');
             const mainStatus = document.getElementById('mainStatusRow');
@@ -2099,19 +2087,12 @@
         });
 
         // ============================================================
-        // 10. FILTER OVERLAY
+        // 10. FILTER OVERLAY — по клику на любой фильтр
         // ============================================================
-        document.getElementById('filterNft').addEventListener('click', function() {
-            document.getElementById('filterOverlay').classList.add('open');
-        });
-        document.getElementById('filterModel').addEventListener('click', function() {
-            document.getElementById('filterOverlay').classList.add('open');
-        });
-        document.getElementById('filterBackdrop').addEventListener('click', function() {
-            document.getElementById('filterOverlay').classList.add('open');
-        });
-        document.getElementById('filterSymbol').addEventListener('click', function() {
-            document.getElementById('filterOverlay').classList.add('open');
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.getElementById('filterOverlay').classList.add('open');
+            });
         });
 
         document.getElementById('filterClose').addEventListener('click', function() {
@@ -2253,14 +2234,7 @@
         });
 
         // ============================================================
-        // 14. FEED CHIP
-        // ============================================================
-        document.getElementById('feedChip').addEventListener('click', function() {
-            this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed ▼';
-        });
-
-        // ============================================================
-        // 15. INIT — с защитой от ошибок WebView
+        // 14. INIT
         // ============================================================
         (function init() {
             try {
