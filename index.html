@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -22,6 +23,7 @@
             justify-content: center;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            overscroll-behavior: none;
         }
         .app {
             max-width: 430px;
@@ -30,12 +32,14 @@
             background: #0a0a0f;
             padding-bottom: 72px;
             position: relative;
+            overflow-x: hidden;
         }
+        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 14px 6px 14px;
+            padding: 12px 16px 8px 16px;
             background: rgba(10, 10, 15, 0.92);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
@@ -44,31 +48,36 @@
             backdrop-filter: blur(8px);
         }
         .header-left h1 {
-            font-size: 17px;
-            font-weight: 700;
+            font-size: 20px;
+            font-weight: 800;
             color: #fff;
             letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .header-right {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
         }
         .icon-btn {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.05);
             border: none;
             color: #8e8ea0;
-            width: 28px;
-            height: 28px;
+            width: 36px;
+            height: 36px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: 0.15s;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .icon-btn:active {
-            background: rgba(255, 255, 255, 0.04);
+            transform: scale(0.92);
+            background: rgba(255, 255, 255, 0.08);
         }
         .icon-btn svg {
             width: 18px;
@@ -78,14 +87,18 @@
             stroke-width: 1.8;
         }
         .avatar-btn {
-            width: 28px;
-            height: 28px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             overflow: hidden;
-            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.08);
             cursor: pointer;
             flex-shrink: 0;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+            transition: 0.2s;
+        }
+        .avatar-btn:active {
+            transform: scale(0.92);
         }
         .avatar-btn img {
             width: 100%;
@@ -98,14 +111,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 16px;
             color: #fff;
+            font-weight: 600;
         }
 
+        /* TABS — только Подарки и Коллекции */
         .gift-tabs {
             display: flex;
-            gap: 6px;
-            padding: 8px 12px 4px 12px;
+            gap: 8px;
+            padding: 10px 16px 8px 16px;
             overflow-x: auto;
             scrollbar-width: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
@@ -114,11 +129,11 @@
             display: none;
         }
         .gift-tab {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 4px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 20px;
             border-radius: 30px;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             color: #8e8ea0;
             cursor: pointer;
@@ -126,35 +141,41 @@
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
         }
+        .gift-tab:active {
+            transform: scale(0.94);
+        }
         .gift-tab.active {
-            background: rgba(74, 138, 244, 0.12);
-            border-color: rgba(74, 138, 244, 0.20);
+            background: rgba(74, 138, 244, 0.15);
+            border-color: rgba(74, 138, 244, 0.25);
             color: #4a8af4;
         }
-        .gift-tab:active {
-            transform: scale(0.95);
-        }
 
+        /* SEARCH — крупный и стильный */
         .search-row {
-            padding: 6px 12px 8px 12px;
+            padding: 10px 16px 12px 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
         }
         .search-box {
             flex: 1;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 30px;
-            padding: 5px 12px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
+            transition: 0.2s;
+        }
+        .search-box:focus-within {
+            border-color: rgba(74, 138, 244, 0.3);
+            background: rgba(255, 255, 255, 0.07);
         }
         .search-box svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             stroke: #6e6e80;
             flex-shrink: 0;
         }
@@ -163,51 +184,62 @@
             border: none;
             outline: none;
             color: #fff;
-            font-size: 11px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             width: 100%;
         }
         .search-box input::placeholder {
             color: #6e6e80;
+            font-weight: 400;
         }
         .chip {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 20px;
-            padding: 3px 10px;
-            font-size: 9px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 11px;
             font-weight: 500;
             color: #8e8ea0;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .chip:active {
             transform: scale(0.94);
         }
         .chip.active-filter {
-            background: rgba(74, 138, 244, 0.06);
-            border-color: rgba(74, 138, 244, 0.10);
+            background: rgba(74, 138, 244, 0.12);
+            border-color: rgba(74, 138, 244, 0.20);
             color: #4a8af4;
         }
+
+        /* FILTER ROW */
         .filter-row {
             display: flex;
-            gap: 4px;
-            padding: 4px 12px 8px 12px;
+            gap: 6px;
+            padding: 6px 16px 12px 16px;
             flex-wrap: wrap;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
         }
+        .filter-row .chip {
+            padding: 6px 14px;
+            font-size: 10px;
+        }
 
+        /* NFT GRID */
         .nft-grid {
-            padding: 8px 12px 12px 12px;
+            padding: 10px 12px 12px 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
         .nft-card {
             background: #121216;
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
             cursor: pointer;
@@ -217,16 +249,16 @@
             transform: scale(0.96);
         }
         .nft-card-inner {
-            padding: 8px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 4px;
             background: #121216;
         }
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             background: #0a0a0f;
             display: flex;
@@ -238,7 +270,7 @@
             height: 100%;
         }
         .nft-name {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: #fff;
             white-space: nowrap;
@@ -246,7 +278,7 @@
             text-overflow: ellipsis;
         }
         .nft-model {
-            font-size: 8px;
+            font-size: 9px;
             color: #6e6e80;
             font-weight: 500;
         }
@@ -254,7 +286,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: #fff;
             margin-top: 1px;
@@ -272,26 +304,27 @@
             object-fit: cover;
         }
         .status-badge {
-            font-size: 7px;
+            font-size: 8px;
             font-weight: 600;
-            padding: 1px 6px;
-            border-radius: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
             display: inline-block;
             align-self: flex-start;
         }
         .status-badge.sale {
             color: #4bc88a;
-            background: rgba(75, 200, 138, 0.08);
+            background: rgba(75, 200, 138, 0.10);
         }
         .status-badge.sold {
             color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.08);
+            background: rgba(255, 107, 107, 0.10);
         }
         .status-badge.auction {
             color: #ffd966;
-            background: rgba(255, 215, 0, 0.08);
+            background: rgba(255, 215, 0, 0.10);
         }
 
+        /* DETAIL */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -325,11 +358,17 @@
             background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .detail-close:active {
+            transform: scale(0.92);
         }
         .detail-lottie-wrapper {
             width: 100%;
@@ -340,12 +379,12 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .detail-title {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .detail-number {
-            font-size: 11px;
+            font-size: 12px;
             color: #4a8af4;
             font-weight: 600;
         }
@@ -354,13 +393,13 @@
             grid-template-columns: 1fr 1fr;
             gap: 2px 8px;
             margin: 4px 0;
-            font-size: 9px;
+            font-size: 10px;
         }
         .detail-stats .stat {
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-            padding: 2px 0;
+            padding: 3px 0;
         }
         .detail-stats .stat .label {
             color: #6e6e80;
@@ -377,38 +416,39 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            padding: 4px 10px;
+            padding: 6px 12px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             margin: 4px 0;
         }
         .detail-buy-btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: #fff;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: 0.15s;
-            margin-top: 4px;
+            margin-top: 6px;
         }
         .detail-buy-btn:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
         .detail-buy-btn.sold {
             background: rgba(255, 255, 255, 0.04);
             color: #6e6e80;
         }
 
+        /* ORDERS */
         .orders-section {
-            padding: 8px 14px 16px 14px;
+            padding: 10px 14px 16px 14px;
             display: none;
         }
         .orders-section.active {
@@ -418,29 +458,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .orders-header h2 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
         }
         .order-item {
             background: #121216;
-            border-radius: 12px;
-            padding: 8px 12px;
-            margin-bottom: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .order-item .order-lottie {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
             overflow: hidden;
             background: #0a0a0f;
             flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .order-item .order-lottie .lottie-container {
             width: 100%;
@@ -450,15 +491,15 @@
             flex: 1;
         }
         .order-item .order-name {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
         }
         .order-item .order-qty {
-            font-size: 9px;
+            font-size: 10px;
             color: #6e6e80;
         }
         .order-item .order-price {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             color: #4a8af4;
             display: flex;
@@ -466,8 +507,8 @@
             gap: 4px;
         }
         .order-item .order-price .mini-gram {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             overflow: hidden;
         }
@@ -483,9 +524,9 @@
         .order-item .order-actions button {
             background: rgba(255, 255, 255, 0.04);
             border: none;
-            padding: 4px 10px;
-            border-radius: 16px;
-            font-size: 9px;
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-size: 10px;
             font-weight: 600;
             color: #8e8ea0;
             cursor: pointer;
@@ -502,30 +543,33 @@
         .create-order {
             margin-top: 18px;
             background: #121216;
-            border-radius: 14px;
-            padding: 14px;
+            border-radius: 16px;
+            padding: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .create-order h3 {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .create-order input {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 8px;
-            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 10px 14px;
             color: #fff;
-            font-size: 10px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             outline: none;
             width: 100%;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+        }
+        .create-order input::placeholder {
+            color: #6e6e80;
         }
         .create-order .row {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
         .create-order .row input {
             flex: 1;
@@ -533,11 +577,11 @@
         .create-order .row button {
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
-            border-radius: 8px;
-            padding: 6px 16px;
+            border-radius: 10px;
+            padding: 10px 20px;
             color: #fff;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 12px;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             transition: 0.15s;
@@ -546,8 +590,9 @@
             transform: scale(0.94);
         }
 
+        /* GAME HUB — большой кейс */
         .game-hub {
-            padding: 12px 14px 16px 14px;
+            padding: 10px 12px 16px 12px;
             display: none;
         }
         .game-hub.active {
@@ -556,20 +601,20 @@
         .game-hub .hub-header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: 16px;
-            padding: 16px;
+            padding: 12px 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             text-align: center;
         }
         .game-hub .hub-header h2 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             background: linear-gradient(90deg, #ffd700, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .game-hub .hub-header p {
-            font-size: 12px;
+            font-size: 11px;
             color: #8e8ea0;
             margin-top: 2px;
         }
@@ -577,12 +622,12 @@
             background: rgba(255, 215, 0, 0.06);
             border: 1px solid rgba(255, 215, 0, 0.10);
             border-radius: 12px;
-            padding: 10px;
+            padding: 8px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #ffd966;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .case-container {
             background: #121216;
@@ -594,8 +639,8 @@
         }
         .case-track {
             display: flex;
-            gap: 12px;
-            padding: 8px 4px 12px 4px;
+            gap: 14px;
+            padding: 8px 4px 14px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -605,20 +650,20 @@
             display: none;
         }
         .case-item {
-            min-width: 100px;
+            min-width: 120px;
             background: #0a0a0f;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 8px;
+            padding: 10px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 72px;
-            height: 72px;
+            width: 80px;
+            height: 80px;
             margin: 0 auto;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             background: #0a0a0f;
         }
@@ -627,35 +672,35 @@
             height: 100%;
         }
         .case-item .case-name {
-            font-size: 8px;
+            font-size: 9px;
             color: #8e8ea0;
-            margin-top: 4px;
+            margin-top: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .case-item .case-price {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 600;
             color: #4a8af4;
         }
         .case-item.highlight {
             border-color: #ffd700;
-            box-shadow: 0 0 24px rgba(255, 215, 0, 0.20);
-            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.20);
+            transform: scale(1.06);
         }
         .spin-btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: linear-gradient(135deg, #ffd700, #f7971e);
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             color: #0a0a0f;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 12px;
+            margin-top: 14px;
             transition: 0.15s;
         }
         .spin-btn:active {
@@ -666,6 +711,7 @@
             cursor: not-allowed;
         }
 
+        /* BOTTOM NAV — увеличенный */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -678,35 +724,39 @@
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             justify-content: space-around;
-            padding: 4px 0 10px 0;
+            padding: 6px 0 12px 0;
             z-index: 100;
         }
         .bottom-nav .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1px;
+            gap: 2px;
             color: #6e6e80;
-            font-size: 8px;
+            font-size: 9px;
             font-weight: 500;
             cursor: pointer;
             background: none;
             border: none;
             font-family: 'Inter', sans-serif;
-            padding: 4px 8px;
+            padding: 6px 12px;
             position: relative;
             transition: 0.15s;
+            min-width: 60px;
+        }
+        .bottom-nav .nav-item:active {
+            transform: scale(0.92);
         }
         .bottom-nav .nav-item .nav-icon {
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .bottom-nav .nav-item .nav-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             stroke: #6e6e80;
             fill: none;
             stroke-width: 1.8;
@@ -724,21 +774,21 @@
             top: -2px;
             left: 50%;
             transform: translateX(-50%);
-            width: 16px;
-            height: 2px;
-            border-radius: 2px;
+            width: 20px;
+            height: 3px;
+            border-radius: 3px;
             background: #4a8af4;
         }
         .bottom-nav .nav-item .badge {
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 2px;
+            right: 4px;
             background: #4a8af4;
             color: #fff;
-            font-size: 6px;
+            font-size: 7px;
             font-weight: 700;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -746,17 +796,18 @@
             border: 1.5px solid #0a0a0f;
         }
 
+        /* TOAST */
         .toast {
             position: fixed;
-            top: 70px;
+            top: 74px;
             left: 50%;
             transform: translateX(-50%);
             background: #181820;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 6px 18px;
-            border-radius: 12px;
+            padding: 8px 20px;
+            border-radius: 14px;
             color: #fff;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
             z-index: 999;
             backdrop-filter: blur(12px);
@@ -769,6 +820,7 @@
             opacity: 1;
         }
 
+        /* PROFILE MODAL */
         .profile-modal {
             position: fixed;
             top: 0;
@@ -788,10 +840,10 @@
         }
         .profile-modal-content {
             background: #14141e;
-            border-radius: 18px;
+            border-radius: 20px;
             max-width: 340px;
             width: 100%;
-            padding: 20px;
+            padding: 24px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
         }
@@ -800,14 +852,18 @@
             background: transparent;
             border: none;
             color: #8e8ea0;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
+            padding: 4px;
+        }
+        .profile-modal-close:active {
+            transform: scale(0.92);
         }
         .profile-avatar {
-            width: 56px;
-            height: 56px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            margin: 4px auto 6px;
+            margin: 4px auto 8px;
             overflow: hidden;
             border: 2px solid rgba(255, 255, 255, 0.08);
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
@@ -823,33 +879,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             color: #fff;
         }
         .profile-name {
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 700;
         }
         .profile-id {
-            font-size: 10px;
+            font-size: 11px;
             color: #6e6e80;
         }
         .profile-balance {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            font-size: 13px;
+            gap: 8px;
+            font-size: 15px;
             font-weight: 700;
-            padding: 6px;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin: 6px 0;
+            margin: 8px 0;
         }
         .profile-balance .mini-gram {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             overflow: hidden;
         }
@@ -860,19 +916,22 @@
         }
         .btn-row {
             display: flex;
-            gap: 6px;
-            margin: 6px 0;
+            gap: 8px;
+            margin: 8px 0;
         }
         .btn-row button {
             flex: 1;
-            padding: 6px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 12px;
             border: none;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
             transition: 0.15s;
+        }
+        .btn-row button:active {
+            transform: scale(0.94);
         }
         .btn-primary {
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
@@ -882,9 +941,6 @@
             background: rgba(255, 255, 255, 0.04);
             color: #8e8ea0;
             border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .btn-row button:active {
-            transform: scale(0.96);
         }
 
         .cart-modal {
@@ -909,7 +965,7 @@
             max-width: 430px;
             width: 100%;
             max-height: 60vh;
-            padding: 16px;
+            padding: 20px 16px 24px;
             overflow-y: auto;
         }
         .cart-modal-header {
@@ -917,39 +973,49 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            padding-bottom: 8px;
-            margin-bottom: 8px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .cart-modal-header h2 {
+            font-size: 17px;
+            font-weight: 700;
         }
         .cart-close {
             background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-close:active {
+            transform: scale(0.92);
         }
         .cart-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 4px 0;
+            gap: 10px;
+            padding: 6px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
         }
         .cart-item .item-info {
             flex: 1;
         }
         .cart-item .item-name {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
         }
         .cart-item .item-collection {
-            font-size: 8px;
+            font-size: 9px;
             color: #6e6e80;
         }
         .cart-item .item-price {
-            font-size: 10px;
+            font-size: 11px;
             color: #4a8af4;
             font-weight: 600;
         }
@@ -957,33 +1023,39 @@
             background: rgba(255, 107, 107, 0.08);
             border: none;
             color: #ff6b6b;
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-item .item-remove:active {
+            transform: scale(0.92);
         }
         .cart-total {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            padding: 10px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
-            margin-top: 4px;
+            margin-top: 6px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
         }
         .btn-checkout {
             width: 100%;
-            padding: 8px;
+            padding: 12px;
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: #fff;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 4px;
+            margin-top: 6px;
             transition: 0.15s;
         }
         .btn-checkout:active {
@@ -994,64 +1066,79 @@
         }
         .empty-cart {
             text-align: center;
-            padding: 16px;
+            padding: 20px;
             color: #6e6e80;
-            font-size: 11px;
+            font-size: 12px;
         }
         .hidden {
             display: none !important;
         }
+
         .withdraw-section {
             display: none;
-            margin-top: 6px;
-            padding: 8px;
+            margin-top: 8px;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 12px;
         }
         .withdraw-section.open {
             display: block;
         }
         .withdraw-section input {
             width: 100%;
-            padding: 4px 8px;
+            padding: 8px 12px;
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
             color: #fff;
-            font-size: 10px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             outline: none;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+        }
+        .withdraw-section input::placeholder {
+            color: #6e6e80;
         }
         .withdraw-section .withdraw-submit {
             width: 100%;
-            padding: 4px;
+            padding: 8px;
             background: #4a8af4;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             color: #fff;
             font-weight: 600;
-            font-size: 10px;
+            font-size: 11px;
             cursor: pointer;
+            transition: 0.15s;
+        }
+        .withdraw-section .withdraw-submit:active {
+            transform: scale(0.94);
         }
         .withdraw-section .error {
-            font-size: 9px;
+            font-size: 10px;
             color: #ff6b6b;
             display: none;
+            margin-top: 4px;
         }
         .withdraw-section .success {
-            font-size: 9px;
+            font-size: 10px;
             color: #4bc88a;
             display: none;
+            margin-top: 4px;
         }
 
         @media (max-width: 380px) {
             .case-item {
-                min-width: 80px;
+                min-width: 100px;
             }
             .case-item .case-lottie {
-                width: 56px;
-                height: 56px;
+                width: 64px;
+                height: 64px;
+            }
+            .bottom-nav .nav-item {
+                padding: 4px 8px;
+                min-width: 50px;
+                font-size: 8px;
             }
         }
     </style>
@@ -1074,12 +1161,10 @@
             </div>
         </div>
 
-        <!-- TABS -->
+        <!-- TABS — только Подарки и Коллекции -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
-            <span class="gift-tab" data-tab="stickers">Стикеры</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
-            <span class="gift-tab" data-tab="channels">Каналы</span>
         </div>
 
         <!-- SEARCH -->
@@ -1100,8 +1185,8 @@
         </div>
 
         <!-- STATUS -->
-        <div style="display:flex;gap:8px;padding:4px 12px 6px 12px;border-bottom:1px solid rgba(255,255,255,0.02);">
-            <span class="chip" style="background:rgba(74,138,244,0.06);border-color:rgba(74,138,244,0.10);color:#4a8af4;">На продаже (0)</span>
+        <div style="display:flex;gap:10px;padding:6px 16px 10px 16px;border-bottom:1px solid rgba(255,255,255,0.02);">
+            <span class="chip" style="background:rgba(74,138,244,0.10);border-color:rgba(74,138,244,0.15);color:#4a8af4;">На продаже (0)</span>
             <span class="chip">Хранилище (0)</span>
         </div>
 
@@ -1112,7 +1197,7 @@
         <div class="orders-section" id="ordersSection">
             <div class="orders-header">
                 <h2>Ордеры</h2>
-                <span class="my-orders" style="font-size:11px;color:#4a8af4;font-weight:600;cursor:pointer;">Мои ордеры</span>
+                <span style="font-size:12px;color:#4a8af4;font-weight:600;cursor:pointer;">Мои ордеры</span>
             </div>
             <div id="ordersList"></div>
             <div class="create-order">
@@ -1131,16 +1216,16 @@
                 <h2>PlayHub Сезон 1</h2>
                 <p>Гонка за 100K GRAM началась!</p>
             </div>
-            <div class="reward-banner">100K GRAM уже тут! PlayHub Сезон 1</div>
+            <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
 
             <div class="case-container">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                    <span style="font-size:12px;font-weight:600;">Кейс с NFT</span>
-                    <span style="font-size:10px;color:#6e6e80;">10 GRAM за открытие</span>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                    <span style="font-size:14px;font-weight:700;">Кейс с NFT</span>
+                    <span style="font-size:12px;color:#ffd966;font-weight:600;">200 GRAM за открытие</span>
                 </div>
                 <div class="case-track" id="caseTrack"></div>
-                <button class="spin-btn" id="spinBtn">Крутить (10 GRAM)</button>
-                <div style="text-align:center;margin-top:6px;font-size:10px;color:#6e6e80;" id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
+                <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
+                <div style="text-align:center;margin-top:8px;font-size:11px;color:#6e6e80;" id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
             </div>
         </div>
 
@@ -1167,7 +1252,7 @@
         <!-- CART -->
         <div class="cart-modal" id="cartModal">
             <div class="cart-modal-content">
-                <div class="cart-modal-header"><h2 style="font-size:15px;">Корзина</h2><button class="cart-close" id="cartClose">✕</button></div>
+                <div class="cart-modal-header"><h2>Корзина</h2><button class="cart-close" id="cartClose">✕</button></div>
                 <div id="cartItems"></div>
                 <div class="cart-total"><span>Итого</span><span><span id="modalCartTotal">0.00</span> GRAM</span></div>
                 <button class="btn-checkout" id="checkoutBtn">Перейти к оплате</button>
@@ -1213,7 +1298,7 @@
 
     <script>
         // ============================================================
-        // 1. DATA — РЕАЛЬНЫЕ ЦЕНЫ (Plush Pepe от 4700 до 12000)
+        // 1. DATA
         // ============================================================
         const COLLECTIONS_DATA = {
             "Plush Pepe": { icon: "🐸" },
@@ -1250,7 +1335,6 @@
             "Candy Cane": { icon: "🍭" }
         };
 
-        // Реальные номера
         const REAL_NUMBERS = {
             "Plush Pepe": [2656, 100, 1412, 1382, 2658, 1179, 2055, 987, 1583, 858, 487, 123, 1010, 222, 333, 444, 555, 666],
             "Nail Bracelet": [2655, 3517, 891, 1861, 2859, 160, 201, 302, 403, 504, 605, 706, 807, 908, 1009, 1110, 1211, 1312],
@@ -1361,6 +1445,7 @@
         let autoScrollInterval = null;
         let allNFTs = [];
         let filteredNFTs = [];
+        let isAutoScrolling = false;
 
         // ============================================================
         // 3. CART
@@ -1431,7 +1516,7 @@
         }
 
         // ============================================================
-        // 4. LOTTIE HELPER (оптимизированная)
+        // 4. LOTTIE — с защитой от ошибок WebView
         // ============================================================
         const lottieLoadQueue = [];
         let isProcessingQueue = false;
@@ -1440,8 +1525,8 @@
             if (!container) return;
             container.innerHTML = '';
             if (lottieCache.has(url)) {
-                const data = lottieCache.get(url);
                 try {
+                    const data = lottieCache.get(url);
                     const anim = lottie.loadAnimation({
                         container,
                         animationData: data,
@@ -1451,9 +1536,11 @@
                     });
                     if (!autoplay) anim.goToAndStop(0, true);
                     return;
-                } catch (e) { container.textContent = '🎁'; return; }
+                } catch (e) {
+                    container.textContent = '🎁';
+                    return;
+                }
             }
-            // ставим в очередь
             lottieLoadQueue.push({ container, url, autoplay });
             processLottieQueue();
         }
@@ -1487,13 +1574,13 @@
                 .finally(() => {
                     isProcessingQueue = false;
                     if (lottieLoadQueue.length > 0) {
-                        setTimeout(processLottieQueue, 50);
+                        setTimeout(processLottieQueue, 30);
                     }
                 });
         }
 
         // ============================================================
-        // 5. RENDER GRID с поиском
+        // 5. RENDER GRID
         // ============================================================
         function renderGrid(filter = '') {
             const grid = document.getElementById('nftGrid');
@@ -1511,7 +1598,7 @@
 
             if (filteredNFTs.length === 0) {
                 grid.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:#6e6e80;font-size:13px;">Ничего не найдено</div>`;
+                    `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
                 return;
             }
 
@@ -1533,7 +1620,6 @@
             });
             grid.innerHTML = html;
 
-            // ленивая загрузка лотти
             filteredNFTs.forEach(nft => {
                 const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`);
                 if (container) loadLottie(container, nft.lottie, false);
@@ -1654,11 +1740,9 @@
         });
 
         // ============================================================
-        // 8. GAME HUB — КЕЙС С АВТОПРОКРУТКОЙ
+        // 8. GAME HUB — КЕЙС с автопрокруткой и ценой 200 GRAM
         // ============================================================
         let caseItems = [];
-        let isAutoScrolling = false;
-        let autoScrollTimer = null;
 
         function renderCase() {
             const track = document.getElementById('caseTrack');
@@ -1679,46 +1763,45 @@
                 if (container) loadLottie(container, nft.lottie, false);
             });
 
-            // запускаем автопрокрутку
             startAutoScroll();
         }
 
         function startAutoScroll() {
-            if (autoScrollTimer) clearInterval(autoScrollTimer);
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
             const track = document.getElementById('caseTrack');
             if (!track || caseItems.length === 0) return;
 
             isAutoScrolling = true;
             let scrollPos = 0;
-            const step = 1.2;
+            const step = 1.0;
             const maxScroll = track.scrollWidth - track.clientWidth;
 
-            autoScrollTimer = setInterval(() => {
+            autoScrollInterval = setInterval(() => {
                 if (!isAutoScrolling) return;
                 scrollPos += step;
                 if (scrollPos > maxScroll) scrollPos = 0;
                 track.scrollTo({ left: scrollPos, behavior: 'smooth' });
-            }, 30);
+            }, 25);
         }
 
         function stopAutoScroll() {
             isAutoScrolling = false;
-            if (autoScrollTimer) {
-                clearInterval(autoScrollTimer);
-                autoScrollTimer = null;
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
             }
         }
 
         document.getElementById('spinBtn').addEventListener('click', function() {
             if (isSpinning) return;
-            if (userBalance < 10) { showToast('Недостаточно GRAM! Нужно 10'); return; }
+            if (userBalance < 200) { showToast('Недостаточно GRAM! Нужно 200'); return; }
 
             isSpinning = true;
             stopAutoScroll();
             this.disabled = true;
             this.textContent = 'Крутим...';
 
-            userBalance -= 10;
+            userBalance -= 200;
             localStorage.setItem('allow_balance_guest', String(userBalance));
             document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
 
@@ -1729,17 +1812,15 @@
 
             items.forEach(el => el.classList.remove('highlight'));
 
-            // усиленная прокрутка к выигрышному
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 12 || 100);
+            // усиленная прокрутка с эффектом
+            let extraScrolls = 0;
+            const maxExtra = 6;
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 110);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
-            // дополнительная прокрутка для эффекта
-            let extraScrolls = 0;
-            const maxExtra = 5;
             const extraInterval = setInterval(() => {
                 if (extraScrolls >= maxExtra) {
                     clearInterval(extraInterval);
-                    // финальная остановка
                     setTimeout(() => {
                         items.forEach(el => el.classList.remove('highlight'));
                         if (items[randomIdx]) {
@@ -1756,16 +1837,16 @@
                         }
                         isSpinning = false;
                         this.disabled = false;
-                        this.textContent = 'Крутить (10 GRAM)';
+                        this.textContent = 'Крутить (200 GRAM)';
                         startAutoScroll();
-                    }, 400);
+                    }, 500);
                     return;
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 12 || 100);
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 110);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
-            }, 150);
+            }, 120);
         });
 
         // ============================================================
@@ -1824,7 +1905,6 @@
 
         document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
 
-        // Аватарка Telegram
         function updateAvatar(user) {
             const avatarImg = document.getElementById('avatarImg');
             const avatarPlaceholder = document.getElementById('avatarPlaceholder');
@@ -1856,9 +1936,13 @@
                 document.getElementById('profileModal').classList.remove('open'); });
 
         document.getElementById('addGiftBtn').addEventListener('click', () => {
-            if (window.Telegram?.WebApp) {
-                window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
-            } else {
+            try {
+                if (window.Telegram?.WebApp) {
+                    window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
+                } else {
+                    window.open('https://t.me/AllowMarketGifts', '_blank');
+                }
+            } catch (e) {
                 window.open('https://t.me/AllowMarketGifts', '_blank');
             }
         });
@@ -1927,38 +2011,52 @@
         });
 
         // ============================================================
-        // 14. INIT
+        // 14. INIT — с защитой от ошибок WebView
         // ============================================================
         (function init() {
-            // генерируем данные
-            allNFTs = generateNFTs();
-
-            const saved = localStorage.getItem('allow_balance_guest');
-            if (saved) userBalance = parseFloat(saved);
-            else localStorage.setItem('allow_balance_guest', '500.00');
-
-            loadCart();
-            renderGrid('');
-            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
-            document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
-            document.getElementById('ordersSection').classList.remove('active');
-            document.getElementById('gameHub').classList.remove('active');
-            document.getElementById('nftGrid').style.display = 'grid';
-
-            // Telegram аватарка
             try {
-                if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-                    const user = window.Telegram.WebApp.initDataUnsafe.user;
-                    document.getElementById('profileName').textContent = user.first_name || 'Пользователь';
-                    document.getElementById('profileId').textContent = `ID: ${user.id}`;
-                    if (user.photo_url) {
-                        updateAvatar(user);
-                    }
-                }
-            } catch (e) {}
+                allNFTs = generateNFTs();
 
-            // если нет аватарки, показываем плейсхолдер
-            updateAvatar(null);
+                const saved = localStorage.getItem('allow_balance_guest');
+                if (saved) userBalance = parseFloat(saved);
+                else localStorage.setItem('allow_balance_guest', '500.00');
+
+                loadCart();
+                renderGrid('');
+                document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+                document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
+                document.getElementById('ordersSection').classList.remove('active');
+                document.getElementById('gameHub').classList.remove('active');
+                document.getElementById('nftGrid').style.display = 'grid';
+
+                try {
+                    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+                        const user = window.Telegram.WebApp.initDataUnsafe.user;
+                        document.getElementById('profileName').textContent = user.first_name || 'Пользователь';
+                        document.getElementById('profileId').textContent = `ID: ${user.id}`;
+                        if (user.photo_url) {
+                            updateAvatar(user);
+                        }
+                    }
+                } catch (e) {}
+                updateAvatar(null);
+
+                // обработка ошибок WebView
+                window.addEventListener('error', function(e) {
+                    console.warn('WebView error caught:', e.message);
+                    return true;
+                });
+
+            } catch (e) {
+                console.warn('Init error:', e);
+                // повторная попытка через 500ms
+                setTimeout(() => {
+                    try {
+                        allNFTs = generateNFTs();
+                        renderGrid('');
+                    } catch (e2) {}
+                }, 500);
+            }
         })();
 
         window.openDetail = openDetail;
