@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Allow Market — Игровой хаб, Ордеры, NFT</title>
+    <title>Allow Market</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js">
     </script>
@@ -21,6 +21,7 @@
             display: flex;
             justify-content: center;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
         .app {
             max-width: 430px;
@@ -42,44 +43,16 @@
             z-index: 50;
             backdrop-filter: blur(8px);
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
         .header-left h1 {
             font-size: 17px;
             font-weight: 700;
             color: #fff;
             letter-spacing: -0.3px;
         }
-        .close-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: none;
-            color: #8e8ea0;
-            font-size: 13px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-        }
-        .close-btn:active {
-            transform: scale(0.94);
-        }
         .header-right {
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-        .badge-icon {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 30px;
-            padding: 2px 10px;
-            font-size: 10px;
-            font-weight: 600;
-            color: #8e8ea0;
-            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .icon-btn {
             background: transparent;
@@ -92,6 +65,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            transition: 0.15s;
         }
         .icon-btn:active {
             background: rgba(255, 255, 255, 0.04);
@@ -103,8 +77,31 @@
             fill: none;
             stroke-width: 1.8;
         }
+        .avatar-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+        }
+        .avatar-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .avatar-btn .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #fff;
+        }
 
-        /* tabs */
         .gift-tabs {
             display: flex;
             gap: 6px;
@@ -159,6 +156,7 @@
             width: 14px;
             height: 14px;
             stroke: #6e6e80;
+            flex-shrink: 0;
         }
         .search-box input {
             background: transparent;
@@ -183,6 +181,7 @@
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
+            flex-shrink: 0;
         }
         .chip:active {
             transform: scale(0.94);
@@ -200,7 +199,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
         }
 
-        /* NFT GRID */
         .nft-grid {
             padding: 8px 12px 12px 12px;
             display: grid;
@@ -213,7 +211,7 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.15s;
         }
         .nft-card:active {
             transform: scale(0.96);
@@ -222,7 +220,7 @@
             padding: 8px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             background: #121216;
         }
         .lottie-wrapper {
@@ -294,7 +292,6 @@
             background: rgba(255, 215, 0, 0.08);
         }
 
-        /* DETAIL */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -399,7 +396,7 @@
             font-weight: 600;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.15s;
             margin-top: 4px;
         }
         .detail-buy-btn:active {
@@ -410,7 +407,6 @@
             color: #6e6e80;
         }
 
-        /* ORDERS */
         .orders-section {
             padding: 8px 14px 16px 14px;
             display: none;
@@ -427,12 +423,6 @@
         .orders-header h2 {
             font-size: 16px;
             font-weight: 700;
-        }
-        .orders-header .my-orders {
-            font-size: 11px;
-            color: #4a8af4;
-            font-weight: 600;
-            cursor: pointer;
         }
         .order-item {
             background: #121216;
@@ -500,6 +490,7 @@
             color: #8e8ea0;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
+            transition: 0.15s;
         }
         .order-item .order-actions button:active {
             transform: scale(0.94);
@@ -549,12 +540,12 @@
             font-size: 10px;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
+            transition: 0.15s;
         }
         .create-order .row button:active {
             transform: scale(0.94);
         }
 
-        /* GAME HUB — CASE */
         .game-hub {
             padding: 12px 14px 16px 14px;
             display: none;
@@ -603,9 +594,9 @@
         }
         .case-track {
             display: flex;
-            gap: 10px;
-            overflow-x: auto;
+            gap: 12px;
             padding: 8px 4px 12px 4px;
+            overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
@@ -614,20 +605,20 @@
             display: none;
         }
         .case-item {
-            min-width: 80px;
+            min-width: 100px;
             background: #0a0a0f;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 6px;
+            padding: 8px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 60px;
-            height: 60px;
+            width: 72px;
+            height: 72px;
             margin: 0 auto;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             background: #0a0a0f;
         }
@@ -650,7 +641,8 @@
         }
         .case-item.highlight {
             border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 24px rgba(255, 215, 0, 0.20);
+            transform: scale(1.05);
         }
         .spin-btn {
             width: 100%;
@@ -664,7 +656,7 @@
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             margin-top: 12px;
-            transition: 0.2s;
+            transition: 0.15s;
         }
         .spin-btn:active {
             transform: scale(0.96);
@@ -674,7 +666,6 @@
             cursor: not-allowed;
         }
 
-        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -704,6 +695,7 @@
             font-family: 'Inter', sans-serif;
             padding: 4px 8px;
             position: relative;
+            transition: 0.15s;
         }
         .bottom-nav .nav-item .nav-icon {
             width: 22px;
@@ -718,6 +710,7 @@
             stroke: #6e6e80;
             fill: none;
             stroke-width: 1.8;
+            transition: 0.15s;
         }
         .bottom-nav .nav-item.active {
             color: #4a8af4;
@@ -770,6 +763,7 @@
             opacity: 0;
             transition: 0.25s;
             pointer-events: none;
+            white-space: nowrap;
         }
         .toast.show {
             opacity: 1;
@@ -814,7 +808,18 @@
             height: 56px;
             border-radius: 50%;
             margin: 4px auto 6px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.08);
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
+        }
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-avatar .placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -867,7 +872,7 @@
             font-weight: 600;
             font-size: 10px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.15s;
         }
         .btn-primary {
             background: linear-gradient(135deg, #4a8af4, #6c5ce7);
@@ -979,6 +984,10 @@
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             margin-top: 4px;
+            transition: 0.15s;
+        }
+        .btn-checkout:active {
+            transform: scale(0.96);
         }
         .btn-checkout:disabled {
             opacity: 0.3;
@@ -1035,6 +1044,16 @@
             color: #4bc88a;
             display: none;
         }
+
+        @media (max-width: 380px) {
+            .case-item {
+                min-width: 80px;
+            }
+            .case-item .case-lottie {
+                width: 56px;
+                height: 56px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1042,15 +1061,16 @@
         <!-- HEADER -->
         <div class="header">
             <div class="header-left">
-                <button class="close-btn" id="closeBtn">Закрыть</button>
                 <h1>Allow Market</h1>
             </div>
             <div class="header-right">
-                <span class="badge-icon">Закрыто: 1512</span>
                 <button class="icon-btn" id="bellBtn">
                     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                 </button>
-                <div class="icon-btn" id="profileBtn" style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#4a8af4,#6c5ce7);color:#fff;font-size:12px;font-weight:700;">👤</div>
+                <div class="avatar-btn" id="profileBtn">
+                    <div class="placeholder" id="avatarPlaceholder">👤</div>
+                    <img id="avatarImg" style="display:none;" alt="avatar">
+                </div>
             </div>
         </div>
 
@@ -1088,11 +1108,11 @@
         <!-- NFT GRID -->
         <div class="nft-grid" id="nftGrid"></div>
 
-        <!-- ORDERS SECTION -->
+        <!-- ORDERS -->
         <div class="orders-section" id="ordersSection">
             <div class="orders-header">
                 <h2>Ордеры</h2>
-                <span class="my-orders" id="myOrdersToggle">Мои ордеры</span>
+                <span class="my-orders" style="font-size:11px;color:#4a8af4;font-weight:600;cursor:pointer;">Мои ордеры</span>
             </div>
             <div id="ordersList"></div>
             <div class="create-order">
@@ -1108,18 +1128,18 @@
         <!-- GAME HUB -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
-                <h2>🎰 PlayHub Сезон 1</h2>
+                <h2>PlayHub Сезон 1</h2>
                 <p>Гонка за 100K GRAM началась!</p>
             </div>
-            <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
+            <div class="reward-banner">100K GRAM уже тут! PlayHub Сезон 1</div>
 
             <div class="case-container">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                    <span style="font-size:12px;font-weight:600;">🎁 Кейс с NFT</span>
+                    <span style="font-size:12px;font-weight:600;">Кейс с NFT</span>
                     <span style="font-size:10px;color:#6e6e80;">10 GRAM за открытие</span>
                 </div>
                 <div class="case-track" id="caseTrack"></div>
-                <button class="spin-btn" id="spinBtn">🎲 Крутить! (10 GRAM)</button>
+                <button class="spin-btn" id="spinBtn">Крутить (10 GRAM)</button>
                 <div style="text-align:center;margin-top:6px;font-size:10px;color:#6e6e80;" id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
             </div>
         </div>
@@ -1158,11 +1178,17 @@
         <div class="profile-modal" id="profileModal">
             <div class="profile-modal-content">
                 <button class="profile-modal-close" id="profileModalClose">✕</button>
-                <div class="profile-avatar" id="profileAvatar">👤</div>
+                <div class="profile-avatar" id="profileAvatar">
+                    <div class="placeholder" id="profilePlaceholder">👤</div>
+                    <img id="profileImg" style="display:none;" alt="avatar">
+                </div>
                 <div class="profile-name" id="profileName">Пользователь</div>
                 <div class="profile-id" id="profileId">ID: —</div>
                 <div class="profile-balance"><span class="mini-gram"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span><span id="profileBalance">0.00</span> GRAM</div>
-                <div class="btn-row"><button class="btn-primary" id="addGiftBtn">Добавить подарок</button><button class="btn-secondary" id="withdrawToggleBtn">Вывести</button></div>
+                <div class="btn-row">
+                    <button class="btn-primary" id="addGiftBtn">Добавить подарок</button>
+                    <button class="btn-secondary" id="withdrawToggleBtn">Вывести</button>
+                </div>
                 <div class="withdraw-section" id="withdrawSection">
                     <input type="text" id="walletInput" placeholder="Адрес TON">
                     <input type="number" id="amountInput" placeholder="Сумма (GRAM)" step="0.01">
@@ -1187,7 +1213,7 @@
 
     <script>
         // ============================================================
-        // 1. DATA — РЕАЛЬНЫЕ НОМЕРА С FRAGMENT
+        // 1. DATA — РЕАЛЬНЫЕ ЦЕНЫ (Plush Pepe от 4700 до 12000)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Plush Pepe": { icon: "🐸" },
@@ -1224,22 +1250,24 @@
             "Candy Cane": { icon: "🍭" }
         };
 
-        // Реальные номера с fragment
+        // Реальные номера
         const REAL_NUMBERS = {
-            "Plush Pepe": [2656, 100, 1412, 1382, 2658, 1179, 2055, 987, 1583, 858, 487, 123, 1010, 222, 333],
-            "Nail Bracelet": [2655, 3517, 891, 1861, 2859, 160, 201, 302, 403, 504, 605, 706, 807, 908, 1009],
-            "Hex Pot": [10348, 10349, 10350, 10351, 10352, 10353, 10354, 10355, 10356, 10357, 10358, 10359, 10360],
-            "Astral Shard": [2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060],
-            "Bonded Ring": [1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136],
-            "Durov's Cap": [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434],
-            "Diamond Ring": [5512, 5513, 5514, 5515, 5516, 5517, 5518, 5519, 5520, 5521, 5522, 5523, 5524, 5525],
-            "Evil Eye": [2231, 2232, 2233, 2234, 2235, 2236, 2237, 2238, 2239, 2240, 2241, 2242, 2243, 2244],
-            "Eternal Rose": [7781, 7782, 7783, 7784, 7785, 7786, 7787, 7788, 7789, 7790, 7791, 7792, 7793, 7794],
-            "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394],
-            "Kissed Frog": [4562, 4563, 4564, 4565, 4566, 4567, 4568, 4569, 4570, 4571, 4572, 4573, 4574, 4575],
-            "Scared Cat": [6651, 6652, 6653, 6654, 6655, 6656, 6657, 6658, 6659, 6660, 6661, 6662, 6663, 6664],
-            "Vintage Cigar": [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013],
-            "Precious Peach": [2153, 11, 1080, 1508, 1780, 1348, 663, 7, 8, 9, 10, 12, 13, 14],
+            "Plush Pepe": [2656, 100, 1412, 1382, 2658, 1179, 2055, 987, 1583, 858, 487, 123, 1010, 222, 333, 444, 555, 666],
+            "Nail Bracelet": [2655, 3517, 891, 1861, 2859, 160, 201, 302, 403, 504, 605, 706, 807, 908, 1009, 1110, 1211, 1312],
+            "Hex Pot": [10348, 10349, 10350, 10351, 10352, 10353, 10354, 10355, 10356, 10357, 10358, 10359, 10360, 10361,
+                10362
+            ],
+            "Astral Shard": [2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062],
+            "Bonded Ring": [1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138],
+            "Durov's Cap": [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437],
+            "Diamond Ring": [5512, 5513, 5514, 5515, 5516, 5517, 5518, 5519, 5520, 5521, 5522, 5523, 5524, 5525, 5526, 5527],
+            "Evil Eye": [2231, 2232, 2233, 2234, 2235, 2236, 2237, 2238, 2239, 2240, 2241, 2242, 2243, 2244, 2245, 2246],
+            "Eternal Rose": [7781, 7782, 7783, 7784, 7785, 7786, 7787, 7788, 7789, 7790, 7791, 7792, 7793, 7794, 7795, 7796],
+            "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394, 3395, 3396],
+            "Kissed Frog": [4562, 4563, 4564, 4565, 4566, 4567, 4568, 4569, 4570, 4571, 4572, 4573, 4574, 4575, 4576, 4577],
+            "Scared Cat": [6651, 6652, 6653, 6654, 6655, 6656, 6657, 6658, 6659, 6660, 6661, 6662, 6663, 6664, 6665, 6666],
+            "Vintage Cigar": [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015],
+            "Precious Peach": [2153, 11, 1080, 1508, 1780, 1348, 663, 7, 8, 9, 10, 12, 13, 14, 15, 16],
             "Snoop Cigar": [5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010],
             "Jester Hat": [6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010],
             "Easter Egg": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010],
@@ -1269,7 +1297,38 @@
             Object.keys(REAL_NUMBERS).forEach(col => {
                 const numbers = REAL_NUMBERS[col];
                 numbers.forEach((num, idx) => {
-                    const price = (2 + Math.random() * 60 + (idx % 5) * 3);
+                    let price;
+                    if (col === "Plush Pepe") {
+                        price = 4700 + Math.random() * 7300;
+                        price = Math.round(price / 10) * 10;
+                    } else if (col === "Nail Bracelet") {
+                        price = 300 + Math.random() * 400;
+                    } else if (col === "Hex Pot") {
+                        price = 18 + Math.random() * 45;
+                    } else if (col === "Astral Shard") {
+                        price = 10 + Math.random() * 30;
+                    } else if (col === "Bonded Ring") {
+                        price = 60 + Math.random() * 150;
+                    } else if (col === "Durov's Cap") {
+                        price = 120 + Math.random() * 300;
+                    } else if (col === "Diamond Ring") {
+                        price = 90 + Math.random() * 200;
+                    } else if (col === "Evil Eye") {
+                        price = 5 + Math.random() * 20;
+                    } else if (col === "Eternal Rose") {
+                        price = 45 + Math.random() * 100;
+                    } else if (col === "Ion Gem") {
+                        price = 75 + Math.random() * 150;
+                    } else if (col === "Kissed Frog") {
+                        price = 12 + Math.random() * 40;
+                    } else if (col === "Scared Cat") {
+                        price = 25 + Math.random() * 60;
+                    } else if (col === "Vintage Cigar") {
+                        price = 45 + Math.random() * 100;
+                    } else {
+                        price = 10 + Math.random() * 100;
+                    }
+                    price = Math.round(price * 100) / 100;
                     const statuses = ["for-sale", "for-sale", "for-sale", "on-auction", "sold"];
                     const status = statuses[idx % statuses.length];
                     const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
@@ -1277,7 +1336,7 @@
                         name: `${col} #${num}`,
                         collection: col,
                         number: num,
-                        price: Math.round(price * 100) / 100,
+                        price: price,
                         status: status,
                         lottie: `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`,
                         model: models[idx % models.length],
@@ -1291,28 +1350,34 @@
             return result;
         }
 
-        const NFT_DATA = generateNFTs();
-
         // ============================================================
         // 2. STATE
         // ============================================================
-        let userBalance = 50.00;
+        let userBalance = 500.00;
         let userCart = [];
         let detailNft = null;
         const lottieCache = new Map();
         let isSpinning = false;
+        let autoScrollInterval = null;
+        let allNFTs = [];
+        let filteredNFTs = [];
 
         // ============================================================
         // 3. CART
         // ============================================================
         function loadCart() {
-            const saved = localStorage.getItem('allow_cart_guest');
-            if (saved) try { userCart = JSON.parse(saved); } catch (e) { userCart = []; } else userCart = [];
+            try {
+                const saved = localStorage.getItem('allow_cart_guest');
+                if (saved) userCart = JSON.parse(saved);
+                else userCart = [];
+            } catch (e) { userCart = []; }
             updateCartUI();
         }
 
         function saveCart() {
-            localStorage.setItem('allow_cart_guest', JSON.stringify(userCart));
+            try {
+                localStorage.setItem('allow_cart_guest', JSON.stringify(userCart));
+            } catch (e) {}
             updateCartUI();
         }
 
@@ -1321,6 +1386,7 @@
             else userCart.push(name);
             saveCart();
             updateDetailButtons();
+            showToast(userCart.includes(name) ? 'Добавлено в корзину' : 'Удалено из корзины');
         }
 
         function removeFromCart(name) {
@@ -1334,7 +1400,7 @@
 
         function getCartTotal() {
             return userCart.reduce((sum, name) => {
-                const n = NFT_DATA.find(item => item.name === name);
+                const n = allNFTs.find(item => item.name === name);
                 return sum + (n ? n.price : 0);
             }, 0);
         }
@@ -1348,11 +1414,13 @@
 
         function renderCartItems() {
             const container = document.getElementById('cartItems');
-            if (userCart.length === 0) { container.innerHTML =
-                `<div class="empty-cart">🛒 Корзина пуста</div>`; return; }
+            if (userCart.length === 0) {
+                container.innerHTML = `<div class="empty-cart">Корзина пуста</div>`;
+                return;
+            }
             let html = '';
             userCart.forEach(name => {
-                const nft = NFT_DATA.find(n => n.name === name);
+                const nft = allNFTs.find(n => n.name === name);
                 if (!nft) return;
                 html += `<div class="cart-item"><div style="font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
                     <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
@@ -1363,8 +1431,11 @@
         }
 
         // ============================================================
-        // 4. LOTTIE HELPER
+        // 4. LOTTIE HELPER (оптимизированная)
         // ============================================================
+        const lottieLoadQueue = [];
+        let isProcessingQueue = false;
+
         function loadLottie(container, url, autoplay = false) {
             if (!container) return;
             container.innerHTML = '';
@@ -1382,29 +1453,70 @@
                     return;
                 } catch (e) { container.textContent = '🎁'; return; }
             }
-            fetch(url).then(r => r.json()).then(data => {
-                lottieCache.set(url, data);
-                container.innerHTML = '';
-                try {
-                    const anim = lottie.loadAnimation({
-                        container,
-                        animationData: data,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: autoplay
-                    });
-                    if (!autoplay) anim.goToAndStop(0, true);
-                } catch (e) { container.textContent = '🎁'; }
-            }).catch(() => { container.textContent = '🎁'; });
+            // ставим в очередь
+            lottieLoadQueue.push({ container, url, autoplay });
+            processLottieQueue();
+        }
+
+        function processLottieQueue() {
+            if (isProcessingQueue || lottieLoadQueue.length === 0) return;
+            isProcessingQueue = true;
+            const item = lottieLoadQueue.shift();
+            const { container, url, autoplay } = item;
+
+            fetch(url)
+                .then(r => {
+                    if (!r.ok) throw new Error();
+                    return r.json();
+                })
+                .then(data => {
+                    lottieCache.set(url, data);
+                    container.innerHTML = '';
+                    try {
+                        const anim = lottie.loadAnimation({
+                            container,
+                            animationData: data,
+                            renderer: 'svg',
+                            loop: true,
+                            autoplay: autoplay
+                        });
+                        if (!autoplay) anim.goToAndStop(0, true);
+                    } catch (e) { container.textContent = '🎁'; }
+                })
+                .catch(() => { container.textContent = '🎁'; })
+                .finally(() => {
+                    isProcessingQueue = false;
+                    if (lottieLoadQueue.length > 0) {
+                        setTimeout(processLottieQueue, 50);
+                    }
+                });
         }
 
         // ============================================================
-        // 5. RENDER GRID
+        // 5. RENDER GRID с поиском
         // ============================================================
-        function renderGrid() {
+        function renderGrid(filter = '') {
             const grid = document.getElementById('nftGrid');
+            const searchTerm = filter.toLowerCase().trim();
+
+            if (searchTerm) {
+                filteredNFTs = allNFTs.filter(n =>
+                    n.name.toLowerCase().includes(searchTerm) ||
+                    String(n.number).includes(searchTerm) ||
+                    n.collection.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                filteredNFTs = allNFTs;
+            }
+
+            if (filteredNFTs.length === 0) {
+                grid.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:#6e6e80;font-size:13px;">Ничего не найдено</div>`;
+                return;
+            }
+
             let html = '';
-            NFT_DATA.forEach(nft => {
+            filteredNFTs.forEach(nft => {
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
                 const statusClass = nft.status === 'sold' ? 'sold' : nft.status === 'on-auction' ? 'auction' : 'sale';
                 const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' :
@@ -1421,7 +1533,8 @@
             });
             grid.innerHTML = html;
 
-            NFT_DATA.forEach(nft => {
+            // ленивая загрузка лотти
+            filteredNFTs.forEach(nft => {
                 const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`);
                 if (container) loadLottie(container, nft.lottie, false);
             });
@@ -1431,7 +1544,7 @@
         // 6. DETAIL
         // ============================================================
         function openDetail(name) {
-            const nft = NFT_DATA.find(item => item.name === name);
+            const nft = allNFTs.find(item => item.name === name);
             if (!nft) return;
             detailNft = nft;
             document.getElementById('detailTitle').textContent = nft.collection;
@@ -1464,7 +1577,7 @@
                 btn.className = 'detail-buy-btn sold';
                 btn.disabled = true;
             } else if (isInCart(detailNft.name)) {
-                btn.textContent = 'В корзине ✓';
+                btn.textContent = 'В корзине';
                 btn.className = 'detail-buy-btn';
                 btn.onclick = () => { addToCart(detailNft.name);
                     updateDetailButtons(); };
@@ -1481,7 +1594,7 @@
                 closeDetail(); });
 
         // ============================================================
-        // 7. ORDERS с мини-лотти
+        // 7. ORDERS
         // ============================================================
         const ORDERS_DATA = [
             { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
@@ -1500,8 +1613,6 @@
                 const col = order.collection || order.name;
                 const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
                 const num = Math.floor(Math.random() * 9000 + 1000);
-                const lottieUrl =
-                `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
                 const lottieId = `order-lottie-${order.name.replace(/\s/g,'')}`;
                 html += `<div class="order-item">
                     <div class="order-lottie"><div class="lottie-container" id="${lottieId}"></div></div>
@@ -1521,7 +1632,6 @@
             });
             container.innerHTML = html;
 
-            // загрузка лотти для ордеров
             ORDERS_DATA.forEach(order => {
                 const col = order.collection || order.name;
                 const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
@@ -1544,12 +1654,15 @@
         });
 
         // ============================================================
-        // 8. GAME HUB — CASE как в CS:GO
+        // 8. GAME HUB — КЕЙС С АВТОПРОКРУТКОЙ
         // ============================================================
+        let caseItems = [];
+        let isAutoScrolling = false;
+        let autoScrollTimer = null;
+
         function renderCase() {
             const track = document.getElementById('caseTrack');
-            // берем первые 20 NFT для кейса
-            const caseItems = NFT_DATA.slice(0, 20);
+            caseItems = allNFTs.slice(0, 24);
             let html = '';
             caseItems.forEach((nft, idx) => {
                 const lottieId = `case-lottie-${idx}`;
@@ -1565,6 +1678,35 @@
                 const container = document.getElementById(`case-lottie-${idx}`);
                 if (container) loadLottie(container, nft.lottie, false);
             });
+
+            // запускаем автопрокрутку
+            startAutoScroll();
+        }
+
+        function startAutoScroll() {
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+            const track = document.getElementById('caseTrack');
+            if (!track || caseItems.length === 0) return;
+
+            isAutoScrolling = true;
+            let scrollPos = 0;
+            const step = 1.2;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+
+            autoScrollTimer = setInterval(() => {
+                if (!isAutoScrolling) return;
+                scrollPos += step;
+                if (scrollPos > maxScroll) scrollPos = 0;
+                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }, 30);
+        }
+
+        function stopAutoScroll() {
+            isAutoScrolling = false;
+            if (autoScrollTimer) {
+                clearInterval(autoScrollTimer);
+                autoScrollTimer = null;
+            }
         }
 
         document.getElementById('spinBtn').addEventListener('click', function() {
@@ -1572,8 +1714,9 @@
             if (userBalance < 10) { showToast('Недостаточно GRAM! Нужно 10'); return; }
 
             isSpinning = true;
+            stopAutoScroll();
             this.disabled = true;
-            this.textContent = '🎲 Крутим...';
+            this.textContent = 'Крутим...';
 
             userBalance -= 10;
             localStorage.setItem('allow_balance_guest', String(userBalance));
@@ -1584,30 +1727,45 @@
             const totalItems = items.length;
             const randomIdx = Math.floor(Math.random() * totalItems);
 
-            // сброс подсветки
             items.forEach(el => el.classList.remove('highlight'));
 
-            // прокрутка
-            const scrollAmount = (randomIdx) * (items[0]?.offsetWidth + 10 || 90);
-            track.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+            // усиленная прокрутка к выигрышному
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 12 || 100);
+            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
-            setTimeout(() => {
-                items.forEach(el => el.classList.remove('highlight'));
-                if (items[randomIdx]) {
-                    items[randomIdx].classList.add('highlight');
-                    const nftName = items[randomIdx].querySelector('.case-name')?.textContent || 'NFT';
-                    document.getElementById('spinResult').textContent = `🎉 Вы выиграли: ${nftName}!`;
-                    showToast(`🎉 Вы выиграли: ${nftName}`);
-                    // добавляем в корзину
-                    const nft = NFT_DATA.find(n => n.name === nftName);
-                    if (nft && !isInCart(nft.name)) {
-                        addToCart(nft.name);
-                    }
+            // дополнительная прокрутка для эффекта
+            let extraScrolls = 0;
+            const maxExtra = 5;
+            const extraInterval = setInterval(() => {
+                if (extraScrolls >= maxExtra) {
+                    clearInterval(extraInterval);
+                    // финальная остановка
+                    setTimeout(() => {
+                        items.forEach(el => el.classList.remove('highlight'));
+                        if (items[randomIdx]) {
+                            items[randomIdx].classList.add('highlight');
+                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent ||
+                            'NFT';
+                            document.getElementById('spinResult').textContent =
+                                `Вы выиграли: ${nftName}!`;
+                            showToast(`Вы выиграли: ${nftName}`);
+                            const nft = allNFTs.find(n => n.name === nftName);
+                            if (nft && !isInCart(nft.name)) {
+                                addToCart(nft.name);
+                            }
+                        }
+                        isSpinning = false;
+                        this.disabled = false;
+                        this.textContent = 'Крутить (10 GRAM)';
+                        startAutoScroll();
+                    }, 400);
+                    return;
                 }
-                isSpinning = false;
-                this.disabled = false;
-                this.textContent = '🎲 Крутить! (10 GRAM)';
-            }, 800);
+                extraScrolls++;
+                const offset = (randomIdx + extraScrolls * 2) % totalItems;
+                const scrollTo = offset * (items[0]?.offsetWidth + 12 || 100);
+                track.scrollTo({ left: scrollTo, behavior: 'smooth' });
+            }, 150);
         });
 
         // ============================================================
@@ -1627,6 +1785,7 @@
 
             if (tab === 'market') {
                 grid.style.display = 'grid';
+                renderGrid(document.getElementById('searchInput').value);
             } else if (tab === 'orders') {
                 orders.classList.add('active');
                 renderOrders();
@@ -1638,8 +1797,10 @@
                 document.querySelector('.nav-item[data-tab="market"]')?.classList.add('active');
                 document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
                 grid.style.display = 'grid';
+                renderGrid(document.getElementById('searchInput').value);
             } else {
                 grid.style.display = 'grid';
+                renderGrid(document.getElementById('searchInput').value);
             }
         }
 
@@ -1662,7 +1823,28 @@
         }
 
         document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
-        document.getElementById('closeBtn').addEventListener('click', () => showToast('Закрыто'));
+
+        // Аватарка Telegram
+        function updateAvatar(user) {
+            const avatarImg = document.getElementById('avatarImg');
+            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+            const profileImg = document.getElementById('profileImg');
+            const profilePlaceholder = document.getElementById('profilePlaceholder');
+
+            if (user && user.photo_url) {
+                avatarImg.src = user.photo_url;
+                avatarImg.style.display = 'block';
+                avatarPlaceholder.style.display = 'none';
+                profileImg.src = user.photo_url;
+                profileImg.style.display = 'block';
+                profilePlaceholder.style.display = 'none';
+            } else {
+                avatarImg.style.display = 'none';
+                avatarPlaceholder.style.display = 'flex';
+                profileImg.style.display = 'none';
+                profilePlaceholder.style.display = 'flex';
+            }
+        }
 
         document.getElementById('profileBtn').addEventListener('click', () => {
             document.getElementById('profileModal').classList.add('open');
@@ -1674,8 +1856,11 @@
                 document.getElementById('profileModal').classList.remove('open'); });
 
         document.getElementById('addGiftBtn').addEventListener('click', () => {
-            if (window.Telegram?.WebApp) window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
-            else alert('Передайте подарок боту @AllowMarketGifts');
+            if (window.Telegram?.WebApp) {
+                window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
+            } else {
+                window.open('https://t.me/AllowMarketGifts', '_blank');
+            }
         });
 
         document.getElementById('withdrawToggleBtn').addEventListener('click', () => {
@@ -1720,7 +1905,14 @@
         });
 
         // ============================================================
-        // 12. FILTER CHIPS (mock)
+        // 12. SEARCH
+        // ============================================================
+        document.getElementById('searchInput').addEventListener('input', function() {
+            renderGrid(this.value);
+        });
+
+        // ============================================================
+        // 13. FILTER CHIPS
         // ============================================================
         document.getElementById('feedChip').addEventListener('click', function() {
             this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed ▼';
@@ -1735,27 +1927,38 @@
         });
 
         // ============================================================
-        // 13. INIT
+        // 14. INIT
         // ============================================================
         (function init() {
+            // генерируем данные
+            allNFTs = generateNFTs();
+
             const saved = localStorage.getItem('allow_balance_guest');
             if (saved) userBalance = parseFloat(saved);
-            else localStorage.setItem('allow_balance_guest', '50.00');
+            else localStorage.setItem('allow_balance_guest', '500.00');
+
             loadCart();
-            renderGrid();
+            renderGrid('');
             document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
             document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
             document.getElementById('ordersSection').classList.remove('active');
             document.getElementById('gameHub').classList.remove('active');
             document.getElementById('nftGrid').style.display = 'grid';
 
+            // Telegram аватарка
             try {
                 if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
                     const user = window.Telegram.WebApp.initDataUnsafe.user;
                     document.getElementById('profileName').textContent = user.first_name || 'Пользователь';
                     document.getElementById('profileId').textContent = `ID: ${user.id}`;
+                    if (user.photo_url) {
+                        updateAvatar(user);
+                    }
                 }
             } catch (e) {}
+
+            // если нет аватарки, показываем плейсхолдер
+            updateAvatar(null);
         })();
 
         window.openDetail = openDetail;
