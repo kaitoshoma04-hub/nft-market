@@ -115,10 +115,8 @@
             border-bottom-color: #f5c842;
         }
 
-        /* SEARCH — полностью убран */
         .search-row { display: none; }
 
-        /* FILTER ROW */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -143,9 +141,6 @@
             transition: 0.15s;
             flex-shrink: 0;
             white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
         .filter-row .filter-chip:active { transform: scale(0.94); }
         .filter-row .filter-chip.active-filter {
@@ -224,7 +219,6 @@
         .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.10); }
         .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.10); }
 
-        /* SVG корзина */
         .cart-add-btn {
             position: absolute;
             bottom: 8px;
@@ -311,7 +305,7 @@
         .detail-buy-btn:active { transform: scale(0.96); }
         .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        /* GAME HUB — лента больше, кнопка ближе */
+        /* GAME HUB — лента больше, кнопка вплотную */
         .game-hub {
             padding: 0;
             display: none;
@@ -321,36 +315,46 @@
         .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            padding: 6px 14px 4px 14px;
+            padding: 4px 14px 3px 14px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
             flex-shrink: 0;
         }
-        .game-hub .hub-header h2 { font-size: 13px; font-weight: 700; color: #f5c842; }
-        .game-hub .hub-header p { font-size: 9px; color: #8e8ea0; margin-top: 0px; }
+        .game-hub .hub-header h2 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #f5c842;
+            letter-spacing: 0.3px;
+        }
+        .game-hub .hub-header p {
+            font-size: 8px;
+            color: #8e8ea0;
+            margin-top: 0px;
+        }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
             border-bottom: 1px solid rgba(245,200,66,0.08);
-            padding: 4px;
+            padding: 3px;
             text-align: center;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             color: #f5c842;
             flex-shrink: 0;
+            letter-spacing: 0.3px;
         }
         .case-container {
             background: #1a1a1a;
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 6px 4px 0px 4px;
+            padding: 4px 4px 0px 4px;
             overflow: hidden;
             min-height: 0;
         }
         .case-track {
             display: flex;
             gap: 10px;
-            padding: 4px 4px 6px 4px;
+            padding: 4px 4px 4px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -360,34 +364,49 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 110px;
+            min-width: 130px;
             background: #222222;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 8px;
+            padding: 10px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 72px; height: 72px;
+            width: 84px; height: 84px;
             margin: 0 auto;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
-        .case-item .case-name { font-size: 8px; color: #8e8ea0; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .case-item .case-price { font-size: 9px; font-weight: 600; color: #f5c842; }
-        .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 16px rgba(245,200,66,0.10); transform: scale(1.04); }
+        .case-item .case-name {
+            font-size: 9px;
+            color: #8e8ea0;
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .case-item .case-price {
+            font-size: 9px;
+            font-weight: 600;
+            color: #f5c842;
+        }
+        .case-item.highlight {
+            border-color: #f5c842;
+            box-shadow: 0 0 20px rgba(245,200,66,0.12);
+            transform: scale(1.05);
+        }
         #spinResult {
             text-align: center;
             padding: 2px;
-            font-size: 8px;
+            font-size: 9px;
             color: #6e6e80;
             flex-shrink: 0;
             background: #1a1a1a;
-            min-height: 14px;
+            min-height: 16px;
         }
         .spin-btn {
             width: 100%;
@@ -396,7 +415,7 @@
             border: none;
             border-radius: 0;
             color: #1a1a1a;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
@@ -800,8 +819,8 @@
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 85px; }
-            .case-item .case-lottie { width: 58px; height: 58px; }
+            .case-item { min-width: 110px; }
+            .case-item .case-lottie { width: 70px; height: 70px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
         }
@@ -826,8 +845,6 @@
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
-
-        <!-- SEARCH — убран -->
 
         <!-- FILTER ROW -->
         <div class="filter-row" id="mainFilterRow">
@@ -886,7 +903,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB -->
+        <!-- GAME HUB — лента больше, кнопка вплотную -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1463,7 +1480,7 @@
 
             let extraScrolls = 0;
             const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 80);
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 100);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
             const extraInterval = setInterval(() => {
@@ -1490,7 +1507,7 @@
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 80);
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 100);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
             }, 120);
         });
@@ -1587,9 +1604,8 @@
         });
 
         // ============================================================
-        // 10. ФИЛЬТРЫ — без окон, мгновенная фильтрация
+        // 10. ФИЛЬТРЫ
         // ============================================================
-        // Список значений для фильтров
         const modelValues = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
         const backdropValues = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
         const symbolValues = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
