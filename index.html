@@ -34,14 +34,13 @@
             position: relative;
             overflow-x: hidden;
         }
-        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px 8px 16px;
-            background: rgba(26, 26, 26, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(26,26,26,0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             position: sticky;
             top: 0;
             z-index: 50;
@@ -59,7 +58,7 @@
             gap: 10px;
         }
         .icon-btn {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             border: none;
             color: #8e8ea0;
             width: 40px;
@@ -70,60 +69,38 @@
             justify-content: center;
             border-radius: 50%;
             transition: 0.15s;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
         }
-        .icon-btn:active {
-            transform: scale(0.92);
-        }
-        .icon-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: #8e8ea0;
-            fill: none;
-            stroke-width: 1.8;
-        }
+        .icon-btn:active { transform: scale(0.92); }
+        .icon-btn svg { width: 20px; height: 20px; stroke: #8e8ea0; fill: none; stroke-width: 1.8; }
         .avatar-btn {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255,255,255,0.06);
             cursor: pointer;
             flex-shrink: 0;
             background: #2a2a2a;
-            transition: 0.15s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .avatar-btn:active {
-            transform: scale(0.92);
-        }
-        .avatar-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .avatar-btn .placeholder {
-            font-size: 18px;
-            color: #fff;
-            font-weight: 600;
-        }
+        .avatar-btn:active { transform: scale(0.92); }
+        .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .avatar-btn .placeholder { font-size: 18px; color: #fff; font-weight: 600; }
 
-        /* TABS — как на фото */
         .gift-tabs {
             display: flex;
             gap: 8px;
             padding: 12px 16px 10px 16px;
             overflow-x: auto;
             scrollbar-width: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .gift-tabs::-webkit-scrollbar { display: none; }
         .gift-tab {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             padding: 8px 18px;
             border-radius: 30px;
             font-size: 13px;
@@ -137,24 +114,24 @@
         }
         .gift-tab:active { transform: scale(0.94); }
         .gift-tab.active {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.12);
             color: #ffffff;
         }
 
-        /* SEARCH — как на фото */
+        /* SEARCH — прямоугольный */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .search-box {
             flex: 1;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 30px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 4px;
             padding: 10px 16px;
             display: flex;
             align-items: center;
@@ -162,12 +139,11 @@
             transition: 0.15s;
         }
         .search-box:focus-within {
-            border-color: rgba(255, 255, 255, 0.12);
-            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
         }
         .search-box svg {
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             stroke: #6e6e80;
             flex-shrink: 0;
         }
@@ -180,13 +156,10 @@
             font-family: 'Inter', sans-serif;
             width: 100%;
         }
-        .search-box input::placeholder {
-            color: #6e6e80;
-            font-weight: 400;
-        }
+        .search-box input::placeholder { color: #6e6e80; font-weight: 400; }
         .chip {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 30px;
             padding: 8px 16px;
             font-size: 11px;
@@ -199,7 +172,7 @@
         }
         .chip:active { transform: scale(0.94); }
 
-        /* FILTER ROW — как на фото: NFT, Модель, Фон, Символ лентой, с галочками */
+        /* FILTER ROW — как на фото, без галочек, с символами */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -207,12 +180,12 @@
             flex-wrap: nowrap;
             overflow-x: auto;
             scrollbar-width: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .filter-row::-webkit-scrollbar { display: none; }
         .filter-row .filter-chip {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 30px;
             padding: 8px 18px;
             font-size: 12px;
@@ -226,21 +199,20 @@
         }
         .filter-row .filter-chip:active { transform: scale(0.94); }
         .filter-row .filter-chip.active-filter {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.12);
             color: #ffffff;
         }
 
-        /* STATUS — как на фото */
         .status-row {
             display: flex;
             gap: 10px;
             padding: 6px 16px 12px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .status-row .chip {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 30px;
             padding: 8px 18px;
             font-size: 12px;
@@ -250,12 +222,11 @@
             cursor: pointer;
         }
         .status-row .chip.active-status {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.12);
             color: #ffffff;
         }
 
-        /* NFT GRID */
         .nft-grid {
             padding: 10px 12px 12px 12px;
             display: grid;
@@ -265,19 +236,13 @@
         .nft-card {
             background: #222222;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255,255,255,0.04);
             overflow: hidden;
             cursor: pointer;
             transition: 0.15s;
         }
         .nft-card:active { transform: scale(0.96); }
-        .nft-card-inner {
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            background: #222222;
-        }
+        .nft-card-inner { padding: 10px; display: flex; flex-direction: column; gap: 4px; background: #222222; }
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
@@ -289,48 +254,19 @@
             justify-content: center;
         }
         .lottie-wrapper .lottie-container { width: 100%; height: 100%; }
-        .nft-name {
-            font-size: 12px;
-            font-weight: 700;
-            color: #fff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .nft-name { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .nft-model { font-size: 9px; color: #6e6e80; font-weight: 500; }
-        .nft-price {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #fff;
-            margin-top: 1px;
-        }
-        .gram-icon {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
+        .nft-price { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: #fff; margin-top: 1px; }
+        .gram-icon { width: 14px; height: 14px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
         .gram-icon img { width: 100%; height: 100%; object-fit: cover; }
-        .status-badge {
-            font-size: 8px;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 12px;
-            display: inline-block;
-            align-self: flex-start;
-        }
+        .status-badge { font-size: 8px; font-weight: 600; padding: 2px 8px; border-radius: 12px; display: inline-block; align-self: flex-start; }
         .status-badge.sale { color: #4bc88a; background: rgba(75,200,138,0.10); }
         .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.10); }
         .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.10); }
 
         /* DETAIL */
         .detail-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.92);
             backdrop-filter: blur(20px);
             z-index: 300;
@@ -350,8 +286,7 @@
             position: relative;
         }
         .detail-close {
-            position: absolute;
-            top: 8px; right: 10px;
+            position: absolute; top: 8px; right: 10px;
             background: rgba(255,255,255,0.04);
             border: none;
             color: #8e8ea0;
@@ -374,69 +309,19 @@
         }
         .detail-title { font-size: 16px; font-weight: 700; margin-top: 8px; }
         .detail-number { font-size: 12px; color: #f5c842; font-weight: 600; }
-        .detail-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px 8px;
-            margin: 4px 0;
-            font-size: 10px;
-        }
-        .detail-stats .stat {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-            padding: 3px 0;
-        }
+        .detail-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; margin: 4px 0; font-size: 10px; }
+        .detail-stats .stat { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.02); padding: 3px 0; }
         .detail-stats .stat .label { color: #6e6e80; }
-        .detail-stats .stat .value {
-            color: #fff;
-            font-weight: 500;
-            max-width: 60%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .detail-price {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 6px 12px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.04);
-            margin: 4px 0;
-        }
-        .detail-buy-btn {
-            width: 100%;
-            padding: 12px;
-            background: #f5c842;
-            border: none;
-            border-radius: 12px;
-            color: #1a1a1a;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: 0.15s;
-            margin-top: 6px;
-        }
+        .detail-stats .stat .value { color: #fff; font-weight: 500; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .detail-price { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; padding: 6px 12px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); margin: 4px 0; }
+        .detail-buy-btn { width: 100%; padding: 12px; background: #f5c842; border: none; border-radius: 12px; color: #1a1a1a; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: 0.15s; margin-top: 6px; }
         .detail-buy-btn:active { transform: scale(0.96); }
         .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
         /* ORDERS */
-        .orders-section {
-            padding: 10px 14px 16px 14px;
-            display: none;
-        }
+        .orders-section { padding: 10px 14px 16px 14px; display: none; }
         .orders-section.active { display: block; }
-        .orders-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
+        .orders-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .orders-header h2 { font-size: 18px; font-weight: 700; }
         .order-item {
             background: #222222;
@@ -448,119 +333,64 @@
             align-items: center;
             gap: 12px;
         }
-        .order-item .order-lottie {
-            width: 48px; height: 48px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #1a1a1a;
-            flex-shrink: 0;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
+        .order-item .order-lottie { width: 48px; height: 48px; border-radius: 10px; overflow: hidden; background: #1a1a1a; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.04); }
         .order-item .order-lottie .lottie-container { width: 100%; height: 100%; }
         .order-item .order-info { flex: 1; }
         .order-item .order-name { font-size: 13px; font-weight: 600; }
         .order-item .order-qty { font-size: 10px; color: #6e6e80; }
-        .order-item .order-price {
-            font-size: 13px;
-            font-weight: 700;
-            color: #f5c842;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .order-item .order-price .mini-gram {
-            width: 16px; height: 16px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
+        .order-item .order-price { font-size: 13px; font-weight: 700; color: #f5c842; display: flex; align-items: center; gap: 4px; }
+        .order-item .order-price .mini-gram { width: 16px; height: 16px; border-radius: 50%; overflow: hidden; }
         .order-item .order-price .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
         .order-item .order-actions { display: flex; gap: 6px; }
-        .order-item .order-actions button {
-            background: rgba(255,255,255,0.04);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 18px;
-            font-size: 10px;
-            font-weight: 600;
-            color: #8e8ea0;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.15s;
-        }
+        .order-item .order-actions button { background: rgba(255,255,255,0.04); border: none; padding: 5px 12px; border-radius: 18px; font-size: 10px; font-weight: 600; color: #8e8ea0; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
         .order-item .order-actions button:active { transform: scale(0.94); }
         .order-item .order-actions .sell-btn { color: #f5c842; background: rgba(245,200,66,0.08); }
-        .create-order {
-            margin-top: 18px;
-            background: #222222;
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
+        .create-order { margin-top: 18px; background: #222222; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
         .create-order h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-        .create-order input {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 10px;
-            padding: 10px 14px;
-            color: #fff;
-            font-size: 12px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            width: 100%;
-            margin-bottom: 6px;
-        }
+        .create-order input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px 14px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; outline: none; width: 100%; margin-bottom: 6px; }
         .create-order input::placeholder { color: #6e6e80; }
         .create-order .row { display: flex; gap: 8px; }
         .create-order .row input { flex: 1; }
-        .create-order .row button {
-            background: #f5c842;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            color: #1a1a1a;
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: 0.15s;
-        }
+        .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
         .create-order .row button:active { transform: scale(0.94); }
 
-        /* GAME HUB */
+        /* GAME HUB — полноэкранный кейс, кнопка снизу */
         .game-hub {
-            padding: 6px 8px 12px 8px;
+            padding: 0;
             display: none;
+            height: 100%;
+            min-height: calc(100vh - 120px);
         }
-        .game-hub.active { display: block; }
+        .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            border-radius: 14px;
+            border-radius: 0;
             padding: 10px 14px;
-            border: 1px solid rgba(255,255,255,0.04);
-            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
+            flex-shrink: 0;
         }
         .game-hub .hub-header h2 { font-size: 15px; font-weight: 700; color: #f5c842; }
         .game-hub .hub-header p { font-size: 10px; color: #8e8ea0; margin-top: 1px; }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
-            border: 1px solid rgba(245,200,66,0.08);
-            border-radius: 10px;
+            border-bottom: 1px solid rgba(245,200,66,0.08);
             padding: 6px;
             text-align: center;
             font-size: 12px;
             font-weight: 700;
             color: #f5c842;
-            margin-bottom: 10px;
+            flex-shrink: 0;
         }
         .case-container {
-            background: #222222;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.04);
-            padding: 12px 8px 14px 8px;
+            background: #1a1a1a;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 8px 8px 12px 8px;
             overflow: hidden;
             position: relative;
-            width: 100%;
+            min-height: 0;
         }
         .case-track {
             display: flex;
@@ -570,20 +400,22 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            flex: 1;
+            align-items: center;
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 130px;
-            background: #1a1a1a;
+            min-width: 140px;
+            background: #222222;
             border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 90px; height: 90px;
+            width: 100px; height: 100px;
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
@@ -595,20 +427,29 @@
         .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 30px rgba(245,200,66,0.15); transform: scale(1.06); }
         .spin-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #f5c842;
             border: none;
-            border-radius: 14px;
+            border-radius: 0;
             color: #1a1a1a;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 12px;
+            margin-top: auto;
             transition: 0.15s;
+            flex-shrink: 0;
         }
-        .spin-btn:active { transform: scale(0.96); }
+        .spin-btn:active { transform: scale(0.97); }
         .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        #spinResult {
+            text-align: center;
+            padding: 6px;
+            font-size: 10px;
+            color: #6e6e80;
+            flex-shrink: 0;
+            background: #1a1a1a;
+        }
 
         /* BOTTOM NAV */
         .bottom-nav {
@@ -644,19 +485,8 @@
             min-width: 60px;
         }
         .bottom-nav .nav-item:active { transform: scale(0.92); }
-        .bottom-nav .nav-item .nav-icon {
-            width: 26px; height: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .bottom-nav .nav-item .nav-icon svg {
-            width: 22px; height: 22px;
-            stroke: #6e6e80;
-            fill: none;
-            stroke-width: 1.8;
-            transition: 0.15s;
-        }
+        .bottom-nav .nav-item .nav-icon { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
+        .bottom-nav .nav-item .nav-icon svg { width: 22px; height: 22px; stroke: #6e6e80; fill: none; stroke-width: 1.8; transition: 0.15s; }
         .bottom-nav .nav-item.active { color: #f5c842; }
         .bottom-nav .nav-item.active .nav-icon svg { stroke: #f5c842; }
         .bottom-nav .nav-item.active::after {
@@ -709,8 +539,7 @@
         .toast.show { opacity: 1; }
 
         .profile-modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.85);
             backdrop-filter: blur(20px);
             z-index: 400;
@@ -729,15 +558,7 @@
             border: 1px solid rgba(255,255,255,0.04);
             text-align: center;
         }
-        .profile-modal-close {
-            float: right;
-            background: transparent;
-            border: none;
-            color: #8e8ea0;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 4px;
-        }
+        .profile-modal-close { float: right; background: transparent; border: none; color: #8e8ea0; font-size: 18px; cursor: pointer; padding: 4px; }
         .profile-modal-close:active { transform: scale(0.92); }
         .profile-avatar {
             width: 64px; height: 64px;
@@ -767,31 +588,16 @@
             border: 1px solid rgba(255,255,255,0.04);
             margin: 8px 0;
         }
-        .profile-balance .mini-gram {
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
+        .profile-balance .mini-gram { width: 18px; height: 18px; border-radius: 50%; overflow: hidden; }
         .profile-balance .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
         .btn-row { display: flex; gap: 8px; margin: 8px 0; }
-        .btn-row button {
-            flex: 1;
-            padding: 10px;
-            border-radius: 12px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            transition: 0.15s;
-        }
+        .btn-row button { flex: 1; padding: 10px; border-radius: 12px; border: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; cursor: pointer; transition: 0.15s; }
         .btn-row button:active { transform: scale(0.94); }
         .btn-primary { background: #f5c842; color: #1a1a1a; }
         .btn-secondary { background: rgba(255,255,255,0.04); color: #8e8ea0; border: 1px solid rgba(255,255,255,0.04); }
 
         .cart-modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.8);
             backdrop-filter: blur(20px);
             z-index: 200;
@@ -809,79 +615,22 @@
             padding: 20px 16px 24px;
             overflow-y: auto;
         }
-        .cart-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
+        .cart-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 10px; margin-bottom: 10px; }
         .cart-modal-header h2 { font-size: 17px; font-weight: 700; }
-        .cart-close {
-            background: rgba(255,255,255,0.04);
-            border: none;
-            color: #8e8ea0;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .cart-close { background: rgba(255,255,255,0.04); border: none; color: #8e8ea0; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .cart-close:active { transform: scale(0.92); }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-        }
+        .cart-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.02); }
         .cart-item .item-info { flex: 1; }
         .cart-item .item-name { font-size: 12px; font-weight: 600; }
         .cart-item .item-collection { font-size: 9px; color: #6e6e80; }
         .cart-item .item-price { font-size: 11px; color: #f5c842; font-weight: 600; }
-        .cart-item .item-remove {
-            background: rgba(255,107,107,0.08);
-            border: none;
-            color: #ff6b6b;
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .cart-item .item-remove { background: rgba(255,107,107,0.08); border: none; color: #ff6b6b; width: 26px; height: 26px; border-radius: 50%; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .cart-item .item-remove:active { transform: scale(0.92); }
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            margin-top: 6px;
-            font-weight: 700;
-            font-size: 14px;
-        }
-        .btn-checkout {
-            width: 100%;
-            padding: 12px;
-            background: #f5c842;
-            border: none;
-            border-radius: 12px;
-            color: #1a1a1a;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            margin-top: 6px;
-            transition: 0.15s;
-        }
+        .cart-total { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 6px; font-weight: 700; font-size: 14px; }
+        .btn-checkout { width: 100%; padding: 12px; background: #f5c842; border: none; border-radius: 12px; color: #1a1a1a; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; margin-top: 6px; transition: 0.15s; }
         .btn-checkout:active { transform: scale(0.96); }
         .btn-checkout:disabled { opacity: 0.3; }
         .empty-cart { text-align: center; padding: 20px; color: #6e6e80; font-size: 12px; }
-        .hidden { display: none !important; }
 
         .withdraw-section {
             display: none;
@@ -891,38 +640,15 @@
             border-radius: 12px;
         }
         .withdraw-section.open { display: block; }
-        .withdraw-section input {
-            width: 100%;
-            padding: 8px 12px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 11px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            margin-bottom: 6px;
-        }
+        .withdraw-section input { width: 100%; padding: 8px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; color: #fff; font-size: 11px; font-family: 'Inter', sans-serif; outline: none; margin-bottom: 6px; }
         .withdraw-section input::placeholder { color: #6e6e80; }
-        .withdraw-section .withdraw-submit {
-            width: 100%;
-            padding: 8px;
-            background: #f5c842;
-            border: none;
-            border-radius: 8px;
-            color: #1a1a1a;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            transition: 0.15s;
-        }
+        .withdraw-section .withdraw-submit { width: 100%; padding: 8px; background: #f5c842; border: none; border-radius: 8px; color: #1a1a1a; font-weight: 600; font-size: 11px; cursor: pointer; transition: 0.15s; }
         .withdraw-section .withdraw-submit:active { transform: scale(0.94); }
         .withdraw-section .error { font-size: 10px; color: #ff6b6b; display: none; margin-top: 4px; }
         .withdraw-section .success { font-size: 10px; color: #4bc88a; display: none; margin-top: 4px; }
 
         .filter-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.85);
             backdrop-filter: blur(20px);
             z-index: 500;
@@ -934,87 +660,23 @@
         }
         .filter-overlay.open { display: flex; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-        .filter-overlay .filter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0 16px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            margin-bottom: 20px;
-        }
+        .filter-overlay .filter-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 0 16px 0; border-bottom: 1px solid rgba(255,255,255,0.04); margin-bottom: 20px; }
         .filter-overlay .filter-header h2 { font-size: 20px; font-weight: 700; color: #fff; }
-        .filter-overlay .filter-close {
-            background: rgba(255,255,255,0.04);
-            border: none;
-            color: #8e8ea0;
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .filter-overlay .filter-close { background: rgba(255,255,255,0.04); border: none; color: #8e8ea0; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .filter-overlay .filter-close:active { transform: scale(0.92); }
-        .filter-overlay .filter-option {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            border: 1px solid transparent;
-            margin-bottom: 4px;
-            cursor: pointer;
-            transition: 0.15s;
-            font-size: 14px;
-            font-weight: 500;
-            color: #ffffff;
-        }
+        .filter-overlay .filter-option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid transparent; margin-bottom: 4px; cursor: pointer; transition: 0.15s; font-size: 14px; font-weight: 500; color: #ffffff; }
         .filter-overlay .filter-option:active { transform: scale(0.97); }
-        .filter-overlay .filter-option .check {
-            margin-left: auto;
-            width: 22px; height: 22px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 12px;
-            transition: 0.2s;
-            color: transparent;
-        }
-        .filter-overlay .filter-option.active .check {
-            background: #f5c842;
-            border-color: #f5c842;
-            color: #1a1a1a;
-        }
-        .filter-overlay .filter-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-        }
-        .filter-overlay .filter-actions button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 14px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.15s;
-        }
+        .filter-overlay .filter-option .check { margin-left: auto; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; transition: 0.2s; color: transparent; }
+        .filter-overlay .filter-option.active .check { background: #f5c842; border-color: #f5c842; color: #1a1a1a; }
+        .filter-overlay .filter-actions { display: flex; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04); }
+        .filter-overlay .filter-actions button { flex: 1; padding: 12px; border-radius: 14px; border: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.15s; }
         .filter-overlay .filter-actions button:active { transform: scale(0.96); }
         .filter-overlay .filter-actions .apply-filter { background: #f5c842; color: #1a1a1a; }
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 110px; }
-            .case-item .case-lottie { width: 72px; height: 72px; }
+            .case-item { min-width: 120px; }
+            .case-item .case-lottie { width: 80px; height: 80px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 11px; padding: 6px 14px; }
         }
@@ -1024,13 +686,9 @@
     <div class="app">
         <!-- HEADER -->
         <div class="header">
-            <div class="header-left">
-                <h1>Allow Market</h1>
-            </div>
+            <div class="header-left"><h1>Allow Market</h1></div>
             <div class="header-right">
-                <button class="icon-btn" id="bellBtn">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                </button>
+                <button class="icon-btn" id="bellBtn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
                 <div class="avatar-btn" id="profileBtn">
                     <span class="placeholder" id="avatarPlaceholder">👤</span>
                     <img id="avatarImg" style="display:none;" alt="avatar">
@@ -1045,21 +703,20 @@
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- SEARCH -->
+        <!-- SEARCH — прямоугольный, без Feed -->
         <div class="search-row" id="mainSearchRow">
             <div class="search-box">
                 <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                 <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
             </div>
-            <span class="chip" id="feedChip">Feed</span>
         </div>
 
-        <!-- FILTER ROW — как на фото -->
+        <!-- FILTER ROW — NFT, Модель, Фон, Символ как на фото -->
         <div class="filter-row" id="mainFilterRow">
-            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT ✔</span>
-            <span class="filter-chip" data-filter="model" id="filterModel">Модель ✔</span>
-            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">ФОН ✔</span>
-            <span class="filter-chip" data-filter="symbol" id="filterSymbol">СИМВОЛ ✔</span>
+            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
+            <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
+            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон</span>
+            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ</span>
         </div>
 
         <!-- STATUS -->
@@ -1073,10 +730,7 @@
 
         <!-- ORDERS -->
         <div class="orders-section" id="ordersSection">
-            <div class="orders-header">
-                <h2>Ордеры</h2>
-                <span style="font-size:12px;color:#f5c842;font-weight:600;cursor:pointer;">Мои ордеры</span>
-            </div>
+            <div class="orders-header"><h2>Ордеры</h2><span style="font-size:12px;color:#f5c842;font-weight:600;cursor:pointer;">Мои ордеры</span></div>
             <div id="ordersList"></div>
             <div class="create-order">
                 <h3>Создать ордер</h3>
@@ -1088,7 +742,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB -->
+        <!-- GAME HUB — полноэкранный кейс -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1096,13 +750,12 @@
             </div>
             <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
             <div class="case-container">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding:0 4px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px 6px 4px;flex-shrink:0;">
                     <span style="font-size:13px;font-weight:700;">Кейс с NFT</span>
-                    <span style="font-size:11px;color:#f5c842;font-weight:600;">200 GRAM за открытие</span>
                 </div>
                 <div class="case-track" id="caseTrack"></div>
+                <div id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
                 <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
-                <div style="text-align:center;margin-top:6px;font-size:10px;color:#6e6e80;" id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
             </div>
         </div>
 
@@ -1163,10 +816,7 @@
 
         <!-- FILTER OVERLAY -->
         <div class="filter-overlay" id="filterOverlay">
-            <div class="filter-header">
-                <h2>Фильтры</h2>
-                <button class="filter-close" id="filterClose">✕</button>
-            </div>
+            <div class="filter-header"><h2>Фильтры</h2><button class="filter-close" id="filterClose">✕</button></div>
             <div id="filterOptionsContainer">
                 <div class="filter-option active"><span>Номер подарка #</span><span class="check">✓</span></div>
                 <div class="filter-option"><span>Сортировать по</span><span class="check"></span></div>
@@ -1307,18 +957,16 @@
         let allNFTs = [];
         let filteredNFTs = [];
         let isAutoScrolling = false;
+        let searchTimeout = null;
 
         // ============================================================
-        // 3. РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ (привязка по ID)
+        // 3. РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ
         // ============================================================
         function getUserData(userId) {
             const key = `allow_user_${userId}`;
             try {
                 const saved = localStorage.getItem(key);
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    return data;
-                }
+                if (saved) return JSON.parse(saved);
             } catch(e) {}
             return { balance: 0, cart: [] };
         }
@@ -1490,7 +1138,7 @@
         }
 
         // ============================================================
-        // 6. RENDER GRID
+        // 6. RENDER GRID — оптимизированный
         // ============================================================
         function renderGrid(filter = '') {
             const grid = document.getElementById('nftGrid');
@@ -1644,7 +1292,7 @@
         });
 
         // ============================================================
-        // 9. GAME HUB
+        // 9. GAME HUB — полноэкранный кейс
         // ============================================================
         let caseItems = [];
 
@@ -1926,27 +1574,23 @@
         });
 
         // ============================================================
-        // 14. SEARCH
+        // 14. SEARCH — с debounce для устранения лагов
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
-            renderGrid(this.value);
+            clearTimeout(searchTimeout);
+            const value = this.value;
+            searchTimeout = setTimeout(() => {
+                renderGrid(value);
+            }, 200);
         });
 
         // ============================================================
-        // 15. FEED CHIP
-        // ============================================================
-        document.getElementById('feedChip').addEventListener('click', function() {
-            this.textContent = this.textContent.includes('Feed') ? 'NFT ▼' : 'Feed';
-        });
-
-        // ============================================================
-        // 16. INIT — привязка к пользователю Telegram
+        // 15. INIT
         // ============================================================
         (function init() {
             try {
                 allNFTs = generateNFTs();
 
-                // Получаем пользователя Telegram
                 let tgUser = null;
                 try {
                     if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
@@ -1959,11 +1603,9 @@
                     document.getElementById('profileName').textContent = tgUser.first_name || 'Пользователь';
                     document.getElementById('profileId').textContent = `ID: ${currentUserId}`;
 
-                    // Аватарка
                     if (tgUser.photo_url) {
                         updateAvatar(tgUser);
                     } else {
-                        // пробуем получить через Telegram.WebApp
                         try {
                             if (window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url) {
                                 updateAvatar(window.Telegram.WebApp.initDataUnsafe.user);
@@ -1971,14 +1613,12 @@
                         } catch(e) {}
                     }
 
-                    // Загружаем данные пользователя
                     const userData = getUserData(currentUserId);
                     userBalance = userData.balance || 0;
                     userCart = userData.cart || [];
                     updateBalanceUI();
                     updateCartUI();
                 } else {
-                    // Гость — показываем плейсхолдер
                     currentUserId = null;
                     userBalance = 0;
                     userCart = [];
@@ -1986,7 +1626,6 @@
                     document.getElementById('profileId').textContent = 'ID: —';
                     updateBalanceUI();
                     updateCartUI();
-                    showToast('Войдите в Telegram для полного доступа');
                 }
 
                 renderGrid('');
@@ -1995,7 +1634,6 @@
                 document.getElementById('gameHub').classList.remove('active');
                 document.getElementById('nftGrid').style.display = 'grid';
 
-                // Если аватарка не загрузилась — показываем плейсхолдер
                 if (!document.getElementById('avatarImg').src) {
                     updateAvatar(null);
                 }
@@ -2016,7 +1654,6 @@
             }
         })();
 
-        // Экспортируем для onclick
         window.openDetail = openDetail;
         window.removeFromCart = function(name) {
             if (currentUserId) removeFromCart(currentUserId, name);
