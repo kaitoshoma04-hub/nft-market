@@ -91,7 +91,7 @@
         .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .avatar-btn .placeholder { font-size: 18px; color: #fff; font-weight: 600; }
 
-        /* TABS — как на фото: без круглешков */
+        /* TABS — как на фото */
         .gift-tabs {
             display: flex;
             gap: 12px;
@@ -114,6 +114,7 @@
             transition: 0.15s;
             letter-spacing: 0.2px;
             border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
         }
         .gift-tab:active { transform: scale(0.94); }
         .gift-tab.active {
@@ -121,6 +122,7 @@
             border-bottom-color: #f5c842;
         }
 
+        /* SEARCH — с лупой как на фото */
         .search-row {
             padding: 10px 16px 12px 16px;
             display: flex;
@@ -143,7 +145,14 @@
             border-color: rgba(255,255,255,0.12);
             background: rgba(255,255,255,0.06);
         }
-        .search-box svg { width: 16px; height: 16px; stroke: #6e6e80; flex-shrink: 0; }
+        .search-box svg {
+            width: 18px;
+            height: 18px;
+            stroke: #8e8ea0;
+            fill: none;
+            stroke-width: 2;
+            flex-shrink: 0;
+        }
         .search-box input {
             background: transparent;
             border: none;
@@ -155,6 +164,7 @@
         }
         .search-box input::placeholder { color: #6e6e80; font-weight: 400; }
 
+        /* FILTER ROW — с символом ˅ как на фото */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -163,6 +173,7 @@
             overflow-x: auto;
             scrollbar-width: none;
             border-bottom: 1px solid rgba(255,255,255,0.03);
+            align-items: center;
         }
         .filter-row::-webkit-scrollbar { display: none; }
         .filter-row .filter-chip {
@@ -178,12 +189,36 @@
             transition: 0.15s;
             flex-shrink: 0;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .filter-row .filter-chip:active { transform: scale(0.94); }
         .filter-row .filter-chip.active-filter {
             background: rgba(255,255,255,0.08);
             border-color: rgba(255,255,255,0.12);
             color: #ffffff;
+        }
+        .filter-row .filter-chip .arrow-down {
+            font-size: 10px;
+            margin-left: 2px;
+            color: #6e6e80;
+        }
+        .filter-row .filter-chip.active-filter .arrow-down {
+            color: #ffffff;
+        }
+        .filter-row .filter-chip.filter-toggle {
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(255,255,255,0.06);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .filter-row .filter-chip.filter-toggle .arrow-down {
+            font-size: 12px;
+            color: #6e6e80;
         }
 
         .status-row {
@@ -334,7 +369,7 @@
         .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
         .create-order .row button:active { transform: scale(0.94); }
 
-        /* GAME HUB — полноэкранный кейс с нормальным размером */
+        /* GAME HUB — нормальный размер без ползунка */
         .game-hub {
             padding: 0;
             display: none;
@@ -344,19 +379,19 @@
         .game-hub.active { display: flex; flex-direction: column; }
         .game-hub .hub-header {
             background: #222222;
-            padding: 10px 14px 8px 14px;
+            padding: 8px 14px 6px 14px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
             text-align: center;
             flex-shrink: 0;
         }
-        .game-hub .hub-header h2 { font-size: 16px; font-weight: 700; color: #f5c842; }
-        .game-hub .hub-header p { font-size: 11px; color: #8e8ea0; margin-top: 1px; }
+        .game-hub .hub-header h2 { font-size: 15px; font-weight: 700; color: #f5c842; }
+        .game-hub .hub-header p { font-size: 10px; color: #8e8ea0; margin-top: 1px; }
         .game-hub .reward-banner {
             background: rgba(245,200,66,0.06);
             border-bottom: 1px solid rgba(245,200,66,0.08);
-            padding: 6px;
+            padding: 5px;
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: #f5c842;
             flex-shrink: 0;
@@ -366,14 +401,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 8px 6px 6px 6px;
+            padding: 6px 4px 4px 4px;
             overflow: hidden;
             min-height: 0;
         }
         .case-track {
             display: flex;
-            gap: 14px;
-            padding: 6px 6px 10px 6px;
+            gap: 12px;
+            padding: 4px 4px 8px 4px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -383,53 +418,54 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 130px;
+            min-width: 120px;
             background: #222222;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.04);
-            padding: 10px;
+            padding: 8px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 90px; height: 90px;
+            width: 80px; height: 80px;
             margin: 0 auto;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             background: #1a1a1a;
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
-        .case-item .case-name { font-size: 9px; color: #8e8ea0; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .case-item .case-price { font-size: 10px; font-weight: 600; color: #f5c842; }
+        .case-item .case-name { font-size: 8px; color: #8e8ea0; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-item .case-price { font-size: 9px; font-weight: 600; color: #f5c842; }
         .case-item.highlight { border-color: #f5c842; box-shadow: 0 0 20px rgba(245,200,66,0.12); transform: scale(1.04); }
         #spinResult {
             text-align: center;
-            padding: 4px;
-            font-size: 10px;
+            padding: 3px;
+            font-size: 9px;
             color: #6e6e80;
             flex-shrink: 0;
             background: #1a1a1a;
+            min-height: 20px;
         }
         .spin-btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: #f5c842;
             border: none;
             border-radius: 0;
             color: #1a1a1a;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 4px;
+            margin-top: 2px;
             transition: 0.15s;
             flex-shrink: 0;
         }
         .spin-btn:active { transform: scale(0.97); }
         .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* ЗВЕЗДЫ И ПРЕМ — как на фото */
+        /* ЗВЕЗДЫ И ПРЕМ */
         .stars-premium-section {
             padding: 16px 16px 20px 16px;
             display: none;
@@ -530,6 +566,69 @@
             margin-top: 12px;
             text-align: center;
             line-height: 1.4;
+        }
+
+        /* МОИ ПОДАРКИ */
+        .my-gifts-section {
+            padding: 20px 16px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            text-align: center;
+        }
+        .my-gifts-section.active { display: flex; }
+        .my-gifts-section .empty-icon {
+            font-size: 48px;
+            color: #6e6e80;
+            margin-bottom: 16px;
+        }
+        .my-gifts-section .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .my-gifts-section .empty-desc {
+            font-size: 13px;
+            color: #6e6e80;
+            margin-bottom: 24px;
+        }
+        .my-gifts-section .add-gift-btn {
+            background: #f5c842;
+            color: #1a1a1a;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.15s;
+        }
+        .my-gifts-section .add-gift-btn:active { transform: scale(0.94); }
+        .my-gifts-section .my-gifts-list {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .my-gifts-section .my-gift-item {
+            background: #222222;
+            border-radius: 12px;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+            text-align: center;
+        }
+        .my-gifts-section .my-gift-item .gift-icon {
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+        .my-gifts-section .my-gift-item .gift-name {
+            font-size: 10px;
+            color: #8e8ea0;
         }
 
         .bottom-nav {
@@ -755,8 +854,8 @@
         .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 110px; }
-            .case-item .case-lottie { width: 74px; height: 74px; }
+            .case-item { min-width: 100px; }
+            .case-item .case-lottie { width: 68px; height: 68px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
         }
@@ -776,7 +875,7 @@
             </div>
         </div>
 
-        <!-- TABS — как на фото, без круглешков -->
+        <!-- TABS -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
@@ -791,12 +890,13 @@
             </div>
         </div>
 
-        <!-- FILTER ROW -->
+        <!-- FILTER ROW — с символом ˅ и кнопкой фильтров -->
         <div class="filter-row" id="mainFilterRow">
-            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
-            <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
-            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон</span>
-            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ</span>
+            <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT <span class="arrow-down">˅</span></span>
+            <span class="filter-chip" data-filter="model" id="filterModel">Модель <span class="arrow-down">˅</span></span>
+            <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон <span class="arrow-down">˅</span></span>
+            <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ <span class="arrow-down">˅</span></span>
+            <span class="filter-chip filter-toggle" id="filterToggleBtn"><span style="font-size:14px;">⚙</span> <span class="arrow-down">˅</span></span>
         </div>
 
         <!-- STATUS -->
@@ -808,7 +908,7 @@
         <!-- NFT GRID -->
         <div class="nft-grid" id="nftGrid"></div>
 
-        <!-- ЗВЕЗДЫ И ПРЕМ — как на фото -->
+        <!-- ЗВЕЗДЫ И ПРЕМ -->
         <div class="stars-premium-section" id="starsPremiumSection">
             <div class="title">Что вы хотите купить?</div>
             <div class="selector">
@@ -825,7 +925,15 @@
             <div class="terms">Покупая Звезды или Премиум, вы соглашаетесь с нашими Условиями использования, и подтверждаете, что вы не резидент США</div>
         </div>
 
-        <!-- ORDERS -->
+        <!-- МОИ ПОДАРКИ -->
+        <div class="my-gifts-section" id="myGiftsSection">
+            <div class="empty-icon">🎁</div>
+            <div class="empty-title">У вас пока нет подарков</div>
+            <div class="empty-desc">Добавьте свой первый подарок</div>
+            <button class="add-gift-btn" id="myGiftsAddBtn">+ Добавить подарок</button>
+        </div>
+
+        <!-- ORDERS (скрыт, но оставлен для совместимости) -->
         <div class="orders-section" id="ordersSection">
             <div class="orders-header"><h2>Ордеры</h2><span style="font-size:12px;color:#f5c842;font-weight:600;cursor:pointer;">Мои ордеры</span></div>
             <div id="ordersList"></div>
@@ -934,7 +1042,7 @@
             <button class="nav-item active" data-tab="market"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span><span>Маркет</span></button>
             <button class="nav-item" data-tab="orders"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span>Ордеры</span></button>
             <button class="nav-item" data-tab="game"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/><path d="M12 6v12"/><circle cx="12" cy="12" r="9"/></svg></span><span>Игровой хаб</span></button>
-            <button class="nav-item" data-tab="tasks"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span><span>Задания</span></button>
+            <button class="nav-item" data-tab="mygifts"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span>Мои подарки</span></button>
             <button class="nav-item" data-tab="vault"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><span>Хранилище</span><span class="badge" id="navCartBadge">0</span></button>
         </div>
     </div>
@@ -1052,6 +1160,7 @@
         let filteredNFTs = [];
         let isAutoScrolling = false;
         let searchTimeout = null;
+        let activeFilters = { model: false, backdrop: false, symbol: false };
 
         // ============================================================
         // 3. РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ
@@ -1238,15 +1347,29 @@
             const grid = document.getElementById('nftGrid');
             const searchTerm = filter.toLowerCase().trim();
 
+            let data = allNFTs;
+
+            // Фильтр по поиску
             if (searchTerm) {
-                filteredNFTs = allNFTs.filter(n =>
+                data = data.filter(n =>
                     n.name.toLowerCase().includes(searchTerm) ||
                     String(n.number).includes(searchTerm) ||
                     n.collection.toLowerCase().includes(searchTerm)
                 );
-            } else {
-                filteredNFTs = allNFTs;
             }
+
+            // Фильтры по модели, фону, символу
+            if (activeFilters.model) {
+                data = data.filter(n => n.model.toLowerCase().includes(activeFilters.model.toLowerCase()));
+            }
+            if (activeFilters.backdrop) {
+                data = data.filter(n => n.backdrop.toLowerCase().includes(activeFilters.backdrop.toLowerCase()));
+            }
+            if (activeFilters.symbol) {
+                data = data.filter(n => n.symbol.toLowerCase().includes(activeFilters.symbol.toLowerCase()));
+            }
+
+            filteredNFTs = data;
 
             if (filteredNFTs.length === 0) {
                 grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
@@ -1326,7 +1449,336 @@
         document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeDetail(); });
 
         // ============================================================
-        // 8. ORDERS
+        // 8. GAME HUB — с таймером для сообщения о недостатке GRAM
+        // ============================================================
+        let caseItems = [];
+        let spinToastTimer = null;
+
+        function renderCase() {
+            const track = document.getElementById('caseTrack');
+            caseItems = allNFTs.slice(0, 24);
+            let html = '';
+            caseItems.forEach((nft, idx) => {
+                const lottieId = `case-lottie-${idx}`;
+                html += `<div class="case-item" data-idx="${idx}">
+                    <div class="case-lottie"><div class="lottie-container" id="${lottieId}"></div></div>
+                    <div class="case-name">${nft.name}</div>
+                    <div class="case-price">${nft.price.toFixed(2)} GRAM</div>
+                </div>`;
+            });
+            track.innerHTML = html;
+
+            caseItems.forEach((nft, idx) => {
+                const container = document.getElementById(`case-lottie-${idx}`);
+                if (container) loadLottie(container, nft.lottie, false);
+            });
+
+            startAutoScroll();
+        }
+
+        function startAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+            const track = document.getElementById('caseTrack');
+            if (!track || caseItems.length === 0) return;
+            isAutoScrolling = true;
+            let scrollPos = 0;
+            const step = 1.2;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            autoScrollInterval = setInterval(() => {
+                if (!isAutoScrolling) return;
+                scrollPos += step;
+                if (scrollPos > maxScroll) scrollPos = 0;
+                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }, 25);
+        }
+
+        function stopAutoScroll() {
+            isAutoScrolling = false;
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        document.getElementById('spinBtn').addEventListener('click', function() {
+            if (isSpinning) return;
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            if (userBalance < 200) {
+                // Показываем сообщение с таймером 4 секунды
+                showToast('Недостаточно GRAM для прокрутки! Нужно 200 GRAM');
+                clearTimeout(spinToastTimer);
+                spinToastTimer = setTimeout(() => {
+                    document.getElementById('toast').classList.remove('show');
+                }, 4000);
+                return;
+            }
+
+            isSpinning = true;
+            stopAutoScroll();
+            this.disabled = true;
+            this.textContent = 'Крутим...';
+
+            const newBalance = setBalance(currentUserId, userBalance - 200);
+            userBalance = newBalance;
+            updateBalanceUI();
+
+            const track = document.getElementById('caseTrack');
+            const items = track.querySelectorAll('.case-item');
+            const totalItems = items.length;
+            const randomIdx = Math.floor(Math.random() * totalItems);
+
+            items.forEach(el => el.classList.remove('highlight'));
+
+            let extraScrolls = 0;
+            const maxExtra = 6;
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 100);
+            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+
+            const extraInterval = setInterval(() => {
+                if (extraScrolls >= maxExtra) {
+                    clearInterval(extraInterval);
+                    setTimeout(() => {
+                        items.forEach(el => el.classList.remove('highlight'));
+                        if (items[randomIdx]) {
+                            items[randomIdx].classList.add('highlight');
+                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent || 'NFT';
+                            document.getElementById('spinResult').textContent = `Вы выиграли: ${nftName}!`;
+                            showToast(`Вы выиграли: ${nftName}`);
+                            const nft = allNFTs.find(n => n.name === nftName);
+                            if (nft && currentUserId && !isInCart(currentUserId, nft.name)) {
+                                addToCart(currentUserId, nft.name);
+                            }
+                        }
+                        isSpinning = false;
+                        this.disabled = false;
+                        this.textContent = 'Крутить (200 GRAM)';
+                        startAutoScroll();
+                    }, 500);
+                    return;
+                }
+                extraScrolls++;
+                const offset = (randomIdx + extraScrolls * 2) % totalItems;
+                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 100);
+                track.scrollTo({ left: scrollTo, behavior: 'smooth' });
+            }, 120);
+        });
+
+        // ============================================================
+        // 9. NAVIGATION
+        // ============================================================
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
+
+            const grid = document.getElementById('nftGrid');
+            const orders = document.getElementById('ordersSection');
+            const game = document.getElementById('gameHub');
+            const stars = document.getElementById('starsPremiumSection');
+            const myGifts = document.getElementById('myGiftsSection');
+
+            const mainSearch = document.getElementById('mainSearchRow');
+            const mainFilter = document.getElementById('mainFilterRow');
+            const mainStatus = document.getElementById('mainStatusRow');
+
+            // Скрываем всё
+            grid.style.display = 'none';
+            orders.classList.remove('active');
+            game.classList.remove('active');
+            stars.classList.remove('active');
+            myGifts.classList.remove('active');
+
+            // Вкладки в хедере
+            document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+
+            if (tab === 'market' || tab === 'gifts') {
+                grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
+                renderGrid(document.getElementById('searchInput').value);
+            } else if (tab === 'stars' || tab === 'starsTab') {
+                stars.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
+                document.querySelector('.gift-tab[data-tab="stars"]')?.classList.add('active');
+            } else if (tab === 'collections') {
+                grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="collections"]')?.classList.add('active');
+                renderGrid(document.getElementById('searchInput').value);
+            } else if (tab === 'mygifts') {
+                myGifts.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
+                document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            } else if (tab === 'orders') {
+                orders.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
+                renderOrders();
+                document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            } else if (tab === 'game') {
+                game.classList.add('active');
+                mainSearch.style.display = 'none';
+                mainFilter.style.display = 'none';
+                mainStatus.style.display = 'none';
+                renderCase();
+                document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            } else if (tab === 'vault') {
+                document.getElementById('cartModal').classList.add('open');
+                document.querySelector('.nav-item[data-tab="market"]')?.classList.add('active');
+                document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
+                grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
+                renderGrid(document.getElementById('searchInput').value);
+            } else {
+                grid.style.display = 'grid';
+                mainSearch.style.display = 'flex';
+                mainFilter.style.display = 'flex';
+                mainStatus.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
+                renderGrid(document.getElementById('searchInput').value);
+            }
+        }
+
+        // Обработчики для вкладок в хедере
+        document.querySelectorAll('.gift-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const t = this.dataset.tab;
+                if (t === 'stars') {
+                    switchTab('starsTab');
+                } else if (t === 'gifts') {
+                    switchTab('market');
+                } else if (t === 'collections') {
+                    switchTab('collections');
+                }
+            });
+        });
+
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
+
+        // ============================================================
+        // 10. ФИЛЬТРЫ: Модель, Фон, Символ с символом ˅
+        // ============================================================
+        document.getElementById('filterModel').addEventListener('click', function() {
+            const val = prompt('Введите модель для фильтрации (например: Classic, Rare, Golden):');
+            if (val !== null && val.trim() !== '') {
+                activeFilters.model = val.trim();
+                this.classList.add('active-filter');
+                renderGrid(document.getElementById('searchInput').value);
+            } else {
+                activeFilters.model = false;
+                this.classList.remove('active-filter');
+                renderGrid(document.getElementById('searchInput').value);
+            }
+        });
+
+        document.getElementById('filterBackdrop').addEventListener('click', function() {
+            const val = prompt('Введите фон для фильтрации (например: Starlight, Midnight, Cosmic):');
+            if (val !== null && val.trim() !== '') {
+                activeFilters.backdrop = val.trim();
+                this.classList.add('active-filter');
+                renderGrid(document.getElementById('searchInput').value);
+            } else {
+                activeFilters.backdrop = false;
+                this.classList.remove('active-filter');
+                renderGrid(document.getElementById('searchInput').value);
+            }
+        });
+
+        document.getElementById('filterSymbol').addEventListener('click', function() {
+            const val = prompt('Введите символ для фильтрации (например: Crescent, Pentagram, Sun):');
+            if (val !== null && val.trim() !== '') {
+                activeFilters.symbol = val.trim();
+                this.classList.add('active-filter');
+                renderGrid(document.getElementById('searchInput').value);
+            } else {
+                activeFilters.symbol = false;
+                this.classList.remove('active-filter');
+                renderGrid(document.getElementById('searchInput').value);
+            }
+        });
+
+        // Кнопка фильтров
+        document.getElementById('filterToggleBtn').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.add('open');
+        });
+
+        // NFT — сброс всех фильтров
+        document.getElementById('filterNft').addEventListener('click', function() {
+            activeFilters.model = false;
+            activeFilters.backdrop = false;
+            activeFilters.symbol = false;
+            document.getElementById('filterModel').classList.remove('active-filter');
+            document.getElementById('filterBackdrop').classList.remove('active-filter');
+            document.getElementById('filterSymbol').classList.remove('active-filter');
+            renderGrid(document.getElementById('searchInput').value);
+            showToast('Все фильтры сброшены');
+        });
+
+        // ============================================================
+        // 11. ЗВЕЗДЫ И ПРЕМ
+        // ============================================================
+        document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.getElementById('sendSelfBtn').addEventListener('click', function() {
+            try {
+                if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+                    const user = window.Telegram.WebApp.initDataUnsafe.user;
+                    document.getElementById('receiverInput').value = '@' + (user.username || 'username');
+                } else {
+                    document.getElementById('receiverInput').value = '@username';
+                }
+            } catch(e) {
+                document.getElementById('receiverInput').value = '@username';
+            }
+            showToast('Юзернейм вставлен');
+        });
+
+        document.getElementById('buyStarsBtn').addEventListener('click', function() {
+            const receiver = document.getElementById('receiverInput').value.trim();
+            const option = document.querySelector('.stars-premium-section .selector .option.active');
+            const type = option ? option.textContent : 'Телеграм звезды';
+            if (!receiver) {
+                showToast('Введите получателя');
+                return;
+            }
+            showToast(`Покупка ${type} для ${receiver} — функция в разработке`);
+        });
+
+        // ============================================================
+        // 12. МОИ ПОДАРКИ
+        // ============================================================
+        document.getElementById('myGiftsAddBtn').addEventListener('click', function() {
+            try {
+                if (window.Telegram?.WebApp) {
+                    window.Telegram.WebApp.openLink('https://t.me/AllowMarketGifts');
+                } else {
+                    window.open('https://t.me/AllowMarketGifts', '_blank');
+                }
+            } catch(e) { window.open('https://t.me/AllowMarketGifts', '_blank'); }
+        });
+
+        // ============================================================
+        // 13. ORDERS (для совместимости)
         // ============================================================
         const ORDERS_DATA = [
             { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
@@ -1386,243 +1838,8 @@
         });
 
         // ============================================================
-        // 9. GAME HUB
+        // 14. FILTER OVERLAY
         // ============================================================
-        let caseItems = [];
-
-        function renderCase() {
-            const track = document.getElementById('caseTrack');
-            caseItems = allNFTs.slice(0, 24);
-            let html = '';
-            caseItems.forEach((nft, idx) => {
-                const lottieId = `case-lottie-${idx}`;
-                html += `<div class="case-item" data-idx="${idx}">
-                    <div class="case-lottie"><div class="lottie-container" id="${lottieId}"></div></div>
-                    <div class="case-name">${nft.name}</div>
-                    <div class="case-price">${nft.price.toFixed(2)} GRAM</div>
-                </div>`;
-            });
-            track.innerHTML = html;
-
-            caseItems.forEach((nft, idx) => {
-                const container = document.getElementById(`case-lottie-${idx}`);
-                if (container) loadLottie(container, nft.lottie, false);
-            });
-
-            startAutoScroll();
-        }
-
-        function startAutoScroll() {
-            if (autoScrollInterval) clearInterval(autoScrollInterval);
-            const track = document.getElementById('caseTrack');
-            if (!track || caseItems.length === 0) return;
-            isAutoScrolling = true;
-            let scrollPos = 0;
-            const step = 1.2;
-            const maxScroll = track.scrollWidth - track.clientWidth;
-            autoScrollInterval = setInterval(() => {
-                if (!isAutoScrolling) return;
-                scrollPos += step;
-                if (scrollPos > maxScroll) scrollPos = 0;
-                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
-            }, 25);
-        }
-
-        function stopAutoScroll() {
-            isAutoScrolling = false;
-            if (autoScrollInterval) {
-                clearInterval(autoScrollInterval);
-                autoScrollInterval = null;
-            }
-        }
-
-        document.getElementById('spinBtn').addEventListener('click', function() {
-            if (isSpinning) return;
-            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
-            if (userBalance < 200) { showToast('Недостаточно GRAM! Нужно 200'); return; }
-
-            isSpinning = true;
-            stopAutoScroll();
-            this.disabled = true;
-            this.textContent = 'Крутим...';
-
-            const newBalance = setBalance(currentUserId, userBalance - 200);
-            userBalance = newBalance;
-            updateBalanceUI();
-
-            const track = document.getElementById('caseTrack');
-            const items = track.querySelectorAll('.case-item');
-            const totalItems = items.length;
-            const randomIdx = Math.floor(Math.random() * totalItems);
-
-            items.forEach(el => el.classList.remove('highlight'));
-
-            let extraScrolls = 0;
-            const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 100);
-            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
-
-            const extraInterval = setInterval(() => {
-                if (extraScrolls >= maxExtra) {
-                    clearInterval(extraInterval);
-                    setTimeout(() => {
-                        items.forEach(el => el.classList.remove('highlight'));
-                        if (items[randomIdx]) {
-                            items[randomIdx].classList.add('highlight');
-                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent || 'NFT';
-                            document.getElementById('spinResult').textContent = `Вы выиграли: ${nftName}!`;
-                            showToast(`Вы выиграли: ${nftName}`);
-                            const nft = allNFTs.find(n => n.name === nftName);
-                            if (nft && currentUserId && !isInCart(currentUserId, nft.name)) {
-                                addToCart(currentUserId, nft.name);
-                            }
-                        }
-                        isSpinning = false;
-                        this.disabled = false;
-                        this.textContent = 'Крутить (200 GRAM)';
-                        startAutoScroll();
-                    }, 500);
-                    return;
-                }
-                extraScrolls++;
-                const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 100);
-                track.scrollTo({ left: scrollTo, behavior: 'smooth' });
-            }, 120);
-        });
-
-        // ============================================================
-        // 10. NAVIGATION
-        // ============================================================
-        function switchTab(tab) {
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
-
-            const grid = document.getElementById('nftGrid');
-            const orders = document.getElementById('ordersSection');
-            const game = document.getElementById('gameHub');
-            const stars = document.getElementById('starsPremiumSection');
-
-            const mainSearch = document.getElementById('mainSearchRow');
-            const mainFilter = document.getElementById('mainFilterRow');
-            const mainStatus = document.getElementById('mainStatusRow');
-
-            grid.style.display = 'none';
-            orders.classList.remove('active');
-            game.classList.remove('active');
-            stars.classList.remove('active');
-
-            // Вкладки в хедере
-            document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
-            const tabMap = { 'gifts': 'gifts', 'stars': 'stars', 'collections': 'collections' };
-            const tabName = tabMap[tab] || 'gifts';
-            document.querySelector(`.gift-tab[data-tab="${tabName}"]`)?.classList.add('active');
-
-            if (tab === 'market' || tab === 'gifts') {
-                grid.style.display = 'grid';
-                mainSearch.style.display = 'flex';
-                mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
-                renderGrid(document.getElementById('searchInput').value);
-            } else if (tab === 'stars' || tab === 'starsTab') {
-                stars.classList.add('active');
-                mainSearch.style.display = 'none';
-                mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
-            } else if (tab === 'orders') {
-                orders.classList.add('active');
-                mainSearch.style.display = 'none';
-                mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
-                renderOrders();
-            } else if (tab === 'game') {
-                game.classList.add('active');
-                mainSearch.style.display = 'none';
-                mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
-                renderCase();
-            } else if (tab === 'vault') {
-                document.getElementById('cartModal').classList.add('open');
-                document.querySelector('.nav-item[data-tab="market"]')?.classList.add('active');
-                document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
-                grid.style.display = 'grid';
-                mainSearch.style.display = 'flex';
-                mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
-                renderGrid(document.getElementById('searchInput').value);
-            } else {
-                grid.style.display = 'grid';
-                mainSearch.style.display = 'flex';
-                mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
-                renderGrid(document.getElementById('searchInput').value);
-            }
-        }
-
-        // Обработчики для вкладок в хедере
-        document.querySelectorAll('.gift-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const t = this.dataset.tab;
-                if (t === 'stars') {
-                    switchTab('starsTab');
-                } else if (t === 'gifts') {
-                    switchTab('market');
-                } else {
-                    switchTab('market');
-                }
-            });
-        });
-
-        document.querySelectorAll('.nav-item').forEach(btn => {
-            btn.addEventListener('click', function() {
-                switchTab(this.dataset.tab);
-            });
-        });
-
-        // ============================================================
-        // 11. ЗВЕЗДЫ И ПРЕМ
-        // ============================================================
-        document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
-            opt.addEventListener('click', function() {
-                document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        document.getElementById('sendSelfBtn').addEventListener('click', function() {
-            try {
-                if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-                    const user = window.Telegram.WebApp.initDataUnsafe.user;
-                    document.getElementById('receiverInput').value = '@' + (user.username || 'username');
-                } else {
-                    document.getElementById('receiverInput').value = '@username';
-                }
-            } catch(e) {
-                document.getElementById('receiverInput').value = '@username';
-            }
-            showToast('Юзернейм вставлен');
-        });
-
-        document.getElementById('buyStarsBtn').addEventListener('click', function() {
-            const receiver = document.getElementById('receiverInput').value.trim();
-            const option = document.querySelector('.stars-premium-section .selector .option.active');
-            const type = option ? option.textContent : 'Телеграм звезды';
-            if (!receiver) {
-                showToast('Введите получателя');
-                return;
-            }
-            showToast(`Покупка ${type} для ${receiver} — функция в разработке`);
-        });
-
-        // ============================================================
-        // 12. FILTER OVERLAY
-        // ============================================================
-        document.querySelectorAll('.filter-chip').forEach(chip => {
-            chip.addEventListener('click', function() {
-                document.getElementById('filterOverlay').classList.add('open');
-            });
-        });
-
         document.getElementById('filterClose').addEventListener('click', function() {
             document.getElementById('filterOverlay').classList.remove('open');
         });
@@ -1654,7 +1871,7 @@
         });
 
         // ============================================================
-        // 13. PROFILE, BELL, TOAST
+        // 15. PROFILE, BELL, TOAST
         // ============================================================
         const toast = document.getElementById('toast');
 
@@ -1662,7 +1879,7 @@
             toast.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toast._timer);
-            toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 4000);
         }
 
         document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
@@ -1707,7 +1924,7 @@
         });
 
         // ============================================================
-        // 14. CART MODAL
+        // 16. CART MODAL
         // ============================================================
         document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList.remove('open'));
         document.getElementById('cartModal').addEventListener('click', (e) => {
@@ -1730,7 +1947,7 @@
         });
 
         // ============================================================
-        // 15. SEARCH
+        // 17. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
@@ -1741,7 +1958,7 @@
         });
 
         // ============================================================
-        // 16. INIT
+        // 18. INIT
         // ============================================================
         (function init() {
             try {
@@ -1800,6 +2017,7 @@
                 document.getElementById('ordersSection').classList.remove('active');
                 document.getElementById('gameHub').classList.remove('active');
                 document.getElementById('starsPremiumSection').classList.remove('active');
+                document.getElementById('myGiftsSection').classList.remove('active');
                 document.getElementById('nftGrid').style.display = 'grid';
 
                 window.addEventListener('error', function(e) {
