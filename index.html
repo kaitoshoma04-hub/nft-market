@@ -9,9 +9,6 @@
     </script>
     <script src="https://telegram.org/js/telegram-web-app.js">
     </script>
-    <!-- TON Connect UI -->
-    <script src="https://unpkg.com/@tonconnect/ui@2.0.0/dist/tonconnect-ui.min.js">
-    </script>
     <style>
         * {
             margin: 0;
@@ -1488,7 +1485,7 @@
         <div class="header">
             <div class="header-right">
                 <button class="icon-btn" id="bellBtn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
-                <!-- Кнопка TON Connect (как на фото) -->
+                <!-- Кнопка TON Connect -->
                 <button class="connect-wallet-btn" id="tonConnectBtn">
                     <span class="dot"></span> Connect Wallet
                 </button>
@@ -1665,8 +1662,9 @@
 
     <script>
         // ============================================================
-        // 0. MANIFEST и TON CONNECT
+        // 0. TON CONNECT (простой и надежный вариант)
         // ============================================================
+        // Манифест
         const TON_MANIFEST = {
             url: "https://nft-market-chi-three.vercel.app/",
             name: "Split!",
@@ -1676,35 +1674,35 @@
         };
 
         let tonConnectUI = null;
+        let isTonConnectReady = false;
 
         function initTonConnect() {
             try {
+                // Проверяем, что библиотека загружена
                 if (typeof window.TonConnectUI === 'undefined') {
-                    console.warn('TON Connect UI not loaded, retrying...');
+                    console.log('TON Connect UI не загружен, ждем...');
                     setTimeout(initTonConnect, 500);
                     return;
                 }
 
-                // Создаем UI с манифестом
+                const manifestString = JSON.stringify(TON_MANIFEST);
+                const manifestUrl = 'data:application/json,' + encodeURIComponent(manifestString);
+
                 tonConnectUI = new window.TonConnectUI({
-                    manifestUrl: 'data:application/json,' + encodeURIComponent(JSON.stringify(TON_MANIFEST)),
-                    actionsConfiguration: {
-                        modals: 'all',
-                        notifications: 'all',
-                        returnStrategy: 'back',
-                    }
+                    manifestUrl: manifestUrl,
                 });
+
+                isTonConnectReady = true;
 
                 const btn = document.getElementById('tonConnectBtn');
 
-                // Подписка на изменения статуса
+                // Подписка на изменение статуса
                 tonConnectUI.onStatusChange((wallet) => {
                     if (wallet) {
                         const address = wallet.account.address;
                         btn.innerHTML = `<span class="dot"></span> ${address.slice(0, 6)}...${address.slice(-4)}`;
                         btn.classList.add('connected');
                         showToast('Кошелёк подключён: ' + address.slice(0, 10) + '...');
-                        // Обновляем баланс в профиле (имитация)
                         document.getElementById('profileBalance').textContent = '1,234.56';
                     } else {
                         btn.innerHTML = `<span class="dot"></span> Connect Wallet`;
@@ -1713,30 +1711,36 @@
                     }
                 });
 
-                // Клик по кнопке — открываем модалку TON Connect
-                btn.addEventListener('click', async function(e) {
+                // Обработчик клика
+                btn.onclick = async function(e) {
                     e.stopPropagation();
                     try {
                         if (tonConnectUI) {
                             await tonConnectUI.openModal();
                         } else {
-                            showToast('Инициализация кошелька...');
-                            setTimeout(() => {
-                                if (tonConnectUI) tonConnectUI.openModal();
-                            }, 500);
+                            showToast('Инициализация...');
                         }
                     } catch (err) {
                         console.error('TON Connect error:', err);
-                        showToast('Ошибка подключения: ' + (err.message || 'неизвестная ошибка'));
+                        showToast('Ошибка: ' + (err.message || 'неизвестная ошибка'));
                     }
-                });
+                };
 
-                console.log('TON Connect initialized successfully');
+                console.log('TON Connect успешно инициализирован!');
 
             } catch (e) {
-                console.warn('TON Connect init error:', e);
+                console.warn('Ошибка инициализации TON Connect:', e);
                 setTimeout(initTonConnect, 1000);
             }
+        }
+
+        // Запускаем инициализацию после загрузки страницы
+        if (document.readyState === 'complete') {
+            setTimeout(initTonConnect, 300);
+        } else {
+            window.addEventListener('load', function() {
+                setTimeout(initTonConnect, 300);
+            });
         }
 
         // ============================================================
@@ -2727,9 +2731,6 @@
                 document.getElementById('starsPremiumSection').classList.remove('active');
                 document.getElementById('myGiftsSection').classList.remove('active');
                 document.getElementById('nftGrid').style.display = 'grid';
-
-                // Инициализация TON Connect после загрузки
-                setTimeout(initTonConnect, 300);
 
                 window.addEventListener('error', function(e) {
                     console.warn('WebView error caught:', e.message);
