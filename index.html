@@ -16,9 +16,10 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #1a1a1a;
+            background: #0b0b0b;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,34 +28,39 @@
             overflow-x: hidden;
             overscroll-behavior: none;
         }
+
         .app {
             max-width: 430px;
             width: 100%;
             min-height: 100vh;
-            background: #1a1a1a;
+            background: #0b0b0b;
             padding-bottom: 72px;
             position: relative;
             overflow-x: hidden;
         }
+
+        /* HEADER */
         .header {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             padding: 12px 16px 8px 16px;
-            background: rgba(26,26,26,0.95);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            background: rgba(11, 11, 11, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
             top: 0;
             z-index: 50;
             backdrop-filter: blur(8px);
         }
+
         .header-right {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .icon-btn {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
             width: 40px;
@@ -65,15 +71,27 @@
             justify-content: center;
             border-radius: 50%;
             transition: 0.15s;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .icon-btn:active { transform: scale(0.92); }
-        .icon-btn svg { width: 20px; height: 20px; stroke: #8e8ea0; fill: none; stroke-width: 1.8; }
+
+        .icon-btn:active {
+            transform: scale(0.92);
+        }
+
+        .icon-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #8e8ea0;
+            fill: none;
+            stroke-width: 1.8;
+        }
+
         .avatar-btn {
-            width: 40px; height: 40px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255, 255, 255, 0.06);
             cursor: pointer;
             flex-shrink: 0;
             background: #2a2a2a;
@@ -81,19 +99,92 @@
             align-items: center;
             justify-content: center;
         }
-        .avatar-btn:active { transform: scale(0.92); }
-        .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .avatar-btn .placeholder { font-size: 18px; color: #fff; font-weight: 600; }
 
+        .avatar-btn:active {
+            transform: scale(0.92);
+        }
+
+        .avatar-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .avatar-btn .placeholder {
+            font-size: 18px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Закрыто */
+        .closed-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8e8ea0;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 0 16px 6px 16px;
+            display: inline-block;
+        }
+
+        /* WEB лидерборд */
+        .leaderboard-banner {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            margin: 0 16px 8px 16px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .leaderboard-banner .title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .leaderboard-banner .sub {
+            font-size: 11px;
+            color: #f5c842;
+            font-weight: 600;
+        }
+
+        .leaderboard-banner .more-btn {
+            background: rgba(245, 200, 66, 0.10);
+            border: 1px solid rgba(245, 200, 66, 0.15);
+            color: #f5c842;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .leaderboard-banner .more-btn:active {
+            transform: scale(0.94);
+        }
+
+        /* TABS - Подарки, Звезды и Прем, Коллекции */
         .gift-tabs {
             display: flex;
             gap: 12px;
-            padding: 14px 16px 12px 16px;
+            padding: 14px 16px 8px 16px;
             overflow-x: auto;
             scrollbar-width: none;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
-        .gift-tabs::-webkit-scrollbar { display: none; }
+
+        .gift-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
         .gift-tab {
             background: transparent;
             border: none;
@@ -109,28 +200,83 @@
             border-bottom: 2px solid transparent;
             margin-bottom: -1px;
         }
-        .gift-tab:active { transform: scale(0.94); }
+
+        .gift-tab:active {
+            transform: scale(0.94);
+        }
+
         .gift-tab.active {
             color: #ffffff;
             border-bottom-color: #f5c842;
         }
 
-        .search-row { display: none; }
+        /* ПОИСК */
+        .search-row {
+            padding: 6px 16px 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
 
+        .search-row input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            padding: 10px 16px;
+            color: #fff;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: 0.15s;
+        }
+
+        .search-row input::placeholder {
+            color: #6e6e80;
+        }
+
+        .search-row input:focus {
+            border-color: rgba(245, 200, 66, 0.3);
+        }
+
+        .search-row .feed-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            padding: 8px 18px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8e8ea0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.15s;
+            white-space: nowrap;
+        }
+
+        .search-row .feed-btn:active {
+            transform: scale(0.94);
+        }
+
+        /* FILTER ROW */
         .filter-row {
             display: flex;
             gap: 8px;
-            padding: 8px 16px 14px 16px;
+            padding: 8px 16px 10px 16px;
             flex-wrap: nowrap;
             overflow-x: auto;
             scrollbar-width: none;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             align-items: center;
         }
-        .filter-row::-webkit-scrollbar { display: none; }
+
+        .filter-row::-webkit-scrollbar {
+            display: none;
+        }
+
         .filter-row .filter-chip {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 30px;
             padding: 8px 18px;
             font-size: 12px;
@@ -142,31 +288,38 @@
             flex-shrink: 0;
             white-space: nowrap;
         }
-        .filter-row .filter-chip:active { transform: scale(0.94); }
+
+        .filter-row .filter-chip:active {
+            transform: scale(0.94);
+        }
+
         .filter-row .filter-chip.active-filter {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
             color: #ffffff;
         }
+
         .filter-row .filter-chip.filter-toggle {
             padding: 8px 14px;
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.06);
             font-size: 12px;
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
+        /* STATUS ROW */
         .status-row {
             display: flex;
             gap: 10px;
             padding: 6px 16px 12px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
+
         .status-row .chip {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 30px;
             padding: 8px 18px;
             font-size: 12px;
@@ -175,50 +328,123 @@
             font-family: 'Inter', sans-serif;
             cursor: pointer;
         }
+
         .status-row .chip.active-status {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.12);
             color: #ffffff;
         }
 
+        /* NFT GRID */
         .nft-grid {
             padding: 10px 12px 12px 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
+
         .nft-card {
-            background: #222222;
+            background: #141414;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
             cursor: pointer;
             transition: 0.15s;
             position: relative;
         }
-        .nft-card:active { transform: scale(0.96); }
-        .nft-card-inner { padding: 10px; display: flex; flex-direction: column; gap: 4px; background: #222222; }
+
+        .nft-card:active {
+            transform: scale(0.96);
+        }
+
+        .nft-card-inner {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background: #141414;
+        }
+
         .lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 12px;
             overflow: hidden;
-            background: #1a1a1a;
+            background: #0b0b0b;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .lottie-wrapper .lottie-container { width: 100%; height: 100%; }
-        .nft-name { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .nft-model { font-size: 9px; color: #6e6e80; font-weight: 500; }
-        .nft-price { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: #fff; margin-top: 1px; }
-        .gram-icon { width: 14px; height: 14px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-        .gram-icon img { width: 100%; height: 100%; object-fit: cover; }
-        .status-badge { font-size: 8px; font-weight: 600; padding: 2px 8px; border-radius: 12px; display: inline-block; align-self: flex-start; }
-        .status-badge.sale { color: #4bc88a; background: rgba(75,200,138,0.10); }
-        .status-badge.sold { color: #ff6b6b; background: rgba(255,107,107,0.10); }
-        .status-badge.auction { color: #ffd966; background: rgba(255,215,0,0.10); }
 
+        .lottie-wrapper .lottie-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nft-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nft-model {
+            font-size: 9px;
+            color: #6e6e80;
+            font-weight: 500;
+        }
+
+        .nft-price {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 1px;
+        }
+
+        .gram-icon {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .gram-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            font-size: 8px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        .status-badge.sale {
+            color: #4bc88a;
+            background: rgba(75, 200, 138, 0.10);
+        }
+
+        .status-badge.sold {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.10);
+        }
+
+        .status-badge.auction {
+            color: #ffd966;
+            background: rgba(255, 215, 0, 0.10);
+        }
+
+        /* КНОПКА КОРЗИНЫ НА КАРТОЧКЕ - ТОЧНО КАК НА ФОТО */
         .cart-add-btn {
             position: absolute;
             bottom: 8px;
@@ -235,26 +461,41 @@
             transition: 0.15s;
             z-index: 2;
             padding: 0;
+            box-shadow: 0 2px 8px rgba(245, 200, 66, 0.3);
         }
-        .cart-add-btn:active { transform: scale(0.88); }
+
+        .cart-add-btn:active {
+            transform: scale(0.88);
+        }
+
         .cart-add-btn.in-cart {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: none;
         }
+
         .cart-add-btn svg {
             width: 16px;
             height: 16px;
-            stroke: #1a1a1a;
+            stroke: #0b0b0b;
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-        .cart-add-btn.in-cart svg { stroke: #6e6e80; }
 
+        .cart-add-btn.in-cart svg {
+            stroke: #6e6e80;
+        }
+
+        /* DETAIL OVERLAY */
         .detail-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.92);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(20px);
             z-index: 300;
             display: none;
@@ -262,22 +503,30 @@
             align-items: center;
             padding: 16px;
         }
-        .detail-overlay.open { display: flex; }
+
+        .detail-overlay.open {
+            display: flex;
+        }
+
         .detail-content {
-            background: #222222;
+            background: #141414;
             border-radius: 20px;
             max-width: 380px;
             width: 100%;
             padding: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             position: relative;
         }
+
         .detail-close {
-            position: absolute; top: 8px; right: 10px;
-            background: rgba(255,255,255,0.04);
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.04);
             border: none;
             color: #8e8ea0;
-            width: 32px; height: 32px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             font-size: 16px;
             cursor: pointer;
@@ -285,55 +534,134 @@
             align-items: center;
             justify-content: center;
         }
-        .detail-close:active { transform: scale(0.92); }
+
+        .detail-close:active {
+            transform: scale(0.92);
+        }
+
         .detail-lottie-wrapper {
             width: 100%;
             aspect-ratio: 1/1;
             border-radius: 14px;
             overflow: hidden;
-            background: #1a1a1a;
-            border: 1px solid rgba(255,255,255,0.04);
+            background: #0b0b0b;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .detail-title { font-size: 16px; font-weight: 700; margin-top: 8px; }
-        .detail-number { font-size: 12px; color: #f5c842; font-weight: 600; }
-        .detail-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; margin: 4px 0; font-size: 10px; }
-        .detail-stats .stat { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.02); padding: 3px 0; }
-        .detail-stats .stat .label { color: #6e6e80; }
-        .detail-stats .stat .value { color: #fff; font-weight: 500; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .detail-price { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; padding: 6px 12px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); margin: 4px 0; }
-        .detail-buy-btn { width: 100%; padding: 12px; background: #f5c842; border: none; border-radius: 12px; color: #1a1a1a; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: 0.15s; margin-top: 6px; }
-        .detail-buy-btn:active { transform: scale(0.96); }
-        .detail-buy-btn.sold { background: rgba(255,255,255,0.04); color: #6e6e80; }
 
-        /* GAME HUB — увеличенный кейс, кнопка выше */
+        .detail-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .detail-number {
+            font-size: 12px;
+            color: #f5c842;
+            font-weight: 600;
+        }
+
+        .detail-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px 8px;
+            margin: 4px 0;
+            font-size: 10px;
+        }
+
+        .detail-stats .stat {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 3px 0;
+        }
+
+        .detail-stats .stat .label {
+            color: #6e6e80;
+        }
+
+        .detail-stats .stat .value {
+            color: #fff;
+            font-weight: 500;
+            max-width: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .detail-price {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 4px 0;
+        }
+
+        .detail-buy-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f5c842;
+            border: none;
+            border-radius: 12px;
+            color: #0b0b0b;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-top: 6px;
+        }
+
+        .detail-buy-btn:active {
+            transform: scale(0.96);
+        }
+
+        .detail-buy-btn.sold {
+            background: rgba(255, 255, 255, 0.04);
+            color: #6e6e80;
+        }
+
+        /* GAME HUB */
         .game-hub {
             padding: 0;
             display: none;
             height: 100%;
             min-height: calc(100vh - 72px);
         }
-        .game-hub.active { display: flex; flex-direction: column; }
+
+        .game-hub.active {
+            display: flex;
+            flex-direction: column;
+        }
+
         .game-hub .hub-header {
-            background: #222222;
+            background: #141414;
             padding: 6px 14px 4px 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
             flex-shrink: 0;
         }
+
         .game-hub .hub-header h2 {
             font-size: 14px;
             font-weight: 700;
             color: #f5c842;
             letter-spacing: 0.3px;
         }
+
         .game-hub .hub-header p {
             font-size: 10px;
             color: #8e8ea0;
             margin-top: 0px;
         }
+
         .game-hub .reward-banner {
-            background: rgba(245,200,66,0.06);
-            border-bottom: 1px solid rgba(245,200,66,0.08);
+            background: rgba(245, 200, 66, 0.06);
+            border-bottom: 1px solid rgba(245, 200, 66, 0.08);
             padding: 4px;
             text-align: center;
             font-size: 11px;
@@ -342,8 +670,9 @@
             flex-shrink: 0;
             letter-spacing: 0.3px;
         }
+
         .case-container {
-            background: #1a1a1a;
+            background: #0b0b0b;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -351,6 +680,7 @@
             overflow: hidden;
             min-height: 0;
         }
+
         .case-track {
             display: flex;
             gap: 12px;
@@ -362,25 +692,36 @@
             flex: 1;
             align-items: center;
         }
-        .case-track::-webkit-scrollbar { display: none; }
+
+        .case-track::-webkit-scrollbar {
+            display: none;
+        }
+
         .case-item {
             min-width: 150px;
-            background: #222222;
+            background: #141414;
             border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 12px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
+
         .case-item .case-lottie {
-            width: 100px; height: 100px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
-            background: #1a1a1a;
+            background: #0b0b0b;
         }
-        .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
+
+        .case-item .case-lottie .lottie-container {
+            width: 100%;
+            height: 100%;
+        }
+
         .case-item .case-name {
             font-size: 10px;
             color: #8e8ea0;
@@ -389,32 +730,36 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .case-item .case-price {
             font-size: 10px;
             font-weight: 600;
             color: #f5c842;
         }
+
         .case-item.highlight {
             border-color: #f5c842;
-            box-shadow: 0 0 24px rgba(245,200,66,0.15);
+            box-shadow: 0 0 24px rgba(245, 200, 66, 0.15);
             transform: scale(1.05);
         }
+
         #spinResult {
             text-align: center;
             padding: 4px;
             font-size: 10px;
             color: #6e6e80;
             flex-shrink: 0;
-            background: #1a1a1a;
+            background: #0b0b0b;
             min-height: 20px;
         }
+
         .spin-btn {
             width: 100%;
             padding: 12px;
             background: #f5c842;
             border: none;
             border-radius: 0;
-            color: #1a1a1a;
+            color: #0b0b0b;
             font-size: 15px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
@@ -423,29 +768,43 @@
             transition: 0.15s;
             flex-shrink: 0;
         }
-        .spin-btn:active { transform: scale(0.97); }
-        .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
+        .spin-btn:active {
+            transform: scale(0.97);
+        }
+
+        .spin-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* STARS & PREM */
         .stars-premium-section {
             padding: 16px 16px 20px 16px;
             display: none;
         }
-        .stars-premium-section.active { display: block; }
+
+        .stars-premium-section.active {
+            display: block;
+        }
+
         .stars-premium-section .title {
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 16px;
         }
+
         .stars-premium-section .selector {
             display: flex;
             gap: 10px;
             margin-bottom: 16px;
         }
+
         .stars-premium-section .selector .option {
             flex: 1;
             padding: 12px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
@@ -453,13 +812,21 @@
             font-weight: 600;
             color: #8e8ea0;
         }
+
         .stars-premium-section .selector .option.active {
-            background: rgba(245,200,66,0.08);
+            background: rgba(245, 200, 66, 0.08);
             border-color: #f5c842;
             color: #f5c842;
         }
-        .stars-premium-section .selector .option:active { transform: scale(0.94); }
-        .stars-premium-section .receiver { margin: 12px 0; }
+
+        .stars-premium-section .selector .option:active {
+            transform: scale(0.94);
+        }
+
+        .stars-premium-section .receiver {
+            margin: 12px 0;
+        }
+
         .stars-premium-section .receiver label {
             font-size: 13px;
             font-weight: 600;
@@ -467,22 +834,27 @@
             display: block;
             margin-bottom: 4px;
         }
+
         .stars-premium-section .receiver input {
             width: 100%;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 10px;
             color: #fff;
             font-size: 14px;
             font-family: 'Inter', sans-serif;
             outline: none;
         }
-        .stars-premium-section .receiver input::placeholder { color: #6e6e80; }
+
+        .stars-premium-section .receiver input::placeholder {
+            color: #6e6e80;
+        }
+
         .stars-premium-section .send-self {
             display: inline-block;
             background: #f5c842;
-            color: #1a1a1a;
+            color: #0b0b0b;
             padding: 8px 20px;
             border-radius: 30px;
             font-weight: 600;
@@ -493,26 +865,35 @@
             font-family: 'Inter', sans-serif;
             margin: 4px 0 12px 0;
         }
-        .stars-premium-section .send-self:active { transform: scale(0.94); }
+
+        .stars-premium-section .send-self:active {
+            transform: scale(0.94);
+        }
+
         .stars-premium-section .fee {
             font-size: 12px;
             color: #6e6e80;
             margin: 6px 0 12px 0;
         }
+
         .stars-premium-section .buy-btn {
             width: 100%;
             padding: 14px;
             background: #f5c842;
             border: none;
             border-radius: 12px;
-            color: #1a1a1a;
+            color: #0b0b0b;
             font-size: 16px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: 0.15s;
         }
-        .stars-premium-section .buy-btn:active { transform: scale(0.96); }
+
+        .stars-premium-section .buy-btn:active {
+            transform: scale(0.96);
+        }
+
         .stars-premium-section .terms {
             font-size: 10px;
             color: #6e6e80;
@@ -521,6 +902,7 @@
             line-height: 1.4;
         }
 
+        /* MY GIFTS */
         .my-gifts-section {
             padding: 20px 16px;
             display: none;
@@ -530,26 +912,33 @@
             min-height: 50vh;
             text-align: center;
         }
-        .my-gifts-section.active { display: flex; }
+
+        .my-gifts-section.active {
+            display: flex;
+        }
+
         .my-gifts-section .empty-icon {
             font-size: 42px;
             color: #6e6e80;
             margin-bottom: 16px;
         }
+
         .my-gifts-section .empty-title {
             font-size: 18px;
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 6px;
         }
+
         .my-gifts-section .empty-desc {
             font-size: 13px;
             color: #6e6e80;
             margin-bottom: 24px;
         }
+
         .my-gifts-section .add-gift-btn {
             background: #f5c842;
-            color: #1a1a1a;
+            color: #0b0b0b;
             padding: 14px 40px;
             border-radius: 30px;
             font-weight: 700;
@@ -559,43 +948,180 @@
             font-family: 'Inter', sans-serif;
             transition: 0.15s;
         }
-        .my-gifts-section .add-gift-btn:active { transform: scale(0.94); }
 
-        .orders-section { padding: 10px 14px 16px 14px; display: none; }
-        .orders-section.active { display: block; }
-        .orders-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .orders-header h2 { font-size: 18px; font-weight: 700; }
+        .my-gifts-section .add-gift-btn:active {
+            transform: scale(0.94);
+        }
+
+        /* ORDERS */
+        .orders-section {
+            padding: 10px 14px 16px 14px;
+            display: none;
+        }
+
+        .orders-section.active {
+            display: block;
+        }
+
+        .orders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .orders-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
         .order-item {
-            background: #222222;
+            background: #141414;
             border-radius: 14px;
             padding: 10px 14px;
             margin-bottom: 8px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .order-item .order-lottie { width: 48px; height: 48px; border-radius: 10px; overflow: hidden; background: #1a1a1a; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.04); }
-        .order-item .order-lottie .lottie-container { width: 100%; height: 100%; }
-        .order-item .order-info { flex: 1; }
-        .order-item .order-name { font-size: 13px; font-weight: 600; }
-        .order-item .order-qty { font-size: 10px; color: #6e6e80; }
-        .order-item .order-price { font-size: 13px; font-weight: 700; color: #f5c842; display: flex; align-items: center; gap: 4px; }
-        .order-item .order-price .mini-gram { width: 16px; height: 16px; border-radius: 50%; overflow: hidden; }
-        .order-item .order-price .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
-        .order-item .order-actions { display: flex; gap: 6px; }
-        .order-item .order-actions button { background: rgba(255,255,255,0.04); border: none; padding: 5px 12px; border-radius: 18px; font-size: 10px; font-weight: 600; color: #8e8ea0; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
-        .order-item .order-actions button:active { transform: scale(0.94); }
-        .order-item .order-actions .sell-btn { color: #f5c842; background: rgba(245,200,66,0.08); }
-        .create-order { margin-top: 18px; background: #222222; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.04); }
-        .create-order h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-        .create-order input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px 14px; color: #fff; font-size: 12px; font-family: 'Inter', sans-serif; outline: none; width: 100%; margin-bottom: 6px; }
-        .create-order input::placeholder { color: #6e6e80; }
-        .create-order .row { display: flex; gap: 8px; }
-        .create-order .row input { flex: 1; }
-        .create-order .row button { background: #f5c842; border: none; border-radius: 10px; padding: 10px 20px; color: #1a1a1a; font-weight: 600; font-size: 12px; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.15s; }
-        .create-order .row button:active { transform: scale(0.94); }
 
+        .order-item .order-lottie {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #0b0b0b;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .order-item .order-lottie .lottie-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .order-item .order-info {
+            flex: 1;
+        }
+
+        .order-item .order-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .order-item .order-qty {
+            font-size: 10px;
+            color: #6e6e80;
+        }
+
+        .order-item .order-price {
+            font-size: 13px;
+            font-weight: 700;
+            color: #f5c842;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .order-item .order-price .mini-gram {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .order-item .order-price .mini-gram img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-item .order-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .order-item .order-actions button {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #8e8ea0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.15s;
+        }
+
+        .order-item .order-actions button:active {
+            transform: scale(0.94);
+        }
+
+        .order-item .order-actions .sell-btn {
+            color: #f5c842;
+            background: rgba(245, 200, 66, 0.08);
+        }
+
+        .create-order {
+            margin-top: 18px;
+            background: #141414;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .create-order h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .create-order input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #fff;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+
+        .create-order input::placeholder {
+            color: #6e6e80;
+        }
+
+        .create-order .row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .create-order .row input {
+            flex: 1;
+        }
+
+        .create-order .row button {
+            background: #f5c842;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: #0b0b0b;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: 0.15s;
+        }
+
+        .create-order .row button:active {
+            transform: scale(0.94);
+        }
+
+        /* BOTTOM NAV - ТОЧНО КАК НА ФОТО */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -603,14 +1129,15 @@
             right: 0;
             max-width: 430px;
             margin: 0 auto;
-            background: rgba(26,26,26,0.95);
+            background: rgba(11, 11, 11, 0.95);
             backdrop-filter: blur(16px);
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             justify-content: space-around;
             padding: 6px 0 12px 0;
             z-index: 100;
         }
+
         .bottom-nav .nav-item {
             display: flex;
             flex-direction: column;
@@ -628,11 +1155,36 @@
             transition: 0.15s;
             min-width: 60px;
         }
-        .bottom-nav .nav-item:active { transform: scale(0.92); }
-        .bottom-nav .nav-item .nav-icon { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
-        .bottom-nav .nav-item .nav-icon svg { width: 22px; height: 22px; stroke: #6e6e80; fill: none; stroke-width: 1.8; transition: 0.15s; }
-        .bottom-nav .nav-item.active { color: #f5c842; }
-        .bottom-nav .nav-item.active .nav-icon svg { stroke: #f5c842; }
+
+        .bottom-nav .nav-item:active {
+            transform: scale(0.92);
+        }
+
+        .bottom-nav .nav-item .nav-icon {
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-nav .nav-item .nav-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: #6e6e80;
+            fill: none;
+            stroke-width: 1.8;
+            transition: 0.15s;
+        }
+
+        .bottom-nav .nav-item.active {
+            color: #f5c842;
+        }
+
+        .bottom-nav .nav-item.active .nav-icon svg {
+            stroke: #f5c842;
+        }
+
         .bottom-nav .nav-item.active::after {
             content: '';
             position: absolute;
@@ -644,12 +1196,13 @@
             border-radius: 3px;
             background: #f5c842;
         }
+
         .bottom-nav .nav-item .badge {
             position: absolute;
             top: 2px;
             right: 4px;
             background: #f5c842;
-            color: #1a1a1a;
+            color: #0b0b0b;
             font-size: 7px;
             font-weight: 700;
             width: 16px;
@@ -658,16 +1211,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1.5px solid #1a1a1a;
+            border: 1.5px solid #0b0b0b;
         }
 
+        /* TOAST */
         .toast {
             position: fixed;
             top: 74px;
             left: 50%;
             transform: translateX(-50%);
-            background: #222222;
-            border: 1px solid rgba(255,255,255,0.06);
+            background: #141414;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 8px 20px;
             border-radius: 14px;
             color: #fff;
@@ -680,11 +1234,19 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        .toast.show { opacity: 1; }
 
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* PROFILE MODAL */
         .profile-modal {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(20px);
             z-index: 400;
             display: none;
@@ -692,33 +1254,70 @@
             align-items: center;
             padding: 20px;
         }
-        .profile-modal.open { display: flex; }
+
+        .profile-modal.open {
+            display: flex;
+        }
+
         .profile-modal-content {
-            background: #222222;
+            background: #141414;
             border-radius: 20px;
             max-width: 340px;
             width: 100%;
             padding: 24px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
         }
-        .profile-modal-close { float: right; background: transparent; border: none; color: #8e8ea0; font-size: 18px; cursor: pointer; padding: 4px; }
-        .profile-modal-close:active { transform: scale(0.92); }
+
+        .profile-modal-close {
+            float: right;
+            background: transparent;
+            border: none;
+            color: #8e8ea0;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .profile-modal-close:active {
+            transform: scale(0.92);
+        }
+
         .profile-avatar {
-            width: 64px; height: 64px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             margin: 4px auto 8px;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255, 255, 255, 0.06);
             background: #2a2a2a;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .profile-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .profile-avatar .placeholder { font-size: 28px; color: #fff; }
-        .profile-name { font-size: 17px; font-weight: 700; }
-        .profile-id { font-size: 11px; color: #6e6e80; }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-avatar .placeholder {
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .profile-name {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .profile-id {
+            font-size: 11px;
+            color: #6e6e80;
+        }
+
         .profile-balance {
             display: flex;
             align-items: center;
@@ -727,31 +1326,79 @@
             font-size: 15px;
             font-weight: 700;
             padding: 10px;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.04);
             margin: 8px 0;
         }
-        .profile-balance .mini-gram { width: 18px; height: 18px; border-radius: 50%; overflow: hidden; }
-        .profile-balance .mini-gram img { width: 100%; height: 100%; object-fit: cover; }
-        .btn-row { display: flex; gap: 8px; margin: 8px 0; }
-        .btn-row button { flex: 1; padding: 10px; border-radius: 12px; border: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; cursor: pointer; transition: 0.15s; }
-        .btn-row button:active { transform: scale(0.94); }
-        .btn-primary { background: #f5c842; color: #1a1a1a; }
-        .btn-secondary { background: rgba(255,255,255,0.04); color: #8e8ea0; border: 1px solid rgba(255,255,255,0.04); }
 
+        .profile-balance .mini-gram {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-balance .mini-gram img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .btn-row button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .btn-row button:active {
+            transform: scale(0.94);
+        }
+
+        .btn-primary {
+            background: #f5c842;
+            color: #0b0b0b;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            color: #8e8ea0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* CART MODAL */
         .cart-modal {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(20px);
             z-index: 200;
             display: none;
             justify-content: center;
             align-items: flex-end;
         }
-        .cart-modal.open { display: flex; }
+
+        .cart-modal.open {
+            display: flex;
+        }
+
         .cart-modal-content {
-            background: #222222;
+            background: #141414;
             border-radius: 20px 20px 0 0;
             max-width: 430px;
             width: 100%;
@@ -759,41 +1406,133 @@
             padding: 20px 16px 24px;
             overflow-y: auto;
         }
-        .cart-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 10px; margin-bottom: 10px; }
-        .cart-modal-header h2 { font-size: 17px; font-weight: 700; }
-        .cart-close { background: rgba(255,255,255,0.04); border: none; color: #8e8ea0; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .cart-close:active { transform: scale(0.92); }
-        .cart-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.02); }
-        .cart-item .item-info { flex: 1; }
-        .cart-item .item-name { font-size: 12px; font-weight: 600; }
-        .cart-item .item-collection { font-size: 9px; color: #6e6e80; }
-        .cart-item .item-price { font-size: 11px; color: #f5c842; font-weight: 600; }
-        .cart-item .item-remove { background: rgba(255,107,107,0.08); border: none; color: #ff6b6b; width: 26px; height: 26px; border-radius: 50%; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .cart-item .item-remove:active { transform: scale(0.92); }
-        .cart-total { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 6px; font-weight: 700; font-size: 14px; }
-        .btn-checkout { width: 100%; padding: 12px; background: #f5c842; border: none; border-radius: 12px; color: #1a1a1a; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; margin-top: 6px; transition: 0.15s; }
-        .btn-checkout:active { transform: scale(0.96); }
-        .btn-checkout:disabled { opacity: 0.3; }
-        .empty-cart { text-align: center; padding: 20px; color: #6e6e80; font-size: 12px; }
 
-        .withdraw-section {
-            display: none;
-            margin-top: 8px;
-            padding: 12px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
+        .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
-        .withdraw-section.open { display: block; }
-        .withdraw-section input { width: 100%; padding: 8px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; color: #fff; font-size: 11px; font-family: 'Inter', sans-serif; outline: none; margin-bottom: 6px; }
-        .withdraw-section input::placeholder { color: #6e6e80; }
-        .withdraw-section .withdraw-submit { width: 100%; padding: 8px; background: #f5c842; border: none; border-radius: 8px; color: #1a1a1a; font-weight: 600; font-size: 11px; cursor: pointer; transition: 0.15s; }
-        .withdraw-section .withdraw-submit:active { transform: scale(0.94); }
-        .withdraw-section .error { font-size: 10px; color: #ff6b6b; display: none; margin-top: 4px; }
-        .withdraw-section .success { font-size: 10px; color: #4bc88a; display: none; margin-top: 4px; }
 
+        .cart-modal-header h2 {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .cart-close {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #8e8ea0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-close:active {
+            transform: scale(0.92);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .cart-item .item-info {
+            flex: 1;
+        }
+
+        .cart-item .item-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .cart-item .item-collection {
+            font-size: 9px;
+            color: #6e6e80;
+        }
+
+        .cart-item .item-price {
+            font-size: 11px;
+            color: #f5c842;
+            font-weight: 600;
+        }
+
+        .cart-item .item-remove {
+            background: rgba(255, 107, 107, 0.08);
+            border: none;
+            color: #ff6b6b;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item .item-remove:active {
+            transform: scale(0.92);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 6px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 12px;
+            background: #f5c842;
+            border: none;
+            border-radius: 12px;
+            color: #0b0b0b;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: 0.15s;
+        }
+
+        .btn-checkout:active {
+            transform: scale(0.96);
+        }
+
+        .btn-checkout:disabled {
+            opacity: 0.3;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 20px;
+            color: #6e6e80;
+            font-size: 12px;
+        }
+
+        /* FILTER OVERLAY */
         .filter-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(20px);
             z-index: 500;
             display: none;
@@ -802,41 +1541,239 @@
             animation: fadeIn 0.25s ease;
             overflow-y: auto;
         }
-        .filter-overlay.open { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-        .filter-overlay .filter-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 0 16px 0; border-bottom: 1px solid rgba(255,255,255,0.04); margin-bottom: 20px; }
-        .filter-overlay .filter-header h2 { font-size: 20px; font-weight: 700; color: #fff; }
-        .filter-overlay .filter-close { background: rgba(255,255,255,0.04); border: none; color: #8e8ea0; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .filter-overlay .filter-close:active { transform: scale(0.92); }
-        .filter-overlay .filter-option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid transparent; margin-bottom: 4px; cursor: pointer; transition: 0.15s; font-size: 14px; font-weight: 500; color: #ffffff; }
-        .filter-overlay .filter-option:active { transform: scale(0.97); }
-        .filter-overlay .filter-option .check { margin-left: auto; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; transition: 0.2s; color: transparent; }
-        .filter-overlay .filter-option.active .check { background: #f5c842; border-color: #f5c842; color: #1a1a1a; }
-        .filter-overlay .filter-actions { display: flex; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.04); }
-        .filter-overlay .filter-actions button { flex: 1; padding: 12px; border-radius: 14px; border: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.15s; }
-        .filter-overlay .filter-actions button:active { transform: scale(0.96); }
-        .filter-overlay .filter-actions .apply-filter { background: #f5c842; color: #1a1a1a; }
-        .filter-overlay .filter-actions .reset-filter { background: rgba(255,255,255,0.04); color: #8e8ea0; }
+
+        .filter-overlay.open {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .filter-overlay .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 20px;
+        }
+
+        .filter-overlay .filter-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .filter-overlay .filter-close {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            color: #8e8ea0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-overlay .filter-close:active {
+            transform: scale(0.92);
+        }
+
+        .filter-overlay .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid transparent;
+            margin-bottom: 4px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .filter-overlay .filter-option:active {
+            transform: scale(0.97);
+        }
+
+        .filter-overlay .filter-option .check {
+            margin-left: auto;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 12px;
+            transition: 0.2s;
+            color: transparent;
+        }
+
+        .filter-overlay .filter-option.active .check {
+            background: #f5c842;
+            border-color: #f5c842;
+            color: #0b0b0b;
+        }
+
+        .filter-overlay .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .filter-overlay .filter-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 14px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .filter-overlay .filter-actions button:active {
+            transform: scale(0.96);
+        }
+
+        .filter-overlay .filter-actions .apply-filter {
+            background: #f5c842;
+            color: #0b0b0b;
+        }
+
+        .filter-overlay .filter-actions .reset-filter {
+            background: rgba(255, 255, 255, 0.04);
+            color: #8e8ea0;
+        }
+
+        /* WITHDRAW */
+        .withdraw-section {
+            display: none;
+            margin-top: 8px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
+
+        .withdraw-section.open {
+            display: block;
+        }
+
+        .withdraw-section input {
+            width: 100%;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            margin-bottom: 6px;
+        }
+
+        .withdraw-section input::placeholder {
+            color: #6e6e80;
+        }
+
+        .withdraw-section .withdraw-submit {
+            width: 100%;
+            padding: 8px;
+            background: #f5c842;
+            border: none;
+            border-radius: 8px;
+            color: #0b0b0b;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .withdraw-section .withdraw-submit:active {
+            transform: scale(0.94);
+        }
+
+        .withdraw-section .error {
+            font-size: 10px;
+            color: #ff6b6b;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .withdraw-section .success {
+            font-size: 10px;
+            color: #4bc88a;
+            display: none;
+            margin-top: 4px;
+        }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 120px; }
-            .case-item .case-lottie { width: 80px; height: 80px; }
-            .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
-            .gift-tab { font-size: 13px; }
+            .case-item {
+                min-width: 120px;
+            }
+            .case-item .case-lottie {
+                width: 80px;
+                height: 80px;
+            }
+            .bottom-nav .nav-item {
+                padding: 4px 8px;
+                min-width: 50px;
+                font-size: 8px;
+            }
+            .gift-tab {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="app">
+
         <!-- HEADER -->
         <div class="header">
             <div class="header-right">
-                <button class="icon-btn" id="bellBtn"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+                <button class="icon-btn" id="bellBtn">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </button>
                 <div class="avatar-btn" id="profileBtn">
                     <span class="placeholder" id="avatarPlaceholder">👤</span>
                     <img id="avatarImg" style="display:none;" alt="avatar">
                 </div>
             </div>
+        </div>
+
+        <!-- ЗАКРЫТО -->
+        <div class="closed-badge">Закрыто: 1512</div>
+
+        <!-- WEB ЛИДЕРБОРД -->
+        <div class="leaderboard-banner">
+            <div>
+                <div class="title">WEB Лидерборд и задания</div>
+                <div class="sub">$50,000 призовой фонд</div>
+            </div>
+            <button class="more-btn">Узнать больше</button>
         </div>
 
         <!-- TABS -->
@@ -846,6 +1783,12 @@
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
+        <!-- ПОИСК -->
+        <div class="search-row">
+            <input type="text" placeholder="🔍 Поиск по названию NFT / номеру" id="searchInput">
+            <button class="feed-btn">Feed</button>
+        </div>
+
         <!-- FILTER ROW -->
         <div class="filter-row" id="mainFilterRow">
             <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
@@ -853,12 +1796,6 @@
             <span class="filter-chip" data-filter="backdrop" id="filterBackdrop">Фон</span>
             <span class="filter-chip" data-filter="symbol" id="filterSymbol">Символ</span>
             <span class="filter-chip filter-toggle" id="filterToggleBtn"><span style="font-size:14px;">⚙</span></span>
-        </div>
-
-        <!-- STATUS -->
-        <div class="status-row" id="mainStatusRow">
-            <span class="chip active-status">На продаже (0)</span>
-            <span class="chip">Хранилище (0)</span>
         </div>
 
         <!-- NFT GRID -->
@@ -921,7 +1858,9 @@
         <div class="detail-overlay" id="detailOverlay">
             <div class="detail-content">
                 <button class="detail-close" id="detailClose">✕</button>
-                <div class="detail-lottie-wrapper" id="detailLottieWrapper"><div id="detailLottie" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:#6e6e80;">🎁</div></div>
+                <div class="detail-lottie-wrapper" id="detailLottieWrapper">
+                    <div id="detailLottie" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:#6e6e80;">🎁</div>
+                </div>
                 <div class="detail-title" id="detailTitle">Collection</div>
                 <div class="detail-number" id="detailNumber">#0000</div>
                 <div class="detail-stats" id="detailStats">
@@ -932,7 +1871,10 @@
                     <div class="stat"><span class="label">Выпуск</span><span class="value" id="detailIssued">—</span></div>
                     <div class="stat"><span class="label">Статус</span><span class="value" id="detailStatus">—</span></div>
                 </div>
-                <div class="detail-price"><span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span><span id="detailPriceAmount">0.00 GRAM</span></div>
+                <div class="detail-price">
+                    <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
+                    <span id="detailPriceAmount">0.00 GRAM</span>
+                </div>
                 <button class="detail-buy-btn" id="detailBuyBtn">Добавить</button>
             </div>
         </div>
@@ -957,7 +1899,10 @@
                 </div>
                 <div class="profile-name" id="profileName">Пользователь</div>
                 <div class="profile-id" id="profileId">ID: —</div>
-                <div class="profile-balance"><span class="mini-gram"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span><span id="profileBalance">0.00</span> GRAM</div>
+                <div class="profile-balance">
+                    <span class="mini-gram"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
+                    <span id="profileBalance">0.00</span> GRAM
+                </div>
                 <div class="btn-row">
                     <button class="btn-primary" id="addGiftBtn">Добавить подарок</button>
                     <button class="btn-secondary" id="withdrawToggleBtn">Вывести</button>
@@ -995,11 +1940,27 @@
 
         <!-- BOTTOM NAV -->
         <div class="bottom-nav">
-            <button class="nav-item active" data-tab="market"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span><span>Маркет</span></button>
-            <button class="nav-item" data-tab="orders"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span>Ордеры</span></button>
-            <button class="nav-item" data-tab="game"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/><path d="M12 6v12"/><circle cx="12" cy="12" r="9"/></svg></span><span>Игровой хаб</span></button>
-            <button class="nav-item" data-tab="mygifts"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span>Мои подарки</span></button>
-            <button class="nav-item" data-tab="vault"><span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><span>Хранилище</span><span class="badge" id="navCartBadge">0</span></button>
+            <button class="nav-item active" data-tab="market">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
+                <span>Маркет</span>
+            </button>
+            <button class="nav-item" data-tab="orders">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                <span>Ордеры</span>
+            </button>
+            <button class="nav-item" data-tab="game">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/><path d="M12 6v12"/><circle cx="12" cy="12" r="9"/></svg></span>
+                <span>Игровой хаб</span>
+            </button>
+            <button class="nav-item" data-tab="mygifts">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+                <span>Мои подарки</span>
+            </button>
+            <button class="nav-item" data-tab="vault">
+                <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+                <span>Хранилище</span>
+                <span class="badge" id="navCartBadge">0</span>
+            </button>
         </div>
     </div>
 
@@ -1008,82 +1969,100 @@
         // 1. DATA
         // ============================================================
         const COLLECTIONS_DATA = {
-            "Plush Pepe": { icon: "🐸" }, "Nail Bracelet": { icon: "📿" }, "Hex Pot": { icon: "🔮" },
-            "Astral Shard": { icon: "💎" }, "Bonded Ring": { icon: "💍" }, "Durov's Cap": { icon: "🎩" },
-            "Diamond Ring": { icon: "💎" }, "Evil Eye": { icon: "👁️" }, "Eternal Rose": { icon: "🌹" },
-            "Ion Gem": { icon: "⚡" }, "Kissed Frog": { icon: "🐸" }, "Scared Cat": { icon: "🐱" },
-            "Vintage Cigar": { icon: "🚬" }, "Precious Peach": { icon: "🍑" }, "Snoop Cigar": { icon: "🚬" },
-            "Jester Hat": { icon: "🎭" }, "Easter Egg": { icon: "🥚" }, "Spring Basket": { icon: "🧺" },
-            "Pretty Posy": { icon: "🌸" }, "Mousse Cake": { icon: "🍰" }, "Mood Pack": { icon: "🎒" },
-            "Joyful Bundle": { icon: "🎁" }, "Surge Board": { icon: "🏄" }, "Liberty Figure": { icon: "🗽" },
-            "Jack-in-the-Box": { icon: "🎭" }, "Spy Agaric": { icon: "🍄" }, "B-Day Candle": { icon: "🕯️" },
-            "Berry Box": { icon: "🍓" }, "Big Year": { icon: "📅" }, "Bow Tie": { icon: "🎀" },
-            "Bunny Muffin": { icon: "🧁" }, "Candy Cane": { icon: "🍭" }
+            "Plush Pepe": { icon: "🐸" },
+            "Nail Bracelet": { icon: "📿" },
+            "Hex Pot": { icon: "🔮" },
+            "Astral Shard": { icon: "💎" },
+            "Bonded Ring": { icon: "💍" },
+            "Durov's Cap": { icon: "🎩" },
+            "Diamond Ring": { icon: "💎" },
+            "Evil Eye": { icon: "👁️" },
+            "Eternal Rose": { icon: "🌹" },
+            "Ion Gem": { icon: "⚡" },
+            "Kissed Frog": { icon: "🐸" },
+            "Scared Cat": { icon: "🐱" },
+            "Vintage Cigar": { icon: "🚬" },
+            "Precious Peach": { icon: "🍑" },
+            "Snoop Cigar": { icon: "🚬" },
+            "Jester Hat": { icon: "🎭" },
+            "Easter Egg": { icon: "🥚" },
+            "Spring Basket": { icon: "🧺" },
+            "Pretty Posy": { icon: "🌸" },
+            "Mousse Cake": { icon: "🍰" },
+            "Mood Pack": { icon: "🎒" },
+            "Joyful Bundle": { icon: "🎁" },
+            "Surge Board": { icon: "🏄" },
+            "Liberty Figure": { icon: "🗽" },
+            "Jack-in-the-Box": { icon: "🎭" },
+            "Spy Agaric": { icon: "🍄" },
+            "B-Day Candle": { icon: "🕯️" },
+            "Berry Box": { icon: "🍓" },
+            "Big Year": { icon: "📅" },
+            "Bow Tie": { icon: "🎀" },
+            "Bunny Muffin": { icon: "🧁" },
+            "Candy Cane": { icon: "🍭" }
         };
 
         const REAL_NUMBERS = {
-            "Plush Pepe": [2656,100,1412,1382,2658,1179,2055,987,1583,858,487,123,1010,222,333,444,555,666],
-            "Nail Bracelet": [2655,3517,891,1861,2859,160,201,302,403,504,605,706,807,908,1009,1110,1211,1312],
-            "Hex Pot": [10348,10349,10350,10351,10352,10353,10354,10355,10356,10357,10358,10359,10360,10361,10362],
-            "Astral Shard": [2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060,2061,2062],
-            "Bonded Ring": [1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138],
-            "Durov's Cap": [420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437],
-            "Diamond Ring": [5512,5513,5514,5515,5516,5517,5518,5519,5520,5521,5522,5523,5524,5525,5526,5527],
-            "Evil Eye": [2231,2232,2233,2234,2235,2236,2237,2238,2239,2240,2241,2242,2243,2244,2245,2246],
-            "Eternal Rose": [7781,7782,7783,7784,7785,7786,7787,7788,7789,7790,7791,7792,7793,7794,7795,7796],
-            "Ion Gem": [3381,3382,3383,3384,3385,3386,3387,3388,3389,3390,3391,3392,3393,3394,3395,3396],
-            "Kissed Frog": [4562,4563,4564,4565,4566,4567,4568,4569,4570,4571,4572,4573,4574,4575,4576,4577],
-            "Scared Cat": [6651,6652,6653,6654,6655,6656,6657,6658,6659,6660,6661,6662,6663,6664,6665,6666],
-            "Vintage Cigar": [4000,4001,4002,4003,4004,4005,4006,4007,4008,4009,4010,4011,4012,4013,4014,4015],
-            "Precious Peach": [2153,11,1080,1508,1780,1348,663,7,8,9,10,12,13,14,15,16],
-            "Snoop Cigar": [5001,5002,5003,5004,5005,5006,5007,5008,5009,5010],
-            "Jester Hat": [6001,6002,6003,6004,6005,6006,6007,6008,6009,6010],
-            "Easter Egg": [7001,7002,7003,7004,7005,7006,7007,7008,7009,7010],
-            "Spring Basket": [8001,8002,8003,8004,8005,8006,8007,8008,8009,8010],
-            "Pretty Posy": [9001,9002,9003,9004,9005,9006,9007,9008,9009,9010],
-            "Mousse Cake": [10001,10002,10003,10004,10005,10006,10007,10008,10009,10010],
-            "Mood Pack": [11001,11002,11003,11004,11005,11006,11007,11008,11009,11010],
-            "Joyful Bundle": [12001,12002,12003,12004,12005,12006,12007,12008,12009,12010],
-            "Surge Board": [13001,13002,13003,13004,13005,13006,13007,13008,13009,13010],
-            "Liberty Figure": [234020,234021,234022,234023,234024],
-            "Jack-in-the-Box": [38228,38229,38230,38231,38232],
-            "Spy Agaric": [9576,9577,9578,9579,9580],
-            "B-Day Candle": [14001,14002,14003,14004,14005],
-            "Berry Box": [15001,15002,15003,15004,15005],
-            "Big Year": [16001,16002,16003,16004,16005],
-            "Bow Tie": [17001,17002,17003,17004,17005],
-            "Bunny Muffin": [18001,18002,18003,18004,18005],
-            "Candy Cane": [19001,19002,19003,19004,19005]
+            "Plush Pepe": [2656, 100, 1412, 1382, 2658, 1179, 2055, 987, 1583, 858, 487, 123, 1010, 222, 333, 444, 555, 666],
+            "Nail Bracelet": [2655, 3517, 891, 1861, 2859, 160, 201, 302, 403, 504, 605, 706, 807, 908, 1009, 1110, 1211, 1312],
+            "Hex Pot": [10348, 10349, 10350, 10351, 10352, 10353, 10354, 10355, 10356, 10357, 10358, 10359, 10360, 10361, 10362],
+            "Astral Shard": [2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062],
+            "Bonded Ring": [1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138],
+            "Durov's Cap": [420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437],
+            "Diamond Ring": [5512, 5513, 5514, 5515, 5516, 5517, 5518, 5519, 5520, 5521, 5522, 5523, 5524, 5525, 5526, 5527],
+            "Evil Eye": [2231, 2232, 2233, 2234, 2235, 2236, 2237, 2238, 2239, 2240, 2241, 2242, 2243, 2244, 2245, 2246],
+            "Eternal Rose": [7781, 7782, 7783, 7784, 7785, 7786, 7787, 7788, 7789, 7790, 7791, 7792, 7793, 7794, 7795, 7796],
+            "Ion Gem": [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394, 3395, 3396],
+            "Kissed Frog": [4562, 4563, 4564, 4565, 4566, 4567, 4568, 4569, 4570, 4571, 4572, 4573, 4574, 4575, 4576, 4577],
+            "Scared Cat": [6651, 6652, 6653, 6654, 6655, 6656, 6657, 6658, 6659, 6660, 6661, 6662, 6663, 6664, 6665, 6666],
+            "Vintage Cigar": [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015],
+            "Precious Peach": [2153, 11, 1080, 1508, 1780, 1348, 663, 7, 8, 9, 10, 12, 13, 14, 15, 16],
+            "Snoop Cigar": [5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010],
+            "Jester Hat": [6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010],
+            "Easter Egg": [7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010],
+            "Spring Basket": [8001, 8002, 8003, 8004, 8005, 8006, 8007, 8008, 8009, 8010],
+            "Pretty Posy": [9001, 9002, 9003, 9004, 9005, 9006, 9007, 9008, 9009, 9010],
+            "Mousse Cake": [10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010],
+            "Mood Pack": [11001, 11002, 11003, 11004, 11005, 11006, 11007, 11008, 11009, 11010],
+            "Joyful Bundle": [12001, 12002, 12003, 12004, 12005, 12006, 12007, 12008, 12009, 12010],
+            "Surge Board": [13001, 13002, 13003, 13004, 13005, 13006, 13007, 13008, 13009, 13010],
+            "Liberty Figure": [234020, 234021, 234022, 234023, 234024],
+            "Jack-in-the-Box": [38228, 38229, 38230, 38231, 38232],
+            "Spy Agaric": [9576, 9577, 9578, 9579, 9580],
+            "B-Day Candle": [14001, 14002, 14003, 14004, 14005],
+            "Berry Box": [15001, 15002, 15003, 15004, 15005],
+            "Big Year": [16001, 16002, 16003, 16004, 16005],
+            "Bow Tie": [17001, 17002, 17003, 17004, 17005],
+            "Bunny Muffin": [18001, 18002, 18003, 18004, 18005],
+            "Candy Cane": [19001, 19002, 19003, 19004, 19005]
         };
 
         function generateNFTs() {
             const result = [];
-            const models = ["Classic","Rare","Legendary","Golden","Shadow","Crystal","Neon","Aurora"];
-            const backdrops = ["Starlight","Midnight","Cosmic","Void","Crystal","Flame","Neon","Shadow"];
-            const symbols = ["Crescent","Pentagram","Baphomet","Tree","Sun","Moon","Star","Crown"];
+            const models = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
+            const backdrops = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
+            const symbols = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
 
             Object.keys(REAL_NUMBERS).forEach(col => {
                 const numbers = REAL_NUMBERS[col];
                 numbers.forEach((num, idx) => {
                     let price;
-                    if (col === "Plush Pepe") { price = 4700 + Math.random() * 7300; price = Math.round(price/10)*10; }
-                    else if (col === "Nail Bracelet") { price = 300 + Math.random() * 400; }
-                    else if (col === "Hex Pot") { price = 18 + Math.random() * 45; }
-                    else if (col === "Astral Shard") { price = 10 + Math.random() * 30; }
-                    else if (col === "Bonded Ring") { price = 60 + Math.random() * 150; }
-                    else if (col === "Durov's Cap") { price = 120 + Math.random() * 300; }
-                    else if (col === "Diamond Ring") { price = 90 + Math.random() * 200; }
-                    else if (col === "Evil Eye") { price = 5 + Math.random() * 20; }
-                    else if (col === "Eternal Rose") { price = 45 + Math.random() * 100; }
-                    else if (col === "Ion Gem") { price = 75 + Math.random() * 150; }
-                    else if (col === "Kissed Frog") { price = 12 + Math.random() * 40; }
-                    else if (col === "Scared Cat") { price = 25 + Math.random() * 60; }
-                    else if (col === "Vintage Cigar") { price = 45 + Math.random() * 100; }
+                    if (col === "Plush Pepe") { price = 4700 + Math.random() * 7300;
+                        price = Math.round(price / 10) * 10; } else if (col === "Nail Bracelet") { price = 300 +
+                            Math.random() * 400; } else if (col === "Hex Pot") { price = 18 + Math.random() * 45; } else if (
+                        col === "Astral Shard") { price = 10 + Math.random() * 30; } else if (col === "Bonded Ring") { price =
+                            60 + Math.random() * 150; } else if (col === "Durov's Cap") { price = 120 + Math.random() * 300; }
+                    else if (col === "Diamond Ring") { price = 90 + Math.random() * 200; } else if (col === "Evil Eye") {
+                        price = 5 + Math.random() * 20; } else if (col === "Eternal Rose") { price = 45 + Math.random() *
+                            100; } else if (col === "Ion Gem") { price = 75 + Math.random() * 150; } else if (col ===
+                        "Kissed Frog") { price = 12 + Math.random() * 40; } else if (col === "Scared Cat") { price = 25 +
+                            Math.random() * 60; } else if (col === "Vintage Cigar") { price = 45 + Math.random() * 100; }
                     else { price = 10 + Math.random() * 100; }
                     price = Math.round(price * 100) / 100;
-                    const statuses = ["for-sale","for-sale","for-sale","on-auction","sold"];
+                    const statuses = ["for-sale", "for-sale", "for-sale", "on-auction", "sold"];
                     const status = statuses[idx % statuses.length];
-                    const slug = col.toLowerCase().replace(/\s/g,'').replace(/[^a-z0-9]/gi,'');
+                    const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
                     result.push({
                         name: `${col} #${num}`,
                         collection: col,
@@ -1118,14 +2097,14 @@
         let activeFilters = { model: false, backdrop: false, symbol: false };
 
         // ============================================================
-        // 3. РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ
+        // 3. USER DATA
         // ============================================================
         function getUserData(userId) {
             const key = `allow_user_${userId}`;
             try {
                 const saved = localStorage.getItem(key);
                 if (saved) return JSON.parse(saved);
-            } catch(e) {}
+            } catch (e) {}
             return { balance: 0, cart: [] };
         }
 
@@ -1197,7 +2176,7 @@
         }
 
         // ============================================================
-        // 4. UI ОБНОВЛЕНИЯ
+        // 4. UI UPDATES
         // ============================================================
         function updateCartUI() {
             if (!currentUserId) return;
@@ -1218,10 +2197,15 @@
             userCart.forEach(name => {
                 const nft = allNFTs.find(n => n.name === name);
                 if (!nft) return;
-                html += `<div class="cart-item"><div style="font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
-                    <div class="item-info"><div class="item-name">${nft.name}</div><div class="item-collection">${nft.collection}</div></div>
+                html += `<div class="cart-item">
+                    <div style="font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
+                    <div class="item-info">
+                        <div class="item-name">${nft.name}</div>
+                        <div class="item-collection">${nft.collection}</div>
+                    </div>
                     <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
-                    <button class="item-remove" onclick="window.removeFromCart('${nft.name}')">✕</button></div>`;
+                    <button class="item-remove" onclick="window.removeFromCart('${nft.name}')">✕</button>
+                </div>`;
             });
             container.innerHTML = html;
         }
@@ -1265,10 +2249,11 @@
             if (lottieCache.has(url)) {
                 try {
                     const data = lottieCache.get(url);
-                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: autoplay });
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
+                        autoplay: autoplay });
                     if (!autoplay) anim.goToAndStop(0, true);
                     return;
-                } catch(e) { container.textContent = '🎁'; return; }
+                } catch (e) { container.textContent = '🎁'; return; }
             }
             lottieLoadQueue.push({ container, url, autoplay });
             processLottieQueue();
@@ -1287,14 +2272,15 @@
                 lottieCache.set(url, data);
                 container.innerHTML = '';
                 try {
-                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true, autoplay: autoplay });
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
+                        autoplay: autoplay });
                     if (!autoplay) anim.goToAndStop(0, true);
-                } catch(e) { container.textContent = '🎁'; }
+                } catch (e) { container.textContent = '🎁'; }
             }).catch(() => { container.textContent = '🎁'; })
-            .finally(() => {
-                isProcessingQueue = false;
-                if (lottieLoadQueue.length > 0) setTimeout(processLottieQueue, 30);
-            });
+                .finally(() => {
+                    isProcessingQueue = false;
+                    if (lottieLoadQueue.length > 0) setTimeout(processLottieQueue, 30);
+                });
         }
 
         // ============================================================
@@ -1315,10 +2301,21 @@
                 data = data.filter(n => n.symbol.toLowerCase().includes(activeFilters.symbol.toLowerCase()));
             }
 
+            // Поиск
+            const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (searchVal) {
+                data = data.filter(n =>
+                    n.name.toLowerCase().includes(searchVal) ||
+                    String(n.number).includes(searchVal) ||
+                    n.collection.toLowerCase().includes(searchVal)
+                );
+            }
+
             filteredNFTs = data;
 
             if (filteredNFTs.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
+                grid.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
                 return;
             }
 
@@ -1326,18 +2323,26 @@
             filteredNFTs.forEach(nft => {
                 const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
                 const statusClass = nft.status === 'sold' ? 'sold' : nft.status === 'on-auction' ? 'auction' : 'sale';
-                const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
+                const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' :
+                    'В продаже';
                 const inCart = currentUserId && isInCart(currentUserId, nft.name);
                 html += `<div class="nft-card" onclick="openDetail('${nft.name}')">
                     <div class="nft-card-inner">
                         <div class="lottie-wrapper"><div class="lottie-container" id="${lottieId}"></div></div>
                         <div class="nft-name">${nft.name}</div>
                         <div class="nft-model">${nft.model}</div>
-                        <div class="nft-price"><span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span> ${nft.price.toFixed(2)}</div>
+                        <div class="nft-price">
+                            <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
+                            ${nft.price.toFixed(2)}
+                        </div>
                         <span class="status-badge ${statusClass}">${statusLabel}</span>
                     </div>
                     <button class="cart-add-btn ${inCart ? 'in-cart' : ''}" onclick="event.stopPropagation(); window.toggleCart('${nft.name}')">
-                        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                        </svg>
                     </button>
                 </div>`;
             });
@@ -1363,7 +2368,8 @@
             document.getElementById('detailSymbol').textContent = nft.symbol || '—';
             document.getElementById('detailOwner').textContent = nft.owner || '—';
             document.getElementById('detailIssued').textContent = nft.issued || '—';
-            document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' : 'В продаже';
+            document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status ===
+                'on-auction' ? 'На аукционе' : 'В продаже';
             document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(2)} GRAM`;
             const container = document.getElementById('detailLottie');
             container.innerHTML = '';
@@ -1387,16 +2393,19 @@
             } else if (isInCart(currentUserId, detailNft.name)) {
                 btn.textContent = 'В корзине';
                 btn.className = 'detail-buy-btn';
-                btn.onclick = () => { addToCart(currentUserId, detailNft.name); updateDetailButtons(); };
+                btn.onclick = () => { addToCart(currentUserId, detailNft.name);
+                    updateDetailButtons(); };
             } else {
                 btn.textContent = 'Добавить';
                 btn.className = 'detail-buy-btn';
-                btn.onclick = () => { addToCart(currentUserId, detailNft.name); updateDetailButtons(); };
+                btn.onclick = () => { addToCart(currentUserId, detailNft.name);
+                    updateDetailButtons(); };
             }
         }
 
         document.getElementById('detailClose').addEventListener('click', closeDetail);
-        document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeDetail(); });
+        document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget)
+            closeDetail(); });
 
         // ============================================================
         // 8. GAME HUB
@@ -1490,8 +2499,10 @@
                         items.forEach(el => el.classList.remove('highlight'));
                         if (items[randomIdx]) {
                             items[randomIdx].classList.add('highlight');
-                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent || 'NFT';
-                            document.getElementById('spinResult').textContent = `Вы выиграли: ${nftName}!`;
+                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent ||
+                            'NFT';
+                            document.getElementById('spinResult').textContent =
+                                `Вы выиграли: ${nftName}!`;
                             showToast(`Вы выиграли: ${nftName}`);
                             const nft = allNFTs.find(n => n.name === nftName);
                             if (nft && currentUserId && !isInCart(currentUserId, nft.name)) {
@@ -1526,7 +2537,10 @@
             const myGifts = document.getElementById('myGiftsSection');
 
             const mainFilter = document.getElementById('mainFilterRow');
-            const mainStatus = document.getElementById('mainStatusRow');
+            const searchRow = document.querySelector('.search-row');
+            const statusRow = document.querySelector('.status-row');
+            const leaderboard = document.querySelector('.leaderboard-banner');
+            const closedBadge = document.querySelector('.closed-badge');
 
             grid.style.display = 'none';
             orders.classList.remove('active');
@@ -1534,40 +2548,55 @@
             stars.classList.remove('active');
             myGifts.classList.remove('active');
 
+            if (searchRow) searchRow.style.display = 'flex';
+            if (statusRow) statusRow.style.display = 'flex';
+            if (leaderboard) leaderboard.style.display = 'flex';
+            if (closedBadge) closedBadge.style.display = 'inline-block';
+
             document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
 
             if (tab === 'market' || tab === 'gifts') {
                 grid.style.display = 'grid';
                 mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
                 document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
                 renderGrid();
-            } else if (tab === 'stars' || tab === 'starsTab') {
+            } else if (tab === 'starsTab') {
                 stars.classList.add('active');
                 mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                if (closedBadge) closedBadge.style.display = 'none';
                 document.querySelector('.gift-tab[data-tab="stars"]')?.classList.add('active');
             } else if (tab === 'collections') {
                 grid.style.display = 'grid';
                 mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
                 document.querySelector('.gift-tab[data-tab="collections"]')?.classList.add('active');
                 renderGrid();
             } else if (tab === 'mygifts') {
                 myGifts.classList.add('active');
                 mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                if (closedBadge) closedBadge.style.display = 'none';
                 document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
             } else if (tab === 'orders') {
                 orders.classList.add('active');
                 mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                if (closedBadge) closedBadge.style.display = 'none';
                 renderOrders();
                 document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
             } else if (tab === 'game') {
                 game.classList.add('active');
                 mainFilter.style.display = 'none';
-                mainStatus.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                if (closedBadge) closedBadge.style.display = 'none';
                 renderCase();
                 document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
             } else if (tab === 'vault') {
@@ -1576,13 +2605,19 @@
                 document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
                 grid.style.display = 'grid';
                 mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
+                if (searchRow) searchRow.style.display = 'flex';
+                if (statusRow) statusRow.style.display = 'flex';
+                if (leaderboard) leaderboard.style.display = 'flex';
+                if (closedBadge) closedBadge.style.display = 'inline-block';
                 document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
                 renderGrid();
             } else {
                 grid.style.display = 'grid';
                 mainFilter.style.display = 'flex';
-                mainStatus.style.display = 'flex';
+                if (searchRow) searchRow.style.display = 'flex';
+                if (statusRow) statusRow.style.display = 'flex';
+                if (leaderboard) leaderboard.style.display = 'flex';
+                if (closedBadge) closedBadge.style.display = 'inline-block';
                 document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
                 renderGrid();
             }
@@ -1604,7 +2639,7 @@
         });
 
         // ============================================================
-        // 10. ФИЛЬТРЫ
+        // 10. FILTERS
         // ============================================================
         const modelValues = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
         const backdropValues = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
@@ -1672,7 +2707,14 @@
         });
 
         // ============================================================
-        // 11. TOGGLE CART
+        // 11. SEARCH
+        // ============================================================
+        document.getElementById('searchInput').addEventListener('input', function() {
+            renderGrid();
+        });
+
+        // ============================================================
+        // 12. TOGGLE CART
         // ============================================================
         window.toggleCart = function(name) {
             if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
@@ -1683,11 +2725,12 @@
         };
 
         // ============================================================
-        // 12. ЗВЕЗДЫ И ПРЕМ
+        // 13. STARS & PREM
         // ============================================================
         document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
             opt.addEventListener('click', function() {
-                document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList.remove('active'));
+                document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList
+                    .remove('active'));
                 this.classList.add('active');
             });
         });
@@ -1700,7 +2743,7 @@
                 } else {
                     document.getElementById('receiverInput').value = '@username';
                 }
-            } catch(e) {
+            } catch (e) {
                 document.getElementById('receiverInput').value = '@username';
             }
             showToast('Юзернейм вставлен');
@@ -1718,14 +2761,14 @@
         });
 
         // ============================================================
-        // 13. МОИ ПОДАРКИ
+        // 14. MY GIFTS
         // ============================================================
         document.getElementById('myGiftsAddBtn').addEventListener('click', function() {
             openGiftBot();
         });
 
         // ============================================================
-        // 14. ORDERS
+        // 15. ORDERS
         // ============================================================
         const ORDERS_DATA = [
             { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
@@ -1742,7 +2785,7 @@
             let html = '';
             ORDERS_DATA.forEach(order => {
                 const col = order.collection || order.name;
-                const slug = col.toLowerCase().replace(/\s/g,'').replace(/[^a-z0-9]/gi,'');
+                const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
                 const num = Math.floor(Math.random() * 9000 + 1000);
                 const lottieId = `order-lottie-${order.name.replace(/\s/g,'')}`;
                 html += `<div class="order-item">
@@ -1765,7 +2808,7 @@
 
             ORDERS_DATA.forEach(order => {
                 const col = order.collection || order.name;
-                const slug = col.toLowerCase().replace(/\s/g,'').replace(/[^a-z0-9]/gi,'');
+                const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
                 const num = Math.floor(Math.random() * 9000 + 1000);
                 const url = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
                 const container = document.getElementById(`order-lottie-${order.name.replace(/\s/g,'')}`);
@@ -1785,7 +2828,7 @@
         });
 
         // ============================================================
-        // 15. FILTER OVERLAY
+        // 16. FILTER OVERLAY
         // ============================================================
         document.getElementById('filterClose').addEventListener('click', function() {
             document.getElementById('filterOverlay').classList.remove('open');
@@ -1818,7 +2861,7 @@
         });
 
         // ============================================================
-        // 16. PROFILE, BELL, TOAST
+        // 17. PROFILE, BELL, TOAST
         // ============================================================
         const toast = document.getElementById('toast');
 
@@ -1836,7 +2879,7 @@
                 } else {
                     window.open('https://t.me/MrktToGifts', '_blank');
                 }
-            } catch(e) {
+            } catch (e) {
                 window.open('https://t.me/MrktToGifts', '_blank');
             }
         }
@@ -1847,7 +2890,8 @@
             document.getElementById('profileModal').classList.add('open');
             updateBalanceUI();
         });
-        document.getElementById('profileModalClose').addEventListener('click', () => document.getElementById('profileModal').classList.remove('open'));
+        document.getElementById('profileModalClose').addEventListener('click', () => document.getElementById('profileModal')
+            .classList.remove('open'));
         document.getElementById('profileModal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) document.getElementById('profileModal').classList.remove('open');
         });
@@ -1875,9 +2919,10 @@
         });
 
         // ============================================================
-        // 17. CART MODAL
+        // 18. CART MODAL
         // ============================================================
-        document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList.remove('open'));
+        document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList
+            .remove('open'));
         document.getElementById('cartModal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) document.getElementById('cartModal').classList.remove('open');
         });
@@ -1898,7 +2943,7 @@
         });
 
         // ============================================================
-        // 18. INIT
+        // 19. INIT
         // ============================================================
         (function init() {
             try {
@@ -1913,7 +2958,7 @@
                             tgUser = user;
                         }
                     }
-                } catch(e) {
+                } catch (e) {
                     console.warn('Telegram init error:', e);
                 }
 
@@ -1929,7 +2974,7 @@
                             if (window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url) {
                                 updateAvatar(window.Telegram.WebApp.initDataUnsafe.user);
                             }
-                        } catch(e) {}
+                        } catch (e) {}
                         if (!document.getElementById('avatarImg').src) {
                             updateAvatar(null);
                         }
@@ -1965,13 +3010,13 @@
                     return true;
                 });
 
-            } catch(e) {
+            } catch (e) {
                 console.warn('Init error:', e);
                 setTimeout(() => {
                     try {
                         allNFTs = generateNFTs();
                         renderGrid();
-                    } catch(e2) {}
+                    } catch (e2) {}
                 }, 500);
             }
         })();
