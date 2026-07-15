@@ -86,7 +86,6 @@
         .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .avatar-btn .placeholder { font-size: 18px; color: #fff; font-weight: 600; }
 
-        /* WEB лидерборд */
         .leaderboard-banner {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             margin: 8px 16px 8px 16px;
@@ -121,7 +120,6 @@
         }
         .leaderboard-banner .more-btn:active { transform: scale(0.94); }
 
-        /* TABS */
         .gift-tabs {
             display: flex;
             gap: 12px;
@@ -152,7 +150,6 @@
             border-bottom-color: #f5c842;
         }
 
-        /* ПОИСК — прямоугольный, без лупы */
         .search-row {
             padding: 8px 16px 10px 16px;
             display: flex;
@@ -180,6 +177,8 @@
             font-family: 'Inter', sans-serif;
             outline: none;
             transition: 0.15s;
+            -webkit-user-select: text;
+            user-select: text;
         }
         .search-row input::placeholder {
             color: #6e6e80;
@@ -188,7 +187,6 @@
             border-color: rgba(245, 200, 66, 0.3);
         }
 
-        /* FILTER ROW */
         .filter-row {
             display: flex;
             gap: 8px;
@@ -230,7 +228,6 @@
             gap: 4px;
         }
 
-        /* STATUS ROW */
         .status-row {
             display: flex;
             gap: 10px;
@@ -254,7 +251,6 @@
             color: #ffffff;
         }
 
-        /* NFT GRID */
         .nft-grid {
             padding: 10px 12px 12px 12px;
             display: grid;
@@ -331,7 +327,6 @@
         .status-badge.sold { color: #ff6b6b; background: rgba(255, 107, 107, 0.10); }
         .status-badge.auction { color: #ffd966; background: rgba(255, 215, 0, 0.10); }
 
-        /* КНОПКА КОРЗИНЫ */
         .cart-add-btn {
             position: absolute;
             bottom: 8px;
@@ -367,7 +362,6 @@
         }
         .cart-add-btn.in-cart svg { stroke: #6e6e80; }
 
-        /* DETAIL OVERLAY */
         .detail-overlay {
             position: fixed;
             top: 0;
@@ -473,14 +467,15 @@
             color: #6e6e80;
         }
 
-        /* GAME HUB */
+        /* GAME HUB — увеличенный кейс */
         .game-hub {
             padding: 0;
             display: none;
             height: 100%;
             min-height: calc(100vh - 72px);
+            flex-direction: column;
         }
-        .game-hub.active { display: flex; flex-direction: column; }
+        .game-hub.active { display: flex; }
         .game-hub .hub-header {
             background: #141414;
             padding: 6px 14px 4px 14px;
@@ -521,8 +516,8 @@
         }
         .case-track {
             display: flex;
-            gap: 12px;
-            padding: 6px 4px 8px 4px;
+            gap: 16px;
+            padding: 8px 8px 12px 8px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -532,18 +527,19 @@
         }
         .case-track::-webkit-scrollbar { display: none; }
         .case-item {
-            min-width: 150px;
+            min-width: 180px;
+            max-width: 220px;
             background: #141414;
-            border-radius: 14px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 12px;
+            padding: 16px;
             text-align: center;
             flex-shrink: 0;
             transition: 0.3s;
         }
         .case-item .case-lottie {
-            width: 100px;
-            height: 100px;
+            width: 130px;
+            height: 130px;
             margin: 0 auto;
             border-radius: 12px;
             overflow: hidden;
@@ -551,15 +547,15 @@
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
         .case-item .case-name {
-            font-size: 10px;
+            font-size: 12px;
             color: #8e8ea0;
-            margin-top: 6px;
+            margin-top: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .case-item .case-price {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             color: #f5c842;
         }
@@ -568,34 +564,38 @@
             box-shadow: 0 0 24px rgba(245, 200, 66, 0.15);
             transform: scale(1.05);
         }
+
+        /* Кнопка крутить — сверху, под баннером */
+        .spin-wrapper {
+            flex-shrink: 0;
+            padding: 4px 8px 8px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
         #spinResult {
             text-align: center;
-            padding: 4px;
+            padding: 2px;
             font-size: 10px;
             color: #6e6e80;
-            flex-shrink: 0;
-            background: #0b0b0b;
-            min-height: 20px;
+            min-height: 16px;
         }
         .spin-btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: #f5c842;
             border: none;
-            border-radius: 0;
+            border-radius: 12px;
             color: #0b0b0b;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-top: 2px;
             transition: 0.15s;
-            flex-shrink: 0;
         }
         .spin-btn:active { transform: scale(0.97); }
         .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* STARS & PREM */
         .stars-premium-section {
             padding: 16px 16px 20px 16px;
             display: none;
@@ -691,7 +691,6 @@
             line-height: 1.4;
         }
 
-        /* MY GIFTS */
         .my-gifts-section {
             padding: 20px 16px;
             display: none;
@@ -732,7 +731,6 @@
         }
         .my-gifts-section .add-gift-btn:active { transform: scale(0.94); }
 
-        /* ORDERS */
         .orders-section {
             padding: 10px 14px 16px 14px;
             display: none;
@@ -845,7 +843,6 @@
         }
         .create-order .row button:active { transform: scale(0.94); }
 
-        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -924,7 +921,6 @@
             border: 1.5px solid #0b0b0b;
         }
 
-        /* TOAST */
         .toast {
             position: fixed;
             top: 74px;
@@ -946,7 +942,6 @@
         }
         .toast.show { opacity: 1; }
 
-        /* PROFILE MODAL */
         .profile-modal {
             position: fixed;
             top: 0;
@@ -1041,7 +1036,6 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        /* CART MODAL */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -1145,7 +1139,6 @@
             font-size: 12px;
         }
 
-        /* FILTER OVERLAY */
         .filter-overlay {
             position: fixed;
             top: 0;
@@ -1256,7 +1249,6 @@
             color: #8e8ea0;
         }
 
-        /* WITHDRAW */
         .withdraw-section {
             display: none;
             margin-top: 8px;
@@ -1305,8 +1297,8 @@
         }
 
         @media (max-width: 380px) {
-            .case-item { min-width: 120px; }
-            .case-item .case-lottie { width: 80px; height: 80px; }
+            .case-item { min-width: 150px; max-width: 180px; }
+            .case-item .case-lottie { width: 100px; height: 100px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
         }
@@ -1347,7 +1339,7 @@
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- ПОИСК — прямоугольный, без лупы, с красивым символом -->
+        <!-- ПОИСК — работает -->
         <div class="search-row">
             <span class="search-icon">⌕</span>
             <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
@@ -1410,7 +1402,7 @@
             </div>
         </div>
 
-        <!-- GAME HUB -->
+        <!-- GAME HUB — увеличенный кейс, кнопка сверху -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1419,8 +1411,10 @@
             <div class="reward-banner">🏆 100K GRAM уже тут! PlayHub Сезон 1</div>
             <div class="case-container">
                 <div class="case-track" id="caseTrack"></div>
-                <div id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
-                <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
+                <div class="spin-wrapper">
+                    <div id="spinResult">Нажмите крутить, чтобы выиграть NFT</div>
+                    <button class="spin-btn" id="spinBtn">Крутить (200 GRAM)</button>
+                </div>
             </div>
         </div>
 
@@ -1675,7 +1669,7 @@
                 const saved = localStorage.getItem(key);
                 if (saved) return JSON.parse(saved);
             } catch (e) {}
-            return { balance: 0, cart: [] };
+            return { balance: 10000, cart: [] };
         }
 
         function saveUserData(userId, data) {
@@ -1871,7 +1865,7 @@
                 data = data.filter(n => n.symbol.toLowerCase().includes(activeFilters.symbol.toLowerCase()));
             }
 
-            // Поиск
+            // Поиск — работает
             const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
             if (searchVal) {
                 data = data.filter(n =>
@@ -1978,7 +1972,7 @@
             closeDetail(); });
 
         // ============================================================
-        // 8. GAME HUB
+        // 8. GAME HUB — увеличенные карточки, кнопка сверху
         // ============================================================
         let caseItems = [];
         let spinToastTimer = null;
@@ -2011,7 +2005,7 @@
             if (!track || caseItems.length === 0) return;
             isAutoScrolling = true;
             let scrollPos = 0;
-            const step = 1.2;
+            const step = 1.5;
             const maxScroll = track.scrollWidth - track.clientWidth;
             autoScrollInterval = setInterval(() => {
                 if (!isAutoScrolling) return;
@@ -2059,7 +2053,7 @@
 
             let extraScrolls = 0;
             const maxExtra = 6;
-            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 14 || 120);
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 16 || 120);
             track.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
             const extraInterval = setInterval(() => {
@@ -2088,7 +2082,7 @@
                 }
                 extraScrolls++;
                 const offset = (randomIdx + extraScrolls * 2) % totalItems;
-                const scrollTo = offset * (items[0]?.offsetWidth + 14 || 120);
+                const scrollTo = offset * (items[0]?.offsetWidth + 16 || 120);
                 track.scrollTo({ left: scrollTo, behavior: 'smooth' });
             }, 120);
         });
@@ -2269,14 +2263,14 @@
         });
 
         // ============================================================
-        // 11. SEARCH — работает
+        // 11. SEARCH — работает, ввод разрешён
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             renderGrid();
         });
 
         // ============================================================
-        // 12. TOGGLE CART — сохраняется в корзине
+        // 12. TOGGLE CART — добавляет в корзину
         // ============================================================
         window.toggleCart = function(name) {
             if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
