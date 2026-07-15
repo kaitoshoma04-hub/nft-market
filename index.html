@@ -516,7 +516,7 @@
         .case-track {
             display: flex;
             gap: 16px;
-            padding: 8px 8px 12px 8px;
+            padding: 8px 8px 8px 8px;
             overflow-x: auto;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -567,10 +567,11 @@
 
         .spin-wrapper {
             flex-shrink: 0;
-            padding: 4px 8px 8px 8px;
+            padding: 2px 8px 8px 8px;
             display: flex;
             flex-direction: column;
             gap: 2px;
+            background: #1a1a1a;
         }
         #spinResult {
             text-align: center;
@@ -591,6 +592,7 @@
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             transition: 0.15s;
+            margin-top: 0px;
         }
         .spin-btn:active { transform: scale(0.97); }
         .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -1640,6 +1642,7 @@
         let filteredNFTs = [];
         let isAutoScrolling = false;
         let activeFilters = { model: false, backdrop: false, symbol: false };
+        let searchTimeout = null;
 
         // ============================================================
         // 3. USER DATA
@@ -1829,7 +1832,7 @@
         }
 
         // ============================================================
-        // 6. RENDER GRID
+        // 6. RENDER GRID — оптимизирован
         // ============================================================
         function renderGrid() {
             const grid = document.getElementById('nftGrid');
@@ -2243,10 +2246,13 @@
         });
 
         // ============================================================
-        // 11. SEARCH
+        // 11. SEARCH — оптимизирован с debounce
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
-            renderGrid();
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                renderGrid();
+            }, 150);
         });
 
         // ============================================================
