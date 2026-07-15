@@ -41,12 +41,11 @@
             justify-content: flex-end;
             align-items: center;
             padding: 12px 16px 8px 16px;
-            background: rgba(26, 26, 26, 0.95);
+            background: #1a1a1a;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             position: sticky;
             top: 0;
             z-index: 50;
-            backdrop-filter: blur(8px);
         }
         .header-right {
             display: flex;
@@ -258,9 +257,9 @@
             gap: 12px;
         }
         .nft-card {
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             overflow: hidden;
             cursor: pointer;
             transition: 0.15s;
@@ -272,7 +271,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
-            background: #141414;
+            background: #1a1a1a;
         }
         .lottie-wrapper {
             width: 100%;
@@ -283,6 +282,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .lottie-wrapper .lottie-container { width: 100%; height: 100%; }
         .nft-name {
@@ -378,7 +378,7 @@
         }
         .detail-overlay.open { display: flex; }
         .detail-content {
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 20px;
             max-width: 380px;
             width: 100%;
@@ -467,7 +467,6 @@
             color: #6e6e80;
         }
 
-        /* GAME HUB */
         .game-hub {
             padding: 0;
             display: none;
@@ -477,7 +476,7 @@
         }
         .game-hub.active { display: flex; }
         .game-hub .hub-header {
-            background: #141414;
+            background: #1a1a1a;
             padding: 6px 14px 4px 14px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             text-align: center;
@@ -529,9 +528,9 @@
         .case-item {
             min-width: 180px;
             max-width: 220px;
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 16px;
             text-align: center;
             flex-shrink: 0;
@@ -544,6 +543,7 @@
             border-radius: 12px;
             overflow: hidden;
             background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .case-item .case-lottie .lottie-container { width: 100%; height: 100%; }
         .case-item .case-name {
@@ -743,11 +743,11 @@
         }
         .orders-header h2 { font-size: 18px; font-weight: 700; }
         .order-item {
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 14px;
             padding: 10px 14px;
             margin-bottom: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -800,10 +800,10 @@
         }
         .create-order {
             margin-top: 18px;
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 16px;
             padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
         .create-order h3 {
             font-size: 14px;
@@ -842,7 +842,6 @@
         }
         .create-order .row button:active { transform: scale(0.94); }
 
-        /* BOTTOM NAV — монотонный серый, без стекла */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -925,7 +924,7 @@
             top: 74px;
             left: 50%;
             transform: translateX(-50%);
-            background: #141414;
+            background: #1a1a1a;
             border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 8px 20px;
             border-radius: 14px;
@@ -933,7 +932,6 @@
             font-size: 12px;
             font-weight: 500;
             z-index: 999;
-            backdrop-filter: blur(12px);
             opacity: 0;
             transition: 0.25s;
             pointer-events: none;
@@ -957,7 +955,7 @@
         }
         .profile-modal.open { display: flex; }
         .profile-modal-content {
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 20px;
             max-width: 340px;
             width: 100%;
@@ -1050,7 +1048,7 @@
         }
         .cart-modal.open { display: flex; }
         .cart-modal-content {
-            background: #141414;
+            background: #1a1a1a;
             border-radius: 20px 20px 0 0;
             max-width: 430px;
             width: 100%;
@@ -1306,7 +1304,6 @@
 <body>
     <div class="app">
 
-        <!-- HEADER -->
         <div class="header">
             <div class="header-right">
                 <button class="icon-btn" id="bellBtn">
@@ -1322,7 +1319,6 @@
             </div>
         </div>
 
-        <!-- WEB ЛИДЕРБОРД -->
         <div class="leaderboard-banner">
             <div>
                 <div class="title">WEB Лидерборд и задания</div>
@@ -1331,20 +1327,17 @@
             <button class="more-btn">Узнать больше</button>
         </div>
 
-        <!-- TABS -->
         <div class="gift-tabs">
             <span class="gift-tab active" data-tab="gifts">Подарки</span>
             <span class="gift-tab" data-tab="stars">Звезды и Прем</span>
             <span class="gift-tab" data-tab="collections">Коллекции</span>
         </div>
 
-        <!-- ПОИСК -->
         <div class="search-row">
             <span class="search-icon">⌕</span>
             <input type="text" placeholder="Поиск по названию NFT / номеру" id="searchInput">
         </div>
 
-        <!-- FILTER ROW -->
         <div class="filter-row" id="mainFilterRow">
             <span class="filter-chip active-filter" data-filter="nft" id="filterNft">NFT</span>
             <span class="filter-chip" data-filter="model" id="filterModel">Модель</span>
@@ -1353,16 +1346,13 @@
             <span class="filter-chip filter-toggle" id="filterToggleBtn"><span style="font-size:14px;">⚙</span></span>
         </div>
 
-        <!-- STATUS ROW -->
         <div class="status-row" id="mainStatusRow">
             <span class="chip active-status">На продаже (0)</span>
             <span class="chip">Хранилище (0)</span>
         </div>
 
-        <!-- NFT GRID -->
         <div class="nft-grid" id="nftGrid"></div>
 
-        <!-- ЗВЕЗДЫ И ПРЕМ -->
         <div class="stars-premium-section" id="starsPremiumSection">
             <div class="title">Что вы хотите купить?</div>
             <div class="selector">
@@ -1379,7 +1369,6 @@
             <div class="terms">Покупая Звезды или Премиум, вы соглашаетесь с нашими Условиями использования, и подтверждаете, что вы не резидент США</div>
         </div>
 
-        <!-- МОИ ПОДАРКИ -->
         <div class="my-gifts-section" id="myGiftsSection">
             <div class="empty-icon">📦</div>
             <div class="empty-title">У вас пока нет подарков</div>
@@ -1387,7 +1376,6 @@
             <button class="add-gift-btn" id="myGiftsAddBtn">+ Добавить подарок</button>
         </div>
 
-        <!-- ORDERS -->
         <div class="orders-section" id="ordersSection">
             <div class="orders-header"><h2>Ордеры</h2><span style="font-size:12px;color:#f5c842;font-weight:600;cursor:pointer;">Мои ордеры</span></div>
             <div id="ordersList"></div>
@@ -1401,7 +1389,6 @@
             </div>
         </div>
 
-        <!-- GAME HUB -->
         <div class="game-hub" id="gameHub">
             <div class="hub-header">
                 <h2>PlayHub Сезон 1</h2>
@@ -1417,7 +1404,6 @@
             </div>
         </div>
 
-        <!-- DETAIL -->
         <div class="detail-overlay" id="detailOverlay">
             <div class="detail-content">
                 <button class="detail-close" id="detailClose">✕</button>
@@ -1442,7 +1428,6 @@
             </div>
         </div>
 
-        <!-- CART -->
         <div class="cart-modal" id="cartModal">
             <div class="cart-modal-content">
                 <div class="cart-modal-header"><h2>Корзина</h2><button class="cart-close" id="cartClose">✕</button></div>
@@ -1452,7 +1437,6 @@
             </div>
         </div>
 
-        <!-- PROFILE -->
         <div class="profile-modal" id="profileModal">
             <div class="profile-modal-content">
                 <button class="profile-modal-close" id="profileModalClose">✕</button>
@@ -1480,7 +1464,6 @@
             </div>
         </div>
 
-        <!-- FILTER OVERLAY -->
         <div class="filter-overlay" id="filterOverlay">
             <div class="filter-header"><h2>Фильтры</h2><button class="filter-close" id="filterClose">✕</button></div>
             <div id="filterOptionsContainer">
@@ -1501,7 +1484,6 @@
 
         <div class="toast" id="toast">Уведомление</div>
 
-        <!-- BOTTOM NAV — монотонный серый -->
         <div class="bottom-nav">
             <button class="nav-item active" data-tab="market">
                 <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
@@ -1864,7 +1846,6 @@
                 data = data.filter(n => n.symbol.toLowerCase().includes(activeFilters.symbol.toLowerCase()));
             }
 
-            // Поиск
             const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
             if (searchVal) {
                 data = data.filter(n =>
