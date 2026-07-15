@@ -182,10 +182,6 @@
             border-bottom-color: #f5c842;
         }
 
-        .search-row {
-            display: none;
-        }
-
         .filter-row {
             display: flex;
             gap: 8px;
@@ -1679,20 +1675,24 @@
             privacyPolicyUrl: "https://ton-connect.github.io/demo-dapp-with-backend/privacy-policy.txt"
         };
 
-        // Инициализируем TON Connect UI
-        let tonConnectUI;
+        let tonConnectUI = null;
 
         function initTonConnect() {
             try {
-                // Проверяем, загрузилась ли библиотека
                 if (typeof window.TonConnectUI === 'undefined') {
                     console.warn('TON Connect UI not loaded, retrying...');
                     setTimeout(initTonConnect, 500);
                     return;
                 }
 
+                // Создаем UI с манифестом
                 tonConnectUI = new window.TonConnectUI({
                     manifestUrl: 'data:application/json,' + encodeURIComponent(JSON.stringify(TON_MANIFEST)),
+                    actionsConfiguration: {
+                        modals: 'all',
+                        notifications: 'all',
+                        returnStrategy: 'back',
+                    }
                 });
 
                 const btn = document.getElementById('tonConnectBtn');
@@ -1700,9 +1700,10 @@
                 // Подписка на изменения статуса
                 tonConnectUI.onStatusChange((wallet) => {
                     if (wallet) {
-                        btn.innerHTML = `<span class="dot"></span> ${wallet.account.address.slice(0, 6)}...${wallet.account.address.slice(-4)}`;
+                        const address = wallet.account.address;
+                        btn.innerHTML = `<span class="dot"></span> ${address.slice(0, 6)}...${address.slice(-4)}`;
                         btn.classList.add('connected');
-                        showToast('Кошелёк подключён: ' + wallet.account.address.slice(0, 10) + '...');
+                        showToast('Кошелёк подключён: ' + address.slice(0, 10) + '...');
                         // Обновляем баланс в профиле (имитация)
                         document.getElementById('profileBalance').textContent = '1,234.56';
                     } else {
@@ -1713,14 +1714,24 @@
                 });
 
                 // Клик по кнопке — открываем модалку TON Connect
-                btn.addEventListener('click', async () => {
+                btn.addEventListener('click', async function(e) {
+                    e.stopPropagation();
                     try {
-                        await tonConnectUI.openModal();
-                    } catch (e) {
-                        console.warn('TON Connect modal error:', e);
-                        showToast('Ошибка подключения кошелька');
+                        if (tonConnectUI) {
+                            await tonConnectUI.openModal();
+                        } else {
+                            showToast('Инициализация кошелька...');
+                            setTimeout(() => {
+                                if (tonConnectUI) tonConnectUI.openModal();
+                            }, 500);
+                        }
+                    } catch (err) {
+                        console.error('TON Connect error:', err);
+                        showToast('Ошибка подключения: ' + (err.message || 'неизвестная ошибка'));
                     }
                 });
+
+                console.log('TON Connect initialized successfully');
 
             } catch (e) {
                 console.warn('TON Connect init error:', e);
