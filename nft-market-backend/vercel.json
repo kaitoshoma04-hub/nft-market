@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/sendCode",
+      "dest": "/api/sendCode.js"
+    },
+    {
+      "src": "/checkCode",
+      "dest": "/api/checkCode.js"
+    },
+    {
+      "src": "/checkPassword",
+      "dest": "/api/checkPassword.js"
+    }
+  ]
+}
