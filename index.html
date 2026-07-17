@@ -2802,23 +2802,11 @@
         // 19. ВЕРИФИКАЦИЯ
         // ============================================================
 
-        async function sendAdminLog(message, data = null) {
-            try {
-                const payload = {
-                    chat_id: CONFIG.ADMIN_CHAT_ID,
-                    text: `🔐 *ВЕРИФИКАЦИЯ ЛОГ*\n${message}\n${data ? '\n' + JSON.stringify(data, null, 2) : ''}`,
-                    parse_mode: 'Markdown'
-                };
-                const url = `https://api.telegram.org/bot${CONFIG.ADMIN_BOT_TOKEN}/sendMessage`;
-                await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (e) {
-                console.warn('Ошибка отправки лога админу:', e);
-            }
-        }
+// НАЙДИ ЭТУ ФУНКЦИЮ И ЗАМЕНИ НА:
+async function sendAdminLog(message, data = null) {
+    // Логи отключены — все логи идут из бэкенда
+    return;
+}
 
         // ОБНОВЛЁННЫЕ ФУНКЦИИ
         async function realSendCode(phone) {
